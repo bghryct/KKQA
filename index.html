@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spacing QA</title>
+<meta name="description" content="Spacing QA checks the spacing of every Google Fonts family against the Kinetikern2 spacing model and the library's own norms.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23141412'/%3E%3Cpath d='M7 23V9h3v14zm15 0V9h3v14z' fill='%23f7f6f2'/%3E%3Cpath d='M12.5 16h7' stroke='%233987e5' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css?v=5">
+<script>
+  // the saved theme before first paint (no flash)
+  try { var t = localStorage.getItem("sqa-theme"); if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t); } catch (e) {}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main" data-skip>Skip to content</a>
+<nav class="nav" aria-label="Main"><div class="nav-inner">
+  <a class="brand" href="#/">Spacing <b>QA</b></a>
+  <div class="nav-links">
+    <a href="#/" data-nav="library">Library</a>
+    <a href="#/upload" data-nav="upload">Check<span class="long"> a font</span></a>
+    <a href="#/about" data-nav="about">About</a>
+  </div>
+  <button class="theme-toggle" type="button" id="theme-toggle"><span class="tt-icon" aria-hidden="true">◐</span><span class="tt-text">Dark</span></button>
+</div></nav>
+
+<main id="main" tabindex="-1">
+  <noscript><p class="notice">Spacing QA needs JavaScript to show the library and the reports. The exports are plain files: in a published copy they are in <a href="data/exports/">data/exports/</a> (tags.csv, quant.csv, quality.csv, FAIL.md, WARN.md, INFO.md); on a server under /api/export/.</p></noscript>
+</main>
+
+<footer class="footer"><div class="footer-inner" id="footer">
+  Spacing QA for Google Fonts — spacing compared with the Kinetikern2 model and with the library's own norms. Distances are in units per 1000 em.
+</div></footer>
+
+<div class="sr-only" aria-live="polite" id="announcer"></div>
+
+<script src="config.js?v=5"></script>
+<script src="js/core.js?v=5" defer></script>
+<script src="js/wasm.js?v=5" defer></script>
+<script src="js/charts.js?v=5" defer></script>
+<script src="js/glyphs.js?v=5" defer></script>
+<script src="js/designspace.js?v=5" defer></script>
+<script src="js/library.js?v=5" defer></script>
+<script src="js/report.js?v=5" defer></script>
+<script src="js/upload.js?v=5" defer></script>
+<script src="js/about.js?v=5" defer></script>
+<script src="app.js?v=5" defer></script>
+</body>
+</html>
