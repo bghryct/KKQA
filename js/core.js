@@ -201,6 +201,19 @@
    *  build says (`spacingqa site --refresh-hours 24`); "" when it does not. */
   const REBUILT = !STATIC || !(CONFIG.refresh_hours > 0) ? ""
     : CONFIG.refresh_hours === 24 ? "every day" : `every ${CONFIG.refresh_hours} hours`;
+  /** A published copy that takes requests (`spacingqa site --requests`): the
+   *  address of a new GitHub issue that asks its refresh workflow to check
+   *  `family` again, or without one every family that changed on Google
+   *  Fonts; the workflow publishes the result, answers and closes the issue.
+   *  `key` (the catalog name or the slug, which the workflow matches) goes
+   *  in the form when the name shown may not be the catalog's. "" when the
+   *  copy takes no requests. */
+  function requestUrl(family, key) {
+    if (!STATIC || !CONFIG.requests || !CONFIG.repo_url) return "";
+    const q = new URLSearchParams({ template: "recheck.yml", title: family ? `Re-check: ${family}` : "Re-check: every changed family" });
+    if (family) q.set("family", key || family);
+    return `${String(CONFIG.repo_url).replace(/\/+$/, "")}/issues/new?${q.toString()}`;
+  }
   const staticValues = new Map();
   window.SQA_DATA = (key, value) => { staticValues.set(key, value); };
   function loadScript(src) {
@@ -666,7 +679,7 @@
     axisNum, parseLocation, locationString, sameLocation, locationDiff, describeLocation,
     LEVELS, LEVEL_RANK, LEVEL_ICON, LEVEL_TEXT, badge, badgeHtml, PRESET_LABEL, presetChip, presetHtml,
     ApiError, api, isAbort, getToken, setToken, askToken, confirmDialog,
-    CONFIG, STATIC, REBUILT, WHERE, exportUrl, staticData,
+    CONFIG, STATIC, REBUILT, requestUrl, WHERE, exportUrl, staticData,
     tip, initTheme, currentTheme, cssVar, announce,
     store, getInfo, getFamilies, getLibrary, categoryKey, categoryName, judgedCategory, SIGMA, FIT_LIMIT, outOfRange, withHarness, scriptName,
     download, segmented, message, loading, errorBox, MINUS,

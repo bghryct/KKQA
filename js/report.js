@@ -182,9 +182,18 @@
     head.appendChild(meta);
     const actions = h("div", { class: "report-actions" });
     if (o.mode !== "upload" && o.onRecheck) {
-      const b = h("button", { type: "button", class: "btn" }, "Re-check now");
+      const b = h("button", { type: "button", class: "btn", title: SQA.STATIC ? "Checks the family's current file from fonts.google.com in your browser, for you: nothing is stored or published." : "" }, "Re-check now");
       b.addEventListener("click", () => o.onRecheck(b));
       actions.appendChild(b);
+    }
+    // a published copy that takes requests: ask its workflow to check the
+    // family again and publish the new report for everyone (a GitHub issue)
+    const request = o.mode === "family" ? SQA.requestUrl(o.familyName || name, o.familyKey) : "";
+    if (request) {
+      actions.appendChild(h("a", {
+        class: "btn", href: request, target: "_blank", rel: "noopener",
+        title: "Opens a GitHub issue (a GitHub account is needed). The site's workflow checks the family again from fonts.google.com, publishes the new report for everyone, answers on the issue and closes it, usually within 15 minutes.",
+      }, "Request a new check"));
     }
     // a picked location's file names say where it was checked
     const base = (o.slug || SQA.slug(name)) + (f.instance ? "-" + SQA.slug(f.instance) : "");
@@ -1105,7 +1114,7 @@
         clear(root);
         ctx.setTitle((rep.font && rep.font.family) || name);
         renderReport(ctx, root, rep, Object.assign({
-          mode: "family", slug,
+          mode: "family", slug, familyName: row ? row.name : (rep.font && rep.font.family) || name, familyKey: row ? row.name : slug,
           onRecheck: async (btn) => {
             btn.disabled = true;
             btn.textContent = "Re-checking…";
@@ -1152,7 +1161,7 @@
         clear(root);
         ctx.setTitle(`${family} — ${target.name}`);
         renderReport(ctx, root, rep2, Object.assign({
-          mode: "family", slug, picked, designspace: own,
+          mode: "family", slug, familyName: row ? row.name : family, familyKey: row ? row.name : slug, picked, designspace: own,
           onRecheck: async (btn) => {
             btn.disabled = true;
             btn.textContent = "Re-checking…";

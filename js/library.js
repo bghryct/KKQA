@@ -364,6 +364,10 @@
           " Fonts you check here — your own under ",
           h("a", { href: "#/upload" }, "Check a font"), ", or a family's Re-check — are checked in your browser; nothing is uploaded.",
           cfg.repo_url ? [" ", h("a", { href: cfg.repo_url, target: "_blank", rel: "noopener" }, "Source and schedule")] : "",
+          SQA.requestUrl("")
+            ? [" Anyone with a GitHub account can ask for a family to be checked again and published for everyone (", h("b", null, "Request a new check"), " on its page), or for every family that changed: ",
+              h("a", { href: SQA.requestUrl(""), target: "_blank", rel: "noopener" }, "Request a refresh"), "."]
+            : "",
         ]);
       },
       note(m) { more.appendChild(h("span", { class: "msg" }, " " + m)); },

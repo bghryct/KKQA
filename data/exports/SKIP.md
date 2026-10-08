@@ -2,7 +2,7 @@
 
 Families the check does not apply to: monospaced (spacing set by the width), without the basic Latin alphabet, or without outlines.
 
-1950 families in the library · baseline 2026-10-08-1419-1115 (1115 fonts in the norms) · spacingqa 0.1.0 kinetikern2 2.0.0
+1950 families in the library · baseline 2026-10-08-1716-1115 (1115 fonts in the norms) · spacingqa 0.1.0 kinetikern2 2.0.0
 
 | Family | Category | Reason |
 |---|---|---|

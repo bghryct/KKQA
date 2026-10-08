@@ -10,6 +10,8 @@
  *                       (the axes that differ from the default location;
  *                       ital:1 for its italic font), checked live, not stored
  *   #/upload            check a font file
+ *   #/guide             how to use it, and the tagging data for the Google Fonts team
+ *   #/cli               the command line: QA runs over the library, CI, font files
  *   #/about             how the check works
  */
 (function () {
@@ -32,6 +34,8 @@
     if (parts[0] === "family" && parts[1]) return { name: "family", params, slug: parts[1], key: "family/" + parts[1] };
     if (parts[0] === "upload" && parts.length === 1) return { name: "upload", params, key: "upload" };
     if (parts[0] === "about" && parts.length === 1) return { name: "about", params, key: "about" };
+    if (parts[0] === "guide" && parts.length === 1) return { name: "guide", params, key: "guide" };
+    if (parts[0] === "cli" && parts.length === 1) return { name: "cli", params, key: "cli" };
     return { name: "notfound", params, key: "notfound" };
   }
 
@@ -90,6 +94,8 @@
       else if (r.name === "family") SQA.views.family(ctx, r.params, r.slug);
       else if (r.name === "upload") SQA.views.upload(ctx, r.params);
       else if (r.name === "about") SQA.views.about(ctx, r.params);
+      else if (r.name === "guide") SQA.views.guide(ctx, r.params);
+      else if (r.name === "cli") SQA.views.cli(ctx, r.params);
       else notFound(ctx);
     } catch (e) {
       container.appendChild(SQA.errorBox(e));
