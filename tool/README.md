@@ -38,7 +38,9 @@ computer with its source:
 2. Run `SpacingQA/deploy/update-pages-repo.sh` with this repository's
    folder. It copies the files here, the workflow and the request form, and
    prints the git commands that commit and push them.
-3. After the push, run the workflow by hand (Actions → Spacing QA daily
-   refresh → Run workflow) with **all**, so that every family is checked by
-   the new version. The daily run (**stale**) checks only the families that
+3. The push rebuilds the site by itself: a push that changes `tool/` or the
+   workflow starts a run that checks what changed (**stale**). For a new
+   version of the check, also run the workflow by hand (Actions → Spacing QA
+   daily refresh → Run workflow) with **all**, so that every family is
+   checked by it. The daily run (**stale**) checks only the families that
    changed on Google Fonts since the last run.

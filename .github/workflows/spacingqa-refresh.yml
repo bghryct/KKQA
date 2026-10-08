@@ -1,7 +1,7 @@
 # Spacing QA, published from this repository: every day, check the Google
 # Fonts families that are new or changed (live from fonts.google.com), judge
 # every report against tool/library.json, rebuild the site and publish it on
-# GitHub Pages.
+# GitHub Pages. A push that changes tool/ or this workflow rebuilds it too.
 #
 # Visitors can ask for a family to be checked again: "Request a new check" on
 # a family's page opens a "Re-check: <family>" issue (the form in
@@ -33,6 +33,12 @@ on:
         default: stale
   issues:
     types: [opened, reopened]
+  # a new build of the tool, or a change to this workflow: rebuild now
+  push:
+    branches: [main]
+    paths:
+      - "tool/**"
+      - ".github/workflows/spacingqa-refresh.yml"
 
 permissions: {}
 
