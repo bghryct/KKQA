@@ -1,0 +1,17 @@
+name: Re-check a family
+description: Ask Spacing QA to check a Google Fonts family again and publish the new report.
+title: "Re-check: "
+labels: ["recheck"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Spacing QA checks the family's current files from fonts.google.com, publishes the new report on the site, answers here and closes this issue, usually within 15 minutes.
+
+        Leave **Family** empty to check every family that changed on Google Fonts since the last run.
+  - type: input
+    id: family
+    attributes:
+      label: Family
+      description: The family's name as on fonts.google.com.
+      placeholder: Lato

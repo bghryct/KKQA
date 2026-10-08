@@ -1,0 +1,184 @@
+# Spacing QA, published from this repository: every day, check the Google
+# Fonts families that are new or changed (live from fonts.google.com), judge
+# every report against tool/library.json, rebuild the site and publish it on
+# GitHub Pages.
+#
+# Visitors can ask for a family to be checked again: "Request a new check" on
+# a family's page opens a "Re-check: <family>" issue (the form in
+# .github/ISSUE_TEMPLATE/recheck.yml). Opening one starts a run. A run checks
+# the families asked for in every open Re-check issue, publishes the site, and
+# then answers each issue with the result and closes it (tool/requests.py).
+# An issue's text is only matched against the catalog's family names.
+#
+# The tool is prebuilt (tool/, see its README.md): this repository holds no
+# source. It is built for macOS on Apple silicon, so the job runs on macos-14.
+# The reports are kept between runs in the Actions cache. A run without one
+# (the first) starts from the reports of the site in this repository
+# (data/reports/*.js), so it checks only what changed since that copy.
+#
+# Setup: Settings → Pages → Build and deployment → Source: "GitHub Actions".
+# Run it by hand (Actions → Spacing QA daily refresh → Run workflow), with
+# "all" to check every family again after a new version of the tool.
+name: Spacing QA daily refresh
+
+on:
+  schedule:
+    - cron: "23 5 * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Families to check"
+        type: choice
+        options: [stale, all]
+        default: stale
+  issues:
+    types: [opened, reopened]
+
+permissions: {}
+
+jobs:
+  build:
+    # an issue starts a run only when it asks for a check
+    if: github.event_name != 'issues' || startsWith(github.event.issue.title, 'Re-check')
+    # Apple silicon, which tool/spacingqa is built for (any later macOS image
+    # runs it too: macos-15, macos-latest)
+    runs-on: macos-14
+    timeout-minutes: 330
+    permissions:
+      contents: read
+      pages: read
+      issues: write
+    # One run at a time. GitHub keeps one run waiting and drops older waiting
+    # ones; the run that waits takes every request open when it starts, so
+    # no request is lost.
+    concurrency:
+      group: spacingqa-build
+      cancel-in-progress: false
+    outputs:
+      answers: ${{ steps.answers.outputs.answers }}
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: The prebuilt tool
+        run: |
+          chmod +x tool/spacingqa
+          tool/spacingqa --version
+          echo "SINCE=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_ENV"
+
+      # The reports live in spacingqa-data/, apart from the site's own data/.
+      - name: Restore the reports of the last run
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            spacingqa-data
+            !spacingqa-data/fonts
+          key: spacingqa-data-${{ github.run_id }}
+          restore-keys: spacingqa-data-
+
+      - name: Without a cache, start from the reports of the published copy
+        run: |
+          if [ -f spacingqa-data/index.json ]; then
+            echo "The reports of the last run were restored."
+          elif [ -d data/reports ]; then
+            tool/spacingqa import-site --site . --data spacingqa-data
+          else
+            echo "::notice::No reports to start from: this run checks every family."
+          fi
+
+      - name: Check new and changed families (live from fonts.google.com)
+        env:
+          MODE: ${{ github.event.inputs.mode || 'stale' }}
+        run: |
+          tool/spacingqa scan --data spacingqa-data --mode "$MODE" \
+            --workers 3 --max-minutes 210 --baseline tool/library.json
+
+      - name: Requests (open "Re-check" issues)
+        id: requests
+        run: |
+          gh label create recheck --color 0E8A16 --description "Spacing QA: check a family again" --force > /dev/null 2>&1 || true
+          python3 tool/requests.py collect spacingqa-data "$RUNNER_TEMP/requests.json"
+
+      - name: Check the families asked for
+        if: steps.requests.outputs.families != ''
+        env:
+          FAMILIES: ${{ steps.requests.outputs.families }}
+        run: |
+          tool/spacingqa scan --data spacingqa-data --families "$FAMILIES" \
+            --workers 3 --max-minutes 60 --baseline tool/library.json
+
+      - name: Keep the reports for the next run
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            spacingqa-data
+            !spacingqa-data/fonts
+          key: spacingqa-data-${{ github.run_id }}
+
+      - id: pages
+        uses: actions/configure-pages@v5
+
+      - name: google/fonts' human tags (for exports/agreement.md)
+        run: |
+          curl -fsSL -o "$RUNNER_TEMP/families.csv" \
+            https://raw.githubusercontent.com/google/fonts/main/tags/all/families.csv || rm -f "$RUNNER_TEMP/families.csv"
+
+      - name: Write the site
+        env:
+          PUBLIC_URL: ${{ steps.pages.outputs.base_url }}
+          REPO_URL: ${{ github.server_url }}/${{ github.repository }}
+        run: |
+          extra=()
+          if [ -f "$RUNNER_TEMP/families.csv" ]; then extra=(--gf-tags "$RUNNER_TEMP/families.csv"); fi
+          tool/spacingqa site --data spacingqa-data --out "$RUNNER_TEMP/site" --baseline tool/library.json \
+            --wasm tool/spacingqa.wasm --public-url "$PUBLIC_URL" --repo-url "$REPO_URL" \
+            --refresh-hours 24 --requests ${extra[@]+"${extra[@]}"}
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ runner.temp }}/site
+
+      - name: Answers to the requests
+        id: answers
+        env:
+          PUBLIC_URL: ${{ steps.pages.outputs.base_url }}
+        run: python3 tool/requests.py answer spacingqa-data "$RUNNER_TEMP/requests.json" "$SINCE" "$PUBLIC_URL"
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    concurrency:
+      group: spacingqa-deploy
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+  # once the site is published: answer each request and close its issue
+  answer:
+    needs: [build, deploy]
+    if: needs.build.outputs.answers != '' && needs.build.outputs.answers != '[]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: tool/requests.py
+          sparse-checkout-cone-mode: false
+      - name: Answer and close the issues
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          ANSWERS: ${{ needs.build.outputs.answers }}
+        run: python3 tool/requests.py reply
