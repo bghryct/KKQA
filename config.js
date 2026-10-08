@@ -1,1 +1,1 @@
-window.SQA_CONFIG = {"data":"data/","generated":"2026-10-08T06:08:00Z","mode":"static","public_url":null,"repo_url":null,"wasm":"spacingqa-wasm.js"};
+window.SQA_CONFIG = {"data":"data/","generated":"2026-10-08T14:36:57Z","mode":"static","public_url":"https://bghryct.github.io/KKQA/","refresh_hours":null,"repo_url":"https://github.com/bghryct/KKQA","wasm":"spacingqa-wasm.js"};

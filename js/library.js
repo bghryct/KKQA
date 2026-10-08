@@ -168,7 +168,7 @@
     root.appendChild(h("header", { class: "view-head" },
       h("p", { class: "eyebrow" }, "Google Fonts · Kinetikern2 spacing model"),
       h("h1", { tabindex: "-1" }, "Spacing QA"),
-      h("p", { class: "lede" }, "Checks the spacing of every Google Fonts family against the Kinetikern2 spacing model — how tight or loose each family is set, and where its letter gaps depart from even spacing of its shapes — and flags only what falls far outside the library's own norms."),
+      h("p", { class: "lede" }, "Checks the spacing of every Google Fonts family against the Kinetikern2 spacing model and its designer harness — how tight or loose each family is set, and where its letter gaps depart from even spacing of its shapes — and flags only what falls far outside the library's own norms."),
       statusEl, chipsEl));
 
     // scan panel
@@ -221,7 +221,12 @@
     function renderHeader() {
       clear(statusEl);
       renderExportCounts();
-      if (info && SQA.STATIC) statusEl.appendChild(h("span", null, "Published copy · built ", h("b", null, SQA.fmtDateTime(SQA.CONFIG.generated || info.generated))));
+      if (info && SQA.STATIC) {
+        const built = SQA.CONFIG.generated || info.generated;
+        statusEl.appendChild(SQA.REBUILT
+          ? h("span", null, `Published copy · rebuilt ${SQA.REBUILT} from fonts.google.com · last `, h("b", null, SQA.fmtDateTime(built)), ` (${SQA.ago(built)})`)
+          : h("span", null, "Published copy · built ", h("b", null, SQA.fmtDateTime(built))));
+      }
       if (info) {
         const src = info.source === "live" ? "live from fonts.google.com" : String(info.source || "").replace(/^repo:/, "google/fonts checkout at ");
         statusEl.appendChild(h("span", null, "Catalog ", h("b", null, src), info.catalog_fetched ? ` · fetched ${SQA.fmtDateTime(info.catalog_fetched)} (${SQA.ago(info.catalog_fetched)})` : ""));
@@ -348,11 +353,15 @@
       el, onData: null, onChange: null, lastRefresh: 0,
       setInfo(info) {
         clear(more);
+        const built = cfg.generated || (info && info.generated);
+        const read = info && info.catalog_fetched ? `catalog read ${SQA.fmtDateTime(info.catalog_fetched)}` : "";
         SQA.append(more, [
-          "The library was checked live from fonts.google.com",
-          info && info.catalog_fetched ? ` (catalog read ${SQA.fmtDateTime(info.catalog_fetched)})` : "",
-          ", and this copy was built ", h("b", null, SQA.fmtDateTime(cfg.generated || (info && info.generated))),
-          ". A scheduled scan (GitHub Actions) builds it again. Fonts you check here — your own under ",
+          SQA.REBUILT
+            ? [`The library is checked live from fonts.google.com ${SQA.REBUILT}: a scheduled scan (GitHub Actions) checks the new and changed families and rebuilds this copy. It was last rebuilt `,
+              h("b", null, SQA.fmtDateTime(built)), ` (${SQA.ago(built)}${read ? "; " + read : ""}).`]
+            : ["The library was checked live from fonts.google.com", read ? ` (${read})` : "",
+              ", and this copy was built ", h("b", null, SQA.fmtDateTime(built)), ". A scheduled scan (GitHub Actions) builds it again."],
+          " Fonts you check here — your own under ",
           h("a", { href: "#/upload" }, "Check a font"), ", or a family's Re-check — are checked in your browser; nothing is uploaded.",
           cfg.repo_url ? [" ", h("a", { href: cfg.repo_url, target: "_blank", rel: "noopener" }, "Source and schedule")] : "",
         ]);

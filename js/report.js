@@ -268,7 +268,7 @@
       CODE_HELP[first.code] ? h("p", null, CODE_HELP[first.code]) : null,
       st.level === "ERROR" && o.onRecheck ? h("p", null, h("button", { type: "button", class: "btn", onclick: (e) => o.onRecheck(e.currentTarget) }, "Re-check now")) : null));
     sec.appendChild(h("h3", null, "What the check covers"));
-    sec.appendChild(h("p", { class: "section-intro" }, "Kinetikern2 spaces and kerns the font's 76 core glyphs — A–Z, a–z, 0–9 and 14 punctuation marks — from their outlines, at a tight, a standard and a loose preset and at the Looseness that fits the font best, and compares the designer's spacing with each. Letters and punctuation are scored; figures are spaced but not scored, because many fonts make them tabular. Monospaced fonts, fonts without the basic Latin alphabet and fonts without outlines are skipped."));
+    sec.appendChild(h("p", { class: "section-intro" }, "Kinetikern2 spaces and kerns the font's 76 core glyphs — A–Z, a–z, 0–9 and 14 punctuation marks — from their outlines, with its designer harness, at a tight, a standard and a loose preset and at the Looseness that fits the font best, and compares the designer's spacing with each. Letters and punctuation are scored; figures are spaced but not scored, because many fonts make them tabular. Monospaced fonts, fonts without the basic Latin alphabet and fonts without outlines are skipped."));
   }
 
   function keyNumbers(sec, r, o) {
@@ -292,7 +292,10 @@
   function closest(ctx, root, r, o) {
     const sm = r.summary;
     const sec = section(root, "closest-h", "Closest to",
-      "The designer's gaps compared with Kinetikern2's three presets. Distance is the mean difference of every pair gap, overall offset included; which preset is nearest is a matter of overall tightness — a designer's choice.");
+      (SQA.withHarness(r)
+        ? "The designer's gaps compared with Kinetikern2's three presets, with its designer harness (see About)."
+        : "The designer's gaps compared with Kinetikern2's three presets — the bare model: this report was checked before the designer harness.") +
+      " Distance is the mean difference of every pair gap, overall offset included; which preset is nearest is a matter of overall tightness — a designer's choice.");
     const cards = h("div", { class: "preset-cards" });
     (sm.presets || []).forEach((p) => {
       const isClosest = p.name === sm.closest;
@@ -522,7 +525,11 @@
     const t = (N && N.t) || (o.info && o.info.thresholds) || {};
     const wide = fullWidth(face, t);
     const sec = section(root, "sides-h", "Glyph sides",
-      "Each side's sidebearing against the best-fit model, after the font's overall offset: positive means the designer gives that side more room than the model. The model disagrees with designers in the same places in many fonts (around f, r, quotes and the like), so with a baseline each side is also compared with the library's median for that side — only what is far from the library is flagged.");
+      "Each side's sidebearing against the best-fit model, after the font's overall offset: positive means the designer gives that side more room than the model. " +
+      (SQA.withHarness(r)
+        ? "The designer harness already takes out what the designers of well-spaced text fonts consistently do differently from the model alone (quotes, parentheses, the open sides of E, F, L and T…); "
+        : "The bare model disagrees with designers in the same places in many fonts (around f, r, quotes and the like), so ") +
+      "with a baseline each side is also compared with the library's median for that side — only what is far from the library is flagged.");
     const entries = [];
     face.glyphs.forEach((g, i) => {
       if (!g.scored || !Array.isArray(g.dev)) return;

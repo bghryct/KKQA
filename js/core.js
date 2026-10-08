@@ -197,6 +197,10 @@
   const DATA = CONFIG.data || "data/";
   const BUILD = CONFIG.generated ? "?v=" + encodeURIComponent(CONFIG.generated) : "";
   const STATIC_REFUSED = "This is the published copy of Spacing QA: a scheduled scan updates it (GitHub Actions), so scans and rebuilds do not run from this page.";
+  /** How often the copy is rebuilt from fonts.google.com ("every day"), when its
+   *  build says (`spacingqa site --refresh-hours 24`); "" when it does not. */
+  const REBUILT = !STATIC || !(CONFIG.refresh_hours > 0) ? ""
+    : CONFIG.refresh_hours === 24 ? "every day" : `every ${CONFIG.refresh_hours} hours`;
   const staticValues = new Map();
   window.SQA_DATA = (key, value) => { staticValues.set(key, value); };
   function loadScript(src) {
@@ -577,7 +581,7 @@
     if (!f || !info) return;
     clear(f);
     append(f, [
-      "Spacing QA for Google Fonts — spacing compared with the Kinetikern2 model and with the library's own norms. Distances are in units per 1000 em. ",
+      "Spacing QA for Google Fonts — spacing compared with the Kinetikern2 model and its designer harness, and with the library's own norms. Distances are in units per 1000 em. ",
       h("span", { class: "muted" }, `${info.tool || "spacingqa"} · ${info.engine || "kinetikern2"}`),
       " · ", h("a", { href: "#/about" }, "How the check works"),
     ]);
@@ -590,6 +594,9 @@
   /** The fit stops at Looseness ±6: tighter (looser) than anything the model makes. */
   const FIT_LIMIT = 6;
   const outOfRange = (v) => typeof v === "number" && Math.abs(v) >= FIT_LIMIT - 1e-6;
+  /** A report compared with the model and its designer harness (false: one
+   *  checked before the harness, with the bare model). */
+  const withHarness = (r) => !!(r && r.harness);
   const SCRIPTS = { Arab: "Arabic", Armn: "Armenian", Beng: "Bengali", Cher: "Cherokee", Cyrl: "Cyrillic", Deva: "Devanagari", Ethi: "Ethiopic",
     Geor: "Georgian", Grek: "Greek", Gujr: "Gujarati", Guru: "Gurmukhi", Hang: "Hangul", Hans: "Simplified Chinese", Hant: "Traditional Chinese",
     Hebr: "Hebrew", Hira: "Hiragana", Jpan: "Japanese", Khmr: "Khmer", Knda: "Kannada", Kore: "Korean", Laoo: "Lao", Mlym: "Malayalam",
@@ -659,9 +666,9 @@
     axisNum, parseLocation, locationString, sameLocation, locationDiff, describeLocation,
     LEVELS, LEVEL_RANK, LEVEL_ICON, LEVEL_TEXT, badge, badgeHtml, PRESET_LABEL, presetChip, presetHtml,
     ApiError, api, isAbort, getToken, setToken, askToken, confirmDialog,
-    CONFIG, STATIC, WHERE, exportUrl, staticData,
+    CONFIG, STATIC, REBUILT, WHERE, exportUrl, staticData,
     tip, initTheme, currentTheme, cssVar, announce,
-    store, getInfo, getFamilies, getLibrary, categoryKey, categoryName, judgedCategory, SIGMA, FIT_LIMIT, outOfRange, scriptName,
+    store, getInfo, getFamilies, getLibrary, categoryKey, categoryName, judgedCategory, SIGMA, FIT_LIMIT, outOfRange, withHarness, scriptName,
     download, segmented, message, loading, errorBox, MINUS,
   });
 })();

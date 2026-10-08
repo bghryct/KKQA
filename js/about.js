@@ -13,12 +13,13 @@
     root.appendChild(h("header", { class: "view-head" },
       h("p", { class: "eyebrow" }, "How the check works"),
       h("h1", { tabindex: "-1" }, "About Spacing QA"),
-      h("p", { class: "lede" }, "Spacing QA measures how every Google Fonts family is spaced, with the Kinetikern2 spacing model as the yardstick and the library itself as the norm.")));
+      h("p", { class: "lede" }, "Spacing QA measures how every Google Fonts family is spaced, with the Kinetikern2 spacing model and its designer harness as the yardstick and the library itself as the norm.")));
     const prose = h("div", { class: "prose" });
     root.appendChild(prose);
     prose.append(
       h("h2", null, "What is measured"),
       h("p", null, "Kinetikern2 spaces and kerns the font's 76 core glyphs from their outlines alone — A–Z, a–z, 0–9 and 14 punctuation marks. Letters and punctuation are scored (66 glyphs, 4,356 ordered pairs); figures are spaced but not scored, because many fonts make them tabular."),
+      h("p", null, "The yardstick is the model with its ", h("strong", null, "designer harness"), ": corrections for the few places where the model alone consistently spaces differently from the designers of the text fonts on Google Fonts that people rate well spaced (Sans Serif and Serif families tagged ", h("code", null, "/Quality/Spacing"), " 70 or more, at Regular and at their other weights). Measured against them the model sets parentheses, the slash, the question and exclamation marks, the ampersand and the open sides of E, F, L and T too tight — more so at light weights — and quotes, period, comma, hyphen and the diagonal sides of A, V, W, Y and K too loose; the harness moves each side by what those designers do, for the Looseness and the weight at hand, and corrects some pairs, mostly of punctuation. Without it every font would show the same few differences, which say more about the model than about the font. It is the same harness Kinetikern2 offers designers in Glyphs, where it can be switched on and off; ", h("code", null, "spacingqa check --no-harness"), " compares with the bare model, and a report checked before the harness says so."),
       h("p", null, "The unit of comparison is the ", h("strong", null, "gap"), " of a pair — the white between the two ink shapes:"),
       h("div", { class: "formula" }, "gap = right sidebearing (left glyph)\n    + left sidebearing (right glyph)\n    + kerning of the pair"),
       h("p", null, "Every length is in units per 1000 em, so fonts with different units per em compare directly."),
@@ -51,7 +52,7 @@
         h("dt", null, "Corners"), h("dd", null, "Every corner of the designspace: all its axes at their extremes together, such as wght 900 · slnt −10, the Black Italic corner. A font with more than six axes (Roboto Flex has thirteen) would have thousands, so it gets the corners of weight, width and optical size, and each other axis's minimum and maximum at the lightest and the boldest weight.")),
       h("p", null, "Each location is measured like the main report: the closest preset, the best-fit Looseness, the shape and sidebearing errors and the kerning correlation. They are judged from those numbers alone, so a new baseline judges them again without a new scan:"),
       h("ul", null,
-        h("li", null, "Evenness: how much a location's shape error exceeds the default location's, against how much evenness the library's families usually lose at that kind of location — a named instance, an edge or a corner. A named instance can be WARN or FAIL; an edge, a corner or a named instance at one of them at most WARN, as can a location that moves a custom axis (YEAR, MORF… may be meant to distort the letters) and any location of a family whose primary script is not Latin."),
+        h("li", null, "Evenness: how much a location's shape error exceeds the default location's, against how much evenness the library's families usually lose at that kind of location — a named instance, an edge or a corner. A named instance that differs from the main report in weight alone can be WARN or FAIL. An edge, a corner or a named instance at one of them is at most WARN, as is one at another width, optical size or custom-axis value than the main report (families space those differently on purpose; YEAR, MORF… may be meant to distort the letters), and any location of a family whose primary script is not Latin."),
         h("li", null, "Overall tightness is reported, never judged: weights, widths and optical sizes are meant to be spaced differently."),
         h("li", null, "Slanted and italic locations are reported only — never judged, nor compared with their neighbours — as are fits that stop at the limit of the Looseness range."),
         h("li", null, "Along every axis, the locations that differ only on it are compared with their neighbours: a location whose Looseness is off the line through its two neighbours by ", dsThr, " or more, or whose shape error is ", dsSpike, " both, is a WARN — an interpolation problem, or a master spaced apart."),
@@ -80,7 +81,9 @@
       h("p", null, "Next to a ", h("code", null, "METADATA.pb"), " in a google/fonts checkout, the family's category picks the library category to compare with. ", h("code", null, "spacingqa check --category \"Serif\""), " sets it by hand."),
       h("h2", null, "This site's data"),
       SQA.STATIC
-        ? h("p", null, "This is the published copy: every family's report, the baseline and the exports are files, written by ", h("code", null, "spacingqa site"), " after a live scan of fonts.google.com and rebuilt by a scheduled scan (GitHub Actions). Fonts you check here — uploads and Re-check — are checked in your browser by the same Rust code, compiled to WebAssembly; nothing is uploaded.")
+        ? h("p", null, "This is the published copy: every family's report, the baseline and the exports are files, written by ", h("code", null, "spacingqa site"), " after a live scan of fonts.google.com and rebuilt by a scheduled scan (GitHub Actions)",
+          SQA.REBUILT ? ` ${SQA.REBUILT}, which checks the new and changed families. It was last rebuilt ${SQA.fmtDateTime(SQA.CONFIG.generated)}` : "",
+          ". Fonts you check here — uploads and Re-check — are checked in your browser by the same Rust code, compiled to WebAssembly; nothing is uploaded.")
         : h("p", null, "The library table lists the live Google Fonts catalog; a family without a current report is checked when its page is opened. The library baseline is rebuilt from the stored reports after a scan (", h("code", null, "spacingqa baseline"), "). Uploaded fonts are checked in memory and never stored."));
 
     (async () => {
