@@ -28,6 +28,9 @@ import sys
 
 # at most this many families in one run; the rest stay open for the next
 MAX_FAMILIES = 30
+# GitHub Pages serves a new deployment some minutes after it is made
+PUBLISHED = "{what} is published; the site can take up to about 10 minutes to show {them}."
+PUBLISHED_MANY = "The new reports are published; the site can take up to about 10 minutes to show them."
 CHANGED = {"", "every changed family", "all", "everything", "*"}
 
 
@@ -145,8 +148,8 @@ def answer(data, path, since, public_url):
                           else f"{v['font'].get('family') or s} {v['status']['level']}" for s, v in fresh[:20]]
                 more = f", and {len(fresh) - 20} more" if len(fresh) > 20 else ""
                 text = (f"This run checked {len(fresh)} {'family' if len(fresh) == 1 else 'families'} from fonts.google.com "
-                        f"(those that changed since the last run, and those asked for) and published the site: "
-                        f"{', '.join(listed)}{more}.")
+                        f"(those that changed since the last run, and those asked for): {', '.join(listed)}{more}. "
+                        f"{PUBLISHED_MANY}")
             answers.append({"number": r["number"], "close": "completed", "body": text})
             continue
         s = slug(r["family"])
@@ -164,9 +167,10 @@ def answer(data, path, since, public_url):
         else:
             reasons = st.get("reasons") or [{}]
             what = f"**{level}**: {reasons[0].get('message', '')}".rstrip(": ")
-        where = f" Its report: {link(s)}" if base else ""
+        where = f" Its report: {link(s)}." if base else ""
         answers.append({"number": r["number"], "close": "completed", "body":
-                        f"Checked {r['family']} again from fonts.google.com and published the site: {what}.{where}"})
+                        f"Checked {r['family']} again from fonts.google.com: {what}.{where} "
+                        f"{PUBLISHED.format(what='The new report', them='it')}"})
     output("answers", json.dumps(answers, ensure_ascii=False, separators=(",", ":")))
     print(f"{len(answers)} answers")
 
