@@ -2,6 +2,8 @@
 # Fonts families that are new or changed (live from fonts.google.com), judge
 # every report against tool/library.json, rebuild the site and publish it on
 # GitHub Pages. A push that changes tool/ or this workflow rebuilds it too.
+# Each run's summary (what got worse or better) is on the run's page and in
+# the site's exports, last-run.md and last-run.json (spacingqa qa).
 #
 # Visitors can ask for a family to be checked again: "Request a new check" on
 # a family's page opens a "Re-check: <family>" issue (the form in
@@ -93,6 +95,8 @@ jobs:
           else
             echo "::notice::No reports to start from: this run checks every family."
           fi
+          # what this run is compared with (the run's summary, below)
+          cp spacingqa-data/index.json "$RUNNER_TEMP/index-before.json" 2> /dev/null || echo '{}' > "$RUNNER_TEMP/index-before.json"
 
       - name: Check new and changed families (live from fonts.google.com)
         env:
@@ -127,6 +131,14 @@ jobs:
       - id: pages
         uses: actions/configure-pages@v5
 
+      - name: What this run changed
+        env:
+          PUBLIC_URL: ${{ steps.pages.outputs.base_url }}
+        run: |
+          tool/spacingqa qa --data spacingqa-data --mode none --before "$RUNNER_TEMP/index-before.json" --since "$SINCE" \
+            --baseline tool/library.json --out "$RUNNER_TEMP/qa" --site-url "$PUBLIC_URL" --fail-on never
+          cat "$RUNNER_TEMP/qa/summary.md" >> "$GITHUB_STEP_SUMMARY"
+
       - name: google/fonts' human tags (for exports/agreement.md)
         run: |
           curl -fsSL -o "$RUNNER_TEMP/families.csv" \
@@ -142,6 +154,9 @@ jobs:
           tool/spacingqa site --data spacingqa-data --out "$RUNNER_TEMP/site" --baseline tool/library.json \
             --wasm tool/spacingqa.wasm --public-url "$PUBLIC_URL" --repo-url "$REPO_URL" \
             --refresh-hours 24 --requests ${extra[@]+"${extra[@]}"}
+          # the summary of this run, published with the exports
+          cp "$RUNNER_TEMP/qa/summary.md" "$RUNNER_TEMP/site/data/exports/last-run.md"
+          cp "$RUNNER_TEMP/qa/summary.json" "$RUNNER_TEMP/site/data/exports/last-run.json"
 
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -1,0 +1,44 @@
+# Spacing QA on pull requests to google/fonts: checks the font files a pull
+# request adds or changes against the library's norms and writes the result
+# to the job's summary. Copy this file into .github/workflows/ of google/fonts
+# (or of a fork).
+#
+# The check reads each family's METADATA.pb next to the font (its category
+# and primary script). A variable font is checked across its designspace:
+# every named instance, edge and corner; italic files too, reported and never
+# judged. It is INFO by default and fails the job only on FAIL (change
+# --error-code-on to warn for stricter checks).
+#
+# The tool is the prebuilt one the published Spacing QA site runs (tool/ of
+# its repository), built for macOS on Apple silicon, so the job runs on
+# GitHub's macos-14 runner: free for public repositories. To keep a version
+# fixed, put a commit instead of "main" in TOOL.
+name: Spacing QA
+on:
+  pull_request:
+    paths: ["ofl/**/*.ttf", "apache/**/*.ttf", "ufl/**/*.ttf"]
+
+permissions:
+  contents: read
+
+jobs:
+  spacing:
+    runs-on: macos-14
+    env:
+      TOOL: https://github.com/bghryct/KKQA/raw/main/tool/spacingqa
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - name: Spacing QA
+        env:
+          BASE: ${{ github.base_ref }}
+        run: |
+          curl -fsSL -o "$RUNNER_TEMP/spacingqa" "$TOOL"
+          chmod +x "$RUNNER_TEMP/spacingqa"
+          "$RUNNER_TEMP/spacingqa" --version
+          git diff --name-only -z --diff-filter=AM "origin/$BASE..." -- '*.ttf' > "$RUNNER_TEMP/fonts"
+          if [ ! -s "$RUNNER_TEMP/fonts" ]; then echo "No font files changed."; exit 0; fi
+          echo "## Spacing QA" >> "$GITHUB_STEP_SUMMARY"
+          set -o pipefail
+          xargs -0 "$RUNNER_TEMP/spacingqa" check --format markdown --error-code-on fail < "$RUNNER_TEMP/fonts" \
+            | tee -a "$GITHUB_STEP_SUMMARY"

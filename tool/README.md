@@ -10,6 +10,12 @@ repository.
 | `spacingqa.wasm` | The same check, compiled to WebAssembly. The site publishes it: "Check a font" and a family's "Re-check" run it in the visitor's browser. |
 | `library.json` | The baseline: the library's norms and the thresholds that every level (INFO, WARN, FAIL) is judged against. |
 | `requests.py` | Reads the requests to check a family again and answers them (below). |
+| `github-actions-google-fonts.yml` | A workflow for google/fonts (copy it into its `.github/workflows/`): it checks the font files a pull request adds or changes and writes the result to the job's summary. |
+
+The tool is also a QA tool of its own, for the whole library or for font
+files: `spacingqa qa` checks what changed, judges it, writes the tagging
+files and the reports, and says what got worse since the last run, with an
+exit code for CI. The site's **CLI** page is the walkthrough.
 
 The reports are kept between runs in the Actions cache (`spacingqa-data`). A
 run without one starts from the site's own reports in this repository
