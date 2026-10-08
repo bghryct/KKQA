@@ -1,6 +1,1 @@
-// Where Spacing QA gets its data. Served by `spacingqa serve`, the page talks
-// to the server's /api (the default here). The static copy that
-// `spacingqa site` writes (GitHub Pages) replaces this file with
-// {"mode": "static", ...}: the page reads published files and checks fonts in
-// the browser with spacingqa.wasm.
-window.SQA_CONFIG = window.SQA_CONFIG || { mode: "server" };
+window.SQA_CONFIG = {"data":"data/","generated":"2026-10-08T06:08:00Z","mode":"static","public_url":null,"repo_url":null,"wasm":"spacingqa-wasm.js"};
