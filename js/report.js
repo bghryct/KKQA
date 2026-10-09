@@ -10,8 +10,32 @@
   const SQA = window.SQA;
   const { h, s, clear, fmt, signed, int, pct, tip, badge, api, isAbort } = SQA;
 
-  const SAMPLES = ["Hamburgefonstiv", "AVATAR TYPE WAVE", "Typography (spacing) / kerning?", "nonnnoon HOHHOOH"];
-  const GROUP_LABEL = { upper: "Capitals", lower: "Lowercase", punct: "Punctuation" };
+  const SAMPLES = ["Hamburgefonstiv", "AVATAR TYPE WAVE", "Typography (spacing) / kerning?", "nonnnoon HOHHOOH", "“Kernel” [glyphs] {all} – 100% @ “once”…", "info@kinetikern.com • $9 · €5 · £3 ™"];
+  const GROUP_LABEL = { upper: "Capitals", lower: "Lowercase", punct: "Punctuation and symbols", unscored: "Not scored: figures, symbols often drawn at figure width, underscore" };
+  // the kernel's characters of ambiguous East Asian width: not scored in a CJK font
+  const CJK_WIDTH = "®°·×÷–—‘’“”•…€™";
+  /** Why a glyph is not scored, for notes and tooltips. */
+  function unscoredWhy(g, face) {
+    return face && face.cjk && CJK_WIDTH.includes(g.char)
+      ? "in a CJK font this punctuation follows CJK conventions (often full-width)"
+      : "fonts often give it a fixed (tabular) width, or it joins its neighbours";
+  }
+  /** What a report covers, for the page's words: the GF Latin Kernel (114
+   *  glyphs, 88 scored) or, for an older report, the 76-glyph core set. */
+  function coverage(r) {
+    const g = (r.detail && r.detail.glyphs) || [];
+    const kernel = g.length > 76 || (r.method || "") === "kernel";
+    const scored = g.filter((x) => x.scored).length;
+    return {
+      kernel, glyphs: g.length, scored,
+      what: kernel
+        ? "the glyphs of Google Fonts’ GF Latin Kernel — A–Z, a–z, 0–9, punctuation and symbols, 114 in all"
+        : "the font's 76 core glyphs — A–Z, a–z, 0–9 and 14 punctuation marks",
+      unscored: kernel
+        ? "figures, the symbols fonts often draw at the figure width ($ ¢ £ ¥ € + − × ÷ = < > # ^ ~) and the underscore, which joins its neighbours, are spaced and drawn but not scored"
+        : "figures are spaced but not scored, because many fonts make them tabular",
+    };
+  }
   // what to do about a skip or an error (the reason itself says what happened)
   const CODE_HELP = {
     "spacing/no-outlines": "The font has no outlines the check can read (for example a bitmap or colour-only font).",
@@ -88,6 +112,10 @@
     keyNumbers(vsec, report, o);
     if (ds) designspace(ctx, root, ds, o);
     closest(ctx, root, report, o);
+    if (SQA.explain) {
+      SQA.explain.harness(ctx, root, report, face, o);
+      SQA.explain.shape(ctx, root, report, face, o);
+    }
     specimen(ctx, root, report, face);
     sides(ctx, root, report, face, o);
     pairs(ctx, root, report, face, o);
@@ -231,7 +259,7 @@
       : "This font was checked in memory and is not stored on the server: the report exists only in this page. Download it to keep it."));
     if (r.summary) {
       const nav = h("nav", { class: "onpage", "aria-label": "On this page" });
-      [["verdict-h", "Verdict"], hasDs ? ["designspace-h", "Designspace"] : null, ["closest-h", "Closest preset"], ["specimen-h", "Specimen"], ["sides-h", "Glyph sides"], ["pairs-h", "Pairs"], ["heat-h", "Heat map"], ["kern-h", "Kerning"]].filter(Boolean).forEach(([id, label]) => {
+      [["verdict-h", "Verdict"], hasDs ? ["designspace-h", "Designspace"] : null, ["closest-h", "Closest preset"], r.summary.bare ? ["harness-h", "Designer harness"] : null, ["shape-h", "Shape error"], ["specimen-h", "Specimen"], ["sides-h", "Glyph sides"], ["pairs-h", "Pairs"], ["heat-h", "Heat map"], ["kern-h", "Kerning"]].filter(Boolean).forEach(([id, label]) => {
         const a = h("a", { href: "#" + id }, label);
         a.addEventListener("click", (e) => {
           e.preventDefault();
@@ -277,7 +305,7 @@
       CODE_HELP[first.code] ? h("p", null, CODE_HELP[first.code]) : null,
       st.level === "ERROR" && o.onRecheck ? h("p", null, h("button", { type: "button", class: "btn", onclick: (e) => o.onRecheck(e.currentTarget) }, "Re-check now")) : null));
     sec.appendChild(h("h3", null, "What the check covers"));
-    sec.appendChild(h("p", { class: "section-intro" }, "Kinetikern2 spaces and kerns the font's 76 core glyphs — A–Z, a–z, 0–9 and 14 punctuation marks — from their outlines, with its designer harness, at a tight, a standard and a loose preset and at the Looseness that fits the font best, and compares the designer's spacing with each. Letters and punctuation are scored; figures are spaced but not scored, because many fonts make them tabular. Monospaced fonts, fonts without the basic Latin alphabet and fonts without outlines are skipped."));
+    sec.appendChild(h("p", { class: "section-intro" }, "Kinetikern2 spaces and kerns the glyphs of Google Fonts’ GF Latin Kernel — A–Z, a–z, 0–9, punctuation and symbols, 114 in all, each against every other — from their outlines, at a tight, a standard and a loose preset and at the Looseness that fits the font best, with its designer harness and without it, and compares the designer's spacing with each. Letters, punctuation and most symbols are scored; figures, the symbols fonts often draw at the figure width and the underscore are spaced and drawn but not scored. Monospaced fonts, fonts without the basic Latin alphabet and fonts without outlines are skipped."));
   }
 
   function keyNumbers(sec, r, o) {
@@ -292,9 +320,23 @@
     tile(fmt(sm.sidebearing_error, 1), "sidebearing error per side, offset removed", ctxLine("sidebearing_error", 1));
     tile(sm.kerned_error !== null && sm.kerned_error !== undefined ? fmt(sm.kerned_error, 1) : "–", `shape error on the ${int(sm.kerned_pairs)} pairs the designer kerned`, ctxLine("kerned_error", 1));
     tile(sm.kern_r !== null && sm.kern_r !== undefined ? fmt(sm.kern_r, 2) : "–", "kerning correlation r with the model", sm.kern_sign !== null && sm.kern_sign !== undefined ? `same direction on ${pct(sm.kern_sign)} of kerned pairs` : "the designer kerned none of the scored pairs");
-    tile(int(sm.pairs), "pairs measured", sm.missing && sm.missing.length ? `missing from the font: ${sm.missing.join(" ")}` : "all 66 scored glyphs present");
+    const cov = coverage(r);
+    const cjk = r.font && r.font.cjk ? " · a CJK font: its punctuation of ambiguous width is not scored" : "";
+    tile(int(sm.pairs), "scored pairs measured", (sm.missing && sm.missing.length ? `missing from the font: ${sm.missing.join(" ")}` : `all ${cov.scored} scored glyphs present${cov.kernel ? ` · ${int(cov.glyphs * cov.glyphs)} pairs drawn in all` : ""}`) + cjk);
+    if (sm.bare) {
+      const d = sm.shape_error - sm.bare.shape_error;
+      tile(signed(d, 1), "shape error from the designer harness", `${fmt(sm.bare.shape_error, 1)} without it, ${fmt(sm.shape_error, 1)} with it: ${d < -0.05 ? "closer to this font" : d > 0.05 ? "further from this font" : "no change"}`);
+    }
     sec.appendChild(h("p", { class: "small", style: { marginBottom: 0 } }, "All numbers in units per 1000 em."));
     sec.appendChild(stats);
+    // the shape error, explained further down
+    const go = (id) => () => {
+      const t = document.getElementById(id);
+      if (t) { t.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }); t.focus({ preventScroll: true }); }
+    };
+    sec.appendChild(h("p", { class: "small" },
+      h("button", { type: "button", class: "linklike", onclick: go("shape-h") }, "What the shape error is made of"), " — the pairs and glyphs behind it, drawn",
+      sm.bare ? [" · ", h("button", { type: "button", class: "linklike", onclick: go("harness-h") }, "The designer harness, with it and without it")] : null));
   }
 
   // ---------------------------------------------------------------- closest
@@ -306,9 +348,11 @@
         : "The designer's gaps compared with Kinetikern2's three presets — the bare model: this report was checked before the designer harness.") +
       " Distance is the mean difference of every pair gap, overall offset included; which preset is nearest is a matter of overall tightness — a designer's choice.");
     const cards = h("div", { class: "preset-cards" });
-    (sm.presets || []).forEach((p) => {
+    const bare = sm.bare || null;
+    (sm.presets || []).forEach((p, k) => {
       const isClosest = p.name === sm.closest;
       const loose = p.offset > 0;
+      const bp = bare && bare.presets ? bare.presets[k] : null;
       cards.appendChild(h("div", { class: "preset-card" + (isClosest ? " closest" : "") },
         isClosest ? h("span", { class: "closest-flag" }, "Closest") : null,
         h("h3", null, SQA.PRESET_LABEL[p.name] || p.name, h("small", null, `Looseness ${signed(p.looseness, 1)}`)),
@@ -316,10 +360,13 @@
         h("div", { class: "lab" }, "mean gap distance (units per 1000 em)"),
         h("dl", null,
           h("dt", null, "Overall offset"), h("dd", null, signed(p.offset, 1)),
-          h("dt", null, "Shape error at this preset"), h("dd", null, fmt(p.shape_error, 1))),
+          h("dt", null, "Shape error at this preset"), h("dd", null, fmt(p.shape_error, 1)),
+          bp ? h("dt", null, "Without the harness") : null,
+          bp ? h("dd", null, `${fmt(bp.distance, 1)} distance · ${fmt(bp.shape_error, 1)} shape error${bare.closest === p.name && !isClosest ? " · closest without it" : ""}`) : null),
         h("p", { class: "small", style: { margin: "8px 0 0" } }, Math.abs(p.offset) < 0.5 ? "On average the font sets its gaps as this preset does." : `On average the font sets its gaps ${fmt(Math.abs(p.offset), 1)} units ${loose ? "looser" : "tighter"} than this preset.`)));
     });
     sec.appendChild(cards);
+    if (bare && bare.closest !== sm.closest) sec.appendChild(h("p", { class: "small" }, `Without the designer harness the font would be closest to the ${SQA.PRESET_LABEL[bare.closest] || bare.closest} preset: the harness moves the model's overall tightness a little (most of all around punctuation), and the font sits between two presets.`));
 
     // the Looseness scale with the category behind it
     const lib = o.library;
@@ -412,7 +459,7 @@
   function specimen(ctx, root, r, face) {
     const sm = r.summary;
     const sec = section(root, "specimen-h", "Specimen",
-      "The same outlines under each spacing, all at one scale, so widths and rhythm compare directly. Only the 76 checked glyphs exist here (A–Z, a–z, 0–9 and . , : ; ! ? - ' \" ( ) / & ’); other characters are left out and the word space is fixed at 250 units per 1000 em.");
+      `The same outlines under each spacing, all at one scale, so widths and rhythm compare directly${face.spacings.includes("bare") ? " — the best fit with the designer harness, and without it (the bare model)" : ""}. Only the ${face.n} checked glyphs exist here (${face.n > 76 ? "A–Z, a–z, 0–9 and the punctuation and symbols of the GF Latin Kernel" : "A–Z, a–z, 0–9 and . , : ; ! ? - ' \" ( ) / & ’"}); other characters are left out and the word space is fixed at 250 units per 1000 em.`);
     const st = { text: SAMPLES[0], mode: "lines", over: "best", shifts: true };
     const controls = h("div", { class: "controls" });
     const input = h("input", { type: "text", value: st.text, maxlength: "64", "aria-label": "Specimen text", spellcheck: "false", autocomplete: "off" });
@@ -421,7 +468,7 @@
     controls.appendChild(samples);
     const modeSeg = SQA.segmented("Display", [{ label: "Lines", value: "lines" }, { label: "Overlay", value: "overlay" }], st.mode, (v) => { st.mode = v; overWrap.hidden = v !== "overlay"; draw(); });
     controls.appendChild(modeSeg);
-    const sel = h("select", { "aria-label": "Model spacing drawn over the designed one" }, ["best", "tight", "standard", "loose"].map((k) => h("option", { value: k }, k === "best" ? `Best fit (${signed(sm.best_looseness, 2)})` : SQA.SPACING_LABEL[k])));
+    const sel = h("select", { "aria-label": "Model spacing drawn over the designed one" }, ["best", "bare", "tight", "standard", "loose"].filter((k) => face.spacings.includes(k)).map((k) => h("option", { value: k }, k === "best" ? `Best fit (${signed(sm.best_looseness, 2)})` : k === "bare" ? `Best fit, bare model (no harness)` : SQA.SPACING_LABEL[k])));
     sel.addEventListener("change", () => { st.over = sel.value; draw(); });
     const overWrap = h("label", { class: "control", hidden: true }, "Outline", sel);
     controls.appendChild(overWrap);
@@ -440,7 +487,7 @@
       clearTimeout(timer);
       timer = setTimeout(() => { st.text = input.value; samples.setValue(SAMPLES.includes(st.text) ? st.text : null); draw(); }, 120);
     });
-    const label = (sp) => sp === "best" ? `Best fit · Looseness ${signed(sm.best_looseness, 2)}` : sp === "designer" ? "As designed" : `${SQA.SPACING_LABEL[sp]} · Looseness ${signed({ tight: -0.5, standard: 0, loose: 0.5 }[sp], 1)}`;
+    const label = (sp) => sp === "best" ? `Best fit · Looseness ${signed(sm.best_looseness, 2)}${sm.bare ? " · with the designer harness" : ""}` : sp === "bare" ? `Best fit · bare model, without the harness` : sp === "designer" ? "As designed" : `${SQA.SPACING_LABEL[sp]} · Looseness ${signed({ tight: -0.5, standard: 0, loose: 0.5 }[sp], 1)}`;
     let width = 0;
 
     function lineSvg(Ls, k, W, opts) {
@@ -488,10 +535,10 @@
       clear(out);
       const text = st.text || " ";
       const layouts = {};
-      SQA.SPACINGS.forEach((sp) => { layouts[sp] = face.layout(text, sp); });
+      face.spacings.forEach((sp) => { layouts[sp] = face.layout(text, sp); });
       const skipped = layouts.designer.skipped;
       skippedEl.textContent = skipped.length ? `Left out (not among the checked glyphs): ${skipped.join(" ")}` : "";
-      const maxW = Math.max(1, ...SQA.SPACINGS.map((sp) => layouts[sp].width));
+      const maxW = Math.max(1, ...face.spacings.map((sp) => layouts[sp].width));
       const fontPx = Math.max(24, Math.min(72, (W - 40) / (maxW / face.upm)));
       const k = fontPx / face.upm;
       const dW = layouts.designer.width;
@@ -507,8 +554,8 @@
         return;
       }
       if (st.mode === "lines") {
-        SQA.SPACINGS.forEach((sp) => {
-          const line = h("div", { class: "spec-line" }, h("div", { class: "spec-label" }, label(sp), h("span", null, widthNote(sp))));
+        face.spacings.forEach((sp) => {
+          const line = h("div", { class: "spec-line" + (sp === "bare" ? " spec-bare" : "") }, h("div", { class: "spec-label" }, label(sp), h("span", null, widthNote(sp))));
           line.appendChild(lineSvg(layouts[sp], k, W - 34, { maxW, aria: `${text} — ${label(sp)}, ${widthNote(sp)}`, shiftsFrom: sp === "designer" ? null : layouts.designer, name: SQA.SPACING_LABEL[sp].toLowerCase() }));
           out.appendChild(line);
         });
@@ -541,12 +588,13 @@
       "with a baseline each side is also compared with the library's median for that side — only what is far from the library is flagged.");
     const entries = [];
     face.glyphs.forEach((g, i) => {
-      if (!g.scored || !Array.isArray(g.dev)) return;
+      if (!Array.isArray(g.dev)) return;
       ["left", "right"].forEach((side, k) => {
         const v = g.dev[k];
         if (v === null || v === undefined) return;
-        const L = N && !wide[i] ? N.sides[`${g.name} ${side}`] : null;
-        const e = { i, g, side, v, lib: L, diff: null, z: null, flag: null, wide: wide[i], group: SQA.groupOf(g) };
+        // unscored glyphs are drawn, never compared with the norms
+        const L = N && !wide[i] && g.scored ? N.sides[`${g.name} ${side}`] : null;
+        const e = { i, g, side, v, lib: L, diff: null, z: null, flag: null, wide: wide[i], group: g.scored ? SQA.groupOf(g) : "unscored" };
         if (L && L.n) {
           const sigma = Math.max(SQA.SIGMA * L.mad, 2);
           e.diff = v - L.median; e.z = e.diff / sigma;
@@ -574,7 +622,7 @@
       } else sec.appendChild(h("p", { class: "small" }, `No side is far from the norms of ${N.name} (${fmt(t.side_warn_z, 0)} robust σ and ${fmt(t.side_warn_units, 0)} units per 1000 em from the median for that side).`));
       if (wide.some(Boolean)) sec.appendChild(h("p", { class: "small" }, `Full-width quotes (${face.glyphs.filter((g, i) => wide[i] && g.scored).map((g) => g.char).join(" ")}), a CJK convention, are not compared with the norms of proportional fonts.`));
     } else sec.appendChild(h("p", { class: "small" }, "No baseline yet: the library's medians are not shown, so sides where the model usually disagrees with designers are not told apart."));
-    const abs = entries.map((e) => Math.abs(e.v)).concat(entries.filter((e) => e.lib).map((e) => Math.abs(e.lib.median))).sort((a, b) => a - b);
+    const abs = entries.filter((e) => e.group !== "unscored").map((e) => Math.abs(e.v)).concat(entries.filter((e) => e.lib).map((e) => Math.abs(e.lib.median))).sort((a, b) => a - b);
     let R = Math.max(20, SQA.quantile(abs, 0.96) * 1.2);
     R = Math.ceil(R / 10) * 10;
     const legendItems = [{ label: "tighter than the model", color: "var(--div-neg)" }, { label: "looser than the model", color: "var(--div-pos)" }];
@@ -582,11 +630,12 @@
     sec.appendChild(SQA.legend(legendItems));
     const grid = h("div", { class: "side-groups", style: { marginTop: "12px" } });
     sec.appendChild(grid);
-    ["upper", "lower", "punct"].forEach((grp) => {
+    ["upper", "lower", "punct", "unscored"].forEach((grp) => {
       const list = [];
-      face.glyphs.forEach((g, i) => { if (g.scored && Array.isArray(g.dev) && SQA.groupOf(g) === grp) list.push(i); });
+      face.glyphs.forEach((g, i) => { if (Array.isArray(g.dev) && (g.scored ? SQA.groupOf(g) : "unscored") === grp) list.push(i); });
       if (!list.length) return;
-      const panel = h("div", { class: "panel" }, h("h4", null, GROUP_LABEL[grp]));
+      const label = GROUP_LABEL[grp] + (grp === "unscored" && face.cjk ? ", punctuation set by CJK conventions" : "");
+      const panel = h("div", { class: "panel" + (grp === "unscored" ? " unscored" : "") }, h("h4", null, label));
       const stage = h("div", { class: "stage" });
       panel.appendChild(stage);
       grid.appendChild(panel);
@@ -599,7 +648,7 @@
       { label: "Library median", num: true, get: (e) => (e.lib ? signed(e.lib.median, 1) : "–") },
       { label: "Difference", num: true, get: (e) => (e.diff !== null ? signed(e.diff, 1) : "–") },
       { label: "Robust z", num: true, get: (e) => (e.z !== null ? signed(e.z, 1) : "–") },
-      { label: "Flag", get: (e) => (e.flag === "fail" ? "extreme" : e.flag === "warn" ? "far" : e.wide ? "full-width, not compared" : "") }],
+      { label: "Flag", get: (e) => (e.flag === "fail" ? "extreme" : e.flag === "warn" ? "far" : e.wide ? "full-width, not compared" : e.group === "unscored" ? "not scored" : "") }],
       () => entries, { caption: "Glyph side deviations from the best-fit model", size: "medium" });
   }
 
@@ -644,7 +693,7 @@
         const content = () => {
           const rows = [["Deviation from the model", signed(e.v, 1)]];
           if (e.lib) rows.push(["Norm (median)", signed(e.lib.median, 1)], ["Norm MAD", fmt(e.lib.mad, 1)], ["Difference", signed(e.diff, 1)], ["Robust z", signed(e.z, 1)]);
-          return { title: `${g.char} — ${c.side} side (${g.name})`, rows, note: e.flag ? (e.flag === "fail" ? "Extreme: very far from the norm for this side." : "Far from the norm for this side.") : e.wide ? "Full-width punctuation: not compared with the norms." : (e.v > 0 ? "The designer gives this side more room than the model." : e.v < 0 ? "The designer gives this side less room than the model." : "") };
+          return { title: `${g.char} — ${c.side} side (${g.name})`, rows, note: e.flag ? (e.flag === "fail" ? "Extreme: very far from the norm for this side." : "Far from the norm for this side.") : e.wide ? "Full-width punctuation: not compared with the norms." : e.group === "unscored" ? `Not scored: ${unscoredWhy(g, face)}.` : (e.v > 0 ? "The designer gives this side more room than the model." : e.v < 0 ? "The designer gives this side less room than the model." : "") };
         };
         const hit = s("rect", { x: c.x0, y, width: trackW, height: rowH, class: "hit" });
         hit.addEventListener("pointermove", (ev) => { tip.show(content(), ev.clientX, ev.clientY); });
@@ -698,6 +747,7 @@
         }
         const A = SQA.groupOf(face.glyphs[ga]), B = SQA.groupOf(face.glyphs[gb]);
         e.cat = A === "punct" || B === "punct" ? "punct" : A === "upper" && B === "upper" ? "upper" : A === "lower" && B === "lower" ? "lower" : "mixed";
+        e.scored = !!(face.glyphs[ga].scored && face.glyphs[gb].scored);
         out.push(e);
       }
     }
@@ -709,15 +759,21 @@
     const N = normsFor(r, lib);
     const t = (N && N.t) || (o.info && o.info.thresholds) || {};
     const P = pairData(r, face, lib, N);
+    const unscoredPairs = P.list.some((e) => !e.scored);
     const sec = section(root, "pairs-h", "Pairs, loosest to tightest",
-      `Every ordered pair of the scored glyphs, ranked by how its gap departs from the best-fit model: the designer's gap − the model's gap − the font's overall offset (${signed(P.offset, 1)}). Positive: the font sets the pair looser than the model would at the font's own tightness. Relative to the library, the value is compared with how ${N ? N.name.replace(/^the whole library$/, "the library's fonts") : "the library's fonts"} usually differ from the model on that pair.`);
+      `Every ordered pair of the scored glyphs, ranked by how its gap departs from the best-fit model: the designer's gap − the model's gap − the font's overall offset (${signed(P.offset, 1)}). Positive: the font sets the pair looser than the model would at the font's own tightness. Relative to the library, the value is compared with how ${N ? N.name.replace(/^the whole library$/, "the library's fonts") : "the library's fonts"} usually differ from the model on that pair.${unscoredPairs ? ` Pairs with a glyph that is not scored (figures, symbols often drawn at the figure width, the underscore${face.cjk ? "; in this CJK font, the punctuation of ambiguous width" : ""}) are measured too: include them below.` : ""}`);
     if (!P.list.length) { sec.appendChild(h("p", { class: "note" }, "This report has no pair residuals.")); return; }
-    const st = { rel: "model", order: "loose", filter: "all" };
+    const st = { rel: "model", order: "loose", filter: "all", unscored: false };
     const controls = h("div", { class: "controls" });
     const relSeg = SQA.segmented("Relative to", [{ label: "Relative to the model", value: "model" }, { label: "Relative to the library", value: "library", disabled: !P.hasLib, title: P.hasLib ? "" : "Needs a library baseline" }], st.rel, (v) => { st.rel = v; drawList(); heat.draw(); });
     controls.append(relSeg,
       SQA.segmented("Order", [{ label: "Loosest first", value: "loose" }, { label: "Tightest first", value: "tight" }], st.order, (v) => { st.order = v; drawList(); }),
-      SQA.segmented("Pairs shown", [{ label: "All", value: "all" }, { label: "Capitals", value: "upper" }, { label: "Lowercase", value: "lower" }, { label: "Mixed case", value: "mixed" }, { label: "Punctuation", value: "punct" }], st.filter, (v) => { st.filter = v; drawList(); }));
+      SQA.segmented("Pairs shown", [{ label: "All", value: "all" }, { label: "Capitals", value: "upper" }, { label: "Lowercase", value: "lower" }, { label: "Mixed case", value: "mixed" }, { label: "Punctuation and symbols", value: "punct" }], st.filter, (v) => { st.filter = v; drawList(); }));
+    if (unscoredPairs) {
+      const box = h("input", { type: "checkbox" });
+      box.addEventListener("change", () => { st.unscored = box.checked; drawList(); });
+      controls.appendChild(h("label", { class: "check" }, box, "Include glyphs that are not scored"));
+    }
     sec.appendChild(controls);
     if (!P.hasLib) sec.appendChild(h("p", { class: "small", style: { marginTop: "-4px" } }, lib ? "The library's pair norms do not cover this font's glyph set." : "“Relative to the library” needs a library baseline; none exists yet."));
     const listInfo = h("p", { class: "small", "aria-live": "polite" });
@@ -745,7 +801,7 @@
     }
     function drawList() {
       const useLib = st.rel === "library" && P.hasLib;
-      let list = P.list.filter((e) => (st.filter === "all" || e.cat === st.filter) && valueOf(e) !== undefined && valueOf(e) !== null);
+      let list = P.list.filter((e) => (st.unscored || e.scored) && (st.filter === "all" || e.cat === st.filter) && valueOf(e) !== undefined && valueOf(e) !== null);
       const max = Math.max(1, ...list.map((e) => Math.abs(valueOf(e))));
       list.sort((a, b) => (st.order === "loose" ? valueOf(b) - valueOf(a) : valueOf(a) - valueOf(b)));
       const shown = list.slice(0, 40);
@@ -769,7 +825,7 @@
           h("td", { class: "pair-name" }, ga.char + gb.char, h("small", null, `${ga.name} ${gb.name}`)),
           h("td", { class: "draw" }, pairSvg(e, "designer", widthU)),
           h("td", { class: "draw" }, pairSvg(e, "best", widthU, "designer")),
-          h("td", { class: "num" }, SQA.miniDiverging(v, max, 96), " ", h("b", null, signed(v, 1)), far ? h("span", { class: "z-mark", title: "Far from the library's usual for this pair" }, "far") : null, e.kd ? h("span", { class: "kd-mark", title: "The designer kerned this pair" }, "kerned") : null),
+          h("td", { class: "num" }, SQA.miniDiverging(v, max, 96), " ", h("b", null, signed(v, 1)), far ? h("span", { class: "z-mark", title: "Far from the library's usual for this pair" }, "far") : null, e.kd ? h("span", { class: "kd-mark", title: "The designer kerned this pair" }, "kerned") : null, e.scored ? null : h("span", { class: "kd-mark", title: `A glyph of this pair is not scored: ${unscoredWhy(ga.scored ? gb : ga, face)}` }, "not scored")),
           h("td", { class: "num" }, fmt(e.dg, 0)),
           h("td", { class: "num" }, fmt(e.mg, 0)),
           h("td", { class: "num" }, e.kd ? signed(e.kd, 0) : "0"),
@@ -793,16 +849,24 @@
 
   function heatMap(ctx, sec, P, face, relFn) {
     const m = P.m;
+    const byK0 = new Array(m * m).fill(null);
+    P.list.forEach((e) => { byK0[e.k] = e; });
+    // rows and columns grouped: capitals, lowercase, punctuation and symbols,
+    // then what is not scored (figures first)
+    const rank = (gi) => { const g = face.glyphs[gi]; if (!g.scored) return SQA.groupOf(g) === "figure" ? 3 : 4; return { upper: 0, lower: 1 }[SQA.groupOf(g)] ?? 2; };
+    const ord = P.pg.map((gi, k) => k).sort((x, y) => rank(P.pg[x]) - rank(P.pg[y]) || x - y);
     const byK = new Array(m * m).fill(null);
-    P.list.forEach((e) => { byK[e.k] = e; });
+    for (let a = 0; a < m; a++) for (let b = 0; b < m; b++) byK[a * m + b] = byK0[ord[a] * m + ord[b]];
+    const glyphAt = (k) => face.glyphs[P.pg[ord[k]]];
+    const unscored = ord.map((k) => !face.glyphs[P.pg[k]].scored);
     const ramp = h("div", { class: "ramp" });
     sec.appendChild(ramp);
     const wrap = h("div", { class: "heat-wrap", style: { marginTop: "10px" } });
     sec.appendChild(wrap);
     const live = h("p", { class: "sr-only", "aria-live": "polite" });
     sec.appendChild(live);
-    const chars = P.pg.map((gi) => face.glyphs[gi].char);
-    const groups = P.pg.map((gi) => SQA.groupOf(face.glyphs[gi]));
+    const chars = ord.map((k) => face.glyphs[P.pg[k]].char);
+    const groups = ord.map((k) => rank(P.pg[k]));
     let R = 20, rel = "model", width = 0;
     const val = (e) => (!e ? null : rel === "library" ? (e.diff === undefined ? null : e.diff) : e.res);
     function cls(v) {
@@ -827,7 +891,7 @@
     }
     function draw() {
       rel = relFn();
-      const vals = P.list.map(val).filter((v) => v !== null && v !== undefined).map(Math.abs).sort((a, b) => a - b);
+      const vals = P.list.filter((e) => e.scored).map(val).filter((v) => v !== null && v !== undefined).map(Math.abs).sort((a, b) => a - b);
       R = Math.max(10, Math.ceil(SQA.quantile(vals, 0.98) / 10) * 10 || 10);
       drawRamp();
       const W = width || wrap.clientWidth || 700;
@@ -844,6 +908,12 @@
         }
       }
       root.appendChild(cells);
+      // what is not scored: veiled
+      const first = unscored.indexOf(true);
+      if (first >= 0) {
+        root.appendChild(s("rect", { x: lab + first * c, y: lab, width: (m - first) * c, height: first * c, class: "hm-veil" }));
+        root.appendChild(s("rect", { x: lab, y: lab + first * c, width: m * c, height: (m - first) * c, class: "hm-veil" }));
+      }
       // group gaps (white between capitals, lowercase and punctuation)
       for (let i = 1; i < m; i++) {
         if (groups[i] !== groups[i - 1]) {
@@ -853,20 +923,21 @@
       }
       const fs = Math.min(10, c - 1);
       chars.forEach((ch, i) => {
-        root.appendChild(s("text", { x: lab + i * c + c / 2, y: lab - 4, "text-anchor": "middle", class: "hm-label", style: `font-size:${fs}px` }, ch));
-        root.appendChild(s("text", { x: lab - 4, y: lab + i * c + c / 2 + fs / 2 - 1, "text-anchor": "end", class: "hm-label", style: `font-size:${fs}px` }, ch));
+        const lc = "hm-label" + (unscored[i] ? " hm-label-muted" : "");
+        root.appendChild(s("text", { x: lab + i * c + c / 2, y: lab - 4, "text-anchor": "middle", class: lc, style: `font-size:${fs}px` }, ch));
+        root.appendChild(s("text", { x: lab - 4, y: lab + i * c + c / 2 + fs / 2 - 1, "text-anchor": "end", class: lc, style: `font-size:${fs}px` }, ch));
       });
       const sel = s("rect", { class: "sel", x: -20, y: -20, width: c + 1, height: c + 1 });
       root.appendChild(sel);
       let at = null;
       const content = (a, b) => {
         const e = byK[a * m + b];
-        const ga = face.glyphs[P.pg[a]], gb = face.glyphs[P.pg[b]];
+        const ga = glyphAt(a), gb = glyphAt(b);
         if (!e) return { title: `${ga.char}${gb.char}`, note: "Not measured." };
         const rows = [["vs model", signed(e.res, 1)]];
         if (e.libMed !== undefined) rows.push(["Library median", signed(e.libMed, 1)], ["vs library", signed(e.diff, 1)], ["Robust z", signed(e.z, 1)]);
         if (e.dg !== undefined) rows.push(["Designer gap", fmt(e.dg, 0)], ["Model gap", fmt(e.mg, 0)], ["Designer kern", fmt(e.kd, 0)], ["Model kern", fmt(e.km, 0)]);
-        return { title: `${ga.char}${gb.char} — ${ga.name} ${gb.name}`, rows };
+        return { title: `${ga.char}${gb.char} — ${ga.name} ${gb.name}`, rows, note: e.scored ? "" : `Not scored: ${unscoredWhy(ga.scored ? gb : ga, face)}.` };
       };
       const move = (a, b, viaKey) => {
         at = [a, b];
@@ -909,7 +980,7 @@
       wrap.appendChild(root);
       tableTog.refresh();
     }
-    // the matrix (66 × 66 cells) is built as one string
+    // the matrix (up to 114 × 114 cells) is built as one string
     const tableTog = SQA.tableToggle(sec, [], () => [], {
       label: "Show as table (every pair)", size: "medium",
       render(twrap) {
@@ -933,7 +1004,7 @@
     const d = r.detail;
     const sec = section(root, "kern-h", "Kerning agreement",
       "The designer's kerning against the best-fit model's on the scored pairs the designer kerned (units per 1000 em). Points near the diagonal agree; points across zero kern the other way.");
-    const scored = new Set(d.pair_glyphs || []);
+    const scored = new Set((d.pair_glyphs || []).filter((i) => face.glyphs[i] && face.glyphs[i].scored));
     const pts = [];
     (d.kerning.designer || []).forEach(([a, b, v]) => {
       if (!scored.has(a) || !scored.has(b)) return;
@@ -1222,6 +1293,7 @@
     load(false);
   }
 
+  SQA.reportParts = { normsFor, percentileOf, ordinal };
   SQA.renderReport = renderReport;
   SQA.renderPicking = renderPicking;
   SQA.views = SQA.views || {};

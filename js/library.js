@@ -30,6 +30,7 @@
     { key: "shape_error", label: "Shape error", num: true, title: "How far the gaps depart from even spacing of these shapes, overall tightness taken out (units per 1000 em)" },
     { key: "sidebearing_error", label: "Sidebearing error", num: true, title: "Mean sidebearing difference from the best-fit model, offset removed (units per 1000 em)" },
     { key: "kern_r", label: "Kerning r", num: true, title: "Correlation of the designer's kerning with the model's on the pairs the designer kerned" },
+    { key: "harness_gain", label: "Harness", num: true, title: "What the designer harness does to the shape error: with it minus without it (negative: the harness brings the model closer to this font's spacing)" },
     { key: "checked", label: "Checked", title: "When the family was last checked; 'changed' marks families updated on Google Fonts since" },
   ];
 
@@ -77,6 +78,7 @@
     rows.forEach((r) => {
       r._search = SQA.fold(r.name + " " + (r.designers || []).join(" "));
       r._rank = r.level ? SQA.LEVEL_RANK[r.level] : -1;
+      r.harness_gain = Number.isFinite(r.shape_error) && Number.isFinite(r.shape_error_bare) ? Math.round((r.shape_error - r.shape_error_bare) * 10) / 10 : null;
     });
     return rows;
   }
@@ -151,6 +153,7 @@
       + `<td class="num">${esc(fmt(r.shape_error, 1))}</td>`
       + `<td class="num">${esc(fmt(r.sidebearing_error, 1))}</td>`
       + `<td class="num">${esc(fmt(r.kern_r, 2))}</td>`
+      + `<td class="num">${r.harness_gain === null ? `<span class="na">–</span>` : `<span class="${r.harness_gain < -0.05 ? "gain-better" : r.harness_gain > 0.05 ? "gain-worse" : ""}">${esc(signed(r.harness_gain, 1))}</span>`}</td>`
       + `<td${r.checked ? ` title="${esc(SQA.fmtDateTime(r.checked))}"` : ""}>${checked}</td></tr>`;
   }
 
@@ -599,6 +602,7 @@
     const pl = panel("loose", "Best-fit Looseness");
     const ps = panel("shape", "Shape error");
     const pc = panel("closest", "Closest preset");
+    const ph = panel("harness", "Designer harness");
 
     function examples(list) {
       const names = list.slice().sort((a, b) => (a.popularity || 1e9) - (b.popularity || 1e9)).slice(0, 5).map((r) => r.name);
@@ -690,6 +694,39 @@
       pc.foot.textContent = "";
       SQA.tableToggle(pc.foot, [{ label: "Preset", get: (r) => r.label }, { label: "Families", num: true, get: (r) => int(r.value) }, { label: "Share", num: true, get: (r) => fmt((100 * r.value) / total, 1) + " %" }],
         () => crow, { caption: "Families closest to each preset" });
+
+      // the designer harness: shape error with it minus without it
+      const both = inCat.filter((r) => r.harness_gain !== null && r.harness_gain !== undefined);
+      ph.foot.textContent = "";
+      if (!both.length) {
+        ph.subEl.textContent = "Shape error with the harness minus without it";
+        ph.cap.textContent = "The reports do not compare both ways yet: the next scan checks every family with the model and its harness and with the bare model.";
+        mount(ph, () => clear(ph.stage));
+        return;
+      }
+      const gains = both.map((r) => r.harness_gain).sort((a, b) => a - b);
+      const closer = both.filter((r) => r.harness_gain < -0.05), further = both.filter((r) => r.harness_gain > 0.05);
+      const gR = Math.max(4, Math.ceil(Math.max(Math.abs(SQA.quantile(gains, 0.02)), Math.abs(SQA.quantile(gains, 0.98))) / 2) * 2);
+      const gStep = gR <= 8 ? 0.5 : gR <= 20 ? 1 : 2;
+      const G = SQA.binValues(gains, -gR, gR, gStep);
+      G.bins.forEach((b) => { b.cls = b.x1 <= 0 ? "neg" : b.x0 >= 0 ? "pos" : ""; b.items = both.filter((r) => r.harness_gain >= b.x0 - 1e-9 && r.harness_gain < b.x1 - 1e-9); });
+      const medBare = SQA.median(both.map((r) => r.shape_error_bare)), medWith = SQA.median(both.map((r) => r.shape_error));
+      ph.subEl.textContent = "Families per step · shape error with the harness minus without it";
+      ph.cap.textContent = `With the harness the model is closer to the spacing of ${int(closer.length)} of ${int(both.length)} families (left of 0), further from ${int(further.length)}. Median shape error ${fmt(medBare, 1)} without the harness, ${fmt(medWith, 1)} with it. It is learned from the text faces rated well spaced, so their gain is not independent evidence.`;
+      mount(ph, (w) => SQA.histogram(ph.stage, {
+        width: w, height: 236, bins: G.bins, xMin: -gR, xMax: gR, xFormat: (v) => signed(v, 0),
+        under: { n: G.under, label: `below ${signed(-gR, 0)}` }, over: { n: G.over, label: `above ${signed(gR, 0)}` },
+        markers: [{ x: 0, label: "no change", cls: "marker-preset" }], xLabel: "← closer with the harness · further →",
+        ariaLabel: `Histogram of what the designer harness does to the shape error of ${both.length} families. Use the arrow keys to read each bar.`,
+        labelFor: (b) => `${signed(b.x0, 1)} to ${signed(b.x1, 1)}: ${b.n} families`,
+        tipFor: (b) => b.under ? { title: `Below ${signed(-gR, 0)}`, rows: [["Families", int(b.n)]] } : b.over ? { title: `Above ${signed(gR, 0)}`, rows: [["Families", int(b.n)]] }
+          : { title: `${signed(b.x0, 1)} to ${signed(b.x1, 1)}`, rows: [["Families", int(b.n)]], note: examples(b.items || []) },
+      }));
+      SQA.tableToggle(ph.foot, [{ label: "Category", get: (r) => r.label }, { label: "Families", num: true, get: (r) => int(r.n) }, { label: "Closer", num: true, get: (r) => int(r.closer) }, { label: "Further", num: true, get: (r) => int(r.further) }, { label: "Median without", num: true, get: (r) => fmt(r.bare, 1) }, { label: "Median with", num: true, get: (r) => fmt(r.with, 1) }],
+        () => CATEGORIES.map((c) => {
+          const rs = data.rows.filter((r) => r.category === c && r.harness_gain !== null && r.harness_gain !== undefined);
+          return { label: c, n: rs.length, closer: rs.filter((r) => r.harness_gain < -0.05).length, further: rs.filter((r) => r.harness_gain > 0.05).length, bare: SQA.median(rs.map((r) => r.shape_error_bare)), with: SQA.median(rs.map((r) => r.shape_error)) };
+        }).filter((r) => r.n), { caption: "What the designer harness does, per category", label: "Show per category" });
     }
     return { render };
   }

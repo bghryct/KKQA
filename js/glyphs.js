@@ -1,7 +1,8 @@
 /*
- * Spacing QA — the report's core glyphs as a small font: text layout under
- * each spacing (designer, tight, standard, loose, best), pair gaps, and
- * drawing through shared <defs> so every outline is in the page once.
+ * Spacing QA — the report's glyphs as a small font: text layout under each
+ * spacing (designer, tight, standard, loose, best, and the bare model — the
+ * best fit without the designer harness), pair gaps, and drawing through
+ * shared <defs> so every outline is in the page once.
  *
  * Geometry is in font units with y up (paths are drawn with scale(s, −s)).
  * A glyph sits at pen position x with its ink starting at x + lsb, so it is
@@ -11,8 +12,8 @@
   "use strict";
   const SQA = window.SQA;
   const { s } = SQA;
-  const SPACINGS = ["designer", "tight", "standard", "loose", "best"];
-  const SPACING_LABEL = { designer: "As designed", tight: "Tight", standard: "Standard", loose: "Loose", best: "Best fit" };
+  const SPACINGS = ["designer", "tight", "standard", "loose", "best", "bare"];
+  const SPACING_LABEL = { designer: "As designed", tight: "Tight", standard: "Standard", loose: "Loose", best: "Best fit", bare: "Best fit, bare model" };
   const finite = (v) => typeof v === "number" && Number.isFinite(v);
   let faceIds = 0;
 
@@ -22,6 +23,8 @@
       this.id = "f" + ++faceIds;
       this.upm = report.font && report.font.upm > 0 ? report.font.upm : 1000;
       this.per = 1000 / this.upm;
+      // a CJK font: its punctuation of ambiguous East Asian width is not scored
+      this.cjk = !!(report.font && report.font.cjk);
       this.glyphs = d.glyphs || [];
       this.n = this.glyphs.length;
       this.byChar = new Map();
@@ -34,11 +37,14 @@
       });
       this.kern = {};
       SPACINGS.forEach((sp) => {
-        const m = new Map();
+        // the bare model's kerning is the best fit's except where the harness corrects a pair
+        const m = sp === "bare" ? new Map(this.kern.best) : new Map();
         const list = (d.kerning && d.kerning[sp]) || [];
         for (const e of list) if (Array.isArray(e) && e.length === 3) m.set(e[0] * this.n + e[1], e[2]);
         this.kern[sp] = m;
       });
+      /** The spacings this report has (older reports have no bare model). */
+      this.spacings = SPACINGS.filter((sp) => this.glyphs.some((g, i) => this.ok[i] && Array.isArray(g[sp])));
       let top = -Infinity, bottom = Infinity;
       this.glyphs.forEach((g, i) => { if (this.ok[i]) { top = Math.max(top, g.bbox[3]); bottom = Math.min(bottom, g.bbox[2]); } });
       this.top = finite(top) ? top : 0.8 * this.upm;

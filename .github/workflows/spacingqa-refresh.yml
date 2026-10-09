@@ -77,17 +77,19 @@ jobs:
           echo "SINCE=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_ENV"
 
       # The reports live in spacingqa-data/, apart from the site's own data/.
-      # The version in the key (v2) starts the cache again: change it to make
+      # The version in the key (v3) starts the cache again: change it to make
       # the next run start from the reports in this repository (data/reports)
       # after pushing a new copy of them, instead of checking every family.
+      # v3: the GF Latin Kernel, the bare model beside the harness and the
+      # third harness table, pushed with reports checked that way.
       - name: Restore the reports of the last run
         uses: actions/cache/restore@v4
         with:
           path: |
             spacingqa-data
             !spacingqa-data/fonts
-          key: spacingqa-data-v2-${{ github.run_id }}
-          restore-keys: spacingqa-data-v2-
+          key: spacingqa-data-v3-${{ github.run_id }}
+          restore-keys: spacingqa-data-v3-
 
       - name: Without a cache, start from the reports of the published copy
         run: |
@@ -129,7 +131,7 @@ jobs:
           path: |
             spacingqa-data
             !spacingqa-data/fonts
-          key: spacingqa-data-v2-${{ github.run_id }}
+          key: spacingqa-data-v3-${{ github.run_id }}
 
       - id: pages
         uses: actions/configure-pages@v5

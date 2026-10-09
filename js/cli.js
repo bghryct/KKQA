@@ -105,7 +105,7 @@
     SQA.append(prose, [sOut,
       h("p", null, "In ", c("spacingqa-data/qa/"), " after a run:"),
       h("dl", { class: "defs" },
-        h("dt", null, c("summary.md"), " ", c("summary.json")), h("dd", null, "The run: the levels and how they moved, the families that got worse or better, the ones checked, the ones that could not be checked. The Markdown fits a CI job summary or an issue."),
+        h("dt", null, c("summary.md"), " ", c("summary.json")), h("dd", null, "The run: the levels and how they moved, the families that got worse or better, the ones checked, the ones that could not be checked, and what the designer harness does across the library (for how many families the model with it is closer to the designer's spacing than without it). The Markdown fits a CI job summary or an issue."),
         h("dt", null, [c("tags.csv"), " ", c("quant.csv"), " ", c("skip.csv"), " ", c("tags_metadata.csv")]), h("dd", null, "The tagging data, in the formats of google/fonts' ", c("tags/all/"), ". The ", h("a", { href: "#/guide" }, "Guide"), " says how to use them."),
         h("dt", null, c("quality.csv")), h("dd", null, "One row per family: level, closest preset, every number, the suggestion and the reasons."),
         h("dt", null, [c("FAIL.md"), " ", c("WARN.md"), " ", c("INFO.md"), " ", c("SKIP.md"), " ", c("ERROR.md")]), h("dd", null, "Every family of a level, with its reasons."),

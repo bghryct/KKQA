@@ -20,7 +20,11 @@ exit code for CI. The site's **CLI** page is the walkthrough.
 The reports are kept between runs in the Actions cache (`spacingqa-data`). A
 run without one starts from the site's own reports in this repository
 (`spacingqa import-site`). Deleting the caches (Actions → Caches) makes the
-next run start from them again.
+next run start from them again. A version of the tool that checks fonts
+another way (the GF Latin Kernel, the bare model beside the harness and the
+third harness table did) comes with a new cache key in the workflow, so the
+first run after it starts from the reports pushed with it, checked that way,
+instead of checking every family again on the runner.
 
 ## Requests
 

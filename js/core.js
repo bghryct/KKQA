@@ -247,6 +247,17 @@
     }
     return p;
   }
+  /** A report as the copy publishes it, {gz: base64 of the gzipped JSON}
+   *  (static_site.rs `packed`), unpacked; anything else as it is. */
+  async function unpackReport(v) {
+    if (!v || typeof v.gz !== "string") return v;
+    if (typeof DecompressionStream === "undefined") throw new ApiError(500, "This browser cannot unpack the published reports (it has no DecompressionStream): please use a current browser.");
+    const bin = atob(v.gz);
+    const bytes = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"));
+    return JSON.parse(await new Response(stream).text());
+  }
   /** Where an export file is: the server's /api/export, or the copy's data/exports. */
   const exportUrl = (name) => (STATIC ? `${DATA}exports/${name}` : `/api/export/${name}`);
   /** Where uploaded fonts are checked, for the page's wording. */
@@ -276,7 +287,7 @@
     if (m) {
       const slug = decodeURIComponent(m[1]);
       let r;
-      try { r = await staticData("report:" + slug, `${DATA}reports/${slug}.js`, false); }
+      try { r = await unpackReport(await staticData("report:" + slug, `${DATA}reports/${slug}.js`, false)); }
       catch (e) {
         if (e.status === 404) throw new ApiError(404, "This family has not been checked yet: the next scheduled scan will check it.");
         throw e;

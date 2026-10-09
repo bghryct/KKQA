@@ -581,3 +581,52 @@ dialog.modal .row { justify-content: flex-end; margin-top: 16px; }
   body { background: #fff; }
   .table-wrap.tall { max-height: none; }
 }
+
+/* ---------------------------------------------------------------- the kernel, the harness, the shape error */
+.heat-wrap .hm-veil { fill: var(--surface); opacity: 0.55; pointer-events: none; }
+.heat-wrap .hm-label-muted { fill: var(--muted); }
+.side-groups .panel.unscored h4 { color: var(--muted); }
+.spec-line.spec-bare .spec-label { color: var(--ink-2); }
+.lead-line { font-size: 16px; margin: 4px 0 14px; }
+.table-wrap.auto { max-height: none; }
+table.both-ways { width: auto; min-width: min(100%, 560px); }
+table.both-ways th[scope="row"] { font-weight: 500; }
+table.both-ways th small { display: block; color: var(--muted); font-size: 11.5px; font-weight: 400; }
+.chg { display: inline-block; margin-left: 8px; padding: 0 6px; border-radius: 999px; font-size: 11px; font-weight: 600; border: 1px solid currentColor; }
+.chg-better { color: var(--good); }
+.chg-worse { color: var(--critical); }
+.chart .gridline { stroke: var(--hairline); stroke-width: 1; }
+.chart .db-line { stroke-width: 2.5; }
+.chart .db-head { fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.chart .db-toward { stroke: var(--good); }
+.chart .db-away { stroke: var(--critical); }
+.chart .db-same { stroke: var(--axis); }
+.chart .db-bare { fill: var(--surface); stroke: var(--ink); stroke-width: 2; }
+.chart .db-with { fill: var(--ink); stroke: var(--surface); stroke-width: 1.5; }
+.chart .contrib-right { fill: var(--s-kk); }
+.chart .contrib-left { fill: var(--s-kk); fill-opacity: 0.3; stroke: var(--s-kk); stroke-width: 1; }
+.gap-band { fill: var(--accent); opacity: 0.22; }
+.gap-band.overlap { fill: var(--div-pos); opacity: 0.3; }
+.dim { stroke: var(--ink-2); stroke-width: 1; }
+.dim-label { font: 600 11px var(--chart-sans); fill: var(--ink-2); font-variant-numeric: tabular-nums; }
+.measure-examples { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 12px; }
+.measure { margin: 0; }
+.measure figcaption { font-size: 13.5px; margin-bottom: 8px; }
+.measure-row { display: flex; flex-wrap: wrap; gap: 6px 22px; align-items: flex-end; }
+.measure-row svg, .context-strip svg { display: block; max-width: 100%; height: auto; }
+.measure-label { font: 600 10.5px/1.4 var(--sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.equation { font-variant-numeric: tabular-nums; font-size: 13.5px; margin: 10px 0 4px; }
+.equation span { white-space: nowrap; }
+.pos-text { color: var(--div-pos); }
+.neg-text { color: var(--div-neg); }
+.sub-h { margin: 18px 0 4px; font-size: 15px; }
+.context-strips { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 10px; margin-top: 8px; }
+.context-strip { margin: 0; padding: 10px 12px; }
+.context-strip figcaption { font-size: 13px; margin-bottom: 4px; }
+.strip-line { display: grid; grid-template-columns: 74px minmax(0, 1fr); align-items: center; gap: 6px; }
+.gap-shade.looser { fill: var(--div-pos); opacity: 0.28; }
+.gap-shade.tighter { fill: var(--div-neg); opacity: 0.28; }
+.gap-shade.even { fill: var(--surface-3); }
+.glyph-accent { fill: var(--accent-ink); }
+.gain-better { color: var(--good); font-weight: 600; }
+.gain-worse { color: var(--critical); font-weight: 600; }

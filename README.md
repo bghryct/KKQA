@@ -13,8 +13,8 @@ Fonts checked on the page — uploads under *Check a font*, and a family's *Re-c
 are checked in the browser by `spacingqa-wasm.js` (the same Rust code as the server,
 compiled to WebAssembly). Nothing is uploaded.
 
-Built 2026-10-08T22:57:24Z from a live scan of fonts.google.com: 1950 families, 1950 reports.
+Built 2026-10-09T11:59:51Z from a live scan of fonts.google.com: 1950 families, 1950 reports.
 The exports for the Google Fonts tagging initiative and the Markdown reports are in
 `data/exports/` (see its README.md).
 
-To build it again: `spacingqa scan`, then `spacingqa site`.
+A scheduled job rebuilds it every day from fonts.google.com.
