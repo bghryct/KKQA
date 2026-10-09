@@ -260,7 +260,7 @@
       h("p", null, "Even spacing means the white between letters feels the same from pair to pair, whatever their shapes. Kinetikern2 spaces each pair of this font's glyphs that way from the outlines alone. For every pair, the check measures the white between the two glyphs as designed and as the model sets them at the font's own overall tightness (the best fit), and takes their difference — after the font's overall offset is taken out, so being set tight or loose overall costs nothing. That difference is the pair's ", h("b", null, "residual"), ": positive when the font gives the pair more room than the model would, negative when less."),
       h("p", null, h("b", null, `The shape error is the average size of the residuals: ${fmt(SE, 1)} units per 1000 em for this font`),
         med ? ` (the median of ${N.name} is ${fmt(med.median, 1)}).` : ".",
-        " 0 would mean every pair as even as the model spaces these shapes. A high value can be a deliberate style (scripts, display faces with a lively rhythm), a convention the model does not know, or pairs that really are uneven. It is not a grade: WARN and FAIL come only from being far outside the library's norms.")));
+        " 0 would mean every pair as even as the model spaces these shapes. A high value can be a deliberate style (scripts, display faces with a lively rhythm), a convention the model does not know, or pairs that really are uneven. It is not a grade: a shape error raises WARN or FAIL only when it is far outside the library's norms.")));
 
     // a pair, measured
     const letterPairs = P.filter((e) => isLetter(face.glyphs[e.a]) && isLetter(face.glyphs[e.b]));

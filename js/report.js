@@ -1,7 +1,9 @@
 /*
  * Spacing QA — the report of one font (#/family/<slug>, and uploads): the
- * verdict, the preset it is closest to, a specimen under every spacing, the
- * glyph sides, the pairs (list and heat map) and the kerning agreement.
+ * verdict, the preset it is closest to, the settings the check used and what
+ * the others give, a connected script's joins (settings.js), a specimen
+ * under every spacing, the glyph sides, the pairs (list and heat map) and
+ * the kerning agreement.
  *
  * Units: geometry in font units; every number shown in units per 1000 em.
  */
@@ -24,7 +26,7 @@
    *  glyphs, 88 scored) or, for an older report, the 76-glyph core set. */
   function coverage(r) {
     const g = (r.detail && r.detail.glyphs) || [];
-    const kernel = g.length > 76 || (r.method || "") === "kernel";
+    const kernel = g.length > 76 || !!r.method;
     const scored = g.filter((x) => x.scored).length;
     return {
       kernel, glyphs: g.length, scored,
@@ -42,6 +44,7 @@
     "spacing/unreadable": "The file could not be read as a TrueType or OpenType font.",
     "spacing/unavailable": "The font could not be downloaded from Google Fonts. This is usually temporary: re-check later.",
     "spacing/error": "The spacing engine could not measure this font.",
+    "spacing/decorated": "Its figures touch the letters as set, as an underline, a chart, guide lines or an effect make every glyph touch its neighbours (a script's figures stand apart). Spacing such a font would break the line or grid, so there is nothing to compare: the plugin's Keep joins keeps every side that touches.",
   };
 
   // ---------------------------------------------------------------- helpers
@@ -112,6 +115,10 @@
     keyNumbers(vsec, report, o);
     if (ds) designspace(ctx, root, ds, o);
     closest(ctx, root, report, o);
+    if (SQA.settings) {
+      SQA.settings.settings(ctx, root, report, face, o);
+      SQA.settings.joins(ctx, root, report, face, o);
+    }
     if (SQA.explain) {
       SQA.explain.harness(ctx, root, report, face, o);
       SQA.explain.shape(ctx, root, report, face, o);
@@ -145,10 +152,10 @@
   }
   /** Seconds one location's check takes: in the browser, what one took here (when known). */
   const pickSeconds = () => (SQA.STATIC ? (SQA.wasm && SQA.wasm.lastMs ? Math.max(1, SQA.wasm.lastMs / 1000) : 3) : 2);
-  /** "Showing Bold (wght 700) — checked live just now, not stored · Back to the default location" */
+  /** "Showing Bold (wght 700) — checked live just now, not stored · Back to the main report (Regular)" */
   function pickBanner(p, text) {
-    const back = p.backHref ? h("a", { href: p.backHref }, "Back to the default location")
-      : h("button", { type: "button", class: "linklike", onclick: p.back }, "Back to the default location");
+    const back = p.backHref ? h("a", { href: p.backHref }, "Back to the main report (Regular)")
+      : h("button", { type: "button", class: "linklike", onclick: p.back }, "Back to the main report (Regular)");
     return h("div", { class: "pick-banner" },
       h("span", null, text[0], h("b", null, p.name), p.desc && !p.redundant ? ` (${p.desc})` : "", text[1]), back);
   }
@@ -205,8 +212,8 @@
     }
     if (r.generated) item("Checked", h("b", { title: r.generated }, SQA.fmtDateTime(r.generated)), ` (${SQA.ago(r.generated)})`);
     if (r.status && r.status.baseline) item("Baseline", h("b", null, r.status.baseline), r.status.compared_with ? ` · compared with ${SQA.categoryName(r.status.compared_with)}` : "");
-    else if (r.summary && f.italic) item("Baseline", h("b", null, "not used"), " — an italic is reported, not judged");
-    else if (r.summary) item("Baseline", h("b", null, "none"), " — levels stay INFO");
+    else if (r.summary && f.italic) item("Baseline", h("b", null, "not used"), " — an italic on its own is not judged against the library's norms");
+    else if (r.summary) item("Baseline", h("b", null, "none"), " — nothing judged against the library's norms");
     head.appendChild(meta);
     const actions = h("div", { class: "report-actions" });
     if (o.mode !== "upload" && o.onRecheck) {
@@ -259,7 +266,7 @@
       : "This font was checked in memory and is not stored on the server: the report exists only in this page. Download it to keep it."));
     if (r.summary) {
       const nav = h("nav", { class: "onpage", "aria-label": "On this page" });
-      [["verdict-h", "Verdict"], hasDs ? ["designspace-h", "Designspace"] : null, ["closest-h", "Closest preset"], r.summary.bare ? ["harness-h", "Designer harness"] : null, ["shape-h", "Shape error"], ["specimen-h", "Specimen"], ["sides-h", "Glyph sides"], ["pairs-h", "Pairs"], ["heat-h", "Heat map"], ["kern-h", "Kerning"]].filter(Boolean).forEach(([id, label]) => {
+      [["verdict-h", "Verdict"], hasDs ? ["designspace-h", "Designspace"] : null, ["closest-h", "Closest preset"], r.settings && r.settings.variants && r.settings.variants.length ? ["settings-h", "Settings"] : null, r.joins ? ["joins-h", "Joins"] : null, r.summary.bare ? ["harness-h", "Designer harness"] : null, ["shape-h", "Shape error"], ["specimen-h", "Specimen"], ["sides-h", "Glyph sides"], ["pairs-h", "Pairs"], ["heat-h", "Heat map"], ["kern-h", "Kerning"]].filter(Boolean).forEach(([id, label]) => {
         const a = h("a", { href: "#" + id }, label);
         a.addEventListener("click", (e) => {
           e.preventDefault();
@@ -277,10 +284,24 @@
     const st = r.status || { level: "ERROR", reasons: [] };
     const sec = section(root, "verdict-h", "Verdict");
     const reasons = (st.reasons || []).slice().sort((a, b) => SQA.LEVEL_RANK[b.level] - SQA.LEVEL_RANK[a.level]);
+    // what raised the level: the library's norms, a location of the
+    // designspace, broken joins — one or more of them
+    const raised = reasons.filter((x) => x.level === st.level).map((x) => x.code);
+    const joins = reasons.some((x) => x.code === "spacing/joins-broken" && SQA.LEVEL_RANK[x.level] >= SQA.LEVEL_RANK.WARN);
+    const located = raised.includes("spacing/instances");
+    const norms = raised.some((x) => x !== "spacing/joins-broken" && x !== "spacing/instances");
+    const fail = st.level === "FAIL";
+    const parts = [
+      norms ? `the spacing falls ${fail ? "very " : ""}far outside the library's norms` : null,
+      located ? (fail ? "a named instance of its designspace falls very far outside the library's norms" : "a location of its designspace stands far from the norms or from its neighbours") : null,
+      joins ? "joins are broken in the font" : null,
+    ].filter(Boolean);
+    const text = (st.level === "WARN" || fail) && parts.length ? `${fail ? "Fails" : "Worth a look"}: ${parts.join(", and ")}.`
+      : SQA.LEVEL_TEXT[st.level] || "";
     const box = h("div", { class: "panel verdict" },
       badge(st.level, { big: true }),
       h("div", null,
-        h("p", { class: "verdict-text" }, SQA.LEVEL_TEXT[st.level] || ""),
+        h("p", { class: "verdict-text" }, text),
         h("ul", { class: "reasons" }, reasons.map((x) => h("li", null,
           h("span", null, badge(x.level)),
           h("span", null, h("span", { class: "code" }, x.code), x.message))))));
@@ -288,8 +309,8 @@
     const lib = o.library;
     if (r.summary && !st.baseline && !r.font.italic) {
       sec.appendChild(h("p", { class: "small" }, lib
-        ? `This report was made before a library baseline existed, so its level is INFO; the comparisons below use the current baseline ${lib.id}. Re-check to judge it.`
-        : "No library baseline was used: every level is INFO until one is built from the library's reports. The comparisons below use the families checked so far."));
+        ? `This report was made without a library baseline, so nothing in it was judged against the library's norms (only broken joins raise a level without one); the comparisons below use the current baseline ${lib.id}. Re-check to judge it.`
+        : "No library baseline was used: nothing is judged against the library's norms until one is built from the library's reports (joins broken in the font are WARN regardless). The comparisons below use the families checked so far."));
     } else if (r.summary && st.baseline && lib && lib.id && st.baseline !== lib.id) {
       sec.appendChild(h("p", { class: "note", style: { marginTop: "10px" } }, `The level and reasons above were judged against baseline ${st.baseline}; the library comparisons below use the server's current baseline ${lib.id}, so their numbers can differ slightly until the report is judged again.`));
     }
@@ -305,7 +326,7 @@
       CODE_HELP[first.code] ? h("p", null, CODE_HELP[first.code]) : null,
       st.level === "ERROR" && o.onRecheck ? h("p", null, h("button", { type: "button", class: "btn", onclick: (e) => o.onRecheck(e.currentTarget) }, "Re-check now")) : null));
     sec.appendChild(h("h3", null, "What the check covers"));
-    sec.appendChild(h("p", { class: "section-intro" }, "Kinetikern2 spaces and kerns the glyphs of Google Fonts’ GF Latin Kernel — A–Z, a–z, 0–9, punctuation and symbols, 114 in all, each against every other — from their outlines, at a tight, a standard and a loose preset and at the Looseness that fits the font best, with its designer harness and without it, and compares the designer's spacing with each. Letters, punctuation and most symbols are scored; figures, the symbols fonts often draw at the figure width and the underscore are spaced and drawn but not scored. Monospaced fonts, fonts without the basic Latin alphabet and fonts without outlines are skipped."));
+    sec.appendChild(h("p", { class: "section-intro" }, "Kinetikern2 spaces and kerns the glyphs of Google Fonts’ GF Latin Kernel — A–Z, a–z, 0–9, punctuation and symbols, 114 in all, each against every other — from their outlines, at a tight, a standard and a loose preset and at the Looseness that fits the font best, with its designer harness and without it, and compares the designer's spacing with each. Letters, punctuation and most symbols are scored; figures, the symbols fonts often draw at the figure width and the underscore are spaced and drawn but not scored. Skipped: monospaced fonts, designs whose glyphs touch by construction (a line, a grid, a background or an effect through every glyph), fonts without the basic Latin alphabet, fonts without outlines, and files that are not fonts."));
   }
 
   function keyNumbers(sec, r, o) {
@@ -315,7 +336,7 @@
     const ctxLine = (k, d) => { const m = med(k); return m && m.n ? `library median ${fmt(m.median, d)}${percentileOf(m, sm[k]) !== null ? ` · ${ordinal(percentileOf(m, sm[k]))} percentile` : ""}` : ""; };
     const stats = h("div", { class: "stats" });
     const tile = (value, label, delta) => stats.appendChild(h("div", { class: "stat" }, h("div", { class: "stat-value" }, value), h("div", { class: "stat-label" }, label), delta ? h("div", { class: "stat-delta" }, delta) : null));
-    tile(signed(sm.best_looseness, 2), "best-fit Looseness (−0.5 tight · 0 standard · +0.5 loose)", ctxLine("best_looseness", 2));
+    tile(signed(sm.best_looseness, 2), r.settings && r.settings.fit === "joins" ? "Looseness (a connected script: matched to its joined letters; −0.5 tight · 0 standard · +0.5 loose)" : "best-fit Looseness (−0.5 tight · 0 standard · +0.5 loose)", ctxLine("best_looseness", 2));
     tile(fmt(sm.shape_error, 1), "shape error: gaps that depart from even spacing of these shapes", ctxLine("shape_error", 1));
     tile(fmt(sm.sidebearing_error, 1), "sidebearing error per side, offset removed", ctxLine("sidebearing_error", 1));
     tile(sm.kerned_error !== null && sm.kerned_error !== undefined ? fmt(sm.kerned_error, 1) : "–", `shape error on the ${int(sm.kerned_pairs)} pairs the designer kerned`, ctxLine("kerned_error", 1));
@@ -346,7 +367,7 @@
       (SQA.withHarness(r)
         ? "The designer's gaps compared with Kinetikern2's three presets, with its designer harness (see About)."
         : "The designer's gaps compared with Kinetikern2's three presets — the bare model: this report was checked before the designer harness.") +
-      " Distance is the mean difference of every pair gap, overall offset included; which preset is nearest is a matter of overall tightness — a designer's choice.");
+      " Distance is the mean absolute difference of the scored pairs' gaps, overall offset included; which preset is nearest is a matter of overall tightness — a designer's choice.");
     const cards = h("div", { class: "preset-cards" });
     const bare = sm.bare || null;
     (sm.presets || []).forEach((p, k) => {
@@ -393,7 +414,7 @@
     fig.appendChild(stage);
     const v = sm.best_looseness;
     fig.appendChild(h("p", { class: "caption" }, `Best fit ${signed(v, 2)}` + (dist && dist.pctl !== null && dist.pctl !== undefined ? ` — the ${ordinal(dist.pctl)} percentile; median ${signed(dist.median, 2)}.` : ".") +
-      (SQA.outOfRange(v) ? (v < 0 ? " The fit stopped at its limit (−6): the letters touch or overlap, as in connecting scripts, so the model cannot set them tighter. Such spacing is reported, never raised." : " The fit stopped at its limit (+6): the font is set looser than anything the model makes. Such spacing is reported, never raised.") : "")));
+      (SQA.outOfRange(v) ? (v < 0 ? " The fit stopped at its limit (−6): the font is set tighter than anything the model makes, as scripts and designs whose letters touch or overlap can be. Its comparison with the model is reported, not judged; broken joins and the designspace's locations still are." : " The fit stopped at its limit (+6): the font is set looser than anything the model makes. Its comparison with the model is reported, not judged; broken joins and the designspace's locations still are.") : "")));
     sec.appendChild(fig);
     SQA.responsive(stage, (w) => looseScale(stage, w, v, dist, sm.presets), ctx);
     SQA.tableToggle(fig, [{ label: "Marker", get: (x) => x[0] }, { label: "Looseness", num: true, get: (x) => x[1] }],
@@ -1137,7 +1158,7 @@
     const cached = mainCache && mainCache.slug === slug && (at || mainCache.picking) && Date.now() - mainCache.t < CACHE_MS ? mainCache : null;
     const willCheck = !cached && row && (!row.level || row.stale);
     const crumbs = h("p", { class: "crumbs", style: { marginTop: "28px" } }, h("a", { href: libraryHref() }, "← Library"));
-    let waitEl = SQA.loading(willCheck ? `Checking ${name} now…` : `Loading the report of ${name}…`, willCheck ? "The font is downloaded from Google Fonts and spaced by Kinetikern2 at five Looseness settings; this takes a few seconds." : null);
+    let waitEl = SQA.loading(willCheck ? `Checking ${name} now…` : `Loading the report of ${name}…`, willCheck ? "The font is downloaded from Google Fonts and spaced by Kinetikern2 at its three presets and its best fit, and with each other setting; this takes a few seconds." : null);
     if (!cached) root.append(crumbs, waitEl);
     const slow = cached ? null : setTimeout(() => {
       if (!ctx.alive() || !waitEl.isConnected || willCheck) return;
@@ -1261,8 +1282,8 @@
         eyebrow: [f.category || "Category unknown", target.italic ? "Italic variable font" : "Variable font"].join(" · "),
         title: family, picked,
         sub: SQA.STATIC
-          ? "Checked in your browser: the font is downloaded from Google Fonts and spaced by Kinetikern2 at five Looseness settings at this location — a few seconds. Nothing is stored."
-          : "Checked live on the server: the font is spaced by Kinetikern2 at five Looseness settings at this location — a few seconds. Nothing is stored.",
+          ? "Checked in your browser: the font is downloaded from Google Fonts and spaced by Kinetikern2 at this location, at its three presets and its best fit, and with each other setting — a few seconds. Nothing is stored."
+          : "Checked live on the server: the font is spaced by Kinetikern2 at this location, at its three presets and its best fit, and with each other setting — a few seconds. Nothing is stored.",
         model: own ? SQA.designspace.model(own) : null,
         dsOpts: { current: target.location, href: lk.dsHref, pick: lk.dsPick, where: SQA.STATIC ? "in your browser" : "on the server", seconds: pickSeconds() },
       });

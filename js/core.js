@@ -158,8 +158,8 @@
   const LEVEL_TEXT = {
     SKIP: "Not checked: the font is outside what the check covers.",
     PASS: "Passes.",
-    INFO: "For information: the spacing is the designer's choice and within the library's norms.",
-    WARN: "Worth a look: the spacing falls far outside the library's norms.",
+    INFO: "For information: the spacing is the designer's choice, and nothing the check judges is far outside the library's norms or broken.",
+    WARN: "Worth a look: something falls far outside the library's norms, a location of the designspace jumps against its neighbours, or joins are broken in the font.",
     FAIL: "Fails: the spacing falls very far outside the library's norms.",
     ERROR: "The check could not run on this font.",
   };
@@ -614,7 +614,8 @@
   /** The library category key of a Google Fonts category ("Sans Serif" → "SANS_SERIF"). */
   const categoryKey = (c) => (c ? String(c).toUpperCase().replace(/ /g, "_") : "ALL");
   /** "SANS_SERIF" → "Sans Serif fonts", as the server's messages name them. */
-  const categoryName = (k) => (!k || k === "ALL" ? "the library's fonts" : k.split("_").map((w) => cap(w.toLowerCase())).join(" ") + " fonts");
+  // the norm groups: Google Fonts' categories, and connected scripts across them (library.rs norm_key)
+  const categoryName = (k) => (!k || k === "ALL" ? "the library's fonts" : k === "CONNECTED" ? "connected scripts" : k.split("_").map((w) => cap(w.toLowerCase())).join(" ") + " fonts");
   /** The fit stops at Looseness ±6: tighter (looser) than anything the model makes. */
   const FIT_LIMIT = 6;
   const outOfRange = (v) => typeof v === "number" && Math.abs(v) >= FIT_LIMIT - 1e-6;

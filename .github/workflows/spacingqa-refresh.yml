@@ -15,12 +15,15 @@
 # The tool is prebuilt (tool/, see its README.md): this repository holds no
 # source. It is built for macOS on Apple silicon, so the job runs on macos-14.
 # The reports are kept between runs in the Actions cache. A run without one
-# (the first) starts from the reports of the site in this repository
-# (data/reports/*.js), so it checks only what changed since that copy.
+# (the first, the first after a new cache key below, or one after the cache
+# expired) starts from the reports of the site in this repository
+# (data/reports/*.js), so it checks only what changed since that copy: the
+# families changed on Google Fonts, in ERROR or missing a location, and those
+# whose report was made by another method, model or harness table (stale).
 #
 # Setup: Settings → Pages → Build and deployment → Source: "GitHub Actions".
 # Run it by hand (Actions → Spacing QA daily refresh → Run workflow), with
-# "all" to check every family again after a new version of the tool.
+# "all" only to check every family again whatever its report says.
 name: Spacing QA daily refresh
 
 on:
@@ -77,19 +80,23 @@ jobs:
           echo "SINCE=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_ENV"
 
       # The reports live in spacingqa-data/, apart from the site's own data/.
-      # The version in the key (v3) starts the cache again: change it to make
+      # The version in the key (v4) starts the cache again: change it to make
       # the next run start from the reports in this repository (data/reports)
-      # after pushing a new copy of them, instead of checking every family.
+      # after pushing a new copy of them, checked by the new version, instead
+      # of checking every family again on the runner.
       # v3: the GF Latin Kernel, the bare model beside the harness and the
       # third harness table, pushed with reports checked that way.
+      # v4: the settings per kind of font (italics along their italic angle,
+      # Keep joins and the join checker, tabular figures) and the variants,
+      # pushed with reports checked that way.
       - name: Restore the reports of the last run
         uses: actions/cache/restore@v4
         with:
           path: |
             spacingqa-data
             !spacingqa-data/fonts
-          key: spacingqa-data-v3-${{ github.run_id }}
-          restore-keys: spacingqa-data-v3-
+          key: spacingqa-data-v4-${{ github.run_id }}
+          restore-keys: spacingqa-data-v4-
 
       - name: Without a cache, start from the reports of the published copy
         run: |
@@ -131,7 +138,7 @@ jobs:
           path: |
             spacingqa-data
             !spacingqa-data/fonts
-          key: spacingqa-data-v3-${{ github.run_id }}
+          key: spacingqa-data-v4-${{ github.run_id }}
 
       - id: pages
         uses: actions/configure-pages@v5

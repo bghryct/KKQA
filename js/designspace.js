@@ -15,11 +15,15 @@
  *
  * A family's italic variable font (report.italic) has locations of its own:
  * in report.instances with italic: true and ital: 1 in their location, filled
- * from the italic's axes — reported, never judged.
+ * from the italic's axes — each judged against its upright counterpart where
+ * it was measured along its italic angle (at most WARN), reported only where
+ * it was measured upright.
  *
- * A location is {tag: user value} for every axis. "The default location" is
- * the main report's: Regular (weight 400, width 100, upright where the axes
- * reach them), every other axis at its default.
+ * A location is {tag: user value} for every axis. `m.main` ("the default
+ * location" in the code below) is the main report's: Regular (weight 400,
+ * width 100, upright where the axes reach them), every other axis at its
+ * default — the page calls it Regular, the main report, since the font's own
+ * default location can be elsewhere.
  */
 (function () {
   "use strict";
@@ -27,15 +31,17 @@
   const { h, s, clear, fmt, signed, int, tip, badge } = SQA;
 
   const KIND = {
-    default: { label: "Default", group: "The default location", order: 0 },
+    default: { label: "Main report", group: "Regular (the main report)", order: 0 },
     named: { label: "Named", group: "Named instances", order: 1 },
     edge: { label: "Edge", group: "Edges", order: 2 },
     corner: { label: "Corner", group: "Corners", order: 3 },
   };
-  // a family's italic variable font, checked across its own designspace: reported, never judged
-  const ITALIC_GROUP = "Italic — reported only";
+  // a family's italic variable font, checked across its own designspace: each
+  // location against its upright counterpart (reported only, measured upright)
+  const ITALIC_GROUP = "Italic (a font of its own)";
   const SKIPPED = {
     monospaced: "monospaced — every letter has the same advance width, so the spacing is set by the width",
+    decorated: "the glyphs touch by construction — a line, a grid, a background or an effect runs through every glyph",
     "not-latin": "no basic Latin alphabet at this location",
     "no-outlines": "no outlines at this location",
   };
@@ -138,8 +144,8 @@
     else if (skipText) r.notes.push(r.error);
     else if (r.error) r.notes.push("Not checked: " + r.error);
     else if (!r.pending) {
-      if (r.italic) r.notes.push("The italic: reported, not judged.");
-      else if (r.slanted) r.notes.push("Slanted: reported, not judged.");
+      if (r.italic) r.notes.push("The italic: judged against its upright where measured along its italic angle (at most WARN), else reported only.");
+      else if (r.slanted) r.notes.push("Slanted: judged against its upright where measured along its angle (at most WARN), else reported only.");
       if (r.outOfRange) r.notes.push(`The fit stopped at its limit (±${SQA.FIT_LIMIT}): reported, not judged.`);
     }
     r.redundant = sameParts(r.name, r.desc);
@@ -193,7 +199,7 @@
       finish(mainRow);
     } else if (mr) {
       // the main report's location is not among the locations (an axis default between named instances)
-      mainRow = makeRow({ name: "Default location", kind: "default", location: main, main: true }, m);
+      mainRow = makeRow({ name: "Regular", kind: "default", location: main, main: true }, m);
       fromReport(mainRow, mr);
       rows.unshift(mainRow);
     }
@@ -225,13 +231,13 @@
     const n = m.rows.filter((r) => r.kind !== "default" && !r.italic).length;
     sec.appendChild(h("p", { class: "section-intro" },
       "A variable font is checked at Regular, the way Google Fonts serves it — weight 400, width 100 and upright where the axes reach them, every other axis at its default: the main report — and across its designspace: at every named instance, at every axis's minimum and maximum (its edges, the other axes where the main report has them) and at every corner of its designspace (all axes at their extremes together; a font with more than six axes: the corners of weight, width and optical size, and each other axis's extremes at the lightest and the boldest weight). ",
-      m.italic ? "A family's italic variable font is checked across its own designspace too: reported, never judged. " : "",
+      m.italic ? "A family's italic variable font is checked across its own designspace too: each location measured along its italic angle is judged against its upright counterpart (at most WARN), and one measured upright is reported only. " : "",
       o.pick ? "Pick any location to see its full report, checked live." : ""));
     if (m.summary) sec.appendChild(h("p", { class: "ds-summary" }, m.summary.message));
     else if (!m.checked && n) {
       sec.appendChild(h("p", { class: "ds-summary" }, `This font has ${SQA.plural(n, "location")} to check: ${[
         counts.named ? SQA.plural(counts.named, "named instance") : null, counts.edge ? SQA.plural(counts.edge, "edge") : null, counts.corner ? SQA.plural(counts.corner, "corner") : null,
-      ].filter(Boolean).join(", ")}. Only the default location is checked so far.`));
+      ].filter(Boolean).join(", ")}. Only Regular, the main report, is checked so far.`));
     } else if (!m.checked) {
       sec.appendChild(h("p", { class: "ds-summary" }, "The named instances, edges and corners of this designspace have not been checked yet" +
         (o.unchecked || "") + (o.pick ? ". Any location can be checked now, under “Another location”." : ".")));
@@ -243,7 +249,7 @@
     }
     if (m.from) {
       sec.appendChild(h("p", { class: "note", style: { marginTop: "12px" } },
-        `The locations are those of the published scan (${SQA.fmtDateTime(m.from.generated)}): the re-check in your browser covers the default location only, because each location takes a few seconds here. Pick a location to check it now.`));
+        `The locations are those of the published scan (${SQA.fmtDateTime(m.from.generated)}): the re-check in your browser covers the main report (Regular) only, because each location takes a few seconds here. Pick a location to check it now.`));
     }
     sec.appendChild(axesList(m));
     if (o.pick) sec.appendChild(picker(m, o, cur));
@@ -273,7 +279,7 @@
 
   function optionText(r) {
     let t = r.name;
-    if (r.main) t += " — the default location (main report)";
+    if (r.main) t += " — Regular, the main report";
     else if (!r.redundant) t += ` — ${r.desc}`;
     if (r.level && r.level !== "INFO") t += ` · ${r.level}${r.skipped ? ` (${r.skipped})` : ""}`;
     return t;
@@ -301,7 +307,7 @@
         const r = m.rows[Number(sel.value)];
         const isShown = !!r && SQA.sameLocation(r.location, cur);
         btn.disabled = !r || isShown;
-        btn.textContent = isShown ? "Shown on this page" : r && r.main ? "Show the default location" : "Check this location";
+        btn.textContent = isShown ? "Shown on this page" : r && r.main ? "Show the main report (Regular)" : "Check this location";
       };
       sel.addEventListener("change", sync);
       btn.addEventListener("click", () => { const r = m.rows[Number(sel.value)]; if (r) o.pick(r); });
@@ -336,7 +342,7 @@
     }
     build();
     const fontSwitch = m.italic ? h("div", { class: "controls", style: { margin: "10px 0 0" } }, h("span", { class: "control-label" }, "Font"),
-      SQA.segmented("Font", [{ label: "Upright", value: "upright" }, { label: "Italic (reported only)", value: "italic" }], italic ? "italic" : "upright", (v) => { italic = v === "italic"; build(); })) : null;
+      SQA.segmented("Font", [{ label: "Upright", value: "upright" }, { label: "Italic", value: "italic" }], italic ? "italic" : "upright", (v) => { italic = v === "italic"; build(); })) : null;
     const msg = h("p", { class: "msg", "aria-live": "polite" });
     const form = h("form", { novalidate: true },
       h("p", { class: "small", style: { margin: "6px 0 0" } }, "Any point of the designspace, each axis from its minimum to its maximum."),
@@ -377,12 +383,12 @@
   const COLS = [
     { key: "k", label: "Location", title: "In the designspace's order: named instances as the font lists them, then edges, then corners; then the italic font's" },
     { key: "kind", label: "Kind", title: "Named instance; edge (one axis at its minimum or maximum, the others where the main report has them: Regular — weight 400, width 100, upright — and the rest at their defaults); corner (all axes at their extremes together — with more than six axes, wght, wdth and opsz, or another axis's extreme at the lightest or the boldest weight)" },
-    { key: "desc", label: "Axes", title: "The axes whose value differs from the default location (in the italic font: from the italic's default location)" },
-    { key: "level", label: "Level", title: "Evenness lost against the default location, compared with what the library's families usually lose there: named instances can be WARN or FAIL; edges, corners and locations at another width, optical size or custom-axis value than the main report at most WARN; slanted and italic locations are reported only" },
+    { key: "desc", label: "Axes", title: "The axes whose value differs from Regular, the main report's location (in the italic font: from the italic's own center, at the main report's weight)" },
+    { key: "level", label: "Level", title: "Evenness lost against Regular, the main report (an italic or slanted location: against its upright), compared with what the library's families usually lose there, and jumps against neighbouring locations (WARN). A named instance that differs from the main report in weight alone can be WARN or FAIL; edges, corners, named instances at one of them, locations at another width, optical size or custom-axis value than the main report, and italic and slanted locations at most WARN. Italic and slanted locations measured upright, and fits at the limit of the Looseness range, are reported only" },
     { key: "closest", label: "Closest", title: "The Kinetikern2 preset nearest to the spacing at this location" },
-    { key: "best_looseness", label: "Looseness", num: true, title: "Best-fit Looseness: −0.5 is the tight preset, 0 standard, +0.5 loose. Reported, not judged: weights, widths and optical sizes are meant to differ" },
+    { key: "best_looseness", label: "Looseness", num: true, title: "Best-fit Looseness (a connected script: matched to its joined letters): −0.5 is the tight preset, 0 standard, +0.5 loose. Reported, not judged: weights, widths and optical sizes are meant to differ" },
     { key: "shape_error", label: "Shape error", num: true, title: "How far the gaps depart from even spacing of these shapes, overall tightness taken out (units per 1000 em)" },
-    { key: "sidebearing_error", label: "Sidebearing error", num: true, title: "Mean sidebearing difference from the best-fit model, offset removed (units per 1000 em)" },
+    { key: "sidebearing_error", label: "Sidebearing error", num: true, title: "Mean absolute sidebearing difference from the best-fit model, offset removed (units per 1000 em)" },
     { key: "kern_r", label: "Kerning r", num: true, title: "Correlation of the designer's kerning with the model's" },
     { key: "notes", label: "Notes", title: "Why a location is raised, skipped or not judged" },
   ];
@@ -409,7 +415,7 @@
     const bw = Math.min(Math.abs(v), 1) * 32;
     const x = v < 0 ? 32 - bw : 32;
     return [
-      SQA.outOfRange(v) ? [h("span", { class: "tag", title: `The best fit stopped at the limit of the Looseness range (±${SQA.FIT_LIMIT}). Reported, never raised.` }, "out of range"), " "] : null,
+      SQA.outOfRange(v) ? [h("span", { class: "tag", title: `The best fit stopped at the limit of the Looseness range (±${SQA.FIT_LIMIT}): this location is reported, not judged.` }, "out of range"), " "] : null,
       h("span", { class: "lb " + (v < 0 ? "neg" : "pos"), style: `--x:${x.toFixed(1)}px;--bw:${bw.toFixed(1)}px` }, signed(v, 2)),
     ];
   }
@@ -449,7 +455,7 @@
       else if (o.pick) name = h("button", { type: "button", class: "linklike", onclick: () => o.pick(r) }, r.name);
       else name = h("span", null, r.name);
       const tags = [];
-      if (r.main) tags.push(h("span", { class: "tag", title: "The default location: the main report" }, "default"));
+      if (r.main) tags.push(h("span", { class: "tag", title: "Regular: the main report's location" }, "main"));
       if (isCur && !mainShown) tags.push(h("span", { class: "tag shown", title: "The report on this page is of this location" }, "shown"));
       const notes = h("td", { class: "notes" },
         r.reasons.map((x) => h("div", { class: "ds-reason" }, badge(x.level), h("span", null, x.message))),
@@ -457,9 +463,9 @@
       return h("tr", { "data-k": String(r.k), class: cls || null, "aria-current": isCur ? "true" : null },
         h("td", null, name, tags.length ? [" ", tags] : null),
         h("td", null, KIND[r.kind].label,
-          r.italic ? [" ", h("span", { class: "tag italic", title: "A location of the family's italic font: reported, not judged" }, "italic")] : null,
+          r.italic ? [" ", h("span", { class: "tag italic", title: "A location of the family's italic font: judged against its upright where measured along its italic angle (at most WARN), else reported only" }, "italic")] : null,
           r.extreme && r.kind === "named" ? [" ", h("span", { class: "tag", title: "This named instance is also an edge or a corner of the designspace" }, "extreme")] : null),
-        h("td", null, r.main ? h("span", { class: "muted" }, "the default location") : r.desc),
+        h("td", null, r.main ? h("span", { class: "muted" }, "Regular (main report)") : r.desc),
         h("td", null, r.level ? badge(r.level) : h("span", { class: "na" }, "not checked yet")),
         h("td", null, SQA.presetChip(r.closest)),
         h("td", { class: "num" }, looseCell(r.best_looseness)),
@@ -510,7 +516,7 @@
       f.order.forEach((t) => { if (t !== tag) { other[t] = pts[0].location[t]; base[t] = f.main[t]; } });
       const at = SQA.sameLocation(other, base) ? "" : SQA.describeLocation(other, base, f.order);
       const through = !italic && !at;
-      lines.push({ pts, main: through, italic, label: italic ? "in the italic" + (at ? ", at " + at : "") : through ? "through the default location" : "at " + at });
+      lines.push({ pts, main: through, italic, label: italic ? "in the italic" + (at ? ", at " + at : "") : through ? "through Regular (the main report)" : "at " + at });
     });
     return lines.sort((a, b) => (b.main - a.main) || (a.italic - b.italic) || (b.pts.length - a.pts.length));
   }
@@ -570,17 +576,17 @@
     const st = { measure: "best_looseness" };
     const isCur = (r) => !SQA.sameLocation(cur, m.main) && SQA.sameLocation(r.location, cur);
     sec.append(head, h("p", { class: "section-intro" },
-      "Each line joins locations that differ on one axis only: the line through the default location in ink, the others in grey; every dot is a location, coloured by its level. Hover or focus a dot for its numbers; click it, or press Enter, to check that location."));
+      "Each line joins locations that differ on one axis only: the line through Regular (the main report) in ink, the others in grey; every dot is a location, coloured by its level. Hover or focus a dot for its numbers; click it, or press Enter, to check that location."));
     const controls = h("div", { class: "controls" }, h("span", { class: "control-label" }, "Measure"),
       SQA.segmented("Measure drawn", Object.keys(MEASURES).map((k) => ({ label: MEASURES[k].label, value: k })), st.measure, (v) => { st.measure = v; redraw(); }));
     // the legend: line keys for lines, the marks as drawn (level colours always with their names)
     const key = (cls, label) => h("span", null, h("i", { class: "ds-key " + cls, "aria-hidden": "true" }), label);
     const italicDrawn = drawn.some((x) => x.lines.some((l) => l.italic));
     const legend = h("div", { class: "legend ds-legend" },
-      key("line", "line through the default location"), key("line other", "other lines along the axis"),
-      italicDrawn ? key("line italic", "the italic, reported only (hollow dots)") : null,
+      key("line", "line through Regular (the main report)"), key("line other", "other lines along the axis"),
+      italicDrawn ? key("line italic", "the italic (hollow dots)") : null,
       key("dot lvl-INFO", "INFO"), key("dot lvl-WARN", "WARN (!)"), key("dot lvl-FAIL", "FAIL (✕)"),
-      key("ring", "the default location (main report)"),
+      key("ring", "Regular (the main report)"),
       SQA.sameLocation(cur, m.main) ? null : key("square", "shown on this page"));
     sec.append(controls, legend);
     const redraws = [];
@@ -595,7 +601,7 @@
         sub, ramp, stage);
       sec.appendChild(panel);
       const chart = SQA.responsive(stage, (w) => planeChart(stage, ramp, w, plane, st.measure, m, o, isCur), ctx);
-      const setSub = () => { sub.textContent = `${MEASURES[st.measure].label} at the ${SQA.plural(plane.pts.length, "location")} where only ${plane.ax} and ${plane.ay} differ from the default location.`; };
+      const setSub = () => { sub.textContent = `${MEASURES[st.measure].label} at the ${SQA.plural(plane.pts.length, "location")} where only ${plane.ax} and ${plane.ay} differ from Regular (the main report).`; };
       setSub();
       redraws.push(() => { setSub(); chart.redraw(); });
       SQA.tableToggle(panel, [], () => [], {
@@ -708,7 +714,7 @@
       ["Looseness", signed(r.best_looseness, 2)], ["Shape error", fmt(r.shape_error, 1)],
       ["Level", r.level || "–"], ["Closest", SQA.PRESET_LABEL[r.closest] || "–"]]);
     const note = [
-      line, r.main ? "The default location: the main report." : null,
+      line, r.main ? "Regular: the main report's location." : null,
       r.reasons.length ? r.reasons[0].message : r.notes[0] || null,
       isCurrent ? "Shown on this page." : pick ? (touch ? "Tap again to check this location." : "Click, or press Enter, to check this location.") : null,
     ].filter(Boolean).join(" ");
@@ -742,7 +748,7 @@
     // the default location's value on this axis
     const dx = X(m.main[A.tag]);
     root.appendChild(s("line", { x1: dx, x2: dx, y1: yT - 10, y2: yB, class: "ds-default" }));
-    root.appendChild(s("text", { x: dx, y: yT - 14, "text-anchor": dx < x0 + 24 ? "start" : dx > x1 - 24 ? "end" : "middle", class: "muted-label halo" }, "default"));
+    root.appendChild(s("text", { x: dx, y: yT - 14, "text-anchor": dx < x0 + 24 ? "start" : dx > x1 - 24 ? "end" : "middle", class: "muted-label halo" }, "main"));
     // lines: the others first, the default location's on top
     lines.slice().reverse().forEach((ln) => {
       const d = ln.pts.map((r, i) => `${i ? "L" : "M"}${X(r.location[A.tag]).toFixed(1)},${Y(r[measure]).toFixed(1)}`).join("");
@@ -772,7 +778,7 @@
     const content = (p, touch) => {
       const v = p.r[measure];
       const extra = [[A.tag, SQA.axisNum(p.r.location[A.tag])]];
-      const t = tipFor(p.r, extra, p.ln.main ? "On the line through the default location." : `On the line ${p.ln.label}.`, isCur(p.r), touch, !!o.pick);
+      const t = tipFor(p.r, extra, p.ln.main ? "On the line through Regular (the main report)." : `On the line ${p.ln.label}.`, isCur(p.r), touch, !!o.pick);
       if (v < dom[0] || v > dom[1]) t.note = "Beyond the drawn scale. " + t.note;
       return t;
     };

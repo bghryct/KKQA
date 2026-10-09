@@ -19,12 +19,17 @@ exit code for CI. The site's **CLI** page is the walkthrough.
 
 The reports are kept between runs in the Actions cache (`spacingqa-data`). A
 run without one starts from the site's own reports in this repository
-(`spacingqa import-site`). Deleting the caches (Actions → Caches) makes the
-next run start from them again. A version of the tool that checks fonts
-another way (the GF Latin Kernel, the bare model beside the harness and the
-third harness table did) comes with a new cache key in the workflow, so the
-first run after it starts from the reports pushed with it, checked that way,
-instead of checking every family again on the runner.
+(`spacingqa import-site`) and checks what changed since. Deleting the caches
+(Actions → Caches) makes the next run start from them again. A version of
+the tool that checks fonts another way comes with a new cache key in the
+workflow — `v3` for the GF Latin Kernel, the bare model beside the harness
+and the third harness table; `v4` for the settings per kind of font (italics
+along their italic angle, Keep joins and the join checker, tabular figures
+at their width) and what the other settings give — so the first run after
+it starts from the reports pushed with it, not from the cache. When those
+were checked that way, the run checks only what changed. A report made by
+another method, model or harness table counts as stale: the runs check it
+again, as much as fits in each.
 
 ## Requests
 
@@ -49,8 +54,10 @@ computer with its source:
    folder. It copies the files here, the workflow and the request form, and
    prints the git commands that commit and push them.
 3. The push rebuilds the site by itself: a push that changes `tool/` or the
-   workflow starts a run that checks what changed (**stale**). For a new
-   version of the check, also run the workflow by hand (Actions → Spacing QA
-   daily refresh → Run workflow) with **all**, so that every family is
-   checked by it. The daily run (**stale**) checks only the families that
-   changed on Google Fonts since the last run.
+   workflow starts a run that checks what changed (**stale**): the families
+   that changed on Google Fonts since, those in ERROR or missing a location,
+   and those whose report was made by another method, model or harness
+   table. Pushed with the site's reports checked by the new version, that run
+   checks only what changed on Google Fonts. Run the workflow by hand
+   (Actions → Spacing QA daily refresh → Run workflow) with **all** only to
+   check every family again, whatever its report says.

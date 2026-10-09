@@ -32,7 +32,7 @@
     root.appendChild(h("header", { class: "view-head" },
       h("p", { class: "eyebrow" }, "Check a font file"),
       h("h1", { tabindex: "-1" }, "Check a font"),
-      h("p", { class: "lede" }, "Upload a TTF or OTF to check it the way the library is checked: against Kinetikern2's tight, standard and loose spacing and, when a baseline exists, against the library's norms for its category. A variable font is checked at its default location first; then any location of its designspace — or all of them — can be checked. " + (SQA.STATIC
+      h("p", { class: "lede" }, "Upload a TTF or OTF to check it the way the library is checked: against Kinetikern2's tight, standard and loose spacing and, when a baseline exists, against the library's norms for its category (a connected script whose joins are kept: against the library's connected scripts). A variable font is checked at Regular, the main report's location, first; then any location of its designspace — or all of them — can be checked. " + (SQA.STATIC
         ? "The font is checked in your browser — it never leaves your computer, and the report exists only in this page."
         : "The font is checked in memory on the server and not stored — the report exists only in this page."))));
 
@@ -52,8 +52,8 @@
     const form = h("form", { class: "panel", novalidate: true },
       zone,
       h("div", { class: "form-grid" },
-        h("label", { for: "up-cat" }, "Compare with", cat, h("span", { class: "hint" }, "The Google Fonts category whose norms the font is judged against.")),
-        h("label", { for: "up-wght" }, "Weight", weight, h("span", { class: "hint" }, "For variable fonts: the wght of the default location (400 unless you change it)."))),
+        h("label", { for: "up-cat" }, "Compare with", cat, h("span", { class: "hint" }, "The Google Fonts category whose norms the font is judged against (a connected script whose joins are kept is judged against the library's connected scripts instead).")),
+        h("label", { for: "up-wght" }, "Weight", weight, h("span", { class: "hint" }, "For variable fonts: the wght of the main report's location, Regular (400 unless you change it)."))),
       h("div", { class: "row" }, go, clearBtn),
       msg);
     root.appendChild(form);
@@ -104,7 +104,7 @@
       go.disabled = true;
       SQA.message(msg, "");
       clear(result);
-      result.appendChild(SQA.loading(`Checking ${file.name} ${SQA.WHERE}…`, "Kinetikern2 spaces the font at five Looseness settings; this takes a few seconds. Nothing is stored."));
+      result.appendChild(SQA.loading(`Checking ${file.name} ${SQA.WHERE}…`, "Kinetikern2 spaces the font at its three presets and its best fit, and with each other setting; this takes a few seconds. Nothing is stored."));
       try {
         const q = new URLSearchParams({ name: file.name, category: cat.value });
         if (weight.value) q.set("weight", String(w));
@@ -162,7 +162,7 @@
       return {
         label: n ? `Check every location (${SQA.int(n)}, about ${SQA.duration(secs)})` : "Check every location",
         text: (SQA.STATIC
-          ? `Your browser checks the locations one after another, about ${SQA.fmt(last.perLocation, 1)} s each (the default location took that long here)` + (inPage ? "; this browser runs the check in the page, which will not respond until it is done." : "; the page stays usable meanwhile.")
+          ? `Your browser checks the locations one after another, about ${SQA.fmt(last.perLocation, 1)} s each (the main report took that long here)` + (inPage ? "; this browser runs the check in the page, which will not respond until it is done." : "; the page stays usable meanwhile.")
           : `The server checks the locations one after another, about ${SQA.fmt(last.perLocation, 1)} s each.`) +
           " The result is judged like a library family's: each location's evenness, and the jumps between neighbouring locations.",
         run: runAll,

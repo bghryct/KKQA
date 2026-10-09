@@ -1,5 +1,5 @@
 /Skip/Spacing,0,100,skip computation of spacing
-/quant/spacing_evenness,0,100,spacing evenness within the category
+/quant/spacing_evenness,0,100,spacing evenness within the category or the connected scripts
 /quant/spacing_kerning_correlation,-1,1,kerning correlation with the spacing model
 /quant/spacing_kerning_error,0,1000,kerned pair spacing error
 /quant/spacing_looseness,-6,6,best-fit spacing looseness

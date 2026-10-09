@@ -53,11 +53,11 @@
 
     // ------------------------------------------------------------ start
     SQA.append(prose, [sStart,
-      h("p", null, "A run keeps its reports in a data folder (here ", c("spacingqa-data"), ") and checks only what changed since. Start it from the reports this site publishes, and the first run takes seconds instead of an hour:"),
+      h("p", null, "A run keeps its reports in a data folder (here ", c("spacingqa-data"), ") and checks only what changed since. Start it from the reports this site publishes, and the first run takes seconds instead of hours:"),
       repo
         ? code(`git clone --depth 1 ${repo}.git kkqa\n${tool} import-site --site kkqa --data spacingqa-data`)
         : code(`${tool} import-site --site path/to/the/published/copy --data spacingqa-data`),
-      h("p", null, "Or check the whole library from nothing: every family and every location of the variable ones, live from fonts.google.com, about an hour on an M1:"),
+      h("p", null, "Or check the whole library from nothing: every family and every location of the variable ones, live from fonts.google.com, two to three hours on an Apple M1 with six workers (October 2026):"),
       code(`${tool} qa --data spacingqa-data --mode all`)]);
 
     // ------------------------------------------------------------ a run
@@ -65,12 +65,12 @@
       code(`${tool} qa --data spacingqa-data`),
       h("p", null, "One run:"),
       h("ol", null,
-        h("li", null, "reads the Google Fonts catalog and checks the families that are new or changed on fonts.google.com since their report, the ones that could not be checked, and those missing a location;"),
+        h("li", null, "reads the Google Fonts catalog and checks the families that are new or changed on fonts.google.com since their report, the ones that could not be checked, those missing a location, and those whose report was made by another method, model or harness table;"),
         h("li", null, "judges every report against the same norms, so that one run compares with the next;"),
         h("li", null, "writes the tagging files, the reports and a summary of the run into ", c("spacingqa-data/qa/"), ";"),
         h("li", null, "prints the levels and every family that got worse or better since the last run, and sets the exit code.")),
       h("p", null, "With nothing new on Google Fonts it takes a few seconds. What it prints, for instance:"),
-      code("1,950 families, 2 checked in this run, baseline 2026-10-08-1419-1115: 12 FAIL (+1), 184 WARN (−1), 1,653 INFO, 101 SKIP\n               worse: Sarina INFO → FAIL  (evenness: Shape error 107.3 units per 1000 em …)\n              better: Lato WARN → INFO"),
+      code("1,950 families, 2 checked in this run, baseline 2026-10-09-2340-1163: 2 FAIL, 239 WARN, 1,529 INFO, 180 SKIP\n               worse: Pacifico INFO → WARN  (joins-broken: 4 joins are broken in the font …)\n              better: Allura WARN → INFO"),
       h("dl", { class: "defs" },
         h("dt", null, c("--mode")), h("dd", null, c("stale"), " (the default) checks what changed; ", c("all"), " every family; ", c("none"), " nothing: judge, write and compare only."),
         h("dt", null, c("--families")), h("dd", null, "Only these families, by name or slug: ", c("--families \"Lato,Roboto Flex\""), "."),
@@ -98,7 +98,7 @@
     // ------------------------------------------------------------ files
     SQA.append(prose, [sFiles,
       code(`${tool} check MyFont-Regular.ttf --category "Sans Serif"\n${tool} check ofl/lato/*.ttf --format markdown\n${tool} check fonts/*.ttf --error-code-on warn --json reports.json`),
-      h("p", null, "Each font is judged against the library's norms for its category (", c("--category"), ", or the ", c("METADATA.pb"), " next to it). A variable font is checked at every named instance, edge and corner (", c("--no-instances"), ": its default location only). ",
+      h("p", null, "Each font is judged against the library's norms for its category (", c("--category"), ", or the ", c("METADATA.pb"), " next to it; a connected script whose joins are kept against the library's connected scripts), and joins broken in the font are WARN. A variable font is checked at every named instance, edge and corner (", c("--no-instances"), ": at Regular, the main report's location, only). ",
         c("--format"), " is ", c("text"), ", ", c("markdown"), " (the report this site downloads) or ", c("json"), "; ", c("--json FILE"), " also writes the full reports. The exit code is 1 when a font is at the level of ", c("--error-code-on"), " (", c("fail"), " by default) or above.")]);
 
     // ------------------------------------------------------------ outputs
@@ -114,7 +114,7 @@
 
     // ------------------------------------------------------------ norms
     SQA.append(prose, [sNorms,
-      h("p", null, "Levels come from the library's norms: the baseline, ", c("library.json"), ". The tool has this site's built in, and a run judges every report against the one it is given (", c("--baseline"), "), or the data folder's, or the built-in one. Keeping the same norms from run to run keeps the runs comparable; the summary says when they changed."),
+      h("p", null, "Levels come from the library's norms — the baseline, ", c("library.json"), " — and from joins broken in the font, which need none. The tool has this site's built in, and a run judges every report against the one it is given (", c("--baseline"), "), or the data folder's, or the built-in one. Keeping the same norms from run to run keeps the runs comparable; the summary says when they changed."),
       h("p", null, "After a run of every family, new norms from those reports:"),
       code(`${tool} baseline --data spacingqa-data --out library.json`),
       h("p", null, "About explains the norms and the thresholds; ", c(`${tool} baseline --thresholds my.json`), " changes the thresholds.")]);

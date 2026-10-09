@@ -10,6 +10,7 @@
   const CATEGORIES = ["Sans Serif", "Serif", "Display", "Handwriting", "Monospace"];
   const NOTE = {
     "spacing/monospaced": "monospaced",
+    "spacing/decorated": "touching by construction",
     "spacing/not-latin": "no Latin",
     "spacing/no-outlines": "no outlines",
     "spacing/unreadable": "unreadable",
@@ -24,11 +25,11 @@
   const COLS = [
     { key: "name", label: "Family", title: "Family name (opens its report)" },
     { key: "category", label: "Category", title: "Google Fonts category" },
-    { key: "level", label: "Level", title: "Result level, as fontspector's: INFO by default; WARN or FAIL only far outside the library's norms" },
+    { key: "level", label: "Level", title: "Result level, as fontspector's: INFO by default; WARN or FAIL far outside the library's norms (at the main location or at a location of the designspace; a jump between neighbouring locations is WARN), WARN for joins broken in a connected script" },
     { key: "closest", label: "Closest", title: "The Kinetikern2 preset nearest to the font's spacing" },
-    { key: "best_looseness", label: "Looseness", num: true, title: "Best-fit Looseness: −0.5 is the tight preset, 0 standard, +0.5 loose" },
+    { key: "best_looseness", label: "Looseness", num: true, title: "Best-fit Looseness (a connected script: matched to its joined letters): −0.5 is the tight preset, 0 standard, +0.5 loose" },
     { key: "shape_error", label: "Shape error", num: true, title: "How far the gaps depart from even spacing of these shapes, overall tightness taken out (units per 1000 em)" },
-    { key: "sidebearing_error", label: "Sidebearing error", num: true, title: "Mean sidebearing difference from the best-fit model, offset removed (units per 1000 em)" },
+    { key: "sidebearing_error", label: "Sidebearing error", num: true, title: "Mean absolute sidebearing difference from the best-fit model, offset removed (units per 1000 em)" },
     { key: "kern_r", label: "Kerning r", num: true, title: "Correlation of the designer's kerning with the model's on the pairs the designer kerned" },
     { key: "harness_gain", label: "Harness", num: true, title: "What the designer harness does to the shape error: with it minus without it (negative: the harness brings the model closer to this font's spacing)" },
     { key: "checked", label: "Checked", title: "When the family was last checked; 'changed' marks families updated on Google Fonts since" },
@@ -124,7 +125,7 @@
     // a bar from the centre of a 64 px track, ±1 at the ends
     const bw = Math.min(Math.abs(v), 1) * 32;
     const x = v < 0 ? 32 - bw : 32;
-    const oor = SQA.outOfRange(v) ? `<span class="tag" title="The best fit stopped at the limit of the Looseness range (±${SQA.FIT_LIMIT}): the font is set ${v < 0 ? "tighter" : "looser"} than anything the model makes, as in connecting scripts. Reported, never raised.">out of range</span> ` : "";
+    const oor = SQA.outOfRange(v) ? `<span class="tag" title="The best fit stopped at the limit of the Looseness range (±${SQA.FIT_LIMIT}): the font is set ${v < 0 ? "tighter" : "looser"} than anything the model makes${v < 0 ? ", as scripts and designs whose letters touch or overlap can be" : ""}. Its comparison with the model is reported, not judged; broken joins and the designspace's locations still are.">out of range</span> ` : "";
     return `${oor}<span class="lb ${v < 0 ? "neg" : "pos"}" style="--x:${x.toFixed(1)}px;--bw:${bw.toFixed(1)}px">${esc(signed(v, 2))}</span>`;
   }
   /** "VF · 12": a variable font and the locations of its designspace checked (axes in the title). */
@@ -136,6 +137,20 @@
       : " · its designspace has not been checked yet");
     return ` <span class="vf${lv ? " lvl-" + lv : ""}" title="${esc(title)}">VF${r.locations ? " · " + esc(int(r.locations)) : ""}${lv ? ` <b aria-hidden="true">${lv === "FAIL" ? "✕" : "!"}</b><span class="sr-only"> (${lv} at a location)</span>` : ""}</span>`;
   }
+  /** "joins": a connected script (its joins kept, the broken ones counted);
+   *  "∠12°": measured along its italic angle (or the slant its stems show). */
+  function settingMarkers(r) {
+    let out = "";
+    if (typeof r.joins === "number") {
+      const b = r.joins_broken || 0;
+      const title = `A connected script: its joins are kept as drawn and checked (${int(r.joins)} a–z pairs join)` + (b ? ` · ${int(b)} ${b === 1 ? "join is" : "joins are"} broken in the font` : "");
+      out += ` <span class="vf joins${b ? " lvl-WARN" : ""}" title="${esc(title)}">joins${b ? ` · ${esc(int(b))} <b aria-hidden="true">!</b><span class="sr-only"> broken</span>` : ""}</span>`;
+    }
+    if (typeof r.slant === "number" && r.slant) {
+      out += ` <span class="vf" title="${esc(`Measured along a ${fmt(Math.abs(r.slant), 1)}° slant (sheared upright about half the x-height)`)}">∠${esc(fmt(Math.abs(r.slant), 0))}°</span>`;
+    }
+    return out;
+  }
   function rowHtml(r) {
     const unchecked = !r.level;
     let level;
@@ -145,7 +160,7 @@
       ? esc(SQA.fmtDate(r.checked)) + (r.stale ? ` <span class="tag stale" title="Updated on Google Fonts${r.last_modified ? " on " + esc(r.last_modified) : ""} after this check">changed</span>` : "")
       : `<span class="na">not yet</span>`;
     return `<tr data-slug="${esc(r.slug)}"${unchecked ? ' class="unchecked"' : ""}>`
-      + `<td><a href="#/family/${esc(r.slug)}" title="${esc(r.name)}">${esc(r.name)}</a>${vfMarker(r)}</td>`
+      + `<td><a href="#/family/${esc(r.slug)}" title="${esc(r.name)}">${esc(r.name)}</a>${vfMarker(r)}${settingMarkers(r)}</td>`
       + `<td>${esc(r.category || "–")}</td>`
       + `<td>${level}</td>`
       + `<td>${presetHtml(r.closest)}</td>`
@@ -171,7 +186,7 @@
     root.appendChild(h("header", { class: "view-head" },
       h("p", { class: "eyebrow" }, "Google Fonts · Kinetikern2 spacing model"),
       h("h1", { tabindex: "-1" }, "Spacing QA"),
-      h("p", { class: "lede" }, "Checks the spacing of every Google Fonts family against the Kinetikern2 spacing model and its designer harness — how tight or loose each family is set, and where its letter gaps depart from even spacing of its shapes — and flags only what falls far outside the library's own norms."),
+      h("p", { class: "lede" }, "Checks the spacing of every Google Fonts family against the Kinetikern2 spacing model and its designer harness — how tight or loose each family is set, and where its letter gaps depart from even spacing of its shapes — and flags what falls far outside the library's own norms, and joins broken in a connected script."),
       statusEl, chipsEl));
 
     // scan panel
@@ -204,9 +219,9 @@
       h("p", { class: "section-intro" }, "Files for other tools, built from the latest reports. The tagging files use the formats of google/fonts' ", h("code", null, "tags/all/"), ": four columns, no header — ", h("code", null, "Family,Axes,Group/Tag,Weight"), "."),
       h("h3", null, "For the Google Fonts tagger"),
       h("div", { class: "exports" },
-        exportLink("tags.csv", "A machine suggestion for the ", h("code", null, "/Quality/Spacing"), " tag, in the format of families.csv: weights 10–100, distributed like the human tags, for the families the check can judge. It passes google/fonts' tag tests (known tag, weights 1–100, no duplicates)."),
-        exportLink("quant.csv", "Measured values in the format of quant.csv, at the weight checked (", h("code", null, "wght@400"), "): best-fit Looseness, shape error, sidebearing error, kerning error and correlation, and evenness (0–100 in the family's category). Variable families also at every location checked, the italic's too (", h("code", null, "\"ital,wght@1,700\""), ")."),
-        exportLink("skip.csv", "Suggested ", h("code", null, "/Skip/Spacing"), " signals (the format of skip.csv) for families the check cannot judge: monospaced, no Latin, or spaced beyond the model's range."),
+        exportLink("tags.csv", "A machine suggestion for the ", h("code", null, "/Quality/Spacing"), " tag, in the format of families.csv: weights 10–100, distributed like the human tags, for the families the check can judge (none for handwriting or connected scripts). It passes google/fonts' tag tests (known tag, weights 1–100, no duplicates)."),
+        exportLink("quant.csv", "Measured values in the format of quant.csv, at the weight checked (", h("code", null, "wght@400"), "): best-fit Looseness (a connected script: matched to its joined letters), shape error, sidebearing error, kerning error and correlation, and evenness (0–100 in the family's category, or among the connected scripts). Variable families also at every other location checked, the italic's too (", h("code", null, "\"ital,wght@1,700\""), "): Looseness, shape error, sidebearing error and kerning correlation. None for a family whose main font is an italic."),
+        exportLink("skip.csv", "Suggested ", h("code", null, "/Skip/Spacing"), " signals (the format of skip.csv) for families the check cannot judge: monospaced, glyphs that touch by construction, no Latin, no outlines, or spaced beyond the model's range."),
         exportLink("tags_metadata.csv", "The rows google/fonts' ", h("code", null, "tags/tags_metadata.csv"), " needs to register the new ", h("code", null, "/quant/spacing_*"), " and ", h("code", null, "/Skip/Spacing"), " tags, in its format (", h("code", null, "/Group/Tag,min,max,description"), ").")),
       h("h3", null, "Reports"),
       h("div", { class: "exports" },
@@ -238,7 +253,7 @@
         statusEl.appendChild(info.baseline
           ? h("span", null, "Baseline ", h("b", null, info.baseline.id), ` · built ${SQA.fmtDateTime(info.baseline.generated)} · norms from `, h("b", null, int(info.baseline.fonts)), " fonts",
             ex.length ? ` · left out of the norms: ${ex.map(([k, n]) => `${int(n)} ${k}`).join(", ")}` : "")
-          : h("span", { title: "Levels stay INFO until a library baseline is built from the reports" }, "Baseline ", h("b", null, "none yet"), " — every level is INFO until one is built"));
+          : h("span", { title: "Nothing is judged against the library's norms until a baseline is built from the reports; joins broken in the font are WARN regardless" }, "Baseline ", h("b", null, "none yet"), " — nothing is judged against the norms until one is built"));
       } else statusEl.appendChild(h("span", { class: "muted" }, "Status unavailable."));
       renderChips();
     }
@@ -628,7 +643,7 @@
         if (sig > 0) {
           lMarkers.push({ x: d.median - t.looseness_warn_z * sig, label: "WARN", cls: "thr-warn" }, { x: d.median + t.looseness_warn_z * sig, label: "WARN", cls: "thr-warn" });
           lMarkers.push({ x: d.median - t.looseness_fail_z * sig, label: "FAIL", cls: "thr-fail" }, { x: d.median + t.looseness_fail_z * sig, label: "FAIL", cls: "thr-fail" });
-          lCap += ` WARN beyond ${fmt(t.looseness_warn_z, 1)} and FAIL beyond ${fmt(t.looseness_fail_z, 1)} robust σ from the median of ${SQA.categoryName(judged.key)} (${signed(d.median, 2)}).`;
+          lCap += ` WARN beyond ${fmt(t.looseness_warn_z, 1)} and FAIL beyond ${fmt(t.looseness_fail_z, 1)} robust σ from the median of ${SQA.categoryName(judged.key)} (${signed(d.median, 2)}); a connected script whose joins are kept is judged against the library's connected scripts instead.`;
         }
       }
       pl.subEl.textContent = "Families per Looseness step · −0.5 tight, 0 standard, +0.5 loose";
@@ -639,7 +654,7 @@
         markers: lMarkers, xLabel: "best-fit Looseness",
         ariaLabel: `Histogram of the best-fit Looseness of ${inCat.length} families. Use the arrow keys to read each bar.`,
         labelFor: (b) => `Looseness ${signed(b.x0, 2)} to ${signed(b.x1, 2)}: ${b.n} families`,
-        tipFor: (b) => b.under ? { title: "Below −1.25", rows: [["Families", int(b.n)]], note: "Looseness down to " + signed(Math.min(...underItems.map((r) => r.best_looseness)), 2) + " — mostly connected scripts, whose letters touch. " + examples(underItems) }
+        tipFor: (b) => b.under ? { title: "Below −1.25", rows: [["Families", int(b.n)]], note: "Looseness down to " + signed(Math.min(...underItems.map((r) => r.best_looseness)), 2) + " — mostly scripts and designs whose letters touch or overlap. " + examples(underItems) }
           : b.over ? { title: "Above +1.25", rows: [["Families", int(b.n)]], note: examples(overItems) }
           : { title: `Looseness ${signed(b.x0, 2)} to ${signed(b.x1, 2)}`, rows: [["Families", int(b.n)]], note: examples(b.items || []) },
       }));
@@ -656,7 +671,7 @@
         const d = judged.stats.shape_error, sig = SQA.SIGMA * d.mad;
         warnX = d.median + t.shape_warn_z * sig; failX = d.median + t.shape_fail_z * sig;
         sMarkers.push({ x: d.median, label: "median", cls: "marker-preset" }, { x: warnX, label: `WARN ${fmt(warnX, 1)}`, cls: "thr-warn" }, { x: failX, label: `FAIL ${fmt(failX, 1)}`, cls: "thr-fail" });
-        sCap = `WARN above ${fmt(warnX, 1)} (median + ${fmt(t.shape_warn_z, 1)} robust σ) and FAIL above ${fmt(failX, 1)} (+${fmt(t.shape_fail_z, 1)} σ), from ${SQA.categoryName(judged.key)} in the baseline${judged.fellBack ? ` (${cat} has too few fonts of its own)` : ""}.`;
+        sCap = `WARN above ${fmt(warnX, 1)} (median + ${fmt(t.shape_warn_z, 1)} robust σ) and FAIL above ${fmt(failX, 1)} (+${fmt(t.shape_fail_z, 1)} σ), from ${SQA.categoryName(judged.key)} in the baseline${judged.fellBack ? ` (${cat} has too few fonts of its own)` : ""}; a connected script whose joins are kept is judged against the library's connected scripts instead.`;
       } else sCap = "WARN and FAIL thresholds appear here once a library baseline exists.";
       const p98 = se.length ? SQA.quantile(se, 0.98) : 40;
       let sHi = Math.max(20, p98, failX ? failX * 1.08 : 0);
