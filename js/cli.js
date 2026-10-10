@@ -70,7 +70,7 @@
         h("li", null, "writes the tagging files, the reports and a summary of the run into ", c("spacingqa-data/qa/"), ";"),
         h("li", null, "prints the levels and every family that got worse or better since the last run, and sets the exit code.")),
       h("p", null, "With nothing new on Google Fonts it takes a few seconds. What it prints, for instance:"),
-      code("1,950 families, 2 checked in this run, baseline 2026-10-09-2340-1163: 2 FAIL, 239 WARN, 1,529 INFO, 180 SKIP\n               worse: Pacifico INFO → WARN  (joins-broken: 4 joins are broken in the font …)\n              better: Allura WARN → INFO"),
+      code("1,950 families, 2 checked in this run, baseline 2026-10-09-2340-1163: 1 FAIL, 237 WARN, 1,529 INFO, 183 SKIP\n               worse: Pacifico INFO → WARN  (joins-broken: 4 joins are broken in the font …)\n              better: Allura WARN → INFO"),
       h("dl", { class: "defs" },
         h("dt", null, c("--mode")), h("dd", null, c("stale"), " (the default) checks what changed; ", c("all"), " every family; ", c("none"), " nothing: judge, write and compare only."),
         h("dt", null, c("--families")), h("dd", null, "Only these families, by name or slug: ", c("--families \"Lato,Roboto Flex\""), "."),

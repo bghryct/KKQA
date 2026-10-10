@@ -1,4 +1,4 @@
-# Spacing QA — WARN: 239 families
+# Spacing QA — WARN: 237 families
 
 Worth a look: spacing far outside the norms of the family's category, a location of its designspace far from how the library's families lose evenness there or apart from its neighbours, or joins broken in the font. Spacing is a designer's choice, so a WARN on spacing is a pointer to the glyph sides, pairs and locations that stand out, not a verdict; a broken join is an error in the font.
 
@@ -124,8 +124,6 @@ Worth a look: spacing far outside the norms of the family's category, a location
 | [Lexend Peta](https://bghryct.github.io/KKQA/#/family/lexend-peta) | Sans Serif | loose | +1.15 | 30.8 | `tightness` |  |
 | [Lexend Tera](https://bghryct.github.io/KKQA/#/family/lexend-tera) | Sans Serif | loose | +1.21 | 33.0 | `tightness` |  |
 | [Lexend Zetta](https://bghryct.github.io/KKQA/#/family/lexend-zetta) | Sans Serif | loose | +1.44 | 38.3 | `tightness` `evenness` `glyph-sides` |  |
-| [Libre Barcode 39 Extended](https://bghryct.github.io/KKQA/#/family/libre-barcode-39-extended) | Display | tight | −3.58 | 17.5 | `tightness` |  |
-| [Libre Barcode 39 Extended Text](https://bghryct.github.io/KKQA/#/family/libre-barcode-39-extended-text) | Display | tight | −1.88 | 17.9 | `tightness` |  |
 | [Libre Baskerville](https://bghryct.github.io/KKQA/#/family/libre-baskerville) | Serif | standard | +0.12 | 17.2 | `instances` |  |
 | [Libre Caslon Condensed](https://bghryct.github.io/KKQA/#/family/libre-caslon-condensed) | Serif | standard | +0.08 | 15.3 | `instances` |  |
 | [Lily Script One](https://bghryct.github.io/KKQA/#/family/lily-script-one) | Display | loose | −0.48 | 60.3 | `joins-broken` |  |
@@ -3991,52 +3989,6 @@ The locations that raise the level: 1 of 9 checked (the family's report lists th
 
 
 [Full report](https://bghryct.github.io/KKQA/#/family/lexend-zetta) · [Specimen](https://fonts.google.com/specimen/Lexend+Zetta)
-
-<a id="libre-barcode-39-extended"></a>
-
-## Libre Barcode 39 Extended Regular — WARN
-
-Display · `LibreBarcode39Extended-Regular.ttf` · Version 1.005; ttfautohint (v1.8.3) · checked at weight 400 · baseline 2026-10-09-2340-1163
-
-- INFO `spacing/closest` — Spacing is closest to Kinetikern2's tight preset (best-fit Looseness -3.58; mean distance in units per 1000 em: tight 316.3, standard 419.4, loose 535.4).
-- **WARN** `spacing/tightness` — Overall tightness: Looseness -3.58 is at the 0th percentile of Display fonts (median +0.08, robust z -6.8).
-- INFO `spacing/evenness` — Shape error 17.5 units per 1000 em (gaps that depart from even spacing of these shapes): 26th percentile of Display fonts (median 21.6, robust z -0.6).
-
-| Spacing | Looseness | Distance | Offset | Shape error | Bare model: distance | Shape error |
-|---|---:|---:|---:|---:|---:|---:|
-| tight (closest) | −0.50 | 316.3 | −316.3 | 49.6 | 307.1 | 46.3 |
-| standard | +0.00 | 419.4 | −419.4 | 63.8 | 411.7 | 60.3 |
-| loose | +0.50 | 535.4 | −535.4 | 80.2 | 529.2 | 75.8 |
-| best fit | −3.58 | | | 17.5 |  | 2.6 |
-
-With Kinetikern2's designer harness the model is further from this font's spacing: shape error 2.6 without it, 17.5 with it (+14.9).
-
-Units per 1000 em. Sidebearing error 17.1 · 5625 pairs measured.
-
-[Full report](https://bghryct.github.io/KKQA/#/family/libre-barcode-39-extended) · [Specimen](https://fonts.google.com/specimen/Libre+Barcode+39+Extended)
-
-<a id="libre-barcode-39-extended-text"></a>
-
-## Libre Barcode 39 Extended Text Regular — WARN
-
-Display · `LibreBarcode39ExtendedText-Regular.ttf` · Version 1.005; ttfautohint (v1.8.3) · checked at weight 400 · baseline 2026-10-09-2340-1163
-
-- INFO `spacing/closest` — Spacing is closest to Kinetikern2's tight preset (best-fit Looseness -1.88; mean distance in units per 1000 em: tight 146.1, standard 215.7, loose 294.0).
-- **WARN** `spacing/tightness` — Overall tightness: Looseness -1.88 is at the 3rd percentile of Display fonts (median +0.08, robust z -3.6).
-- INFO `spacing/evenness` — Shape error 17.9 units per 1000 em (gaps that depart from even spacing of these shapes): 28th percentile of Display fonts (median 21.6, robust z -0.5).
-
-| Spacing | Looseness | Distance | Offset | Shape error | Bare model: distance | Shape error |
-|---|---:|---:|---:|---:|---:|---:|
-| tight (closest) | −0.50 | 146.1 | −146.1 | 30.5 | 136.9 | 27.0 |
-| standard | +0.00 | 215.7 | −215.7 | 39.0 | 208.0 | 35.5 |
-| loose | +0.50 | 294.0 | −294.0 | 49.7 | 287.8 | 45.1 |
-| best fit | −1.88 | | | 17.9 |  | 10.8 |
-
-With Kinetikern2's designer harness the model is further from this font's spacing: shape error 10.8 without it, 17.9 with it (+7.1).
-
-Units per 1000 em. Sidebearing error 17.2 · 5625 pairs measured.
-
-[Full report](https://bghryct.github.io/KKQA/#/family/libre-barcode-39-extended-text) · [Specimen](https://fonts.google.com/specimen/Libre+Barcode+39+Extended+Text)
 
 <a id="libre-baskerville"></a>
 

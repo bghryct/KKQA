@@ -1,6 +1,6 @@
-# Spacing QA — SKIP: 180 families
+# Spacing QA — SKIP: 183 families
 
-Families the check does not apply to: monospaced (spacing set by the width), glyphs that touch by construction (a line, a grid, a background or an effect through every glyph), without the basic Latin alphabet, without outlines, or a file that is not a font.
+Families the check does not apply to: monospaced or every letter on two or three fixed widths (spacing set by the widths: a multi-pitch design or a barcode), glyphs that touch by construction (a line, a grid, a background or an effect through every glyph), without the basic Latin alphabet, without outlines, or a file that is not a font.
 
 1950 families in the library · baseline 2026-10-09-2340-1163 (1163 fonts in the norms) · spacingqa 0.1.0 kinetikern2 2.0.0
 
@@ -74,6 +74,8 @@ Families the check does not apply to: monospaced (spacing set by the width), gly
 | [Libre Barcode 128](https://bghryct.github.io/KKQA/#/family/libre-barcode-128) | Display | Skipped: every letter has the same advance width, so the spacing is set by the width, not by sidebearings and kerning. |
 | [Libre Barcode 128 Text](https://bghryct.github.io/KKQA/#/family/libre-barcode-128-text) | Display | Skipped: every letter has the same advance width, so the spacing is set by the width, not by sidebearings and kerning. |
 | [Libre Barcode 39](https://bghryct.github.io/KKQA/#/family/libre-barcode-39) | Display | Skipped: every letter has the same advance width, so the spacing is set by the width, not by sidebearings and kerning. |
+| [Libre Barcode 39 Extended](https://bghryct.github.io/KKQA/#/family/libre-barcode-39-extended) | Display | Skipped: every letter is one of two widths (480 and 960 units per 1000 em) — a multi-pitch design or a barcode — so, as in a monospaced font, the spacing is set by the widths, not by sidebearings and kerning. |
+| [Libre Barcode 39 Extended Text](https://bghryct.github.io/KKQA/#/family/libre-barcode-39-extended-text) | Display | Skipped: every letter is one of two widths (480 and 960 units per 1000 em) — a multi-pitch design or a barcode — so, as in a monospaced font, the spacing is set by the widths, not by sidebearings and kerning. |
 | [Libre Barcode 39 Text](https://bghryct.github.io/KKQA/#/family/libre-barcode-39-text) | Display | Skipped: every letter has the same advance width, so the spacing is set by the width, not by sidebearings and kerning. |
 | [Libre Barcode EAN13 Text](https://bghryct.github.io/KKQA/#/family/libre-barcode-ean13-text) | Display | Skipped: the core Latin letters are not all there (10 missing: UVWYZuvwyz…). The check covers fonts with the basic Latin alphabet. |
 | [Lilex](https://bghryct.github.io/KKQA/#/family/lilex) | Monospace | Skipped: every letter has the same advance width, so the spacing is set by the width, not by sidebearings and kerning. |
@@ -175,6 +177,7 @@ Families the check does not apply to: monospaced (spacing set by the width), gly
 | [Spline Sans Mono](https://bghryct.github.io/KKQA/#/family/spline-sans-mono) | Monospace | Skipped: every letter has the same advance width, so the spacing is set by the width, not by sidebearings and kerning. |
 | [SUSE Mono](https://bghryct.github.io/KKQA/#/family/suse-mono) | Sans Serif | Skipped: every letter has the same advance width, so the spacing is set by the width, not by sidebearings and kerning. |
 | [Syne Mono](https://bghryct.github.io/KKQA/#/family/syne-mono) | Monospace | Skipped: every letter has the same advance width, so the spacing is set by the width, not by sidebearings and kerning. |
+| [Trispace](https://bghryct.github.io/KKQA/#/family/trispace) | Sans Serif | Skipped: every letter is one of three widths (500, 650 and 850 units per 1000 em) — a multi-pitch design or a barcode — so, as in a monospaced font, the spacing is set by the widths, not by sidebearings and kerning. |
 | [Ubuntu Mono](https://bghryct.github.io/KKQA/#/family/ubuntu-mono) | Monospace | Skipped: every letter has the same advance width, so the spacing is set by the width, not by sidebearings and kerning. |
 | [Ubuntu Sans Mono](https://bghryct.github.io/KKQA/#/family/ubuntu-sans-mono) | Monospace | Skipped: every letter has the same advance width, so the spacing is set by the width, not by sidebearings and kerning. |
 | [Victor Mono](https://bghryct.github.io/KKQA/#/family/victor-mono) | Monospace | Skipped: every letter has the same advance width, so the spacing is set by the width, not by sidebearings and kerning. |

@@ -44,6 +44,7 @@
     "spacing/unreadable": "The file could not be read as a TrueType or OpenType font.",
     "spacing/unavailable": "The font could not be downloaded from Google Fonts. This is usually temporary: re-check later.",
     "spacing/error": "The spacing engine could not measure this font.",
+    "spacing/fixed-widths": "Every letter has one of two or three advance widths — a multi-pitch design such as Trispace (500, 650 and 850 units per 1000 em) or a barcode — so, as in a monospaced font, the spacing is set by the widths and there are no sidebearings or kerning of a proportional font to compare with the model.",
     "spacing/decorated": "Its figures touch the letters as set, as an underline, a chart, guide lines or an effect make every glyph touch its neighbours (a script's figures stand apart). Spacing such a font would break the line or grid, so there is nothing to compare: the plugin's Keep joins keeps every side that touches.",
   };
 
@@ -326,7 +327,7 @@
       CODE_HELP[first.code] ? h("p", null, CODE_HELP[first.code]) : null,
       st.level === "ERROR" && o.onRecheck ? h("p", null, h("button", { type: "button", class: "btn", onclick: (e) => o.onRecheck(e.currentTarget) }, "Re-check now")) : null));
     sec.appendChild(h("h3", null, "What the check covers"));
-    sec.appendChild(h("p", { class: "section-intro" }, "Kinetikern2 spaces and kerns the glyphs of Google Fonts’ GF Latin Kernel — A–Z, a–z, 0–9, punctuation and symbols, 114 in all, each against every other — from their outlines, at a tight, a standard and a loose preset and at the Looseness that fits the font best, with its designer harness and without it, and compares the designer's spacing with each. Letters, punctuation and most symbols are scored; figures, the symbols fonts often draw at the figure width and the underscore are spaced and drawn but not scored. Skipped: monospaced fonts, designs whose glyphs touch by construction (a line, a grid, a background or an effect through every glyph), fonts without the basic Latin alphabet, fonts without outlines, and files that are not fonts."));
+    sec.appendChild(h("p", { class: "section-intro" }, "Kinetikern2 spaces and kerns the glyphs of Google Fonts’ GF Latin Kernel — A–Z, a–z, 0–9, punctuation and symbols, 114 in all, each against every other — from their outlines, at a tight, a standard and a loose preset and at the Looseness that fits the font best, with its designer harness and without it, and compares the designer's spacing with each. Letters, punctuation and most symbols are scored; figures, the symbols fonts often draw at the figure width and the underscore are spaced and drawn but not scored. Skipped: monospaced fonts and fonts whose every letter has one of two or three widths (a multi-pitch design or a barcode), designs whose glyphs touch by construction (a line, a grid, a background or an effect through every glyph), fonts without the basic Latin alphabet, fonts without outlines, and files that are not fonts."));
   }
 
   function keyNumbers(sec, r, o) {

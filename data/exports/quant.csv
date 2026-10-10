@@ -14021,14 +14021,6 @@ Libertinus Serif,wght@400,/quant/spacing_kerning_error,17.20
 Libertinus Serif,wght@400,/quant/spacing_looseness,0.17
 Libertinus Serif,wght@400,/quant/spacing_shape_error,18.70
 Libertinus Serif,wght@400,/quant/spacing_sidebearing_error,10.50
-Libre Barcode 39 Extended Text,wght@400,/quant/spacing_evenness,72.00
-Libre Barcode 39 Extended Text,wght@400,/quant/spacing_looseness,-1.88
-Libre Barcode 39 Extended Text,wght@400,/quant/spacing_shape_error,17.90
-Libre Barcode 39 Extended Text,wght@400,/quant/spacing_sidebearing_error,17.20
-Libre Barcode 39 Extended,wght@400,/quant/spacing_evenness,74.00
-Libre Barcode 39 Extended,wght@400,/quant/spacing_looseness,-3.58
-Libre Barcode 39 Extended,wght@400,/quant/spacing_shape_error,17.50
-Libre Barcode 39 Extended,wght@400,/quant/spacing_sidebearing_error,17.10
 Libre Baskerville,"ital,wght@1,400",/quant/spacing_kerning_correlation,0.68
 Libre Baskerville,"ital,wght@1,400",/quant/spacing_looseness,0.25
 Libre Baskerville,"ital,wght@1,400",/quant/spacing_shape_error,24.10
@@ -30147,64 +30139,6 @@ Trirong,wght@400,/quant/spacing_kerning_error,17.20
 Trirong,wght@400,/quant/spacing_looseness,-0.12
 Trirong,wght@400,/quant/spacing_shape_error,20.70
 Trirong,wght@400,/quant/spacing_sidebearing_error,12.60
-Trispace,"wdth,wght@125,100",/quant/spacing_kerning_correlation,0.63
-Trispace,"wdth,wght@125,100",/quant/spacing_looseness,0.74
-Trispace,"wdth,wght@125,100",/quant/spacing_shape_error,133.20
-Trispace,"wdth,wght@125,100",/quant/spacing_sidebearing_error,92.20
-Trispace,"wdth,wght@125,400",/quant/spacing_kerning_correlation,0.65
-Trispace,"wdth,wght@125,400",/quant/spacing_looseness,1.24
-Trispace,"wdth,wght@125,400",/quant/spacing_shape_error,126.80
-Trispace,"wdth,wght@125,400",/quant/spacing_sidebearing_error,85.00
-Trispace,"wdth,wght@125,800",/quant/spacing_kerning_correlation,0.50
-Trispace,"wdth,wght@125,800",/quant/spacing_looseness,2.24
-Trispace,"wdth,wght@125,800",/quant/spacing_shape_error,119.30
-Trispace,"wdth,wght@125,800",/quant/spacing_sidebearing_error,78.80
-Trispace,"wdth,wght@75,100",/quant/spacing_kerning_correlation,0.20
-Trispace,"wdth,wght@75,100",/quant/spacing_looseness,1.52
-Trispace,"wdth,wght@75,100",/quant/spacing_shape_error,43.80
-Trispace,"wdth,wght@75,100",/quant/spacing_sidebearing_error,30.90
-Trispace,"wdth,wght@75,400",/quant/spacing_kerning_correlation,0.21
-Trispace,"wdth,wght@75,400",/quant/spacing_looseness,1.95
-Trispace,"wdth,wght@75,400",/quant/spacing_shape_error,37.30
-Trispace,"wdth,wght@75,400",/quant/spacing_sidebearing_error,25.00
-Trispace,"wdth,wght@75,800",/quant/spacing_kerning_correlation,0.02
-Trispace,"wdth,wght@75,800",/quant/spacing_looseness,0.69
-Trispace,"wdth,wght@75,800",/quant/spacing_shape_error,34.30
-Trispace,"wdth,wght@75,800",/quant/spacing_sidebearing_error,21.50
-Trispace,wght@100,/quant/spacing_kerning_correlation,0.23
-Trispace,wght@100,/quant/spacing_looseness,1.12
-Trispace,wght@100,/quant/spacing_shape_error,66.60
-Trispace,wght@100,/quant/spacing_sidebearing_error,48.20
-Trispace,wght@200,/quant/spacing_kerning_correlation,0.34
-Trispace,wght@200,/quant/spacing_looseness,1.21
-Trispace,wght@200,/quant/spacing_shape_error,64.20
-Trispace,wght@200,/quant/spacing_sidebearing_error,46.20
-Trispace,wght@300,/quant/spacing_kerning_correlation,0.35
-Trispace,wght@300,/quant/spacing_looseness,1.37
-Trispace,wght@300,/quant/spacing_shape_error,62.90
-Trispace,wght@300,/quant/spacing_sidebearing_error,44.80
-Trispace,wght@400,/quant/spacing_evenness,0.00
-Trispace,wght@400,/quant/spacing_kerning_correlation,0.35
-Trispace,wght@400,/quant/spacing_kerning_error,51.50
-Trispace,wght@400,/quant/spacing_looseness,1.51
-Trispace,wght@400,/quant/spacing_shape_error,61.90
-Trispace,wght@400,/quant/spacing_sidebearing_error,43.80
-Trispace,wght@500,/quant/spacing_kerning_correlation,0.35
-Trispace,wght@500,/quant/spacing_looseness,1.70
-Trispace,wght@500,/quant/spacing_shape_error,61.60
-Trispace,wght@500,/quant/spacing_sidebearing_error,43.30
-Trispace,wght@600,/quant/spacing_kerning_correlation,0.35
-Trispace,wght@600,/quant/spacing_looseness,1.82
-Trispace,wght@600,/quant/spacing_shape_error,59.10
-Trispace,wght@600,/quant/spacing_sidebearing_error,41.80
-Trispace,wght@700,/quant/spacing_kerning_correlation,0.35
-Trispace,wght@700,/quant/spacing_looseness,1.98
-Trispace,wght@700,/quant/spacing_shape_error,58.00
-Trispace,wght@700,/quant/spacing_sidebearing_error,41.10
-Trispace,wght@800,/quant/spacing_kerning_correlation,0.38
-Trispace,wght@800,/quant/spacing_looseness,1.88
-Trispace,wght@800,/quant/spacing_shape_error,57.10
-Trispace,wght@800,/quant/spacing_sidebearing_error,40.20
 Trocchi,wght@400,/quant/spacing_evenness,20.00
 Trocchi,wght@400,/quant/spacing_kerning_correlation,0.73
 Trocchi,wght@400,/quant/spacing_kerning_error,30.10

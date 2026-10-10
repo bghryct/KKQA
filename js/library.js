@@ -10,6 +10,7 @@
   const CATEGORIES = ["Sans Serif", "Serif", "Display", "Handwriting", "Monospace"];
   const NOTE = {
     "spacing/monospaced": "monospaced",
+    "spacing/fixed-widths": "two or three fixed widths",
     "spacing/decorated": "touching by construction",
     "spacing/not-latin": "no Latin",
     "spacing/no-outlines": "no outlines",
@@ -221,7 +222,7 @@
       h("div", { class: "exports" },
         exportLink("tags.csv", "A machine suggestion for the ", h("code", null, "/Quality/Spacing"), " tag, in the format of families.csv: weights 10–100, distributed like the human tags, for the families the check can judge (none for handwriting or connected scripts). It passes google/fonts' tag tests (known tag, weights 1–100, no duplicates)."),
         exportLink("quant.csv", "Measured values in the format of quant.csv, at the weight checked (", h("code", null, "wght@400"), "): best-fit Looseness (a connected script: matched to its joined letters), shape error, sidebearing error, kerning error and correlation, and evenness (0–100 in the family's category, or among the connected scripts). Variable families also at every other location checked, the italic's too (", h("code", null, "\"ital,wght@1,700\""), "): Looseness, shape error, sidebearing error and kerning correlation. None for a family whose main font is an italic."),
-        exportLink("skip.csv", "Suggested ", h("code", null, "/Skip/Spacing"), " signals (the format of skip.csv) for families the check cannot judge: monospaced, glyphs that touch by construction, no Latin, no outlines, or spaced beyond the model's range."),
+        exportLink("skip.csv", "Suggested ", h("code", null, "/Skip/Spacing"), " signals (the format of skip.csv) for families the check cannot judge: monospaced or on two or three fixed widths, glyphs that touch by construction, no Latin, no outlines, or spaced beyond the model's range."),
         exportLink("tags_metadata.csv", "The rows google/fonts' ", h("code", null, "tags/tags_metadata.csv"), " needs to register the new ", h("code", null, "/quant/spacing_*"), " and ", h("code", null, "/Skip/Spacing"), " tags, in its format (", h("code", null, "/Group/Tag,min,max,description"), ").")),
       h("h3", null, "Reports"),
       h("div", { class: "exports" },

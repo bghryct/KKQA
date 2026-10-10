@@ -41,6 +41,7 @@
   const ITALIC_GROUP = "Italic (a font of its own)";
   const SKIPPED = {
     monospaced: "monospaced — every letter has the same advance width, so the spacing is set by the width",
+    "fixed-widths": "two or three fixed widths — every letter has one of them, so the spacing is set by the widths",
     decorated: "the glyphs touch by construction — a line, a grid, a background or an effect runs through every glyph",
     "not-latin": "no basic Latin alphabet at this location",
     "no-outlines": "no outlines at this location",
