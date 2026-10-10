@@ -52,8 +52,11 @@
     if (!st || !sm) return;
     const variants = Array.isArray(st.variants) ? st.variants : [];
     const used = [];
+    // measured upright, the model could not follow it (its fit stops at the limit) and along the slant it can
+    const upright = variants.find((v) => v.setting === "slant" && v.value === "upright");
+    const onlyLean = !!upright && SQA.outOfRange(upright.best_looseness) && !SQA.outOfRange(sm.best_looseness);
     if (st.slant) used.push(st.slant_from === "measured"
-      ? `measured along the ${fmt(Math.abs(st.slant), 1)}° slant its stems show (it declares no italic angle, and fits clearly better that way: Spacing QA's own rule, as the plugin measures such a design as drawn)`
+      ? `measured along the ${fmt(Math.abs(st.slant), 1)}° slant its stems show (it declares no italic angle, and ${onlyLean ? `measured upright the model cannot follow it — its fit stops at the limit of the Looseness range (${signed(upright.best_looseness, 2)}) — where along its slant it can` : "fits clearly better that way"}: Spacing QA's own rule, as the plugin measures such a design as drawn). Like an italic, it is compared with its category and reported, not judged: the library's norms come from fonts measured upright`
       : `measured along its ${fmt(Math.abs(st.slant), 1)}° italic angle (sheared upright about half the x-height, as the plugin does)`);
     if (st.joins) used.push(`${st.joins === "keep" ? "its joins kept as drawn (Keep joins, the plugin's default for a connected script)" : `connected-script mode “${JOIN_LABEL[st.joins] || st.joins}”`}`);
     if (st.fit === "joins") used.push(`the Looseness matched to its joined letters (${signed(sm.best_looseness, 2)}), as the plugin does with Keep joins, so the rest of the font is measured at the script's own rhythm rather than pulled by its swash capitals and punctuation`);
@@ -108,7 +111,7 @@
     variants.forEach((v) => {
       const d = v.shape_error - sm.shape_error;
       const how = Math.abs(d) < 0.05 ? "the same" : d > 0 ? `${fmt(d, 1)} less even` : `${fmt(-d, 1)} more even`;
-      if (v.setting === "slant" && v.value === "upright") lines.push(`Measured upright, this ${st.slant_from === "measured" ? "design" : "italic"} would look ${how} (shape error ${fmt(v.shape_error, 1)} against ${fmt(sm.shape_error, 1)}) and fit at Looseness ${signed(v.best_looseness, 2)}.`);
+      if (v.setting === "slant" && v.value === "upright") lines.push(`Measured upright, this ${st.slant_from === "measured" ? "design" : "italic"} would look ${how} (shape error ${fmt(v.shape_error, 1)} against ${fmt(sm.shape_error, 1)}) and fit at Looseness ${signed(v.best_looseness, 2)}${SQA.outOfRange(v.best_looseness) ? ", the limit of the model's range: measured that way, the font is tighter than anything the model makes" : ""}.`);
       else if (v.setting === "slant") lines.push(`Its stems lean but it declares no italic angle of 3° or more; measured along that slant it would look ${how}, not clearly better, so it was measured upright, as drawn — the way the plugin measures it.`);
       else if (v.setting === "joins" && v.joins) lines.push(`${JOIN_LABEL[v.value] || v.value}: ${v.joins.broken ? `${int(v.joins.broken)} of its ${int(v.joins.joins)} a–z joins would break` : "every join would hold"}${v.joins.crossings ? `, ${int(v.joins.crossings)} pairs would cross or collide` : ""}; the other pairs would look ${how}.`);
       else if (v.setting === "harness") lines.push(`Without the designer harness the model is ${how} to this font's spacing (the harness's own section has the detail).`);

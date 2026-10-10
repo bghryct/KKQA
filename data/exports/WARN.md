@@ -1,4 +1,4 @@
-# Spacing QA — WARN: 239 families
+# Spacing QA — WARN: 235 families
 
 Worth a look: spacing far outside the norms of the family's category, a location of its designspace far from how the library's families lose evenness there or apart from its neighbours, or joins broken in the font. Spacing is a designer's choice, so a WARN on spacing is a pointer to the glyph sides, pairs and locations that stand out, not a verdict; a broken join is an error in the font.
 
@@ -59,7 +59,6 @@ Worth a look: spacing far outside the norms of the family's category, a location
 | [Cantata One](https://bghryct.github.io/KKQA/#/family/cantata-one) | Serif | loose | +0.41 | 41.0 | `evenness` |  |
 | [Caramel](https://bghryct.github.io/KKQA/#/family/caramel) | Handwriting | loose | −0.03 | 47.6 | `joins-broken` |  |
 | [Carme](https://bghryct.github.io/KKQA/#/family/carme) | Sans Serif | standard | +0.32 | 38.5 | `evenness` `glyph-sides` |  |
-| [Caveat](https://bghryct.github.io/KKQA/#/family/caveat) | Handwriting | loose | +0.39 | 28.5 | `glyph-sides` |  |
 | [Cedarville Cursive](https://bghryct.github.io/KKQA/#/family/cedarville-cursive) | Handwriting | standard | +0.09 | 40.8 | `joins-broken` |  |
 | [Cherry Cream Soda](https://bghryct.github.io/KKQA/#/family/cherry-cream-soda) | Display | tight | −1.09 | 36.2 | `glyph-sides` |  |
 | [Chiron Sung HK](https://bghryct.github.io/KKQA/#/family/chiron-sung-hk) | Serif | standard | +0.28 | 17.1 | `instances` | secondary Latin |
@@ -110,7 +109,6 @@ Worth a look: spacing far outside the norms of the family's category, a location
 | [Kalnia](https://bghryct.github.io/KKQA/#/family/kalnia) | Serif | standard | −0.20 | 29.0 | `instances` |  |
 | [Kalnia Glaze](https://bghryct.github.io/KKQA/#/family/kalnia-glaze) | Display | tight | −0.71 | 30.5 | `instances` |  |
 | [Kapakana](https://bghryct.github.io/KKQA/#/family/kapakana) | Handwriting | loose | −0.60 | 88.7 | `joins-broken` | secondary Latin |
-| [Kaushan Script](https://bghryct.github.io/KKQA/#/family/kaushan-script) | Handwriting | loose | +0.22 | 31.8 | `glyph-sides` |  |
 | [Kay Pho Du](https://bghryct.github.io/KKQA/#/family/kay-pho-du) | Serif | loose | +0.36 | 23.7 | `glyph-sides` | secondary Latin |
 | [Kolker Brush](https://bghryct.github.io/KKQA/#/family/kolker-brush) | Handwriting | tight | −0.82 | 60.7 | `joins-broken` |  |
 | [Kotta One](https://bghryct.github.io/KKQA/#/family/kotta-one) | Serif | loose | +0.14 | 31.0 | `glyph-sides` |  |
@@ -147,7 +145,7 @@ Worth a look: spacing far outside the norms of the family's category, a location
 | [Montagu Slab](https://bghryct.github.io/KKQA/#/family/montagu-slab) | Serif | standard | −0.17 | 15.5 | `instances` |  |
 | [MonteCarlo](https://bghryct.github.io/KKQA/#/family/montecarlo) | Handwriting | standard | −0.30 | 68.7 | `joins-broken` |  |
 | [Montenegrin Gothic One](https://bghryct.github.io/KKQA/#/family/montenegrin-gothic-one) | Serif | standard | −0.06 | 23.9 | `glyph-sides` |  |
-| [Mrs Sheppards](https://bghryct.github.io/KKQA/#/family/mrs-sheppards) | Handwriting | loose | −6.00 | 76.4 | `joins-broken` | out of range |
+| [Mrs Sheppards](https://bghryct.github.io/KKQA/#/family/mrs-sheppards) | Handwriting | tight | +0.60 | 100.6 | `joins-broken` |  |
 | [Mystery Quest](https://bghryct.github.io/KKQA/#/family/mystery-quest) | Display | tight | −1.98 | 45.7 | `tightness` `glyph-sides` |  |
 | [Nabla](https://bghryct.github.io/KKQA/#/family/nabla) | Display | loose | +1.89 | 24.6 | `instances` |  |
 | [New Tegomin](https://bghryct.github.io/KKQA/#/family/new-tegomin) | Serif | loose | +0.57 | 66.6 | `evenness` `glyph-sides` | secondary Latin |
@@ -158,7 +156,6 @@ Worth a look: spacing far outside the norms of the family's category, a location
 | [Noto Serif](https://bghryct.github.io/KKQA/#/family/noto-serif) | Serif | loose | +0.25 | 19.2 | `instances` |  |
 | [Noto Serif Display](https://bghryct.github.io/KKQA/#/family/noto-serif-display) | Serif | standard | −0.03 | 21.6 | `instances` |  |
 | [Noto Serif Tamil](https://bghryct.github.io/KKQA/#/family/noto-serif-tamil) | Serif | loose | +0.26 | 19.2 | `instances` | secondary Latin |
-| [Nova Script](https://bghryct.github.io/KKQA/#/family/nova-script) | Display | loose | +0.57 | 25.2 | `glyph-sides` |  |
 | [Nuosu SIL](https://bghryct.github.io/KKQA/#/family/nuosu-sil) | Sans Serif | standard | +0.08 | 59.3 | `evenness` `glyph-sides` | secondary Latin |
 | [Oleo Script Swash Caps](https://bghryct.github.io/KKQA/#/family/oleo-script-swash-caps) | Display | standard | −1.57 | 45.8 | `glyph-sides` |  |
 | [Orbitron](https://bghryct.github.io/KKQA/#/family/orbitron) | Sans Serif | tight | −0.99 | 30.3 | `tightness` |  |
@@ -187,7 +184,6 @@ Worth a look: spacing far outside the norms of the family's category, a location
 | [Rubik Iso](https://bghryct.github.io/KKQA/#/family/rubik-iso) | Display | tight | −1.88 | 26.9 | `tightness` `glyph-sides` |  |
 | [Rubik Scribble](https://bghryct.github.io/KKQA/#/family/rubik-scribble) | Display | tight | −2.25 | 17.8 | `tightness` |  |
 | [Ruge Boogie](https://bghryct.github.io/KKQA/#/family/ruge-boogie) | Handwriting | tight | −0.61 | 53.1 | `glyph-sides` |  |
-| [Sail](https://bghryct.github.io/KKQA/#/family/sail) | Display | tight | −0.53 | 22.4 | `glyph-sides` |  |
 | [Saira](https://bghryct.github.io/KKQA/#/family/saira) | Sans Serif | standard | +0.05 | 13.5 | `instances` |  |
 | [Saira Stencil](https://bghryct.github.io/KKQA/#/family/saira-stencil) | Display | standard | −0.03 | 14.2 | `instances` |  |
 | [Sarina](https://bghryct.github.io/KKQA/#/family/sarina) | Display | loose | +0.79 | 64.4 | `joins-broken` |  |
@@ -331,7 +327,7 @@ Handwriting · `AguafinaScript-Regular.ttf` · Version 1.000 · checked at weigh
 - INFO `spacing/joins` — A connected script (its letters overlap at their joins as spaced and kerned). Its joins are kept, the plugin's default: 94 glyph sides keep their sidebearings and every pair of two joining sides the font's kerning. The model spaces the rest, the scores leave the kept joins out, and the join checker judges the joins (454 of 454 a–z joins kept).
 - **WARN** `spacing/joins-broken` — 4 joins are broken in the font: two joining letters whose strokes do not meet, as a browser sets them inside words (units per 1000 em): lb 31 apart (the kern that joins it makes the strokes cross: a longer stroke or an alternate), ll 19 apart (the kern that joins it makes the strokes cross: a longer stroke or an alternate), lh 14 apart (the kern that joins it makes the strokes cross: a longer stroke or an alternate), lk 12 apart (the kern that joins it makes the strokes cross: a longer stroke or an alternate).
 - INFO `spacing/joins-fragile` — 1 join has less than 5 units per 1000 em of room to open (zx 0.6); 1 join encloses white that neither letter has, or a changed counter (tt).
-- INFO `spacing/italic` — Measured along the 27.0° slant its stems show, on its outlines sheared upright about half the x-height, which fits it clearly better (measured upright, the shape error would be 103.5 at Looseness +1.33, against 40.2 along the slant). Spacing QA measures a design that leans without declaring an italic angle this way where that leaves at most 80 % of the upright shape error; the plugin measures along a declared italic angle only (post.italicAngle, the master's italic angle).
+- INFO `spacing/italic` — Measured along the 27.0° slant its stems show, on its outlines sheared upright about half the x-height, which fits it clearly better (measured upright, the shape error would be 103.5 at Looseness +1.33, against 40.2 along the slant). Spacing QA measures a design that leans without declaring an italic angle this way where that leaves at most 80 % of the upright shape error, or where upright its best fit stops at the limit of the Looseness range (±6) and along the slant it does not; the plugin measures along a declared italic angle only (post.italicAngle, the master's italic angle).
 - INFO `spacing/tightness` — Overall tightness, from its joined letters: Looseness -0.22 is at the 63rd percentile of connected scripts (median -0.43, robust z +0.3).
 - INFO `spacing/evenness` — Shape error 40.2 units per 1000 em (gaps that depart from even spacing of these shapes): 28th percentile of connected scripts (median 49.5, robust z -0.4).
 - INFO `spacing/connected` — A connected script: its spacing is compared with the library's other connected scripts and reported, not judged — what the model compares there is mostly swash capitals and punctuation, where it disagrees with script designers by convention. Its joins are judged by the join checker.
@@ -1978,41 +1974,6 @@ Units per 1000 em. Sidebearing error 24.5 · kerned-pair error 24.6 · kerning c
 
 [Full report](https://bghryct.github.io/KKQA/#/family/carme) · [Specimen](https://fonts.google.com/specimen/Carme)
 
-<a id="caveat"></a>
-
-## Caveat Regular — WARN
-
-Handwriting · `Caveat-VariableFont_wght.ttf` · Version 2.000 · checked at weight 400 · baseline 2026-10-09-2340-1163
-
-- INFO `spacing/closest` — Spacing is closest to Kinetikern2's loose preset (best-fit Looseness +0.39; mean distance in units per 1000 em: tight 46.7, standard 34.8, loose 28.7).
-- INFO `spacing/italic` — Measured along the 16.3° slant its stems show, on its outlines sheared upright about half the x-height, which fits it clearly better (measured upright, the shape error would be 37.1 at Looseness -0.91, against 28.5 along the slant). Spacing QA measures a design that leans without declaring an italic angle this way where that leaves at most 80 % of the upright shape error; the plugin measures along a declared italic angle only (post.italicAngle, the master's italic angle).
-- INFO `spacing/tightness` — Overall tightness: Looseness +0.39 is at the 88th percentile of Handwriting fonts (median -0.32, robust z +1.2).
-- INFO `spacing/evenness` — Shape error 28.5 units per 1000 em (gaps that depart from even spacing of these shapes): 27th percentile of Handwriting fonts (median 34.9, robust z -0.6).
-- **WARN** `spacing/glyph-sides` — 10 glyph sides are spaced far from the norms of Handwriting fonts (units per 1000 em against their median): q left +87, d left +92, & right -188, m right -130, u left +91, o left +87, z right -146, a left +91.
-- INFO `spacing/designspace` — Checked at 2 locations of the designspace (2 named instances, 0 edges, 0 corners): closest to 1 loose, 1 tight; Looseness from +0.39 (Regular) to +0.39 (Regular); shape error 28.5–28.5; 1 location beyond the model's range.
-
-| Spacing | Looseness | Distance | Offset | Shape error | Bare model: distance | Shape error |
-|---|---:|---:|---:|---:|---:|---:|
-| tight | −0.50 | 46.7 | +39.6 | 28.8 | 51.6 | 30.0 |
-| standard | +0.00 | 34.8 | +22.1 | 28.3 | 38.5 | 30.1 |
-| loose (closest) | +0.50 | 28.7 | +0.7 | 28.7 | 30.7 | 30.6 |
-| best fit | +0.39 | | | 28.5 |  | 30.4 |
-
-With Kinetikern2's designer harness the model is closer to this font's spacing: shape error 30.4 without it, 28.5 with it (-1.9).
-
-Units per 1000 em. Sidebearing error 78.2 · kerned-pair error 19.2 · kerning correlation 0.71 · 7744 pairs measured.
-
-### Designspace
-
-The locations that raise the level: 1 of 2 checked (the family's report lists them all).
-
-| Location | Where | Kind | Closest | Looseness | Shape error | Level |
-|---|---|---|---|---:|---:|---|
-| Regular | the default location | named, the main report | loose | +0.39 | 28.5 | **WARN** |
-
-
-[Full report](https://bghryct.github.io/KKQA/#/family/caveat) · [Specimen](https://fonts.google.com/specimen/Caveat)
-
 <a id="cedarville-cursive"></a>
 
 ## Cedarville Cursive Regular — WARN
@@ -2436,7 +2397,7 @@ Display · primary script Khmr · `Fasthand-Regular.ttf` · Version 8.002; ttfau
 - INFO `spacing/joins` — A connected script (its letters overlap at their joins as spaced and kerned). Its joins are kept, the plugin's default: 103 glyph sides keep their sidebearings and every pair of two joining sides the font's kerning. The model spaces the rest, the scores leave the kept joins out, and the join checker judges the joins (597 of 597 a–z joins kept).
 - **WARN** `spacing/joins-broken` — 6 joins are broken in the font: two joining letters whose strokes do not meet, as a browser sets them inside words (units per 1000 em): wz 36 apart (kern -41 joins it), fz 25 apart (kern -30 joins it), uz 13 apart (kern -18 joins it), hx 9 apart (the kern that joins it makes the strokes cross: a longer stroke or an alternate), lz 4 apart (kern -9 joins it), mz 4 apart (the kern that joins it makes the strokes cross: a longer stroke or an alternate).
 - INFO `spacing/joins-fragile` — 1 join's strokes nearly touch, a hairline gap under 3 units per 1000 em (ex 1.4); 7 joins have less than 5 units per 1000 em of room to open (zj 0.0, qj 2.6, px 2.7, jx 3.2, kx 3.2, nx 3.9, lx 4.3); 23 joins enclose white that neither letter has, or a changed counter (do, dt, dx, fj, ft, ke, ko, kq).
-- INFO `spacing/italic` — Measured along the 21.6° slant its stems show, on its outlines sheared upright about half the x-height, which fits it clearly better (measured upright, the shape error would be 68.4 at Looseness +0.12, against 42.3 along the slant). Spacing QA measures a design that leans without declaring an italic angle this way where that leaves at most 80 % of the upright shape error; the plugin measures along a declared italic angle only (post.italicAngle, the master's italic angle).
+- INFO `spacing/italic` — Measured along the 21.6° slant its stems show, on its outlines sheared upright about half the x-height, which fits it clearly better (measured upright, the shape error would be 68.4 at Looseness +0.12, against 42.3 along the slant). Spacing QA measures a design that leans without declaring an italic angle this way where that leaves at most 80 % of the upright shape error, or where upright its best fit stops at the limit of the Looseness range (±6) and along the slant it does not; the plugin measures along a declared italic angle only (post.italicAngle, the master's italic angle).
 - INFO `spacing/tightness` — Overall tightness, from its joined letters: Looseness +0.26 is at the 87th percentile of connected scripts (median -0.43, robust z +1.0).
 - INFO `spacing/evenness` — Shape error 42.3 units per 1000 em (gaps that depart from even spacing of these shapes): 33rd percentile of connected scripts (median 49.5, robust z -0.3).
 - INFO `spacing/secondary-latin` — The family's primary script is Khmr: its Latin is compared with Latin fonts, and the level stops at WARN.
@@ -2654,7 +2615,7 @@ Display · primary script Khmr · `Freehand-Regular.ttf` · Version 8.002; ttfau
 - INFO `spacing/joins` — A connected script (its letters overlap at their joins as spaced and kerned). Its joins are kept, the plugin's default: 103 glyph sides keep their sidebearings and every pair of two joining sides the font's kerning. The model spaces the rest, the scores leave the kept joins out, and the join checker judges the joins (597 of 597 a–z joins kept).
 - **WARN** `spacing/joins-broken` — 6 joins are broken in the font: two joining letters whose strokes do not meet, as a browser sets them inside words (units per 1000 em): wz 36 apart (kern -41 joins it), fz 25 apart (kern -30 joins it), uz 13 apart (kern -18 joins it), hx 9 apart (the kern that joins it makes the strokes cross: a longer stroke or an alternate), lz 4 apart (kern -9 joins it), mz 4 apart (the kern that joins it makes the strokes cross: a longer stroke or an alternate).
 - INFO `spacing/joins-fragile` — 1 join's strokes nearly touch, a hairline gap under 3 units per 1000 em (ex 1.4); 7 joins have less than 5 units per 1000 em of room to open (zj 0.0, qj 2.6, px 2.7, jx 3.2, kx 3.2, nx 3.9, lx 4.3); 23 joins enclose white that neither letter has, or a changed counter (do, dt, dx, fj, ft, ke, ko, kq).
-- INFO `spacing/italic` — Measured along the 21.6° slant its stems show, on its outlines sheared upright about half the x-height, which fits it clearly better (measured upright, the shape error would be 68.4 at Looseness +0.12, against 42.3 along the slant). Spacing QA measures a design that leans without declaring an italic angle this way where that leaves at most 80 % of the upright shape error; the plugin measures along a declared italic angle only (post.italicAngle, the master's italic angle).
+- INFO `spacing/italic` — Measured along the 21.6° slant its stems show, on its outlines sheared upright about half the x-height, which fits it clearly better (measured upright, the shape error would be 68.4 at Looseness +0.12, against 42.3 along the slant). Spacing QA measures a design that leans without declaring an italic angle this way where that leaves at most 80 % of the upright shape error, or where upright its best fit stops at the limit of the Looseness range (±6) and along the slant it does not; the plugin measures along a declared italic angle only (post.italicAngle, the master's italic angle).
 - INFO `spacing/tightness` — Overall tightness, from its joined letters: Looseness +0.26 is at the 87th percentile of connected scripts (median -0.43, robust z +1.0).
 - INFO `spacing/evenness` — Shape error 42.3 units per 1000 em (gaps that depart from even spacing of these shapes): 33rd percentile of connected scripts (median 49.5, robust z -0.3).
 - INFO `spacing/secondary-latin` — The family's primary script is Khmr: its Latin is compared with Latin fonts, and the level stops at WARN.
@@ -3588,31 +3549,6 @@ The locations that raise the level: 1 of 2 checked (the family's report lists th
 
 
 [Full report](https://bghryct.github.io/KKQA/#/family/kapakana) · [Specimen](https://fonts.google.com/specimen/Kapakana)
-
-<a id="kaushan-script"></a>
-
-## Kaushan Script Regular — WARN
-
-Handwriting · `KaushanScript-Regular.ttf` · Version 1.002 · checked at weight 400 · baseline 2026-10-09-2340-1163
-
-- INFO `spacing/closest` — Spacing is closest to Kinetikern2's loose preset (best-fit Looseness +0.22; mean distance in units per 1000 em: tight 49.3, standard 35.8, loose 33.0).
-- INFO `spacing/italic` — Measured along the 19.9° slant its stems show, on its outlines sheared upright about half the x-height, which fits it clearly better (measured upright, the shape error would be 47.3 at Looseness -1.35, against 31.8 along the slant). Spacing QA measures a design that leans without declaring an italic angle this way where that leaves at most 80 % of the upright shape error; the plugin measures along a declared italic angle only (post.italicAngle, the master's italic angle).
-- INFO `spacing/tightness` — Overall tightness: Looseness +0.22 is at the 80th percentile of Handwriting fonts (median -0.32, robust z +0.9).
-- INFO `spacing/evenness` — Shape error 31.8 units per 1000 em (gaps that depart from even spacing of these shapes): 39th percentile of Handwriting fonts (median 34.9, robust z -0.3).
-- **WARN** `spacing/glyph-sides` — 7 glyph sides are spaced far from the norms of Handwriting fonts (units per 1000 em against their median): q left +78, d left +80, u left +82, o left +76, o right -73, a left +84, w left +94.
-
-| Spacing | Looseness | Distance | Offset | Shape error | Bare model: distance | Shape error |
-|---|---:|---:|---:|---:|---:|---:|
-| tight | −0.50 | 49.3 | +37.0 | 32.2 | 51.5 | 30.7 |
-| standard | +0.00 | 35.8 | +16.3 | 31.6 | 37.1 | 30.4 |
-| loose (closest) | +0.50 | 33.0 | −9.2 | 32.4 | 31.6 | 31.6 |
-| best fit | +0.22 | | | 31.8 |  | 30.8 |
-
-With Kinetikern2's designer harness the model is further from this font's spacing: shape error 30.8 without it, 31.8 with it (+1.0).
-
-Units per 1000 em. Sidebearing error 70.7 · kerned-pair error 29.9 · kerning correlation 0.54 · 7744 pairs measured.
-
-[Full report](https://bghryct.github.io/KKQA/#/family/kaushan-script) · [Specimen](https://fonts.google.com/specimen/Kaushan+Script)
 
 <a id="kay-pho-du"></a>
 
@@ -4665,23 +4601,27 @@ Units per 1000 em. Sidebearing error 40.5 · kerned-pair error 22.0 · kerning c
 
 Handwriting · `MrsSheppards-Regular.ttf` · Version 1.000 · checked at weight 400 · baseline 2026-10-09-2340-1163
 
-- INFO `spacing/closest` — Spacing is closest to Kinetikern2's loose preset (Looseness matched to its joined letters, as the plugin does with Keep joins, -6.00; mean distance in units per 1000 em: tight 72.6, standard 70.4, loose 69.9).
-- INFO `spacing/joins` — A connected script (it joins only in part, but where print faces never do: 36 of its 88 pairs of two stem letters (n n, m i, u n …) and 253 of 676 a–z pairs join above the baseline, as set inside words). Its joins are kept, the plugin's default: 101 glyph sides keep their sidebearings and every pair of two joining sides the font's kerning. The model spaces the rest, the scores leave the kept joins out, and the join checker judges the joins (279 of 279 a–z joins kept).
+- INFO `spacing/closest` — Spacing is closest to Kinetikern2's tight preset (Looseness matched to its joined letters, as the plugin does with Keep joins, +0.60; mean distance in units per 1000 em: tight 100.7, standard 100.8, loose 102.3).
+- INFO `spacing/joins` — A connected script (it joins only in part, but where print faces never do: 36 of its 88 pairs of two stem letters (n n, m i, u n …) and 253 of 676 a–z pairs join above the baseline, as set inside words). Its joins are kept, the plugin's default: 102 glyph sides keep their sidebearings and every pair of two joining sides the font's kerning. The model spaces the rest, the scores leave the kept joins out, and the join checker judges the joins (279 of 279 a–z joins kept).
 - **WARN** `spacing/joins-broken` — 1 join is broken in the font: two joining letters whose strokes do not meet, as a browser sets them inside words (units per 1000 em): fx 34 apart (kern -38 joins it).
 - INFO `spacing/joins-fragile` — 9 joins have less than 5 units per 1000 em of room to open (ad 0.0, bz 0.0, gy 0.2, pj 0.2, hz 0.3, as 1.7, gm 1.8, vw 3.0); 4 joins enclose white that neither letter has, or a changed counter (bt, ft, lt, lx).
-- INFO `spacing/italic` — Its stems lean 36.4° but the font declares no italic angle of 3° or more: it was measured upright, as drawn, the way the plugin measures it (along that slant the shape error would be 99.9 at Looseness +0.60, not clearly better than 76.4 upright).
-- INFO `spacing/out-of-range` — The font is set tighter than anything Kinetikern2 models (the best fit stops at Looseness -6.00), as in scripts and designs whose letters touch or overlap. Such spacing is a property of the design, so the comparison with the model is not judged against the norms, only shown for reference; joins broken in the font, and the locations of a variable font's designspace, are judged all the same.
+- INFO `spacing/italic` — Measured along the 36.4° slant its stems show, on its outlines sheared upright about half the x-height, where the model can follow it: measured upright, its best fit stops at the limit of the Looseness range (-6.00), as if the font were tighter than anything the model makes, and the shape error would be 76.4. Spacing QA measures a design that leans without declaring an italic angle this way where that leaves at most 80 % of the upright shape error, or where upright its best fit stops at the limit of the Looseness range (±6) and along the slant it does not; the plugin measures along a declared italic angle only (post.italicAngle, the master's italic angle).
+- INFO `spacing/tightness` — Overall tightness, from its joined letters: Looseness +0.60 is at the 95th percentile of connected scripts (median -0.43, robust z +1.4).
+- INFO `spacing/evenness` — Shape error 100.6 units per 1000 em (gaps that depart from even spacing of these shapes): 96th percentile of connected scripts (median 49.5, robust z +2.3).
+- INFO `spacing/glyph-sides` — 7 glyph sides are spaced far from the norms of connected scripts (units per 1000 em against their median): { left -225, ° right +285, ™ right +215, [ left -256, — right +144, | left -248, – right +128.
+- INFO `spacing/pairs` — 7 pairs are spaced far from how connected scripts usually compare with the model (units per 1000 em, + looser): @F -271, V® -334, /" +319, /' +316, W® -313, F° -254.
+- INFO `spacing/connected` — A connected script: its spacing is compared with the library's other connected scripts and reported, not judged (it falls outside their norms) — what the model compares there is mostly swash capitals and punctuation, where it disagrees with script designers by convention. Its joins are judged by the join checker.
 
 | Spacing | Looseness | Distance | Offset | Shape error | Bare model: distance | Shape error |
 |---|---:|---:|---:|---:|---:|---:|
-| tight | −0.50 | 72.6 | −0.9 | 72.8 | 74.0 | 72.3 |
-| standard | +0.00 | 70.4 | −10.4 | 71.3 | 71.3 | 71.0 |
-| loose (closest) | +0.50 | 69.9 | −21.8 | 70.3 | 69.1 | 69.8 |
-| best fit (a connected script: matched to its joined letters) | −6.00 | | | 76.4 |  | 76.1 |
+| tight (closest) | −0.50 | 100.7 | −2.2 | 100.7 | 93.8 | 93.4 |
+| standard | +0.00 | 100.8 | −12.2 | 100.4 | 93.1 | 93.1 |
+| loose | +0.50 | 102.3 | −24.2 | 100.5 | 93.5 | 93.3 |
+| best fit (a connected script: matched to its joined letters) | +0.60 | | | 100.6 |  | 93.4 |
 
-With Kinetikern2's designer harness the model is further from this font's spacing: shape error 76.1 without it, 76.4 with it (+0.3).
+With Kinetikern2's designer harness the model is further from this font's spacing: shape error 93.4 without it, 100.6 with it (+7.2).
 
-Units per 1000 em. Sidebearing error 63.8 · kerned-pair error 69.6 · kerning correlation 0.79 · 5196 pairs measured.
+Units per 1000 em. Sidebearing error 112.3 · kerned-pair error 66.5 · kerning correlation 0.36 · 5144 pairs measured.
 
 [Full report](https://bghryct.github.io/KKQA/#/family/mrs-sheppards) · [Specimen](https://fonts.google.com/specimen/Mrs+Sheppards)
 
@@ -5053,31 +4993,6 @@ The locations that raise the level: 12 of 24 checked (the family's report lists 
 
 [Full report](https://bghryct.github.io/KKQA/#/family/noto-serif-tamil) · [Specimen](https://fonts.google.com/specimen/Noto+Serif+Tamil)
 
-<a id="nova-script"></a>
-
-## Nova Script Regular — WARN
-
-Display · `NovaScript-Regular.ttf` · Version 2.001 · checked at weight 400 · baseline 2026-10-09-2340-1163
-
-- INFO `spacing/closest` — Spacing is closest to Kinetikern2's loose preset (best-fit Looseness +0.57; mean distance in units per 1000 em: tight 85.4, standard 55.1, loose 28.5).
-- INFO `spacing/italic` — Measured along its 13.0° italic angle, the way the plugin spaces italics: on its outlines sheared upright about half the x-height (measured upright, the shape error would be 36.7 at Looseness +0.09).
-- INFO `spacing/tightness` — Overall tightness: Looseness +0.57 is at the 80th percentile of Display fonts (median +0.08, robust z +0.9).
-- INFO `spacing/evenness` — Shape error 25.2 units per 1000 em (gaps that depart from even spacing of these shapes): 69th percentile of Display fonts (median 21.6, robust z +0.5).
-- **WARN** `spacing/glyph-sides` — 29 glyph sides are spaced far from the norms of Display fonts (units per 1000 em against their median): c left +74, m left +70, q left +74, e left +76, o left +74, g left +72, a left +76, s left +74.
-
-| Spacing | Looseness | Distance | Offset | Shape error | Bare model: distance | Shape error |
-|---|---:|---:|---:|---:|---:|---:|
-| tight | −0.50 | 85.4 | +84.9 | 24.3 | 88.2 | 26.7 |
-| standard | +0.00 | 55.1 | +53.3 | 24.0 | 58.0 | 28.1 |
-| loose (closest) | +0.50 | 28.5 | +16.6 | 24.9 | 33.1 | 30.0 |
-| best fit | +0.57 | | | 25.2 |  | 30.3 |
-
-With Kinetikern2's designer harness the model is closer to this font's spacing: shape error 30.3 without it, 25.2 with it (-5.1).
-
-Units per 1000 em. Sidebearing error 63.8 · kerned-pair error 42.1 · kerning correlation 0.62 · 7744 pairs measured.
-
-[Full report](https://bghryct.github.io/KKQA/#/family/nova-script) · [Specimen](https://fonts.google.com/specimen/Nova+Script)
-
 <a id="nuosu-sil"></a>
 
 ## Nuosu SIL Regular — WARN
@@ -5416,7 +5331,7 @@ Handwriting · `PlaywriteDKLoopet-VariableFont_wght.ttf` · Version 1.003 · che
 - INFO `spacing/closest` — Spacing is closest to Kinetikern2's standard preset (Looseness matched to its joined letters, as the plugin does with Keep joins, -0.36; mean distance in units per 1000 em: tight 52.2, standard 41.8, loose 50.2).
 - INFO `spacing/joins` — A connected script (its letters join as set inside words, through contextual alternates and connectors). Its joins are kept, the plugin's default: 68 glyph sides keep their sidebearings and every pair of two joining sides the font's kerning. The model spaces the rest, the scores leave the kept joins out, and the join checker judges the joins (655 of 655 a–z joins kept).
 - INFO `spacing/joins-fragile` — 68 joins enclose white that neither letter has, or a changed counter (af, al, as, bf, bl, bs, cf, cl).
-- INFO `spacing/italic` — Measured along the 24.3° slant its stems show, on its outlines sheared upright about half the x-height, which fits it clearly better (measured upright, the shape error would be 65.9 at Looseness -0.31, against 42.1 along the slant). Spacing QA measures a design that leans without declaring an italic angle this way where that leaves at most 80 % of the upright shape error; the plugin measures along a declared italic angle only (post.italicAngle, the master's italic angle).
+- INFO `spacing/italic` — Measured along the 24.3° slant its stems show, on its outlines sheared upright about half the x-height, which fits it clearly better (measured upright, the shape error would be 65.9 at Looseness -0.31, against 42.1 along the slant). Spacing QA measures a design that leans without declaring an italic angle this way where that leaves at most 80 % of the upright shape error, or where upright its best fit stops at the limit of the Looseness range (±6) and along the slant it does not; the plugin measures along a declared italic angle only (post.italicAngle, the master's italic angle).
 - INFO `spacing/tightness` — Overall tightness, from its joined letters: Looseness -0.36 is at the 52nd percentile of connected scripts (median -0.43, robust z +0.1).
 - INFO `spacing/evenness` — Shape error 42.1 units per 1000 em (gaps that depart from even spacing of these shapes): 33rd percentile of connected scripts (median 49.5, robust z -0.3).
 - INFO `spacing/connected` — A connected script: its spacing is compared with the library's other connected scripts and reported, not judged — what the model compares there is mostly swash capitals and punctuation, where it disagrees with script designers by convention. Its joins are judged by the join checker.
@@ -5455,7 +5370,7 @@ Handwriting · `PlaywriteNZ-VariableFont_wght.ttf` · Version 1.004 · checked a
 - INFO `spacing/closest` — Spacing is closest to Kinetikern2's standard preset (Looseness matched to its joined letters, as the plugin does with Keep joins, +0.08; mean distance in units per 1000 em: tight 47.9, standard 28.0, loose 30.5).
 - INFO `spacing/joins` — A connected script (its letters join as set inside words, through contextual alternates and connectors). Its joins are kept, the plugin's default: 48 glyph sides keep their sidebearings and every pair of two joining sides the font's kerning. The model spaces the rest, the scores leave the kept joins out, and the join checker judges the joins (448 of 448 a–z joins kept).
 - **WARN** `spacing/joins-broken` — 1 join is broken in the font: two joining letters whose strokes do not meet, as a browser sets them inside words (units per 1000 em): fk 42 apart (kern -47 joins it).
-- INFO `spacing/italic` — Measured along the 18.0° slant its stems show, on its outlines sheared upright about half the x-height, which fits it clearly better (measured upright, the shape error would be 61.7 at Looseness -0.15, against 24.2 along the slant). Spacing QA measures a design that leans without declaring an italic angle this way where that leaves at most 80 % of the upright shape error; the plugin measures along a declared italic angle only (post.italicAngle, the master's italic angle).
+- INFO `spacing/italic` — Measured along the 18.0° slant its stems show, on its outlines sheared upright about half the x-height, which fits it clearly better (measured upright, the shape error would be 61.7 at Looseness -0.15, against 24.2 along the slant). Spacing QA measures a design that leans without declaring an italic angle this way where that leaves at most 80 % of the upright shape error, or where upright its best fit stops at the limit of the Looseness range (±6) and along the slant it does not; the plugin measures along a declared italic angle only (post.italicAngle, the master's italic angle).
 - INFO `spacing/tightness` — Overall tightness, from its joined letters: Looseness +0.08 is at the 79th percentile of connected scripts (median -0.43, robust z +0.7).
 - INFO `spacing/evenness` — Shape error 24.2 units per 1000 em (gaps that depart from even spacing of these shapes): 5th percentile of connected scripts (median 49.5, robust z -1.2).
 - INFO `spacing/connected` — A connected script: its spacing is compared with the library's other connected scripts and reported, not judged — what the model compares there is mostly swash capitals and punctuation, where it disagrees with script designers by convention. Its joins are judged by the join checker.
@@ -5978,32 +5893,6 @@ Units per 1000 em. Sidebearing error 32.2 · kerned-pair error 100.6 · kerning 
 
 [Full report](https://bghryct.github.io/KKQA/#/family/ruge-boogie) · [Specimen](https://fonts.google.com/specimen/Ruge+Boogie)
 
-<a id="sail"></a>
-
-## Sail Regular — WARN
-
-Display · `Sail-Regular.ttf` · Version 1.002 · checked at weight 400 · baseline 2026-10-09-2340-1163
-
-- INFO `spacing/closest` — Spacing is closest to Kinetikern2's tight preset (best-fit Looseness -0.53; mean distance in units per 1000 em: tight 25.4, standard 30.9, loose 66.9).
-- INFO `spacing/italic` — Measured along the 11.6° slant its stems show, on its outlines sheared upright about half the x-height, which fits it clearly better (measured upright, the shape error would be 28.5 at Looseness -0.71, against 22.4 along the slant). Spacing QA measures a design that leans without declaring an italic angle this way where that leaves at most 80 % of the upright shape error; the plugin measures along a declared italic angle only (post.italicAngle, the master's italic angle).
-- INFO `spacing/tightness` — Overall tightness: Looseness -0.53 is at the 15th percentile of Display fonts (median +0.08, robust z -1.1).
-- INFO `spacing/evenness` — Shape error 22.4 units per 1000 em (gaps that depart from even spacing of these shapes): 55th percentile of Display fonts (median 21.6, robust z +0.1).
-- **WARN** `spacing/glyph-sides` — 1 sidebearing is far outside the norms of Display fonts (units per 1000 em against their median): R right -237.
-- INFO `spacing/pairs` — 5 pairs are spaced far from how Display fonts usually compare with the model (units per 1000 em, + looser): Y” -270, X” -205, Y“ -245, YS -230, X“ -179; 21 more, with a glyph side flagged above, count under that side.
-
-| Spacing | Looseness | Distance | Offset | Shape error | Bare model: distance | Shape error |
-|---|---:|---:|---:|---:|---:|---:|
-| tight (closest) | −0.50 | 25.4 | +11.8 | 22.4 | 27.6 | 25.1 |
-| standard | +0.00 | 30.9 | −24.2 | 22.5 | 33.3 | 25.9 |
-| loose | +0.50 | 66.9 | −66.3 | 25.1 | 66.6 | 29.0 |
-| best fit | −0.53 | | | 22.4 |  | 25.1 |
-
-With Kinetikern2's designer harness the model is closer to this font's spacing: shape error 25.1 without it, 22.4 with it (-2.7).
-
-Units per 1000 em. Sidebearing error 39.7 · kerned-pair error 28.7 · kerning correlation 0.58 · 7744 pairs measured.
-
-[Full report](https://bghryct.github.io/KKQA/#/family/sail) · [Specimen](https://fonts.google.com/specimen/Sail)
-
 <a id="saira"></a>
 
 ## Saira Regular — WARN
@@ -6189,7 +6078,7 @@ Display · `SeaweedScript-Regular.ttf` · Version 1.000 · checked at weight 400
 - INFO `spacing/joins` — A connected script (its letters overlap at their joins as spaced and kerned). Its joins are kept, the plugin's default: 103 glyph sides keep their sidebearings and every pair of two joining sides the font's kerning. The model spaces the rest, the scores leave the kept joins out, and the join checker judges the joins (597 of 597 a–z joins kept).
 - **WARN** `spacing/joins-broken` — 6 joins are broken in the font: two joining letters whose strokes do not meet, as a browser sets them inside words (units per 1000 em): wz 36 apart (kern -41 joins it), fz 25 apart (kern -30 joins it), uz 13 apart (kern -18 joins it), hx 9 apart (the kern that joins it makes the strokes cross: a longer stroke or an alternate), lz 4 apart (kern -10 joins it), mz 4 apart (the kern that joins it makes the strokes cross: a longer stroke or an alternate).
 - INFO `spacing/joins-fragile` — 1 join's strokes nearly touch, a hairline gap under 3 units per 1000 em (ex 1.4); 7 joins have less than 5 units per 1000 em of room to open (zj 0.0, qj 2.5, px 2.9, kx 3.1, jx 3.3, nx 4.0, lx 4.3); 20 joins enclose white that neither letter has, or a changed counter (do, dt, dx, fj, ft, lt, mr, qj).
-- INFO `spacing/italic` — Measured along the 21.6° slant its stems show, on its outlines sheared upright about half the x-height, which fits it clearly better (measured upright, the shape error would be 71.2 at Looseness +0.16, against 40.8 along the slant). Spacing QA measures a design that leans without declaring an italic angle this way where that leaves at most 80 % of the upright shape error; the plugin measures along a declared italic angle only (post.italicAngle, the master's italic angle).
+- INFO `spacing/italic` — Measured along the 21.6° slant its stems show, on its outlines sheared upright about half the x-height, which fits it clearly better (measured upright, the shape error would be 71.2 at Looseness +0.16, against 40.8 along the slant). Spacing QA measures a design that leans without declaring an italic angle this way where that leaves at most 80 % of the upright shape error, or where upright its best fit stops at the limit of the Looseness range (±6) and along the slant it does not; the plugin measures along a declared italic angle only (post.italicAngle, the master's italic angle).
 - INFO `spacing/tightness` — Overall tightness, from its joined letters: Looseness -0.10 is at the 68th percentile of connected scripts (median -0.43, robust z +0.5).
 - INFO `spacing/evenness` — Shape error 40.8 units per 1000 em (gaps that depart from even spacing of these shapes): 30th percentile of connected scripts (median 49.5, robust z -0.4).
 - INFO `spacing/connected` — A connected script: its spacing is compared with the library's other connected scripts and reported, not judged — what the model compares there is mostly swash capitals and punctuation, where it disagrees with script designers by convention. Its joins are judged by the join checker.
@@ -6684,7 +6573,7 @@ Display · primary script Khmr · `Taprom-Regular.ttf` · Version 8.002; ttfauto
 - INFO `spacing/joins` — A connected script (its letters overlap at their joins as spaced and kerned). Its joins are kept, the plugin's default: 103 glyph sides keep their sidebearings and every pair of two joining sides the font's kerning. The model spaces the rest, the scores leave the kept joins out, and the join checker judges the joins (597 of 597 a–z joins kept).
 - **WARN** `spacing/joins-broken` — 6 joins are broken in the font: two joining letters whose strokes do not meet, as a browser sets them inside words (units per 1000 em): wz 36 apart (kern -41 joins it), fz 25 apart (kern -30 joins it), uz 13 apart (kern -18 joins it), hx 9 apart (the kern that joins it makes the strokes cross: a longer stroke or an alternate), lz 4 apart (kern -9 joins it), mz 4 apart (the kern that joins it makes the strokes cross: a longer stroke or an alternate).
 - INFO `spacing/joins-fragile` — 1 join's strokes nearly touch, a hairline gap under 3 units per 1000 em (ex 1.4); 7 joins have less than 5 units per 1000 em of room to open (zj 0.0, qj 2.6, px 2.7, jx 3.2, kx 3.2, nx 3.9, lx 4.3); 23 joins enclose white that neither letter has, or a changed counter (do, dt, dx, fj, ft, ke, ko, kq).
-- INFO `spacing/italic` — Measured along the 21.6° slant its stems show, on its outlines sheared upright about half the x-height, which fits it clearly better (measured upright, the shape error would be 68.4 at Looseness +0.12, against 42.3 along the slant). Spacing QA measures a design that leans without declaring an italic angle this way where that leaves at most 80 % of the upright shape error; the plugin measures along a declared italic angle only (post.italicAngle, the master's italic angle).
+- INFO `spacing/italic` — Measured along the 21.6° slant its stems show, on its outlines sheared upright about half the x-height, which fits it clearly better (measured upright, the shape error would be 68.4 at Looseness +0.12, against 42.3 along the slant). Spacing QA measures a design that leans without declaring an italic angle this way where that leaves at most 80 % of the upright shape error, or where upright its best fit stops at the limit of the Looseness range (±6) and along the slant it does not; the plugin measures along a declared italic angle only (post.italicAngle, the master's italic angle).
 - INFO `spacing/tightness` — Overall tightness, from its joined letters: Looseness +0.26 is at the 87th percentile of connected scripts (median -0.43, robust z +1.0).
 - INFO `spacing/evenness` — Shape error 42.3 units per 1000 em (gaps that depart from even spacing of these shapes): 33rd percentile of connected scripts (median 49.5, robust z -0.3).
 - INFO `spacing/secondary-latin` — The family's primary script is Khmr: its Latin is compared with Latin fonts, and the level stops at WARN.
@@ -7374,7 +7263,7 @@ Handwriting · `Yellowtail-Regular.ttf` · Version 001.002 · checked at weight 
 - INFO `spacing/joins` — A connected script (its letters overlap at their joins as spaced and kerned). Its joins are kept, the plugin's default: 103 glyph sides keep their sidebearings and every pair of two joining sides the font's kerning. The model spaces the rest, the scores leave the kept joins out, and the join checker judges the joins (423 of 423 a–z joins kept).
 - **WARN** `spacing/joins-broken` — 1 join is broken in the font: two joining letters whose strokes do not meet, as a browser sets them inside words (units per 1000 em): el 4 apart (kern -10 joins it).
 - INFO `spacing/joins-fragile` — 6 joins have less than 5 units per 1000 em of room to open (xa 0.0, xp 0.0, zl 2.3, xn 2.5, xr 3.5, xq 4.1); 9 joins enclose white that neither letter has, or a changed counter (dt, ef, lt, tb, th, tk, tl, tt).
-- INFO `spacing/italic` — Measured along the 26.7° slant its stems show, on its outlines sheared upright about half the x-height, which fits it clearly better (measured upright, the shape error would be 85.0 at Looseness +0.53, against 49.4 along the slant). Spacing QA measures a design that leans without declaring an italic angle this way where that leaves at most 80 % of the upright shape error; the plugin measures along a declared italic angle only (post.italicAngle, the master's italic angle).
+- INFO `spacing/italic` — Measured along the 26.7° slant its stems show, on its outlines sheared upright about half the x-height, which fits it clearly better (measured upright, the shape error would be 85.0 at Looseness +0.53, against 49.4 along the slant). Spacing QA measures a design that leans without declaring an italic angle this way where that leaves at most 80 % of the upright shape error, or where upright its best fit stops at the limit of the Looseness range (±6) and along the slant it does not; the plugin measures along a declared italic angle only (post.italicAngle, the master's italic angle).
 - INFO `spacing/tightness` — Overall tightness, from its joined letters: Looseness -0.03 is at the 72nd percentile of connected scripts (median -0.43, robust z +0.6).
 - INFO `spacing/evenness` — Shape error 49.4 units per 1000 em (gaps that depart from even spacing of these shapes): 49th percentile of connected scripts (median 49.5, robust z -0.0).
 - INFO `spacing/connected` — A connected script: its spacing is compared with the library's other connected scripts and reported, not judged — what the model compares there is mostly swash capitals and punctuation, where it disagrees with script designers by convention. Its joins are judged by the join checker.

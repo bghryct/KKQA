@@ -748,6 +748,20 @@
   }
 
   // ---------------------------------------------------------------- table
+  /** What each column and badge of the families table means, from the same definitions as the header tooltips. */
+  function columnHelp() {
+    const badge = (html) => { const d = h("dt"); d.innerHTML = html; return d; };
+    return h("details", { class: "col-help" },
+      h("summary", null, "What each column and badge means"),
+      h("dl", { class: "defs" },
+        COLS.flatMap((c) => [h("dt", null, c.label), h("dd", null, c.title + ".")]),
+        badge(`<span class="vf">VF · 12</span>`), h("dd", null, "A variable font, and how many locations of its designspace were checked: its named instances, each axis's minimum and maximum, and the corners of its designspace; its italic is checked the same way."),
+        badge(`<span class="vf lvl-WARN">VF · 12 <b>!</b></span>`), h("dd", null, "At one location at least the spacing is far from the norms (WARN; ✕ for FAIL), or it jumps between neighbouring locations. The report's designspace section shows where."),
+        badge(`<span class="vf joins lvl-WARN">joins · 4 <b>!</b></span>`), h("dd", null, "A connected script: its joins are kept as drawn and checked, and its spacing is compared with the library's connected scripts. The number counts joins broken in the font."),
+        badge(`<span class="vf">∠12°</span>`), h("dd", null, "Measured along the font's italic angle (or the slant its stems show): the glyphs are sheared upright before measuring."),
+        badge(`<span class="tag stale">changed</span>`), h("dd", null, "Updated on Google Fonts after this check; the scheduled scan checks it again."),
+        badge(`<span class="tag">out of range</span>`), h("dd", null, "The best fit stopped at the end of the model's Looseness range (±6): the font is set tighter or looser than anything the model makes. It is reported, not judged.")));
+  }
   function familyTable(ctx, sec) {
     let rows = [], list = [], gen = 0;
     const search = h("input", { type: "search", placeholder: "Family or designer", "aria-describedby": "fam-count", autocomplete: "off", spellcheck: "false" });
@@ -768,7 +782,8 @@
     const emptyEl = h("div", { class: "empty", hidden: true });
     sec.append(
       h("h2", { id: "table-h" }, "Families"),
-      h("p", { class: "section-intro" }, "Every family in the catalog with its latest result. Families not checked yet are listed too: opening one checks it on the spot."),
+      h("p", { class: "section-intro" }, "Every family in the catalog with its latest result, one row per family: its upright Regular — a variable font at weight 400, else the static font closest to it — measured against the Kinetikern2 model and judged against the library's norms. A variable family's other locations and its italic are in its report; the row's level counts them. Families not checked yet are listed too: opening one checks it on the spot. Click a column header to sort by it, again to reverse; the filters narrow the list."),
+      columnHelp(),
       h("div", { class: "filters", role: "search", "aria-label": "Filter the families" },
         h("label", { class: "search" }, "Search", search),
         h("label", null, "Category", selCat),

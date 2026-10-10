@@ -350,10 +350,22 @@
     // the same glyphs, drawn in context
     const resOf = new Map(P.map((e) => [e.a * face.n + e.b, e.res]));
     sec.appendChild(h("h4", { class: "sub-h" }, "Drawn among other letters"));
-    sec.appendChild(h("p", { class: "small" }, "The first six, set between n and o (lowercase), H and O (capitals) or n and H (punctuation and symbols), as designed and as the model sets them; the white on each side of the glyph is shaded red where the font is looser than the model, blue where tighter, with the residual."));
+    sec.appendChild(h("p", { class: "small" }, "The first six, set between n and o (lowercase), H and O (capitals) or n and H (punctuation and symbols), as designed and as the model sets them; the white on each side of the glyph is shaded red where the font is looser than the model, blue where tighter, with the residual. Draw more glyphs, in order of their share, with the button below."));
     const strips = h("div", { class: "context-strips" });
-    sec.appendChild(strips);
-    topN.slice(0, 6).forEach((c) => strips.appendChild(contextStrip(face, c, resOf)));
+    const moreStrips = h("div", { class: "more-rows" });
+    sec.append(strips, moreStrips);
+    let drawn = 0;
+    const drawMore = (n) => {
+      glyphs.slice(drawn, drawn + n).forEach((c) => strips.appendChild(contextStrip(face, c, resOf)));
+      drawn = Math.min(glyphs.length, drawn + n);
+      clear(moreStrips);
+      const left = glyphs.length - drawn;
+      if (left <= 0) return;
+      const b = h("button", { type: "button", class: "btn" }, `Draw the next ${Math.min(6, left)}`);
+      b.addEventListener("click", () => drawMore(6));
+      moreStrips.append(b, h("span", { class: "small" }, `${int(left)} more ${left === 1 ? "glyph" : "glyphs"}, in order of their share of the shape error.`));
+    };
+    drawMore(6);
 
     // sidebearings or kerning?
     const dev = (i, k2) => { const g = face.glyphs[i]; return Array.isArray(g.dev) && Number.isFinite(g.dev[k2]) ? g.dev[k2] : null; };
@@ -423,13 +435,13 @@
   }
 
   /** A glyph between neighbours, as designed and as the model sets it, with the white on either side shaded by its residual. */
-  function contextStrip(face, c, resOf) {
+  function contextStrip(face, c, resOf, caption) {
     const g = face.glyphs[c.i];
     const grp = SQA.groupOf(g);
     const [p, q] = grp === "lower" ? ["n", "o"] : grp === "upper" ? ["H", "O"] : ["n", "H"];
     const text = `${p}${g.char}${p} ${q}${g.char}${q}`;
     const k = 46 / (face.top - face.bottom);
-    const wrap = h("figure", { class: "panel context-strip" }, h("figcaption", null, h("b", null, g.char), ` ${g.name} · ${fmt(100 * c.share, 1)} % of the shape error`));
+    const wrap = h("figure", { class: "panel context-strip" }, h("figcaption", null, caption ? caption : [h("b", null, g.char), ` ${g.name} · ${fmt(100 * c.share, 1)} % of the shape error`]));
     const lines = [["designer", "As designed"], ["best", "Model"]];
     const L = lines.map(([sp]) => face.layout(text, sp));
     const Wu = Math.max(...L.map((x) => x.width)) + 0.1 * face.upm;
@@ -465,5 +477,5 @@
     return wrap;
   }
 
-  SQA.explain = { harness, shape, pairsOf };
+  SQA.explain = { harness, shape, pairsOf, pairFigure, contextStrip };
 })();

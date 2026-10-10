@@ -88,6 +88,9 @@
     const em = t && t.fullwidth_em;
     return face.glyphs.map((g) => !!em && AMBIGUOUS_WIDTH.includes(g.char) && g.adv >= em * face.upm);
   }
+  /** Measured along a slant (an italic's angle, or the slant a design's stems show): the library's
+   *  norms come from fonts measured upright, so comparisons with them are a rough guide only. */
+  const slanted = (r) => !!r && !!r.settings && typeof r.settings.slant === "number";
   function ordinal(n) {
     n = Math.round(n);
     const m100 = n % 100, m10 = n % 10;
@@ -114,6 +117,7 @@
     const vsec = verdict(root, report, o);
     if (!sum || !face) { notChecked(root, report, o); if (ds) designspace(ctx, root, ds, o); technical(root, report); return; }
     keyNumbers(vsec, report, o);
+    if (SQA.outliers) SQA.outliers.render(ctx, root, report, face, o);
     if (ds) designspace(ctx, root, ds, o);
     closest(ctx, root, report, o);
     if (SQA.settings) {
@@ -267,7 +271,7 @@
       : "This font was checked in memory and is not stored on the server: the report exists only in this page. Download it to keep it."));
     if (r.summary) {
       const nav = h("nav", { class: "onpage", "aria-label": "On this page" });
-      [["verdict-h", "Verdict"], hasDs ? ["designspace-h", "Designspace"] : null, ["closest-h", "Closest preset"], r.settings && r.settings.variants && r.settings.variants.length ? ["settings-h", "Settings"] : null, r.joins ? ["joins-h", "Joins"] : null, r.summary.bare ? ["harness-h", "Designer harness"] : null, ["shape-h", "Shape error"], ["specimen-h", "Specimen"], ["sides-h", "Glyph sides"], ["pairs-h", "Pairs"], ["heat-h", "Heat map"], ["kern-h", "Kerning"]].filter(Boolean).forEach(([id, label]) => {
+      [["verdict-h", "Verdict"], ["differs-h", "Where it differs"], hasDs ? ["designspace-h", "Designspace"] : null, ["closest-h", "Closest preset"], r.settings && r.settings.variants && r.settings.variants.length ? ["settings-h", "Settings"] : null, r.joins ? ["joins-h", "Joins"] : null, r.summary.bare ? ["harness-h", "Designer harness"] : null, ["shape-h", "Shape error"], ["specimen-h", "Specimen"], ["sides-h", "Glyph sides"], ["pairs-h", "Pairs"], ["heat-h", "Heat map"], ["kern-h", "Kerning"]].filter(Boolean).forEach(([id, label]) => {
         const a = h("a", { href: "#" + id }, label);
         a.addEventListener("click", (e) => {
           e.preventDefault();
@@ -603,7 +607,7 @@
     const t = (N && N.t) || (o.info && o.info.thresholds) || {};
     const wide = fullWidth(face, t);
     const sec = section(root, "sides-h", "Glyph sides",
-      "Each side's sidebearing against the best-fit model, after the font's overall offset: positive means the designer gives that side more room than the model. " +
+      "Each side's sidebearing against the best-fit model, after the font's overall offset: positive means the designer gives that side more room than the model, negative less. A bar to the right is a side set looser than the model would set it, to the left tighter; the longer, the further. The thin line on a bar is where the fonts of the same kind usually are for that side, so a bar that ends near its line is a common habit, and a bar far from its line is particular to this font. " +
       (SQA.withHarness(r)
         ? "The designer harness already takes out what the designers of well-spaced text fonts consistently do differently from the model alone (quotes, parentheses, the open sides of E, F, L and T…); "
         : "The bare model disagrees with designers in the same places in many fonts (around f, r, quotes and the like), so ") +
@@ -642,6 +646,7 @@
         sec.appendChild(h("div", { class: "flag-list" }, flagged.map((e) => h("span", { class: "flag-item" + (e.flag === "fail" ? " fail" : "") },
           h("b", { "aria-hidden": "true" }, e.flag === "fail" ? "✕" : "!"), `${e.g.char} ${e.side} ${signed(e.diff, 0)}`, h("span", { class: "small" }, `${e.flag === "fail" ? "extreme · " : ""}z ${signed(e.z, 1)}`)))));
       } else sec.appendChild(h("p", { class: "small" }, `No side is far from the norms of ${N.name} (${fmt(t.side_warn_z, 0)} robust σ and ${fmt(t.side_warn_units, 0)} units per 1000 em from the median for that side).`));
+      if (slanted(r)) sec.appendChild(h("p", { class: "small" }, `Measured along its slant: the norms of ${N.name} come from fonts measured upright, and the shear moves the sides of what sits far from half the x-height (quotes, capitals, descenders), so these comparisons are reported, not judged.`));
       if (wide.some(Boolean)) sec.appendChild(h("p", { class: "small" }, `Full-width quotes (${face.glyphs.filter((g, i) => wide[i] && g.scored).map((g) => g.char).join(" ")}), a CJK convention, are not compared with the norms of proportional fonts.`));
     } else sec.appendChild(h("p", { class: "small" }, "No baseline yet: the library's medians are not shown, so sides where the model usually disagrees with designers are not told apart."));
     const abs = entries.filter((e) => e.group !== "unscored").map((e) => Math.abs(e.v)).concat(entries.filter((e) => e.lib).map((e) => Math.abs(e.lib.median))).sort((a, b) => a - b);
@@ -676,7 +681,7 @@
 
   function sideChart(container, W, list, entries, R, face, hasLib) {
     clear(container);
-    const rowH = 19, top = 22, labelW = 30, gapX = 14;
+    const rowH = 24, top = 26, labelW = 36, gapX = 16;
     const H = top + list.length * rowH + 20;
     const trackW = (W - labelW - gapX) / 2;
     const cols = [{ side: "left", x0: labelW }, { side: "right", x0: labelW + trackW + gapX }];
@@ -684,7 +689,7 @@
     const items = [];
     cols.forEach((c) => {
       const mid = c.x0 + trackW / 2;
-      root.appendChild(s("text", { x: mid, y: 13, "text-anchor": "middle", class: "label-strong", style: "font-size:11.5px" }, c.side === "left" ? "Left side" : "Right side"));
+      root.appendChild(s("text", { x: mid, y: 15, "text-anchor": "middle", class: "label-strong", style: "font-size:13.5px" }, c.side === "left" ? "Left side" : "Right side"));
       root.appendChild(s("line", { x1: mid, x2: mid, y1: top - 4, y2: H - 18, class: "axis" }));
       root.appendChild(s("text", { x: c.x0 + 2, y: H - 5, "text-anchor": "start", class: "tick" }, signed(-R, 0)));
       root.appendChild(s("text", { x: mid, y: H - 5, "text-anchor": "middle", class: "tick" }, "0"));
@@ -694,7 +699,7 @@
     list.forEach((gi, row) => {
       const g = face.glyphs[gi];
       const y = top + row * rowH;
-      root.appendChild(s("text", { x: labelW - 10, y: y + rowH / 2 + 4.5, "text-anchor": "middle", class: "label-strong", style: "font-size:13px" }, g.char));
+      root.appendChild(s("text", { x: labelW - 12, y: y + rowH / 2 + 5.5, "text-anchor": "middle", class: "label-strong", style: "font-size:16px" }, g.char));
       cols.forEach((c) => {
         const e = entries.find((x) => x.i === gi && x.side === c.side);
         if (!e) return;
@@ -782,15 +787,21 @@
     const t = (N && N.t) || (o.info && o.info.thresholds) || {};
     const P = pairData(r, face, lib, N);
     const unscoredPairs = P.list.some((e) => !e.scored);
-    const sec = section(root, "pairs-h", "Pairs, loosest to tightest",
-      `Every ordered pair of the scored glyphs, ranked by how its gap departs from the best-fit model: the designer's gap − the model's gap − the font's overall offset (${signed(P.offset, 1)}). Positive: the font sets the pair looser than the model would at the font's own tightness. Relative to the library, the value is compared with how ${N ? N.name.replace(/^the whole library$/, "the library's fonts") : "the library's fonts"} usually differ from the model on that pair.${unscoredPairs ? ` Pairs with a glyph that is not scored (figures, symbols often drawn at the figure width, the underscore${face.cjk ? "; in this CJK font, the punctuation of ambiguous width" : ""}) are measured too: include them below.` : ""}`);
+    const sec = section(root, "pairs-h", "Pairs, loosest to tightest", h("div", { class: "section-intro" },
+      h("p", null, `Every ordered pair of the scored glyphs, ranked by how its gap departs from the best-fit model: the designer's gap − the model's gap − the font's overall offset (${signed(P.offset, 1)}). Positive: the font sets the pair looser than the model would at the font's own tightness; negative: tighter. Relative to the library, the value is compared with how ${N ? N.name.replace(/^the whole library$/, "the library's fonts") : "the library's fonts"} usually differ from the model on that pair, so pairs every font sets differently from the model drop away and what is left is particular to this font.${unscoredPairs ? ` Pairs with a glyph that is not scored (figures, symbols often drawn at the figure width, the underscore${face.cjk ? "; in this CJK font, the punctuation of ambiguous width" : ""}) are measured too: include them below.` : ""}`),
+      h("p", null, "How to read a row: the first drawing is the pair as designed, the second as the model sets it, with the designer's position of the second glyph in grey — where grey shows to the right, the model would close the pair up; to the left, open it. The gaps are the white between the two inks; the kerning columns say how much of each gap is kerning. Choose how many rows to see, or type a glyph to see every pair it is in.")));
     if (!P.list.length) { sec.appendChild(h("p", { class: "note" }, "This report has no pair residuals.")); return; }
-    const st = { rel: "model", order: "loose", filter: "all", unscored: false };
+    const st = { rel: "model", order: "loose", filter: "all", unscored: false, limit: 40, glyph: "" };
+    const rowsSeg = SQA.segmented("Rows", [40, 100, 250, 500].map((n) => ({ label: `${n} rows`, value: n })), st.limit, (v) => { st.limit = v; drawList(); });
     const controls = h("div", { class: "controls" });
     const relSeg = SQA.segmented("Relative to", [{ label: "Relative to the model", value: "model" }, { label: "Relative to the library", value: "library", disabled: !P.hasLib, title: P.hasLib ? "" : "Needs a library baseline" }], st.rel, (v) => { st.rel = v; drawList(); heat.draw(); });
     controls.append(relSeg,
       SQA.segmented("Order", [{ label: "Loosest first", value: "loose" }, { label: "Tightest first", value: "tight" }], st.order, (v) => { st.order = v; drawList(); }),
-      SQA.segmented("Pairs shown", [{ label: "All", value: "all" }, { label: "Capitals", value: "upper" }, { label: "Lowercase", value: "lower" }, { label: "Mixed case", value: "mixed" }, { label: "Punctuation and symbols", value: "punct" }], st.filter, (v) => { st.filter = v; drawList(); }));
+      SQA.segmented("Pairs shown", [{ label: "All", value: "all" }, { label: "Capitals", value: "upper" }, { label: "Lowercase", value: "lower" }, { label: "Mixed case", value: "mixed" }, { label: "Punctuation and symbols", value: "punct" }], st.filter, (v) => { st.filter = v; drawList(); }),
+      rowsSeg);
+    const find = h("input", { type: "search", placeholder: "T, or a name: bar", maxlength: 40, size: 14, "aria-label": "Show only the pairs with this glyph: type the glyph, or its name" });
+    find.addEventListener("input", () => { st.glyph = find.value.trim(); drawList(); });
+    controls.appendChild(h("label", { class: "control" }, "Pairs with the glyph", find));
     if (unscoredPairs) {
       const box = h("input", { type: "checkbox" });
       box.addEventListener("change", () => { st.unscored = box.checked; drawList(); });
@@ -801,11 +812,14 @@
     const listInfo = h("p", { class: "small", "aria-live": "polite" });
     sec.appendChild(listInfo);
     const tableBox = h("div", { class: "table-wrap" });
-    sec.appendChild(tableBox);
+    const moreBox = h("div", { class: "more-rows" });
+    sec.append(tableBox, moreBox);
+    // one character: that glyph; longer: a glyph name
+    const hasGlyph = (g) => ([...st.glyph].length === 1 ? g.char === st.glyph : g.name === st.glyph);
     const valueOf = (e) => (st.rel === "library" ? e.diff : e.res);
 
     // pair drawings share one scale
-    const k = 38 / (face.top - face.bottom);
+    const k = 52 / (face.top - face.bottom);
     const padU = 0.05 * face.upm;
     function pairSvg(e, sp, widthU, ghostSp) {
       const p = face.pairPlace(e.a, e.b, sp);
@@ -823,15 +837,17 @@
     }
     function drawList() {
       const useLib = st.rel === "library" && P.hasLib;
-      let list = P.list.filter((e) => (st.unscored || e.scored) && (st.filter === "all" || e.cat === st.filter) && valueOf(e) !== undefined && valueOf(e) !== null);
+      let list = P.list.filter((e) => (st.unscored || e.scored) && (st.filter === "all" || e.cat === st.filter) && valueOf(e) !== undefined && valueOf(e) !== null &&
+        (!st.glyph || hasGlyph(face.glyphs[e.a]) || hasGlyph(face.glyphs[e.b])));
       const max = Math.max(1, ...list.map((e) => Math.abs(valueOf(e))));
       list.sort((a, b) => (st.order === "loose" ? valueOf(b) - valueOf(a) : valueOf(a) - valueOf(b)));
-      const shown = list.slice(0, 40);
+      const shown = list.slice(0, st.limit);
       const unusual = useLib ? P.list.filter((e) => e.z !== undefined && Math.abs(e.z) >= (t.pair_z || 5) && Math.abs(e.diff) >= (t.pair_units || 50)).length : null;
-      listInfo.textContent = `The ${st.order === "loose" ? "loosest" : "tightest"} ${shown.length} of ${int(list.length)} pairs` +
+      listInfo.textContent = `The ${st.order === "loose" ? "loosest" : "tightest"} ${int(shown.length)} of ${int(list.length)} pairs${st.glyph ? ` with ${st.glyph}` : ""}` +
         (useLib ? ` relative to ${N.name}. ${int(unusual)} ${unusual === 1 ? "pair is" : "pairs are"} far from their usual (at least ${fmt(t.pair_z, 0)} robust σ and ${fmt(t.pair_units, 0)} units) and marked “far”.` : " relative to the model.");
       clear(tableBox);
-      if (!shown.length) { tableBox.appendChild(h("p", { class: "empty" }, "No pairs in this group.")); return; }
+      clear(moreBox);
+      if (!shown.length) { tableBox.appendChild(h("p", { class: "empty" }, st.glyph ? `No pairs with ${st.glyph} in this group: the glyph${[...st.glyph].length > 1 ? " name" : ""} may not be in the report's set, or not scored${st.unscored || !unscoredPairs ? "" : " (include the glyphs that are not scored above)"}.` : "No pairs in this group.")); return; }
       const widthU = Math.max(...shown.map((e) => Math.max(face.pairPlace(e.a, e.b, "designer").right, face.pairPlace(e.a, e.b, "best").right)));
       const tbl = h("table", { class: "pairs" });
       tbl.appendChild(h("caption", { class: "sr-only" }, listInfo.textContent));
@@ -857,6 +873,13 @@
       });
       tbl.appendChild(tb);
       tableBox.appendChild(tbl);
+      const rest = list.length - shown.length;
+      if (rest > 0) {
+        const step = Math.min(rest, 250);
+        const more = h("button", { type: "button", class: "btn" }, `Show ${int(step)} more`);
+        more.addEventListener("click", () => { st.limit = shown.length + step; rowsSeg.setValue(st.limit); drawList(); });
+        moreBox.append(more, h("span", { class: "small" }, ` ${int(rest)} more ${rest === 1 ? "pair" : "pairs"} in this order, down to the ${st.order === "loose" ? "tightest" : "loosest"}.`));
+      }
     }
     drawList();
     sec.appendChild(h("p", { class: "caption" }, "Drawings: the pair as designed, and as the best-fit model sets it with the designed position of the second glyph in grey. Gaps and kerning in units per 1000 em."));
@@ -864,7 +887,7 @@
     // the heat map
     const hsec = h("div", null);
     hsec.appendChild(h("h3", { id: "heat-h", tabindex: "-1" }, "Heat map of every pair"));
-    hsec.appendChild(h("p", { class: "section-intro" }, "Rows: the left glyph; columns: the right glyph. Uses the “relative to” setting above. Hover a cell, or focus the map and use the arrow keys."));
+    hsec.appendChild(h("p", { class: "section-intro" }, "Rows: the left glyph; columns: the right glyph. Uses the “relative to” setting above. How to read it: a whole row in one colour is the left glyph's right side (every pair after it is looser or tighter), a whole column the right glyph's left side — a sidebearing; single cells or short runs that differ from their row and column are kerning. Hover a cell, or focus the map and use the arrow keys."));
     sec.appendChild(hsec);
     const heat = heatMap(ctx, hsec, P, face, () => (st.rel === "library" && P.hasLib ? "library" : "model"));
   }
@@ -918,7 +941,7 @@
       drawRamp();
       const W = width || wrap.clientWidth || 700;
       const lab = 16;
-      const c = Math.max(8, Math.min(14, Math.floor((W - lab - 4) / m)));
+      const c = Math.max(8, Math.min(18, Math.floor((W - lab - 4) / m)));
       const size = lab + m * c + 2;
       clear(wrap);
       const root = s("svg", { width: size, height: size, viewBox: `0 0 ${size} ${size}`, class: "chart", role: "application", "aria-roledescription": "heat map", "aria-label": `Heat map of ${m} by ${m} pairs, ${rel === "library" ? "relative to the library" : "relative to the model"}. Arrow keys move between cells.`, tabindex: "0" });
@@ -1025,7 +1048,7 @@
     const sm = r.summary;
     const d = r.detail;
     const sec = section(root, "kern-h", "Kerning agreement",
-      "The designer's kerning against the best-fit model's on the scored pairs the designer kerned (units per 1000 em). Points near the diagonal agree; points across zero kern the other way.");
+      "The designer's kerning against the best-fit model's on the scored pairs the designer kerned (units per 1000 em). Each point is one pair: across, how much the designer kerns it; up, how much the model would. Points near the diagonal agree; points above it are pairs the model would kern less (or open), below it more; points in the top-left or bottom-right quarters kern the other way. Hover a point for its pair.");
     const scored = new Set((d.pair_glyphs || []).filter((i) => face.glyphs[i] && face.glyphs[i].scored));
     const pts = [];
     (d.kerning.designer || []).forEach(([a, b, v]) => {
@@ -1315,7 +1338,7 @@
     load(false);
   }
 
-  SQA.reportParts = { normsFor, percentileOf, ordinal };
+  SQA.reportParts = { normsFor, percentileOf, ordinal, fullWidth, slanted };
   SQA.renderReport = renderReport;
   SQA.renderPicking = renderPicking;
   SQA.views = SQA.views || {};

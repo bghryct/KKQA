@@ -3356,11 +3356,12 @@ Be Vietnam Pro,wght@400,/quant/spacing_kerning_error,15.50
 Be Vietnam Pro,wght@400,/quant/spacing_looseness,0.20
 Be Vietnam Pro,wght@400,/quant/spacing_shape_error,33.00
 Be Vietnam Pro,wght@400,/quant/spacing_sidebearing_error,19.70
-Beau Rivage,wght@400,/quant/spacing_kerning_correlation,0.77
-Beau Rivage,wght@400,/quant/spacing_kerning_error,56.40
-Beau Rivage,wght@400,/quant/spacing_looseness,-6.00
-Beau Rivage,wght@400,/quant/spacing_shape_error,63.80
-Beau Rivage,wght@400,/quant/spacing_sidebearing_error,64.30
+Beau Rivage,wght@400,/quant/spacing_evenness,33.00
+Beau Rivage,wght@400,/quant/spacing_kerning_correlation,0.86
+Beau Rivage,wght@400,/quant/spacing_kerning_error,44.50
+Beau Rivage,wght@400,/quant/spacing_looseness,-2.05
+Beau Rivage,wght@400,/quant/spacing_shape_error,61.50
+Beau Rivage,wght@400,/quant/spacing_sidebearing_error,40.60
 Bebas Neue,wght@400,/quant/spacing_evenness,68.00
 Bebas Neue,wght@400,/quant/spacing_kerning_correlation,0.81
 Bebas Neue,wght@400,/quant/spacing_kerning_error,14.20
@@ -3693,11 +3694,12 @@ Bigshot One,wght@400,/quant/spacing_kerning_error,27.50
 Bigshot One,wght@400,/quant/spacing_looseness,0.65
 Bigshot One,wght@400,/quant/spacing_shape_error,23.30
 Bigshot One,wght@400,/quant/spacing_sidebearing_error,13.10
-Bilbo Swash Caps,wght@400,/quant/spacing_kerning_correlation,0.27
-Bilbo Swash Caps,wght@400,/quant/spacing_kerning_error,41.80
-Bilbo Swash Caps,wght@400,/quant/spacing_looseness,-6.00
-Bilbo Swash Caps,wght@400,/quant/spacing_shape_error,58.60
-Bilbo Swash Caps,wght@400,/quant/spacing_sidebearing_error,42.40
+Bilbo Swash Caps,wght@400,/quant/spacing_evenness,1.00
+Bilbo Swash Caps,wght@400,/quant/spacing_kerning_correlation,0.23
+Bilbo Swash Caps,wght@400,/quant/spacing_kerning_error,51.30
+Bilbo Swash Caps,wght@400,/quant/spacing_looseness,-1.08
+Bilbo Swash Caps,wght@400,/quant/spacing_shape_error,68.80
+Bilbo Swash Caps,wght@400,/quant/spacing_sidebearing_error,47.40
 Bilbo,wght@400,/quant/spacing_evenness,16.00
 Bilbo,wght@400,/quant/spacing_kerning_correlation,0.74
 Bilbo,wght@400,/quant/spacing_kerning_error,46.60
@@ -5538,9 +5540,10 @@ Calistoga,wght@400,/quant/spacing_kerning_error,22.20
 Calistoga,wght@400,/quant/spacing_looseness,0.28
 Calistoga,wght@400,/quant/spacing_shape_error,26.30
 Calistoga,wght@400,/quant/spacing_sidebearing_error,17.50
-Calligraffitti,wght@400,/quant/spacing_looseness,-6.00
-Calligraffitti,wght@400,/quant/spacing_shape_error,77.70
-Calligraffitti,wght@400,/quant/spacing_sidebearing_error,72.20
+Calligraffitti,wght@400,/quant/spacing_evenness,2.00
+Calligraffitti,wght@400,/quant/spacing_looseness,-1.43
+Calligraffitti,wght@400,/quant/spacing_shape_error,66.80
+Calligraffitti,wght@400,/quant/spacing_sidebearing_error,90.50
 Cambay,wght@400,/quant/spacing_evenness,15.00
 Cambay,wght@400,/quant/spacing_looseness,0.20
 Cambay,wght@400,/quant/spacing_shape_error,25.20
@@ -5586,11 +5589,12 @@ Caramel,wght@400,/quant/spacing_kerning_error,2.50
 Caramel,wght@400,/quant/spacing_looseness,-0.03
 Caramel,wght@400,/quant/spacing_shape_error,47.60
 Caramel,wght@400,/quant/spacing_sidebearing_error,38.90
-Carattere,wght@400,/quant/spacing_kerning_correlation,0.66
-Carattere,wght@400,/quant/spacing_kerning_error,164.20
-Carattere,wght@400,/quant/spacing_looseness,-6.00
-Carattere,wght@400,/quant/spacing_shape_error,77.20
-Carattere,wght@400,/quant/spacing_sidebearing_error,62.40
+Carattere,wght@400,/quant/spacing_evenness,0.00
+Carattere,wght@400,/quant/spacing_kerning_correlation,0.77
+Carattere,wght@400,/quant/spacing_kerning_error,58.70
+Carattere,wght@400,/quant/spacing_looseness,-1.50
+Carattere,wght@400,/quant/spacing_shape_error,90.40
+Carattere,wght@400,/quant/spacing_sidebearing_error,67.10
 Cardo,wght@400,/quant/spacing_evenness,14.00
 Cardo,wght@400,/quant/spacing_looseness,0.15
 Cardo,wght@400,/quant/spacing_shape_error,27.70
@@ -8560,11 +8564,12 @@ Expletus Sans,wght@700,/quant/spacing_kerning_correlation,0.97
 Expletus Sans,wght@700,/quant/spacing_looseness,0.45
 Expletus Sans,wght@700,/quant/spacing_shape_error,29.30
 Expletus Sans,wght@700,/quant/spacing_sidebearing_error,18.50
-Explora,wght@400,/quant/spacing_kerning_correlation,0.78
-Explora,wght@400,/quant/spacing_kerning_error,47.00
-Explora,wght@400,/quant/spacing_looseness,-6.00
-Explora,wght@400,/quant/spacing_shape_error,54.80
-Explora,wght@400,/quant/spacing_sidebearing_error,43.90
+Explora,wght@400,/quant/spacing_evenness,4.00
+Explora,wght@400,/quant/spacing_kerning_correlation,0.02
+Explora,wght@400,/quant/spacing_kerning_error,44.10
+Explora,wght@400,/quant/spacing_looseness,-0.93
+Explora,wght@400,/quant/spacing_shape_error,61.00
+Explora,wght@400,/quant/spacing_sidebearing_error,41.20
 Faculty Glyphic,wght@400,/quant/spacing_evenness,37.00
 Faculty Glyphic,wght@400,/quant/spacing_kerning_correlation,0.80
 Faculty Glyphic,wght@400,/quant/spacing_kerning_error,24.20
@@ -12449,11 +12454,12 @@ Irish Grover,wght@400,/quant/spacing_kerning_error,38.90
 Irish Grover,wght@400,/quant/spacing_looseness,-2.08
 Irish Grover,wght@400,/quant/spacing_shape_error,50.00
 Irish Grover,wght@400,/quant/spacing_sidebearing_error,33.00
-Island Moments,wght@400,/quant/spacing_kerning_correlation,0.08
-Island Moments,wght@400,/quant/spacing_kerning_error,24.90
-Island Moments,wght@400,/quant/spacing_looseness,-6.00
-Island Moments,wght@400,/quant/spacing_shape_error,57.70
-Island Moments,wght@400,/quant/spacing_sidebearing_error,43.10
+Island Moments,wght@400,/quant/spacing_evenness,4.00
+Island Moments,wght@400,/quant/spacing_kerning_correlation,-0.83
+Island Moments,wght@400,/quant/spacing_kerning_error,6.80
+Island Moments,wght@400,/quant/spacing_looseness,-1.07
+Island Moments,wght@400,/quant/spacing_shape_error,62.50
+Island Moments,wght@400,/quant/spacing_sidebearing_error,44.60
 Isometra,wght@400,/quant/spacing_evenness,14.00
 Isometra,wght@400,/quant/spacing_kerning_correlation,0.77
 Isometra,wght@400,/quant/spacing_kerning_error,50.70
@@ -13206,11 +13212,12 @@ Khula,wght@400,/quant/spacing_kerning_error,23.50
 Khula,wght@400,/quant/spacing_looseness,0.03
 Khula,wght@400,/quant/spacing_shape_error,21.70
 Khula,wght@400,/quant/spacing_sidebearing_error,12.20
-Kings,wght@400,/quant/spacing_kerning_correlation,0.24
-Kings,wght@400,/quant/spacing_kerning_error,85.70
-Kings,wght@400,/quant/spacing_looseness,-6.00
-Kings,wght@400,/quant/spacing_shape_error,60.20
-Kings,wght@400,/quant/spacing_sidebearing_error,42.00
+Kings,wght@400,/quant/spacing_evenness,7.00
+Kings,wght@400,/quant/spacing_kerning_correlation,0.09
+Kings,wght@400,/quant/spacing_kerning_error,24.90
+Kings,wght@400,/quant/spacing_looseness,-0.63
+Kings,wght@400,/quant/spacing_shape_error,59.00
+Kings,wght@400,/quant/spacing_sidebearing_error,40.00
 Kirang Haerang,wght@400,/quant/spacing_evenness,47.00
 Kirang Haerang,wght@400,/quant/spacing_looseness,0.17
 Kirang Haerang,wght@400,/quant/spacing_shape_error,22.10
@@ -16010,11 +16017,12 @@ Mrs Saint Delafield,wght@400,/quant/spacing_kerning_error,89.30
 Mrs Saint Delafield,wght@400,/quant/spacing_looseness,-0.04
 Mrs Saint Delafield,wght@400,/quant/spacing_shape_error,84.80
 Mrs Saint Delafield,wght@400,/quant/spacing_sidebearing_error,84.80
-Mrs Sheppards,wght@400,/quant/spacing_kerning_correlation,0.79
-Mrs Sheppards,wght@400,/quant/spacing_kerning_error,69.60
-Mrs Sheppards,wght@400,/quant/spacing_looseness,-6.00
-Mrs Sheppards,wght@400,/quant/spacing_shape_error,76.40
-Mrs Sheppards,wght@400,/quant/spacing_sidebearing_error,63.80
+Mrs Sheppards,wght@400,/quant/spacing_evenness,4.00
+Mrs Sheppards,wght@400,/quant/spacing_kerning_correlation,0.36
+Mrs Sheppards,wght@400,/quant/spacing_kerning_error,66.50
+Mrs Sheppards,wght@400,/quant/spacing_looseness,0.60
+Mrs Sheppards,wght@400,/quant/spacing_shape_error,100.60
+Mrs Sheppards,wght@400,/quant/spacing_sidebearing_error,112.30
 Ms Madi,wght@400,/quant/spacing_evenness,54.00
 Ms Madi,wght@400,/quant/spacing_kerning_correlation,0.81
 Ms Madi,wght@400,/quant/spacing_kerning_error,48.50
@@ -22266,10 +22274,11 @@ Permanent Marker,wght@400,/quant/spacing_kerning_error,40.70
 Permanent Marker,wght@400,/quant/spacing_looseness,-6.00
 Permanent Marker,wght@400,/quant/spacing_shape_error,53.00
 Permanent Marker,wght@400,/quant/spacing_sidebearing_error,40.10
-Petemoss,wght@400,/quant/spacing_kerning_error,15.20
-Petemoss,wght@400,/quant/spacing_looseness,-6.00
-Petemoss,wght@400,/quant/spacing_shape_error,65.00
-Petemoss,wght@400,/quant/spacing_sidebearing_error,46.10
+Petemoss,wght@400,/quant/spacing_evenness,0.00
+Petemoss,wght@400,/quant/spacing_kerning_error,9.90
+Petemoss,wght@400,/quant/spacing_looseness,-1.85
+Petemoss,wght@400,/quant/spacing_shape_error,74.90
+Petemoss,wght@400,/quant/spacing_sidebearing_error,52.40
 Petit Formal Script,wght@400,/quant/spacing_evenness,32.00
 Petit Formal Script,wght@400,/quant/spacing_kerning_correlation,0.08
 Petit Formal Script,wght@400,/quant/spacing_kerning_error,64.30
@@ -24481,16 +24490,18 @@ Quintessential,wght@400,/quant/spacing_kerning_error,32.40
 Quintessential,wght@400,/quant/spacing_looseness,-0.29
 Quintessential,wght@400,/quant/spacing_shape_error,30.40
 Quintessential,wght@400,/quant/spacing_sidebearing_error,17.20
-Qwigley,wght@400,/quant/spacing_kerning_correlation,0.18
-Qwigley,wght@400,/quant/spacing_kerning_error,46.70
-Qwigley,wght@400,/quant/spacing_looseness,-6.00
-Qwigley,wght@400,/quant/spacing_shape_error,47.10
-Qwigley,wght@400,/quant/spacing_sidebearing_error,35.80
-Qwitcher Grypen,wght@400,/quant/spacing_kerning_correlation,0.36
-Qwitcher Grypen,wght@400,/quant/spacing_kerning_error,104.10
-Qwitcher Grypen,wght@400,/quant/spacing_looseness,-6.00
-Qwitcher Grypen,wght@400,/quant/spacing_shape_error,56.10
-Qwitcher Grypen,wght@400,/quant/spacing_sidebearing_error,40.80
+Qwigley,wght@400,/quant/spacing_evenness,10.00
+Qwigley,wght@400,/quant/spacing_kerning_correlation,0.20
+Qwigley,wght@400,/quant/spacing_kerning_error,49.50
+Qwigley,wght@400,/quant/spacing_looseness,-1.26
+Qwigley,wght@400,/quant/spacing_shape_error,54.70
+Qwigley,wght@400,/quant/spacing_sidebearing_error,39.40
+Qwitcher Grypen,wght@400,/quant/spacing_evenness,2.00
+Qwitcher Grypen,wght@400,/quant/spacing_kerning_correlation,0.28
+Qwitcher Grypen,wght@400,/quant/spacing_kerning_error,66.90
+Qwitcher Grypen,wght@400,/quant/spacing_looseness,-2.60
+Qwitcher Grypen,wght@400,/quant/spacing_shape_error,67.60
+Qwitcher Grypen,wght@400,/quant/spacing_sidebearing_error,47.50
 REM,"ital,wght@1,100",/quant/spacing_kerning_correlation,0.72
 REM,"ital,wght@1,100",/quant/spacing_looseness,-0.40
 REM,"ital,wght@1,100",/quant/spacing_shape_error,24.80
@@ -26398,11 +26409,12 @@ Rokkitt,wght@900,/quant/spacing_kerning_correlation,0.61
 Rokkitt,wght@900,/quant/spacing_looseness,0.26
 Rokkitt,wght@900,/quant/spacing_shape_error,16.70
 Rokkitt,wght@900,/quant/spacing_sidebearing_error,8.50
-Romanesco,wght@400,/quant/spacing_kerning_correlation,0.09
-Romanesco,wght@400,/quant/spacing_kerning_error,33.80
-Romanesco,wght@400,/quant/spacing_looseness,-6.00
-Romanesco,wght@400,/quant/spacing_shape_error,40.00
-Romanesco,wght@400,/quant/spacing_sidebearing_error,51.70
+Romanesco,wght@400,/quant/spacing_evenness,79.00
+Romanesco,wght@400,/quant/spacing_kerning_correlation,0.67
+Romanesco,wght@400,/quant/spacing_kerning_error,29.50
+Romanesco,wght@400,/quant/spacing_looseness,-0.66
+Romanesco,wght@400,/quant/spacing_shape_error,35.90
+Romanesco,wght@400,/quant/spacing_sidebearing_error,49.40
 Ropa Sans,wght@400,/quant/spacing_evenness,73.00
 Ropa Sans,wght@400,/quant/spacing_kerning_correlation,0.79
 Ropa Sans,wght@400,/quant/spacing_kerning_error,15.70
@@ -28174,11 +28186,12 @@ Smooch Sans,wght@900,/quant/spacing_kerning_correlation,0.83
 Smooch Sans,wght@900,/quant/spacing_looseness,-0.24
 Smooch Sans,wght@900,/quant/spacing_shape_error,26.90
 Smooch Sans,wght@900,/quant/spacing_sidebearing_error,17.40
-Smooch,wght@400,/quant/spacing_kerning_correlation,0.55
-Smooch,wght@400,/quant/spacing_kerning_error,63.00
-Smooch,wght@400,/quant/spacing_looseness,-6.00
-Smooch,wght@400,/quant/spacing_shape_error,78.20
-Smooch,wght@400,/quant/spacing_sidebearing_error,79.30
+Smooch,wght@400,/quant/spacing_evenness,7.00
+Smooch,wght@400,/quant/spacing_kerning_correlation,0.34
+Smooch,wght@400,/quant/spacing_kerning_error,54.20
+Smooch,wght@400,/quant/spacing_looseness,0.13
+Smooch,wght@400,/quant/spacing_shape_error,91.30
+Smooch,wght@400,/quant/spacing_sidebearing_error,84.80
 Smythe,wght@400,/quant/spacing_evenness,89.00
 Smythe,wght@400,/quant/spacing_kerning_correlation,0.59
 Smythe,wght@400,/quant/spacing_kerning_error,14.20
@@ -30897,11 +30910,12 @@ Voltaire,wght@400,/quant/spacing_kerning_error,17.50
 Voltaire,wght@400,/quant/spacing_looseness,0.78
 Voltaire,wght@400,/quant/spacing_shape_error,20.30
 Voltaire,wght@400,/quant/spacing_sidebearing_error,14.00
-Vujahday Script,wght@400,/quant/spacing_kerning_correlation,0.56
-Vujahday Script,wght@400,/quant/spacing_kerning_error,57.40
-Vujahday Script,wght@400,/quant/spacing_looseness,-6.00
-Vujahday Script,wght@400,/quant/spacing_shape_error,88.00
-Vujahday Script,wght@400,/quant/spacing_sidebearing_error,75.70
+Vujahday Script,wght@400,/quant/spacing_evenness,0.00
+Vujahday Script,wght@400,/quant/spacing_kerning_correlation,0.09
+Vujahday Script,wght@400,/quant/spacing_kerning_error,81.30
+Vujahday Script,wght@400,/quant/spacing_looseness,-0.24
+Vujahday Script,wght@400,/quant/spacing_shape_error,73.90
+Vujahday Script,wght@400,/quant/spacing_sidebearing_error,55.40
 WDXL Lubrifont JP N,wght@400,/quant/spacing_evenness,49.00
 WDXL Lubrifont JP N,wght@400,/quant/spacing_looseness,0.42
 WDXL Lubrifont JP N,wght@400,/quant/spacing_shape_error,18.90
