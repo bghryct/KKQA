@@ -72,7 +72,7 @@
     const padU = 0.06 * face.upm;
     const widthU = Math.max(opt.widthU || 0, p.right);
     const glyphH = (face.top - face.bottom) * k;
-    const W = Math.ceil((widthU + 2 * padU) * k), H = Math.ceil(glyphH + 30);
+    const W = Math.ceil((widthU + 2 * padU) * k), H = Math.ceil(glyphH + 36);
     const baseY = face.top * k + 4, ox = padU * k;
     const root = s("svg", { width: W, height: H, viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": `${pairName(face, e)} ${opt.label || sp}: gap ${fmt(p.gap * face.per, 0)} units per 1000 em` });
     const inkR = face.ink(e.a), gapU = p.gap;
@@ -90,7 +90,7 @@
     root.appendChild(s("line", { x1, x2, y1: y, y2: y, class: "dim" }));
     root.appendChild(s("line", { x1, x2: x1, y1: y - 4, y2: y + 4, class: "dim" }));
     root.appendChild(s("line", { x1: x2, x2, y1: y - 4, y2: y + 4, class: "dim" }));
-    root.appendChild(s("text", { x: (x1 + x2) / 2, y: y + 13, "text-anchor": "middle", class: "dim-label" }, (opt.measureLabel ? "gap " : "") + fmt(gapU * face.per, 0)));
+    root.appendChild(s("text", { x: (x1 + x2) / 2, y: y + 16, "text-anchor": "middle", class: "dim-label" }, (opt.measureLabel ? "gap " : "") + fmt(gapU * face.per, 0)));
     return root;
   }
 
@@ -181,7 +181,7 @@
       sec.appendChild(h("p", { class: "section-intro" },
         `Beyond the sides, the harness corrects the kerning of ${int(fixes.length)} ${fixes.length === 1 ? "pair" : "pairs"} of this font (mostly with punctuation); ${int(toward)} of them end up closer to the designer's gap. The largest, as designed, as the bare model sets them and with the harness:`));
       const top = fixes.slice().sort((x, y) => Math.abs(y.corr) - Math.abs(x.corr)).slice(0, 8);
-      const k = 34 / (face.top - face.bottom);
+      const k = 64 / (face.top - face.bottom);
       const widthU = Math.max(...top.map((e) => Math.max(face.pairPlace(e.a, e.b, "designer").right, face.pairPlace(e.a, e.b, "bare").right, face.pairPlace(e.a, e.b, "best").right)));
       const t2 = h("table", { class: "pairs" });
       t2.appendChild(h("caption", { class: "sr-only" }, "The pairs the designer harness corrects most"));
@@ -271,7 +271,7 @@
     sec.appendChild(h("h3", null, "One pair, measured"));
     const ex = h("div", { class: "measure-examples" });
     sec.appendChild(ex);
-    const k = 92 / (face.top - face.bottom);
+    const k = 168 / (face.top - face.bottom);
     [[typical, "A typical pair: its residual is about the shape error"], [extreme, letterPairs.length ? "The letter pair furthest from the model" : "The pair furthest from the model"]].forEach(([e, title]) => {
       if (!e) return;
       const widthU = Math.max(face.pairPlace(e.a, e.b, "designer").right, face.pairPlace(e.a, e.b, "best").right);
@@ -398,13 +398,13 @@
 
   function contributions(container, W, rows, face, even) {
     clear(container);
-    const rowH = 34, top = 6, labelW = 150, valueW = 150;
+    const rowH = 46, top = 6, labelW = 168, valueW = 150;
     const H = top + rows.length * rowH + 10;
     const max = Math.max(...rows.map((c) => c.share), even * 1.5);
     const x0 = labelW, x1 = W - valueW;
     const X = (v) => x0 + (v / max) * (x1 - x0);
     const root = s("svg", { viewBox: `0 0 ${W} ${H}`, width: W, height: H, class: "chart", role: "img", "aria-label": "The glyphs that make most of the shape error, with their share. Use the arrow keys to read each." });
-    const gk = 26 / (face.top - face.bottom);
+    const gk = 38 / (face.top - face.bottom);
     const items = [];
     root.appendChild(s("line", { x1: X(even), x2: X(even), y1: 0, y2: H - 6, class: "gridline" }));
     root.appendChild(s("text", { x: X(even) + 4, y: H - 2, class: "tick" }, "every glyph equal"));
@@ -413,12 +413,12 @@
       const y = top + j * rowH;
       // the glyph itself, drawn
       const gw = face.ink(c.i) * gk;
-      root.appendChild(face.use(c.i, -g.bbox[0] + (26 / gk - face.ink(c.i)) / 2, gk, 6, y + face.top * gk + 3, "glyph-fill"));
-      root.appendChild(s("text", { x: 6 + Math.max(30, gw + 6), y: y + rowH / 2 + 4, class: "tick" }, g.name.length > 15 ? g.name.slice(0, 14) + "…" : g.name));
+      root.appendChild(face.use(c.i, -g.bbox[0] + (38 / gk - face.ink(c.i)) / 2, gk, 6, y + face.top * gk + 4, "glyph-fill"));
+      root.appendChild(s("text", { x: 6 + Math.max(44, gw + 8), y: y + rowH / 2 + 4, class: "tick" }, g.name.length > 15 ? g.name.slice(0, 14) + "…" : g.name));
       const shareR = c.left + c.right > 0 ? (c.right / (c.left + c.right)) * c.share : 0, shareL = c.share - shareR;
       const xr = X(shareR);
-      root.appendChild(s("path", { d: SQA.barPath(x0, y + 8, xr - x0, rowH - 16, 0), class: "contrib-right" }));
-      root.appendChild(s("path", { d: SQA.barPath(xr, y + 8, X(shareR + shareL) - xr, rowH - 16, 3), class: "contrib-left" }));
+      root.appendChild(s("path", { d: SQA.barPath(x0, y + 11, xr - x0, rowH - 22, 0), class: "contrib-right" }));
+      root.appendChild(s("path", { d: SQA.barPath(xr, y + 11, X(shareR + shareL) - xr, rowH - 22, 0), class: "contrib-left" }));
       root.appendChild(s("text", { x: X(c.share) + 8, y: y + rowH / 2 + 4 }, `${fmt(100 * c.share, 1)} % · mean ${fmt(c.mean, 0)}`));
       const content = () => ({
         title: `${g.char} — ${g.name}`,
@@ -440,14 +440,14 @@
     const grp = SQA.groupOf(g);
     const [p, q] = grp === "lower" ? ["n", "o"] : grp === "upper" ? ["H", "O"] : ["n", "H"];
     const text = `${p}${g.char}${p} ${q}${g.char}${q}`;
-    const k = 46 / (face.top - face.bottom);
+    const k = 92 / (face.top - face.bottom);
     const wrap = h("figure", { class: "panel context-strip" }, h("figcaption", null, caption ? caption : [h("b", null, g.char), ` ${g.name} · ${fmt(100 * c.share, 1)} % of the shape error`]));
     const lines = [["designer", "As designed"], ["best", "Model"]];
     const L = lines.map(([sp]) => face.layout(text, sp));
     const Wu = Math.max(...L.map((x) => x.width)) + 0.1 * face.upm;
     lines.forEach(([sp, label], li) => {
       const lay = L[li];
-      const H = Math.ceil((face.top - face.bottom) * k + 22);
+      const H = Math.ceil((face.top - face.bottom) * k + 26);
       const W = Math.ceil(Wu * k);
       const baseY = face.top * k + 2;
       const svg = s("svg", { width: W, height: H, viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": `${text} ${label.toLowerCase()}` });
@@ -466,11 +466,11 @@
       // the residuals under their gaps, kept apart
       for (let pass = 0; pass < 4; pass++) {
         for (let j = 1; j < labels.length; j++) {
-          const need = 7 * (labels[j - 1].text.length + labels[j].text.length) / 2 + 4 - (labels[j].x - labels[j - 1].x);
+          const need = 7.6 * (labels[j - 1].text.length + labels[j].text.length) / 2 + 6 - (labels[j].x - labels[j - 1].x);
           if (need > 0) { labels[j - 1].x -= need / 2; labels[j].x += need / 2; }
         }
       }
-      labels.forEach((l) => svg.appendChild(s("text", { x: Math.max(10, Math.min(W - 10, l.x)), y: H - 3, "text-anchor": "middle", class: "dim-label" }, l.text)));
+      labels.forEach((l) => svg.appendChild(s("text", { x: Math.max(14, Math.min(W - 14, l.x)), y: H - 4, "text-anchor": "middle", class: "dim-label" }, l.text)));
       lay.items.forEach((it) => svg.appendChild(face.use(it.i, it.tx, k, 0, baseY, it.i === c.i ? "glyph-accent" : "glyph-fill")));
       wrap.appendChild(h("div", { class: "strip-line" }, h("span", { class: "measure-label" }, label), svg));
     });

@@ -762,7 +762,7 @@
       const node = s("circle", { cx: x, cy: y, r: ln.main ? 4.5 : 4, class: `ds-pt lvl-${r.level || "NONE"}` + (r.italic ? " italic" : "") });
       marks.appendChild(node);
       if (r.main) marks.appendChild(s("circle", { cx: x, cy: y, r: 8.5, class: "ds-main-ring" }));
-      if (isCur(r)) marks.appendChild(s("rect", { x: x - 9, y: y - 9, width: 18, height: 18, rx: 4, class: "ds-current-ring" }));
+      if (isCur(r)) marks.appendChild(s("rect", { x: x - 9, y: y - 9, width: 18, height: 18, class: "ds-current-ring" }));
       if (r.level === "WARN" || r.level === "FAIL") marks.appendChild(s("text", { x, y: y - 10, "text-anchor": "middle", class: "label-strong halo", style: "font-size:11px" }, r.level === "FAIL" ? "✕" : "!"));
       if (v < dom[0] || v > dom[1]) marks.appendChild(s("text", { x: x + 8, y: y + 4, class: "label-strong halo", style: "font-size:11px" }, v < dom[0] ? "↓" : "↑"));
       pts.push({ r, ln, x, y, node, label: `${r.label}: ${A.tag} ${SQA.axisNum(r.location[A.tag])}, ${M.label} ${M.fmt(v)}, ${r.level || "not checked"}, ${ln.label}` });
@@ -834,20 +834,20 @@
       const r = P.pts.find((p) => near(p.location[P.ax], x) && near(p.location[P.ay], y));
       const cx = labW + i * cw, cy = top + j * ch;
       if (!r) {
-        root.appendChild(s("rect", { x: cx + 1, y: cy + 1, width: cw - 2, height: ch - 2, rx: 4, class: "ds-empty" }));
+        root.appendChild(s("rect", { x: cx + 1, y: cy + 1, width: cw - 2, height: ch - 2, class: "ds-empty" }));
         return;
       }
       const v = r[measure];
       const c = cls(v);
-      const node = s("rect", { x: cx + 1, y: cy + 1, width: cw - 2, height: ch - 2, rx: 4, class: c });
+      const node = s("rect", { x: cx + 1, y: cy + 1, width: cw - 2, height: ch - 2, class: c });
       root.appendChild(node);
       if (cw >= 40) root.appendChild(s("text", { x: cx + cw / 2, y: cy + ch / 2 + 4, "text-anchor": "middle", class: "ds-cell-text" }, measure === "best_looseness" ? signed(v, 2) : fmt(v, 1)));
-      if (r.main) root.appendChild(s("rect", { x: cx + 2.5, y: cy + 2.5, width: cw - 5, height: ch - 5, rx: 3, class: "ds-main-ring" }));
-      if (isCur(r)) root.appendChild(s("rect", { x: cx + 0.5, y: cy + 0.5, width: cw - 1, height: ch - 1, rx: 5, class: "ds-current-ring" }));
+      if (r.main) root.appendChild(s("rect", { x: cx + 2.5, y: cy + 2.5, width: cw - 5, height: ch - 5, class: "ds-main-ring" }));
+      if (isCur(r)) root.appendChild(s("rect", { x: cx + 0.5, y: cy + 0.5, width: cw - 1, height: ch - 1, class: "ds-current-ring" }));
       if (r.level === "WARN" || r.level === "FAIL") root.appendChild(s("text", { x: cx + cw - 5, y: cy + 12, "text-anchor": "end", class: "ds-cell-text", style: "font-size:10px;font-weight:700" }, r.level === "FAIL" ? "✕" : "!"));
       pts.push({ r, x: cx + cw / 2, y: cy + ch / 2, node, label: `${r.label}: ${P.ax} ${SQA.axisNum(x)}, ${P.ay} ${SQA.axisNum(y)}, ${M.label} ${M.fmt(v)}, ${r.level || "not checked"}` });
     }));
-    const hov = s("rect", { class: "sel", x: -60, y: -60, width: cw, height: ch, rx: 5 });
+    const hov = s("rect", { class: "sel", x: -60, y: -60, width: cw, height: ch });
     root.appendChild(hov);
     const onMove = (i) => {
       if (i < 0) { hov.setAttribute("x", -60); return; }

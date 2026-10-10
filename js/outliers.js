@@ -277,10 +277,10 @@
     const label = `${g.char} (${g.name}): left side ${e.l ? signed(e.l.d, 0) : "not compared"}, right side ${e.r ? signed(e.r.d, 0) : "not compared"}` +
       ((e.l && e.l.out) || (e.r && e.r.out) ? ", stands out" : "");
     const svg = s("svg", { width: W, height: H, viewBox: `0 0 ${W} ${H}`, class: "chart glyph-tile", role: "img", "aria-label": label });
-    svg.appendChild(s("rect", { x: 0.5, y: 0.5, width: W - 1, height: H - 1, rx: 6, class: "tile-bg" }));
+    svg.appendChild(s("rect", { x: 0.5, y: 0.5, width: W - 1, height: H - 1, class: "tile-bg" }));
     [[e.l, 2], [e.r, W - band - 2]].forEach(([x, bx]) => {
-      svg.appendChild(s("rect", { x: bx, y: 2, width: band, height: H - 4, rx: 3, class: heat(val(x), A.R) }));
-      if (x && x.out) svg.appendChild(s("rect", { x: bx - 1, y: 1, width: band + 2, height: H - 2, rx: 4, class: "flag-ring", style: x.strong ? "stroke:var(--critical);stroke-width:2" : "stroke-width:2" }));
+      svg.appendChild(s("rect", { x: bx, y: 2, width: band, height: H - 4, class: heat(val(x), A.R) }));
+      if (x && x.out) svg.appendChild(s("rect", { x: bx - 1, y: 1, width: band + 2, height: H - 2, class: "flag-ring", style: x.strong ? "stroke:var(--critical);stroke-width:2" : "stroke-width:2" }));
     });
     svg.appendChild(face.use(e.i, -g.bbox[0], k, (W - inkW) / 2, pad + face.top * k, "glyph-fill"));
     const content = () => {
@@ -427,7 +427,7 @@
       face.glyphs.forEach((g, i) => { if (g.scored && SQA.groupOf(g) === grp && face.ok[i]) idx.push(i); });
       if (!idx.length) return;
       const tiles = h("div", { class: "gm-tiles" });
-      idx.forEach((i) => tiles.appendChild(tile(face, { i, l: bySide.get(i + ":left") || null, r: bySide.get(i + ":right") || null }, A, { h: 58, band: 7, minW: 40 })));
+      idx.forEach((i) => tiles.appendChild(tile(face, { i, l: bySide.get(i + ":left") || null, r: bySide.get(i + ":right") || null }, A, { h: 88, band: 10, minW: 60 })));
       map.appendChild(h("div", { class: "gm-group" }, h("h4", null, label), tiles));
     });
     body.appendChild(map);
@@ -445,15 +445,15 @@
       const n = gr.glyphs.length;
       card.appendChild(h("h4", null, gr.shift ? `${gr.kind.label}: off-centre, ${gr.dir}` : `${gr.kind.label}: ${gr.where} ${gr.dir}`, gr.strong ? h("span", { class: "z-mark" }, "far out") : null));
       const all = n === gr.total && n > 1 ? `All ${n} ${gr.kind.label.toLowerCase()}, ${charList(face, gr.glyphs)},` : n === 1 ? `${face.glyphs[gr.glyphs[0]].char} (${face.glyphs[gr.glyphs[0]].name})` : `${n} of the ${gr.total} ${gr.kind.label.toLowerCase()}, ${charList(face, gr.glyphs)},`;
-      card.appendChild(h("p", null, gr.shift
+      const words = h("p", { class: "card-text" }, gr.shift
         ? `${all} ${n === 1 ? "sits" : "sit"} ${range(gr.offsets)} units per 1000 em further ${gr.dir.replace("shifted ", "")} in ${n === 1 ? "its" : "their"} advance than ${A.against === "library" ? `${catName} usually place ${n === 1 ? "it" : "them"}` : `the model places ${n === 1 ? "it" : "them"}`}: one side is tighter and the other looser by about as much, so the room is right but the ink is off-centre.`
         : [`${all} ${n === 1 ? "is" : "are"} set ${gr.dir} ${onWhere(gr, n)} than ${A.against === "library" ? `${catName} usually set ${n === 1 ? "it" : "them"}` : `the model sets ${n === 1 ? "it" : "them"}`}: ${range(gr.items.map((e) => e.d))} units per 1000 em beyond the font's typical side. `,
-          `${n === 1 ? "It gets" : "They get"} ${gr.dir === "looser" ? "more" : "less"} room than the rest of the font gives its glyphs.`]));
+          `${n === 1 ? "It gets" : "They get"} ${gr.dir === "looser" ? "more" : "less"} room than the rest of the font gives its glyphs.`]);
       const tiles = h("div", { class: "gm-tiles big" });
       gr.glyphs.forEach((i) => {
         const l = bySide.get(i + ":left") || null, rr = bySide.get(i + ":right") || null;
         const cap = (x, name) => (x ? h("span", { class: x.out ? "out-num" : "" }, `${name} ${signed(x.d, 0)}`) : null);
-        tiles.appendChild(h("figure", { class: "tile-fig" }, tile(face, { i, l, r: rr }, A, { h: 84, band: 10, minW: 60 }),
+        tiles.appendChild(h("figure", { class: "tile-fig" }, tile(face, { i, l, r: rr }, A, { h: 150, band: 15, minW: 104 }),
           h("figcaption", null, cap(l, "L"), l && rr ? " · " : null, cap(rr, "R"))));
       });
       card.appendChild(tiles);
@@ -461,6 +461,7 @@
         const top = gr.items[0].i;
         card.appendChild(SQA.explain.contextStrip(face, { i: top }, resOf, `${face.glyphs[top].char} (${face.glyphs[top].name}) among other glyphs`));
       }
+      card.appendChild(words);
       cards.appendChild(card);
     });
     body.appendChild(cards);
@@ -478,30 +479,30 @@
     body.appendChild(h("p", { class: "section-intro" },
       `A pair's gap depends on the two sidebearings and on its kerning. To see the kerning on its own, each pair is measured against the typical pair of its left glyph and of its right glyph${against === "library" ? `, after what ${catName} usually do for that pair` : ""}: whatever a glyph's sidebearing does to all its pairs cancels out, and what is left is how this particular pair is kerned. A pair stands out at ${fmt(K.tau, 0)} units per 1000 em or more. Groups: a glyph with three or more such pairs in one direction.`));
     if (!K.outs.length) { body.appendChild(h("p", { class: "note" }, "No pair stands out: the kerning follows the sidebearings consistently.")); return; }
-    const cards = h("div", { class: "out-cards" });
-    const k = 50 / (face.top - face.bottom);
+    const cards = h("div", { class: "out-cards kern-cards" });
+    const k = 132 / (face.top - face.bottom);
     K.groups.slice(0, 12).forEach((gr) => {
       const g = face.glyphs[gr.glyph];
       const partnerIdx = gr.pairs.map((e) => (gr.role === "left" ? e.b : e.a));
       const card = h("article", { class: "panel out-card" });
       card.appendChild(h("h4", null, gr.role === "left" ? `${named(g)} followed by ${gr.pairs.length} glyphs: ${gr.dir}` : `${gr.pairs.length} glyphs followed by ${named(g)}: ${gr.dir}`));
       const kd = medianOf(gr.pairs.map((e) => e.kd)), km = medianOf(gr.pairs.map((e) => e.km));
-      card.appendChild(h("p", null,
+      const words = h("p", { class: "card-text" },
         `${gr.role === "left" ? `${named(g)} before ${describeGlyphs(face, partnerIdx)}` : `${describeGlyphs(face, partnerIdx)} before ${named(g)}`}: these pairs are set ${fmt(Math.abs(gr.median), 0)} units ${gr.dir} (median) than ${/^[A-Za-z0-9]$/.test(g.char) ? `${g.char}'s other pairs` : `the other pairs of ${named(g)}`} and their partners' other pairs would make them. `,
         `The font kerns them ${signed(kd, 0)} (median) where the model kerns ${signed(km, 0)}. `,
-        gr.dir === "looser" ? "Compared with how the rest of the font is spaced, these pairs are kerned less, or opened more, than expected." : "Compared with how the rest of the font is spaced, these pairs are kerned more than expected."));
+        gr.dir === "looser" ? "Compared with how the rest of the font is spaced, these pairs are kerned less, or opened more, than expected." : "Compared with how the rest of the font is spaced, these pairs are kerned more than expected.");
       // the pairs furthest out, drawn as designed and as the model sets them
-      const ex = gr.pairs.slice(0, 3);
+      const ex = gr.pairs.slice(0, 4);
       const widthU = Math.max(...ex.map((e) => Math.max(face.pairPlace(e.a, e.b, "designer").right, face.pairPlace(e.a, e.b, "best").right)));
       const drawings = h("div", { class: "pair-examples" });
       ex.forEach((e) => {
         drawings.appendChild(h("figure", { class: "pair-example" },
-          h("figcaption", null, h("b", null, face.glyphs[e.a].char + face.glyphs[e.b].char), ` ${signed(e.d, 0)} · kern ${signed(e.kd, 0)} / model ${signed(e.km, 0)}`),
+          h("figcaption", null, h("b", null, face.glyphs[e.a].char + face.glyphs[e.b].char), h("span", null, `${signed(e.d, 0)} · kern ${signed(e.kd, 0)} / model ${signed(e.km, 0)}`)),
           h("div", { class: "pe-row" },
             h("div", null, h("span", { class: "measure-label" }, "As designed"), SQA.explain.pairFigure(face, e, "designer", k, { widthU, label: "as designed" })),
             h("div", null, h("span", { class: "measure-label" }, "Model"), SQA.explain.pairFigure(face, e, "best", k, { widthU, label: "as the model sets it", ghost: "designer" })))));
       });
-      card.appendChild(drawings);
+      card.append(drawings, words);
       const more = h("details", { class: "more-pairs" }, h("summary", null, `Every pair of this group (${gr.pairs.length})`),
         h("div", { class: "table-wrap" }, pairTable(face, gr.pairs)));
       card.appendChild(more);

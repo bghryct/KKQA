@@ -127,7 +127,7 @@
     if (o.xLabel) root.appendChild(s("text", { x: (x0 + x1) / 2, y: H - 6, "text-anchor": "middle", class: "muted-label" }, o.xLabel));
     root.appendChild(s("line", { x1: m.l, x2: W - m.r, y1: H - m.b, y2: H - m.b, class: "axis" }));
     const items = [];
-    const hl = s("rect", { class: "sel", x: -10, y: -10, width: 0, height: 0, rx: 3 });
+    const hl = s("rect", { class: "sel", x: -10, y: -10, width: 0, height: 0 });
     const gap = Math.min(2, (x1 - x0) / nb * 0.2);
     function addBar(xa, xb, n, cls, content, label) {
       const w = Math.max(1, xb - xa - gap);
@@ -189,7 +189,7 @@
     const X = (v) => x0 + (v / max) * (x1 - x0);
     const root = s("svg", { viewBox: `0 0 ${W} ${H}`, class: "chart", role: "img", "aria-label": o.ariaLabel || "Bar chart", width: W, height: H });
     const items = [];
-    const hl = s("rect", { class: "sel", x: -10, y: -10, width: 0, height: 0, rx: 3 });
+    const hl = s("rect", { class: "sel", x: -10, y: -10, width: 0, height: 0 });
     rows.forEach((r, i) => {
       const y = 8 + i * (rowH + gapY);
       root.appendChild(s("text", { x: x0 - 10, y: y + rowH / 2 + 4, "text-anchor": "end", class: "label-strong" }, r.label));

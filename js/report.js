@@ -565,7 +565,7 @@
       const skipped = layouts.designer.skipped;
       skippedEl.textContent = skipped.length ? `Left out (not among the checked glyphs): ${skipped.join(" ")}` : "";
       const maxW = Math.max(1, ...face.spacings.map((sp) => layouts[sp].width));
-      const fontPx = Math.max(24, Math.min(72, (W - 40) / (maxW / face.upm)));
+      const fontPx = Math.max(24, Math.min(144, (W - 40) / (maxW / face.upm)));
       const k = fontPx / face.upm;
       const dW = layouts.designer.width;
       const widthNote = (sp) => {
@@ -695,7 +695,7 @@
       root.appendChild(s("text", { x: mid, y: H - 5, "text-anchor": "middle", class: "tick" }, "0"));
       root.appendChild(s("text", { x: c.x0 + trackW - 2, y: H - 5, "text-anchor": "end", class: "tick" }, signed(R, 0)));
     });
-    const hl = s("rect", { class: "sel", x: -10, y: -10, width: 0, height: 0, rx: 3 });
+    const hl = s("rect", { class: "sel", x: -10, y: -10, width: 0, height: 0 });
     list.forEach((gi, row) => {
       const g = face.glyphs[gi];
       const y = top + row * rowH;
@@ -713,7 +713,7 @@
           root.appendChild(s("line", { x1: lx, x2: lx, y1: y + 1, y2: y + rowH - 1, class: "lib-tick" }));
         }
         if (e.flag) {
-          root.appendChild(s("rect", { x: c.x0 + 1, y: y + 1, width: trackW - 2, height: rowH - 2, rx: 4, class: "flag-ring", style: e.flag === "fail" ? "stroke:var(--critical)" : "" }));
+          root.appendChild(s("rect", { x: c.x0 + 1, y: y + 1, width: trackW - 2, height: rowH - 2, class: "flag-ring", style: e.flag === "fail" ? "stroke:var(--critical)" : "" }));
           const tx = e.v >= 0 ? Math.min(X(e.v) + 4, c.x0 + trackW - 4) : Math.max(X(e.v) - 4, c.x0 + 4);
           root.appendChild(s("text", { x: tx, y: y + rowH / 2 + 4, "text-anchor": e.v >= 0 ? (X(e.v) + 30 > c.x0 + trackW ? "end" : "start") : (X(e.v) - 30 < c.x0 ? "start" : "end"), class: "label-strong", style: "font-size:10.5px" }, e.flag === "fail" ? "✕" : "!"));
         }
@@ -819,7 +819,7 @@
     const valueOf = (e) => (st.rel === "library" ? e.diff : e.res);
 
     // pair drawings share one scale
-    const k = 52 / (face.top - face.bottom);
+    const k = 84 / (face.top - face.bottom);
     const padU = 0.05 * face.upm;
     function pairSvg(e, sp, widthU, ghostSp) {
       const p = face.pairPlace(e.a, e.b, sp);
