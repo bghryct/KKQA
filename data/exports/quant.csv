@@ -2958,11 +2958,12 @@ BJCree,wght@400,/quant/spacing_evenness,13.00
 BJCree,wght@400,/quant/spacing_looseness,0.04
 BJCree,wght@400,/quant/spacing_shape_error,28.20
 BJCree,wght@400,/quant/spacing_sidebearing_error,16.20
-Babylonica,wght@400,/quant/spacing_kerning_correlation,0.44
-Babylonica,wght@400,/quant/spacing_kerning_error,93.50
-Babylonica,wght@400,/quant/spacing_looseness,-6.00
-Babylonica,wght@400,/quant/spacing_shape_error,77.30
-Babylonica,wght@400,/quant/spacing_sidebearing_error,60.60
+Babylonica,wght@400,/quant/spacing_evenness,27.00
+Babylonica,wght@400,/quant/spacing_kerning_correlation,0.79
+Babylonica,wght@400,/quant/spacing_kerning_error,93.00
+Babylonica,wght@400,/quant/spacing_looseness,0.04
+Babylonica,wght@400,/quant/spacing_shape_error,67.80
+Babylonica,wght@400,/quant/spacing_sidebearing_error,63.30
 Bacasime Antique,wght@400,/quant/spacing_evenness,3.00
 Bacasime Antique,wght@400,/quant/spacing_looseness,0.11
 Bacasime Antique,wght@400,/quant/spacing_shape_error,38.70
@@ -3355,11 +3356,11 @@ Be Vietnam Pro,wght@400,/quant/spacing_kerning_error,15.50
 Be Vietnam Pro,wght@400,/quant/spacing_looseness,0.20
 Be Vietnam Pro,wght@400,/quant/spacing_shape_error,33.00
 Be Vietnam Pro,wght@400,/quant/spacing_sidebearing_error,19.70
-Beau Rivage,wght@400,/quant/spacing_kerning_correlation,0.18
-Beau Rivage,wght@400,/quant/spacing_kerning_error,78.00
+Beau Rivage,wght@400,/quant/spacing_kerning_correlation,0.77
+Beau Rivage,wght@400,/quant/spacing_kerning_error,56.40
 Beau Rivage,wght@400,/quant/spacing_looseness,-6.00
-Beau Rivage,wght@400,/quant/spacing_shape_error,83.90
-Beau Rivage,wght@400,/quant/spacing_sidebearing_error,65.20
+Beau Rivage,wght@400,/quant/spacing_shape_error,63.80
+Beau Rivage,wght@400,/quant/spacing_sidebearing_error,64.30
 Bebas Neue,wght@400,/quant/spacing_evenness,68.00
 Bebas Neue,wght@400,/quant/spacing_kerning_correlation,0.81
 Bebas Neue,wght@400,/quant/spacing_kerning_error,14.20
@@ -5053,9 +5054,10 @@ Bonbon,wght@400,/quant/spacing_evenness,75.00
 Bonbon,wght@400,/quant/spacing_looseness,-0.25
 Bonbon,wght@400,/quant/spacing_shape_error,28.40
 Bonbon,wght@400,/quant/spacing_sidebearing_error,15.90
-Bonheur Royale,wght@400,/quant/spacing_looseness,-6.00
-Bonheur Royale,wght@400,/quant/spacing_shape_error,82.70
-Bonheur Royale,wght@400,/quant/spacing_sidebearing_error,68.00
+Bonheur Royale,wght@400,/quant/spacing_evenness,32.00
+Bonheur Royale,wght@400,/quant/spacing_looseness,-1.32
+Bonheur Royale,wght@400,/quant/spacing_shape_error,63.30
+Bonheur Royale,wght@400,/quant/spacing_sidebearing_error,56.40
 Boogaloo,wght@400,/quant/spacing_evenness,20.00
 Boogaloo,wght@400,/quant/spacing_kerning_correlation,0.86
 Boogaloo,wght@400,/quant/spacing_kerning_error,21.60
@@ -5815,11 +5817,11 @@ Chelsea Market,wght@400,/quant/spacing_evenness,31.00
 Chelsea Market,wght@400,/quant/spacing_looseness,-0.14
 Chelsea Market,wght@400,/quant/spacing_shape_error,25.30
 Chelsea Market,wght@400,/quant/spacing_sidebearing_error,15.00
-Cherish,wght@400,/quant/spacing_kerning_correlation,0.37
-Cherish,wght@400,/quant/spacing_kerning_error,94.00
+Cherish,wght@400,/quant/spacing_kerning_correlation,0.78
+Cherish,wght@400,/quant/spacing_kerning_error,96.10
 Cherish,wght@400,/quant/spacing_looseness,-6.00
-Cherish,wght@400,/quant/spacing_shape_error,110.30
-Cherish,wght@400,/quant/spacing_sidebearing_error,95.20
+Cherish,wght@400,/quant/spacing_shape_error,96.10
+Cherish,wght@400,/quant/spacing_sidebearing_error,93.10
 Cherry Bomb One,wght@400,/quant/spacing_evenness,16.00
 Cherry Bomb One,wght@400,/quant/spacing_kerning_correlation,0.73
 Cherry Bomb One,wght@400,/quant/spacing_kerning_error,34.20
@@ -8110,11 +8112,12 @@ Enriqueta,wght@400,/quant/spacing_kerning_error,16.80
 Enriqueta,wght@400,/quant/spacing_looseness,0.22
 Enriqueta,wght@400,/quant/spacing_shape_error,16.50
 Enriqueta,wght@400,/quant/spacing_sidebearing_error,10.20
-Ephesis,wght@400,/quant/spacing_kerning_correlation,0.63
-Ephesis,wght@400,/quant/spacing_kerning_error,83.00
-Ephesis,wght@400,/quant/spacing_looseness,-6.00
-Ephesis,wght@400,/quant/spacing_shape_error,86.20
-Ephesis,wght@400,/quant/spacing_sidebearing_error,73.20
+Ephesis,wght@400,/quant/spacing_evenness,18.00
+Ephesis,wght@400,/quant/spacing_kerning_correlation,0.64
+Ephesis,wght@400,/quant/spacing_kerning_error,116.20
+Ephesis,wght@400,/quant/spacing_looseness,-0.93
+Ephesis,wght@400,/quant/spacing_shape_error,76.20
+Ephesis,wght@400,/quant/spacing_sidebearing_error,67.80
 Epilogue,"ital,wght@1,100",/quant/spacing_kerning_correlation,0.61
 Epilogue,"ital,wght@1,100",/quant/spacing_looseness,-0.25
 Epilogue,"ital,wght@1,100",/quant/spacing_shape_error,27.60
@@ -8712,10 +8715,10 @@ Federo,wght@400,/quant/spacing_kerning_error,16.00
 Federo,wght@400,/quant/spacing_looseness,-0.13
 Federo,wght@400,/quant/spacing_shape_error,14.10
 Federo,wght@400,/quant/spacing_sidebearing_error,6.90
-Felipa,wght@400,/quant/spacing_evenness,12.00
-Felipa,wght@400,/quant/spacing_looseness,-0.98
-Felipa,wght@400,/quant/spacing_shape_error,53.50
-Felipa,wght@400,/quant/spacing_sidebearing_error,35.60
+Felipa,wght@400,/quant/spacing_evenness,67.00
+Felipa,wght@400,/quant/spacing_looseness,-1.15
+Felipa,wght@400,/quant/spacing_shape_error,42.40
+Felipa,wght@400,/quant/spacing_sidebearing_error,27.60
 Fenix,wght@400,/quant/spacing_evenness,98.00
 Fenix,wght@400,/quant/spacing_kerning_correlation,0.73
 Fenix,wght@400,/quant/spacing_kerning_error,14.90
@@ -11185,11 +11188,12 @@ Grenze,wght@900,/quant/spacing_kerning_correlation,0.92
 Grenze,wght@900,/quant/spacing_looseness,0.22
 Grenze,wght@900,/quant/spacing_shape_error,18.90
 Grenze,wght@900,/quant/spacing_sidebearing_error,9.70
-Grey Qo,wght@400,/quant/spacing_kerning_correlation,0.27
-Grey Qo,wght@400,/quant/spacing_kerning_error,68.90
-Grey Qo,wght@400,/quant/spacing_looseness,-6.00
-Grey Qo,wght@400,/quant/spacing_shape_error,61.90
-Grey Qo,wght@400,/quant/spacing_sidebearing_error,65.50
+Grey Qo,wght@400,/quant/spacing_evenness,38.00
+Grey Qo,wght@400,/quant/spacing_kerning_correlation,0.33
+Grey Qo,wght@400,/quant/spacing_kerning_error,47.50
+Grey Qo,wght@400,/quant/spacing_looseness,-2.34
+Grey Qo,wght@400,/quant/spacing_shape_error,56.10
+Grey Qo,wght@400,/quant/spacing_sidebearing_error,65.00
 Griffy,wght@400,/quant/spacing_looseness,-6.00
 Griffy,wght@400,/quant/spacing_shape_error,49.20
 Griffy,wght@400,/quant/spacing_sidebearing_error,34.40
@@ -12171,12 +12175,12 @@ Indie Flower,wght@400,/quant/spacing_evenness,66.00
 Indie Flower,wght@400,/quant/spacing_looseness,-0.52
 Indie Flower,wght@400,/quant/spacing_shape_error,30.90
 Indie Flower,wght@400,/quant/spacing_sidebearing_error,18.00
-Ingrid Darling,wght@400,/quant/spacing_evenness,13.00
-Ingrid Darling,wght@400,/quant/spacing_kerning_correlation,0.28
-Ingrid Darling,wght@400,/quant/spacing_kerning_error,72.30
-Ingrid Darling,wght@400,/quant/spacing_looseness,-2.72
-Ingrid Darling,wght@400,/quant/spacing_shape_error,53.20
-Ingrid Darling,wght@400,/quant/spacing_sidebearing_error,36.80
+Ingrid Darling,wght@400,/quant/spacing_evenness,75.00
+Ingrid Darling,wght@400,/quant/spacing_kerning_correlation,0.89
+Ingrid Darling,wght@400,/quant/spacing_kerning_error,48.10
+Ingrid Darling,wght@400,/quant/spacing_looseness,-0.09
+Ingrid Darling,wght@400,/quant/spacing_shape_error,37.90
+Ingrid Darling,wght@400,/quant/spacing_sidebearing_error,30.30
 Inika,wght@400,/quant/spacing_evenness,16.00
 Inika,wght@400,/quant/spacing_kerning_correlation,0.92
 Inika,wght@400,/quant/spacing_kerning_error,18.40
@@ -12201,11 +12205,12 @@ Inria Serif,wght@400,/quant/spacing_kerning_error,18.00
 Inria Serif,wght@400,/quant/spacing_looseness,0.27
 Inria Serif,wght@400,/quant/spacing_shape_error,20.40
 Inria Serif,wght@400,/quant/spacing_sidebearing_error,12.40
-Inspiration,wght@400,/quant/spacing_kerning_correlation,0.66
-Inspiration,wght@400,/quant/spacing_kerning_error,78.20
-Inspiration,wght@400,/quant/spacing_looseness,-6.00
-Inspiration,wght@400,/quant/spacing_shape_error,76.70
-Inspiration,wght@400,/quant/spacing_sidebearing_error,57.70
+Inspiration,wght@400,/quant/spacing_evenness,32.00
+Inspiration,wght@400,/quant/spacing_kerning_correlation,0.94
+Inspiration,wght@400,/quant/spacing_kerning_error,37.70
+Inspiration,wght@400,/quant/spacing_looseness,0.05
+Inspiration,wght@400,/quant/spacing_shape_error,62.60
+Inspiration,wght@400,/quant/spacing_sidebearing_error,56.80
 Instrument Sans,"ital,wdth,wght@1,75,400",/quant/spacing_kerning_correlation,0.56
 Instrument Sans,"ital,wdth,wght@1,75,400",/quant/spacing_looseness,0.31
 Instrument Sans,"ital,wdth,wght@1,75,400",/quant/spacing_shape_error,14.60
@@ -13249,11 +13254,12 @@ Koh Santepheap,wght@400,/quant/spacing_evenness,37.00
 Koh Santepheap,wght@400,/quant/spacing_looseness,0.22
 Koh Santepheap,wght@400,/quant/spacing_shape_error,22.90
 Koh Santepheap,wght@400,/quant/spacing_sidebearing_error,12.30
-Kolker Brush,wght@400,/quant/spacing_kerning_correlation,0.61
-Kolker Brush,wght@400,/quant/spacing_kerning_error,46.30
-Kolker Brush,wght@400,/quant/spacing_looseness,-6.00
-Kolker Brush,wght@400,/quant/spacing_shape_error,65.20
-Kolker Brush,wght@400,/quant/spacing_sidebearing_error,62.90
+Kolker Brush,wght@400,/quant/spacing_evenness,33.00
+Kolker Brush,wght@400,/quant/spacing_kerning_correlation,0.87
+Kolker Brush,wght@400,/quant/spacing_kerning_error,100.60
+Kolker Brush,wght@400,/quant/spacing_looseness,-0.82
+Kolker Brush,wght@400,/quant/spacing_shape_error,60.70
+Kolker Brush,wght@400,/quant/spacing_sidebearing_error,56.80
 Konkhmer Sleokchher,wght@400,/quant/spacing_evenness,27.00
 Konkhmer Sleokchher,wght@400,/quant/spacing_looseness,0.62
 Konkhmer Sleokchher,wght@400,/quant/spacing_shape_error,26.10
@@ -13475,10 +13481,10 @@ LXGW WenKai TC,wght@400,/quant/spacing_evenness,80.00
 LXGW WenKai TC,wght@400,/quant/spacing_looseness,0.17
 LXGW WenKai TC,wght@400,/quant/spacing_shape_error,27.00
 LXGW WenKai TC,wght@400,/quant/spacing_sidebearing_error,15.50
-La Belle Aurore,wght@400,/quant/spacing_evenness,2.00
-La Belle Aurore,wght@400,/quant/spacing_looseness,-1.72
-La Belle Aurore,wght@400,/quant/spacing_shape_error,66.00
-La Belle Aurore,wght@400,/quant/spacing_sidebearing_error,39.50
+La Belle Aurore,wght@400,/quant/spacing_evenness,34.00
+La Belle Aurore,wght@400,/quant/spacing_looseness,0.82
+La Belle Aurore,wght@400,/quant/spacing_shape_error,58.50
+La Belle Aurore,wght@400,/quant/spacing_sidebearing_error,47.20
 Labrada,"ital,wght@1,100",/quant/spacing_kerning_correlation,0.73
 Labrada,"ital,wght@1,100",/quant/spacing_looseness,0.04
 Labrada,"ital,wght@1,100",/quant/spacing_shape_error,25.40
@@ -14209,12 +14215,12 @@ Libre Franklin,wght@900,/quant/spacing_kerning_correlation,0.86
 Libre Franklin,wght@900,/quant/spacing_looseness,0.39
 Libre Franklin,wght@900,/quant/spacing_shape_error,15.20
 Libre Franklin,wght@900,/quant/spacing_sidebearing_error,9.40
-Licorice,wght@400,/quant/spacing_evenness,7.00
-Licorice,wght@400,/quant/spacing_kerning_correlation,0.33
-Licorice,wght@400,/quant/spacing_kerning_error,40.10
-Licorice,wght@400,/quant/spacing_looseness,-1.34
-Licorice,wght@400,/quant/spacing_shape_error,59.00
-Licorice,wght@400,/quant/spacing_sidebearing_error,46.90
+Licorice,wght@400,/quant/spacing_evenness,38.00
+Licorice,wght@400,/quant/spacing_kerning_correlation,0.47
+Licorice,wght@400,/quant/spacing_kerning_error,73.00
+Licorice,wght@400,/quant/spacing_looseness,-0.22
+Licorice,wght@400,/quant/spacing_shape_error,56.10
+Licorice,wght@400,/quant/spacing_sidebearing_error,49.50
 Life Savers,wght@400,/quant/spacing_evenness,48.00
 Life Savers,wght@400,/quant/spacing_kerning_correlation,0.81
 Life Savers,wght@400,/quant/spacing_kerning_error,26.30
@@ -14451,11 +14457,12 @@ Lora,wght@700,/quant/spacing_kerning_correlation,0.78
 Lora,wght@700,/quant/spacing_looseness,0.39
 Lora,wght@700,/quant/spacing_shape_error,18.10
 Lora,wght@700,/quant/spacing_sidebearing_error,11.20
-Love Light,wght@400,/quant/spacing_kerning_correlation,0.00
-Love Light,wght@400,/quant/spacing_kerning_error,68.90
-Love Light,wght@400,/quant/spacing_looseness,-6.00
-Love Light,wght@400,/quant/spacing_shape_error,95.50
-Love Light,wght@400,/quant/spacing_sidebearing_error,69.30
+Love Light,wght@400,/quant/spacing_evenness,18.00
+Love Light,wght@400,/quant/spacing_kerning_correlation,-0.95
+Love Light,wght@400,/quant/spacing_kerning_error,29.80
+Love Light,wght@400,/quant/spacing_looseness,-3.97
+Love Light,wght@400,/quant/spacing_shape_error,76.20
+Love Light,wght@400,/quant/spacing_sidebearing_error,56.50
 Love Ya Like A Sister,wght@400,/quant/spacing_evenness,33.00
 Love Ya Like A Sister,wght@400,/quant/spacing_looseness,-0.79
 Love Ya Like A Sister,wght@400,/quant/spacing_shape_error,24.90
@@ -16003,11 +16010,11 @@ Mrs Saint Delafield,wght@400,/quant/spacing_kerning_error,89.30
 Mrs Saint Delafield,wght@400,/quant/spacing_looseness,-0.04
 Mrs Saint Delafield,wght@400,/quant/spacing_shape_error,84.80
 Mrs Saint Delafield,wght@400,/quant/spacing_sidebearing_error,84.80
-Mrs Sheppards,wght@400,/quant/spacing_kerning_correlation,0.05
-Mrs Sheppards,wght@400,/quant/spacing_kerning_error,81.60
+Mrs Sheppards,wght@400,/quant/spacing_kerning_correlation,0.79
+Mrs Sheppards,wght@400,/quant/spacing_kerning_error,69.60
 Mrs Sheppards,wght@400,/quant/spacing_looseness,-6.00
-Mrs Sheppards,wght@400,/quant/spacing_shape_error,102.40
-Mrs Sheppards,wght@400,/quant/spacing_sidebearing_error,100.50
+Mrs Sheppards,wght@400,/quant/spacing_shape_error,76.40
+Mrs Sheppards,wght@400,/quant/spacing_sidebearing_error,63.80
 Ms Madi,wght@400,/quant/spacing_evenness,54.00
 Ms Madi,wght@400,/quant/spacing_kerning_correlation,0.81
 Ms Madi,wght@400,/quant/spacing_kerning_error,48.50
@@ -16224,11 +16231,12 @@ MuseoModerno,wght@900,/quant/spacing_kerning_correlation,0.56
 MuseoModerno,wght@900,/quant/spacing_looseness,0.17
 MuseoModerno,wght@900,/quant/spacing_shape_error,16.40
 MuseoModerno,wght@900,/quant/spacing_sidebearing_error,9.20
-My Soul,wght@400,/quant/spacing_kerning_correlation,0.16
-My Soul,wght@400,/quant/spacing_kerning_error,129.80
-My Soul,wght@400,/quant/spacing_looseness,-6.00
-My Soul,wght@400,/quant/spacing_shape_error,114.50
-My Soul,wght@400,/quant/spacing_sidebearing_error,107.00
+My Soul,wght@400,/quant/spacing_evenness,18.00
+My Soul,wght@400,/quant/spacing_kerning_correlation,0.63
+My Soul,wght@400,/quant/spacing_kerning_error,81.70
+My Soul,wght@400,/quant/spacing_looseness,-0.61
+My Soul,wght@400,/quant/spacing_shape_error,77.20
+My Soul,wght@400,/quant/spacing_sidebearing_error,59.70
 Mynerve,wght@400,/quant/spacing_evenness,47.00
 Mynerve,wght@400,/quant/spacing_kerning_correlation,0.48
 Mynerve,wght@400,/quant/spacing_kerning_error,34.40
@@ -21619,11 +21627,12 @@ Onest,wght@900,/quant/spacing_kerning_correlation,0.81
 Onest,wght@900,/quant/spacing_looseness,0.24
 Onest,wght@900,/quant/spacing_shape_error,18.10
 Onest,wght@900,/quant/spacing_sidebearing_error,9.70
-Oooh Baby,wght@400,/quant/spacing_kerning_correlation,0.57
-Oooh Baby,wght@400,/quant/spacing_kerning_error,112.80
-Oooh Baby,wght@400,/quant/spacing_looseness,-6.00
-Oooh Baby,wght@400,/quant/spacing_shape_error,66.80
-Oooh Baby,wght@400,/quant/spacing_sidebearing_error,74.40
+Oooh Baby,wght@400,/quant/spacing_evenness,32.00
+Oooh Baby,wght@400,/quant/spacing_kerning_correlation,0.64
+Oooh Baby,wght@400,/quant/spacing_kerning_error,129.90
+Oooh Baby,wght@400,/quant/spacing_looseness,-0.52
+Oooh Baby,wght@400,/quant/spacing_shape_error,63.20
+Oooh Baby,wght@400,/quant/spacing_sidebearing_error,79.20
 Open Sans,"ital,wdth,wght@1,75,300",/quant/spacing_looseness,-0.09
 Open Sans,"ital,wdth,wght@1,75,300",/quant/spacing_shape_error,18.00
 Open Sans,"ital,wdth,wght@1,75,300",/quant/spacing_sidebearing_error,12.70
@@ -24398,10 +24407,10 @@ Public Sans,wght@900,/quant/spacing_kerning_correlation,0.73
 Public Sans,wght@900,/quant/spacing_looseness,0.76
 Public Sans,wght@900,/quant/spacing_shape_error,19.70
 Public Sans,wght@900,/quant/spacing_sidebearing_error,10.90
-Puppies Play,wght@400,/quant/spacing_evenness,15.00
-Puppies Play,wght@400,/quant/spacing_looseness,-2.29
-Puppies Play,wght@400,/quant/spacing_shape_error,49.30
-Puppies Play,wght@400,/quant/spacing_sidebearing_error,33.50
+Puppies Play,wght@400,/quant/spacing_evenness,77.00
+Puppies Play,wght@400,/quant/spacing_looseness,-1.20
+Puppies Play,wght@400,/quant/spacing_shape_error,37.50
+Puppies Play,wght@400,/quant/spacing_sidebearing_error,25.60
 Puritan,wght@400,/quant/spacing_evenness,11.00
 Puritan,wght@400,/quant/spacing_looseness,0.14
 Puritan,wght@400,/quant/spacing_shape_error,27.40
@@ -26389,12 +26398,11 @@ Rokkitt,wght@900,/quant/spacing_kerning_correlation,0.61
 Rokkitt,wght@900,/quant/spacing_looseness,0.26
 Rokkitt,wght@900,/quant/spacing_shape_error,16.70
 Rokkitt,wght@900,/quant/spacing_sidebearing_error,8.50
-Romanesco,wght@400,/quant/spacing_evenness,57.00
-Romanesco,wght@400,/quant/spacing_kerning_correlation,0.58
-Romanesco,wght@400,/quant/spacing_kerning_error,33.20
-Romanesco,wght@400,/quant/spacing_looseness,-0.51
-Romanesco,wght@400,/quant/spacing_shape_error,33.60
-Romanesco,wght@400,/quant/spacing_sidebearing_error,51.10
+Romanesco,wght@400,/quant/spacing_kerning_correlation,0.09
+Romanesco,wght@400,/quant/spacing_kerning_error,33.80
+Romanesco,wght@400,/quant/spacing_looseness,-6.00
+Romanesco,wght@400,/quant/spacing_shape_error,40.00
+Romanesco,wght@400,/quant/spacing_sidebearing_error,51.70
 Ropa Sans,wght@400,/quant/spacing_evenness,73.00
 Ropa Sans,wght@400,/quant/spacing_kerning_correlation,0.79
 Ropa Sans,wght@400,/quant/spacing_kerning_error,15.70
@@ -26449,11 +26457,11 @@ Rosarivo,wght@400,/quant/spacing_kerning_error,26.60
 Rosarivo,wght@400,/quant/spacing_looseness,0.29
 Rosarivo,wght@400,/quant/spacing_shape_error,25.30
 Rosarivo,wght@400,/quant/spacing_sidebearing_error,15.60
-Rouge Script,wght@400,/quant/spacing_evenness,11.00
-Rouge Script,wght@400,/quant/spacing_kerning_error,38.60
-Rouge Script,wght@400,/quant/spacing_looseness,-0.99
-Rouge Script,wght@400,/quant/spacing_shape_error,54.30
-Rouge Script,wght@400,/quant/spacing_sidebearing_error,48.40
+Rouge Script,wght@400,/quant/spacing_evenness,54.00
+Rouge Script,wght@400,/quant/spacing_kerning_error,27.60
+Rouge Script,wght@400,/quant/spacing_looseness,-1.66
+Rouge Script,wght@400,/quant/spacing_shape_error,48.80
+Rouge Script,wght@400,/quant/spacing_sidebearing_error,43.00
 Rowdies,wght@400,/quant/spacing_evenness,60.00
 Rowdies,wght@400,/quant/spacing_kerning_correlation,0.72
 Rowdies,wght@400,/quant/spacing_kerning_error,26.30
@@ -26708,11 +26716,12 @@ Russo One,wght@400,/quant/spacing_kerning_error,15.10
 Russo One,wght@400,/quant/spacing_looseness,-0.10
 Russo One,wght@400,/quant/spacing_shape_error,13.50
 Russo One,wght@400,/quant/spacing_sidebearing_error,9.00
-Ruthie,wght@400,/quant/spacing_kerning_correlation,0.44
-Ruthie,wght@400,/quant/spacing_kerning_error,100.50
-Ruthie,wght@400,/quant/spacing_looseness,-6.00
-Ruthie,wght@400,/quant/spacing_shape_error,84.10
-Ruthie,wght@400,/quant/spacing_sidebearing_error,59.70
+Ruthie,wght@400,/quant/spacing_evenness,32.00
+Ruthie,wght@400,/quant/spacing_kerning_correlation,0.71
+Ruthie,wght@400,/quant/spacing_kerning_error,63.10
+Ruthie,wght@400,/quant/spacing_looseness,-2.71
+Ruthie,wght@400,/quant/spacing_shape_error,62.10
+Ruthie,wght@400,/quant/spacing_sidebearing_error,40.30
 Ruwudu,wght@400,/quant/spacing_evenness,24.00
 Ruwudu,wght@400,/quant/spacing_looseness,0.39
 Ruwudu,wght@400,/quant/spacing_shape_error,25.20
@@ -28165,11 +28174,11 @@ Smooch Sans,wght@900,/quant/spacing_kerning_correlation,0.83
 Smooch Sans,wght@900,/quant/spacing_looseness,-0.24
 Smooch Sans,wght@900,/quant/spacing_shape_error,26.90
 Smooch Sans,wght@900,/quant/spacing_sidebearing_error,17.40
-Smooch,wght@400,/quant/spacing_kerning_correlation,0.49
-Smooch,wght@400,/quant/spacing_kerning_error,65.70
+Smooch,wght@400,/quant/spacing_kerning_correlation,0.55
+Smooch,wght@400,/quant/spacing_kerning_error,63.00
 Smooch,wght@400,/quant/spacing_looseness,-6.00
-Smooch,wght@400,/quant/spacing_shape_error,80.40
-Smooch,wght@400,/quant/spacing_sidebearing_error,82.20
+Smooch,wght@400,/quant/spacing_shape_error,78.20
+Smooch,wght@400,/quant/spacing_sidebearing_error,79.30
 Smythe,wght@400,/quant/spacing_evenness,89.00
 Smythe,wght@400,/quant/spacing_kerning_correlation,0.59
 Smythe,wght@400,/quant/spacing_kerning_error,14.20
@@ -28994,11 +29003,11 @@ Spirax,wght@400,/quant/spacing_kerning_error,21.90
 Spirax,wght@400,/quant/spacing_looseness,-0.44
 Spirax,wght@400,/quant/spacing_shape_error,19.10
 Spirax,wght@400,/quant/spacing_sidebearing_error,12.30
-Splash,wght@400,/quant/spacing_kerning_correlation,0.31
-Splash,wght@400,/quant/spacing_kerning_error,136.90
+Splash,wght@400,/quant/spacing_kerning_correlation,0.59
+Splash,wght@400,/quant/spacing_kerning_error,96.40
 Splash,wght@400,/quant/spacing_looseness,-6.00
-Splash,wght@400,/quant/spacing_shape_error,109.50
-Splash,wght@400,/quant/spacing_sidebearing_error,98.30
+Splash,wght@400,/quant/spacing_shape_error,84.10
+Splash,wght@400,/quant/spacing_sidebearing_error,102.40
 Spline Sans,wght@300,/quant/spacing_kerning_correlation,0.58
 Spline Sans,wght@300,/quant/spacing_looseness,-0.04
 Spline Sans,wght@300,/quant/spacing_shape_error,21.90
@@ -29131,11 +29140,12 @@ Stack Sans Text,wght@700,/quant/spacing_kerning_correlation,0.64
 Stack Sans Text,wght@700,/quant/spacing_looseness,0.37
 Stack Sans Text,wght@700,/quant/spacing_shape_error,19.20
 Stack Sans Text,wght@700,/quant/spacing_sidebearing_error,10.30
-Stalemate,wght@400,/quant/spacing_kerning_correlation,0.31
-Stalemate,wght@400,/quant/spacing_kerning_error,113.00
-Stalemate,wght@400,/quant/spacing_looseness,-6.00
-Stalemate,wght@400,/quant/spacing_shape_error,70.20
-Stalemate,wght@400,/quant/spacing_sidebearing_error,47.70
+Stalemate,wght@400,/quant/spacing_evenness,66.00
+Stalemate,wght@400,/quant/spacing_kerning_correlation,0.84
+Stalemate,wght@400,/quant/spacing_kerning_error,50.70
+Stalemate,wght@400,/quant/spacing_looseness,-0.81
+Stalemate,wght@400,/quant/spacing_shape_error,42.70
+Stalemate,wght@400,/quant/spacing_sidebearing_error,23.60
 Stalinist One,wght@400,/quant/spacing_evenness,26.00
 Stalinist One,wght@400,/quant/spacing_kerning_correlation,0.74
 Stalinist One,wght@400,/quant/spacing_kerning_error,86.80
@@ -29653,11 +29663,11 @@ The Girl Next Door,wght@400,/quant/spacing_evenness,42.00
 The Girl Next Door,wght@400,/quant/spacing_looseness,-0.29
 The Girl Next Door,wght@400,/quant/spacing_shape_error,37.30
 The Girl Next Door,wght@400,/quant/spacing_sidebearing_error,22.10
-The Nautigal,wght@400,/quant/spacing_kerning_correlation,-0.19
-The Nautigal,wght@400,/quant/spacing_kerning_error,88.50
+The Nautigal,wght@400,/quant/spacing_kerning_correlation,0.83
+The Nautigal,wght@400,/quant/spacing_kerning_error,73.00
 The Nautigal,wght@400,/quant/spacing_looseness,-6.00
-The Nautigal,wght@400,/quant/spacing_shape_error,79.00
-The Nautigal,wght@400,/quant/spacing_sidebearing_error,66.90
+The Nautigal,wght@400,/quant/spacing_shape_error,67.80
+The Nautigal,wght@400,/quant/spacing_sidebearing_error,64.70
 Tienne,wght@400,/quant/spacing_evenness,18.00
 Tienne,wght@400,/quant/spacing_kerning_correlation,0.97
 Tienne,wght@400,/quant/spacing_kerning_error,27.20
@@ -30926,11 +30936,12 @@ Warnes,wght@400,/quant/spacing_kerning_error,115.80
 Warnes,wght@400,/quant/spacing_looseness,1.52
 Warnes,wght@400,/quant/spacing_shape_error,79.30
 Warnes,wght@400,/quant/spacing_sidebearing_error,83.10
-Water Brush,wght@400,/quant/spacing_kerning_correlation,0.18
-Water Brush,wght@400,/quant/spacing_kerning_error,104.20
-Water Brush,wght@400,/quant/spacing_looseness,-6.00
-Water Brush,wght@400,/quant/spacing_shape_error,79.60
-Water Brush,wght@400,/quant/spacing_sidebearing_error,71.20
+Water Brush,wght@400,/quant/spacing_evenness,18.00
+Water Brush,wght@400,/quant/spacing_kerning_correlation,0.45
+Water Brush,wght@400,/quant/spacing_kerning_error,92.80
+Water Brush,wght@400,/quant/spacing_looseness,-0.06
+Water Brush,wght@400,/quant/spacing_shape_error,76.80
+Water Brush,wght@400,/quant/spacing_sidebearing_error,85.80
 Waterfall,wght@400,/quant/spacing_evenness,56.00
 Waterfall,wght@400,/quant/spacing_kerning_error,57.50
 Waterfall,wght@400,/quant/spacing_looseness,-0.85
@@ -30945,11 +30956,12 @@ Wendy One,wght@400,/quant/spacing_kerning_error,1.90
 Wendy One,wght@400,/quant/spacing_looseness,0.18
 Wendy One,wght@400,/quant/spacing_shape_error,15.20
 Wendy One,wght@400,/quant/spacing_sidebearing_error,8.60
-Whisper,wght@400,/quant/spacing_kerning_correlation,0.27
-Whisper,wght@400,/quant/spacing_kerning_error,72.50
-Whisper,wght@400,/quant/spacing_looseness,-6.00
-Whisper,wght@400,/quant/spacing_shape_error,80.50
-Whisper,wght@400,/quant/spacing_sidebearing_error,75.70
+Whisper,wght@400,/quant/spacing_evenness,26.00
+Whisper,wght@400,/quant/spacing_kerning_correlation,0.46
+Whisper,wght@400,/quant/spacing_kerning_error,62.70
+Whisper,wght@400,/quant/spacing_looseness,-1.47
+Whisper,wght@400,/quant/spacing_shape_error,69.30
+Whisper,wght@400,/quant/spacing_sidebearing_error,83.80
 WindSong,wght@400,/quant/spacing_evenness,4.00
 WindSong,wght@400,/quant/spacing_kerning_correlation,0.79
 WindSong,wght@400,/quant/spacing_kerning_error,127.60
@@ -32084,10 +32096,10 @@ Zen Tokyo Zoo,wght@400,/quant/spacing_kerning_error,20.70
 Zen Tokyo Zoo,wght@400,/quant/spacing_looseness,-0.40
 Zen Tokyo Zoo,wght@400,/quant/spacing_shape_error,19.70
 Zen Tokyo Zoo,wght@400,/quant/spacing_sidebearing_error,10.00
-Zeyada,wght@400,/quant/spacing_evenness,54.00
-Zeyada,wght@400,/quant/spacing_looseness,-0.72
-Zeyada,wght@400,/quant/spacing_shape_error,34.00
-Zeyada,wght@400,/quant/spacing_sidebearing_error,19.50
+Zeyada,wght@400,/quant/spacing_evenness,79.00
+Zeyada,wght@400,/quant/spacing_looseness,0.68
+Zeyada,wght@400,/quant/spacing_shape_error,36.20
+Zeyada,wght@400,/quant/spacing_sidebearing_error,24.50
 Zhi Mang Xing,wght@400,/quant/spacing_evenness,67.00
 Zhi Mang Xing,wght@400,/quant/spacing_kerning_correlation,0.52
 Zhi Mang Xing,wght@400,/quant/spacing_kerning_error,38.50

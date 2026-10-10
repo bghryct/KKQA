@@ -1,4 +1,4 @@
-# Spacing QA — WARN: 237 families
+# Spacing QA — WARN: 239 families
 
 Worth a look: spacing far outside the norms of the family's category, a location of its designspace far from how the library's families lose evenness there or apart from its neighbours, or joins broken in the font. Spacing is a designer's choice, so a WARN on spacing is a pointer to the glyph sides, pairs and locations that stand out, not a verdict; a broken join is an error in the font.
 
@@ -90,6 +90,7 @@ Worth a look: spacing far outside the norms of the family's category, a location
 | [Girassol](https://bghryct.github.io/KKQA/#/family/girassol) | Display | loose | +0.28 | 37.4 | `glyph-sides` |  |
 | [Gloock](https://bghryct.github.io/KKQA/#/family/gloock) | Serif | tight | −0.70 | 25.9 | `tightness` |  |
 | [Google Sans Flex](https://bghryct.github.io/KKQA/#/family/google-sans-flex) | Sans Serif | standard | −0.23 | 19.1 | `instances` |  |
+| [Grey Qo](https://bghryct.github.io/KKQA/#/family/grey-qo) | Handwriting | tight | −2.34 | 56.1 | `joins-broken` |  |
 | [Headland One](https://bghryct.github.io/KKQA/#/family/headland-one) | Serif | loose | +0.32 | 42.3 | `evenness` |  |
 | [Henny Penny](https://bghryct.github.io/KKQA/#/family/henny-penny) | Display | standard | −0.37 | 39.5 | `pairs` |  |
 | [Hepta Slab](https://bghryct.github.io/KKQA/#/family/hepta-slab) | Serif | standard | −0.11 | 20.8 | `instances` |  |
@@ -97,7 +98,7 @@ Worth a look: spacing far outside the norms of the family's category, a location
 | [Hurricane](https://bghryct.github.io/KKQA/#/family/hurricane) | Handwriting | loose | −0.26 | 71.7 | `joins-broken` |  |
 | [IM Fell English SC](https://bghryct.github.io/KKQA/#/family/im-fell-english-sc) | Serif | loose | +0.22 | 22.7 | `pairs` |  |
 | [Imperial Script](https://bghryct.github.io/KKQA/#/family/imperial-script) | Handwriting | standard | −0.31 | 73.9 | `joins-broken` |  |
-| [Ingrid Darling](https://bghryct.github.io/KKQA/#/family/ingrid-darling) | Handwriting | tight | −2.72 | 53.2 | `tightness` |  |
+| [Ingrid Darling](https://bghryct.github.io/KKQA/#/family/ingrid-darling) | Handwriting | standard | −0.09 | 37.9 | `joins-broken` |  |
 | [Inter Tight](https://bghryct.github.io/KKQA/#/family/inter-tight) | Sans Serif | tight | −0.45 | 18.4 | `instances` |  |
 | [Irish Grover](https://bghryct.github.io/KKQA/#/family/irish-grover) | Display | tight | −2.08 | 50.0 | `tightness` `evenness` `glyph-sides` |  |
 | [Isometra](https://bghryct.github.io/KKQA/#/family/isometra) | Serif | loose | +1.01 | 27.6 | `tightness` |  |
@@ -111,11 +112,11 @@ Worth a look: spacing far outside the norms of the family's category, a location
 | [Kapakana](https://bghryct.github.io/KKQA/#/family/kapakana) | Handwriting | loose | −0.60 | 88.7 | `joins-broken` | secondary Latin |
 | [Kaushan Script](https://bghryct.github.io/KKQA/#/family/kaushan-script) | Handwriting | loose | +0.22 | 31.8 | `glyph-sides` |  |
 | [Kay Pho Du](https://bghryct.github.io/KKQA/#/family/kay-pho-du) | Serif | loose | +0.36 | 23.7 | `glyph-sides` | secondary Latin |
+| [Kolker Brush](https://bghryct.github.io/KKQA/#/family/kolker-brush) | Handwriting | tight | −0.82 | 60.7 | `joins-broken` |  |
 | [Kotta One](https://bghryct.github.io/KKQA/#/family/kotta-one) | Serif | loose | +0.14 | 31.0 | `glyph-sides` |  |
 | [Kripa](https://bghryct.github.io/KKQA/#/family/kripa) | Sans Serif | standard | −0.11 | 15.7 | `instances` | secondary Latin |
 | [Kristi](https://bghryct.github.io/KKQA/#/family/kristi) | Handwriting | loose | +0.34 | 58.1 | `joins-broken` |  |
 | [Krona One](https://bghryct.github.io/KKQA/#/family/krona-one) | Sans Serif | loose | +0.37 | 36.6 | `evenness` |  |
-| [La Belle Aurore](https://bghryct.github.io/KKQA/#/family/la-belle-aurore) | Handwriting | standard | −1.72 | 66.0 | `glyph-sides` |  |
 | [Lancelot](https://bghryct.github.io/KKQA/#/family/lancelot) | Display | loose | +0.18 | 43.3 | `glyph-sides` `pairs` |  |
 | [Lavishly Yours](https://bghryct.github.io/KKQA/#/family/lavishly-yours) | Handwriting | tight | −0.26 | 51.9 | `joins-broken` |  |
 | [League Script](https://bghryct.github.io/KKQA/#/family/league-script) | Handwriting | standard | −0.60 | 71.7 | `joins-broken` |  |
@@ -146,6 +147,7 @@ Worth a look: spacing far outside the norms of the family's category, a location
 | [Montagu Slab](https://bghryct.github.io/KKQA/#/family/montagu-slab) | Serif | standard | −0.17 | 15.5 | `instances` |  |
 | [MonteCarlo](https://bghryct.github.io/KKQA/#/family/montecarlo) | Handwriting | standard | −0.30 | 68.7 | `joins-broken` |  |
 | [Montenegrin Gothic One](https://bghryct.github.io/KKQA/#/family/montenegrin-gothic-one) | Serif | standard | −0.06 | 23.9 | `glyph-sides` |  |
+| [Mrs Sheppards](https://bghryct.github.io/KKQA/#/family/mrs-sheppards) | Handwriting | loose | −6.00 | 76.4 | `joins-broken` | out of range |
 | [Mystery Quest](https://bghryct.github.io/KKQA/#/family/mystery-quest) | Display | tight | −1.98 | 45.7 | `tightness` `glyph-sides` |  |
 | [Nabla](https://bghryct.github.io/KKQA/#/family/nabla) | Display | loose | +1.89 | 24.6 | `instances` |  |
 | [New Tegomin](https://bghryct.github.io/KKQA/#/family/new-tegomin) | Serif | loose | +0.57 | 66.6 | `evenness` `glyph-sides` | secondary Latin |
@@ -171,7 +173,6 @@ Worth a look: spacing far outside the norms of the family's category, a location
 | [Playwrite NZ](https://bghryct.github.io/KKQA/#/family/playwrite-nz) | Handwriting | standard | +0.08 | 24.2 | `joins-broken` |  |
 | [Pliant](https://bghryct.github.io/KKQA/#/family/pliant) | Sans Serif | standard | −0.05 | 26.1 | `instances` |  |
 | [Plus Jakarta Sans](https://bghryct.github.io/KKQA/#/family/plus-jakarta-sans) | Sans Serif | standard | −0.08 | 20.4 | `instances` |  |
-| [Puppies Play](https://bghryct.github.io/KKQA/#/family/puppies-play) | Handwriting | tight | −2.29 | 49.3 | `glyph-sides` |  |
 | [Qahiri](https://bghryct.github.io/KKQA/#/family/qahiri) | Sans Serif | loose | +0.42 | 21.4 | `glyph-sides` | secondary Latin |
 | [Ramaraja](https://bghryct.github.io/KKQA/#/family/ramaraja) | Serif | loose | +0.04 | 29.5 | `glyph-sides` | secondary Latin |
 | [Ranga](https://bghryct.github.io/KKQA/#/family/ranga) | Display | standard | −1.52 | 34.1 | `glyph-sides` | secondary Latin |
@@ -214,6 +215,7 @@ Worth a look: spacing far outside the norms of the family's category, a location
 | [Tauri](https://bghryct.github.io/KKQA/#/family/tauri) | Sans Serif | loose | +0.74 | 36.5 | `evenness` |  |
 | [Tektur](https://bghryct.github.io/KKQA/#/family/tektur) | Display | tight | −0.65 | 52.4 | `evenness` `glyph-sides` |  |
 | [Text Me One](https://bghryct.github.io/KKQA/#/family/text-me-one) | Sans Serif | tight | −0.30 | 39.5 | `evenness` `glyph-sides` |  |
+| [The Nautigal](https://bghryct.github.io/KKQA/#/family/the-nautigal) | Handwriting | tight | −6.00 | 67.8 | `joins-broken` | out of range |
 | [TikTok Sans](https://bghryct.github.io/KKQA/#/family/tiktok-sans) | Sans Serif | tight | −0.26 | 18.1 | `instances` |  |
 | [Tillana](https://bghryct.github.io/KKQA/#/family/tillana) | Display | standard | −0.10 | 43.6 | `glyph-sides` | secondary Latin |
 | [Tilt Neon](https://bghryct.github.io/KKQA/#/family/tilt-neon) | Display | standard | +0.15 | 20.6 | `instances` |  |
@@ -2977,6 +2979,36 @@ The locations that raise the level: 4 of 90 checked (the family's report lists t
 
 [Full report](https://bghryct.github.io/KKQA/#/family/google-sans-flex) · [Specimen](https://fonts.google.com/specimen/Google+Sans+Flex)
 
+<a id="grey-qo"></a>
+
+## Grey Qo Regular — WARN
+
+Handwriting · `GreyQo-Regular.ttf` · Version 2.010 · checked at weight 400 · baseline 2026-10-09-2340-1163
+
+- INFO `spacing/closest` — Spacing is closest to Kinetikern2's tight preset (Looseness matched to its joined letters, as the plugin does with Keep joins, -2.34; mean distance in units per 1000 em: tight 57.5, standard 64.4, loose 75.7).
+- INFO `spacing/joins` — A connected script (it joins only in part, but where print faces never do: 48 of its 88 pairs of two stem letters (n n, m i, u n …) and 296 of 673 a–z pairs join above the baseline, as set inside words). Its joins are kept, the plugin's default: 100 glyph sides keep their sidebearings and every pair of two joining sides the font's kerning. The model spaces the rest, the scores leave the kept joins out, and the join checker judges the joins (361 of 361 a–z joins kept).
+- **WARN** `spacing/joins-broken` — 3 joins are broken in the font: two joining letters whose strokes do not meet, as a browser sets them inside words (units per 1000 em): ps 13 apart (kern -18 joins it), pp 12 apart (kern -17 joins it), ph 3 apart (kern -8 joins it).
+- INFO `spacing/joins-fragile` — 2 joins' strokes nearly touch, a hairline gap under 3 units per 1000 em (pu 2.4, px 2.9); 46 joins have less than 5 units per 1000 em of room to open (fm 0.0, pk 0.0, pl 0.0, lp 0.3, ep 1.3, rp 1.4, xp 1.5, zh 1.5); 52 joins enclose white that neither letter has, or a changed counter (as, db, dk, ds, ef, es, fj, gf).
+- INFO `spacing/italic` — Its stems lean 19.6° but the font declares no italic angle of 3° or more: it was measured upright, as drawn, the way the plugin measures it (along that slant the shape error would be 53.6 at Looseness -1.04, not clearly better than 56.1 upright).
+- INFO `spacing/tightness` — Overall tightness, from its joined letters: Looseness -2.34 is at the 0th percentile of connected scripts (median -0.43, robust z -2.7).
+- INFO `spacing/evenness` — Shape error 56.1 units per 1000 em (gaps that depart from even spacing of these shapes): 62nd percentile of connected scripts (median 49.5, robust z +0.3).
+- INFO `spacing/glyph-sides` — Sides spaced unusually for connected scripts: © right -272.
+- INFO `spacing/pairs` — 13 pairs are spaced far from how connected scripts usually compare with the model (units per 1000 em, + looser): Dp -286, –f -310, —f -305, Bp -235, ;p -286, :p -289; 18 more, with a glyph side flagged above, count under that side.
+- INFO `spacing/connected` — A connected script: its spacing is compared with the library's other connected scripts and reported, not judged — what the model compares there is mostly swash capitals and punctuation, where it disagrees with script designers by convention. Its joins are judged by the join checker.
+
+| Spacing | Looseness | Distance | Offset | Shape error | Bare model: distance | Shape error |
+|---|---:|---:|---:|---:|---:|---:|
+| tight (closest) | −0.50 | 57.5 | −21.8 | 55.2 | 57.4 | 56.7 |
+| standard | +0.00 | 64.4 | −36.4 | 56.9 | 60.6 | 56.7 |
+| loose | +0.50 | 75.7 | −53.5 | 60.4 | 68.3 | 57.8 |
+| best fit (a connected script: matched to its joined letters) | −2.34 | | | 56.1 |  | 57.8 |
+
+With Kinetikern2's designer harness the model is closer to this font's spacing: shape error 57.8 without it, 56.1 with it (-1.7).
+
+Units per 1000 em. Sidebearing error 65.0 · kerned-pair error 47.5 · kerning correlation 0.33 · 5248 pairs measured.
+
+[Full report](https://bghryct.github.io/KKQA/#/family/grey-qo) · [Specimen](https://fonts.google.com/specimen/Grey+Qo)
+
 <a id="headland-one"></a>
 
 ## Headland One Regular — WARN
@@ -3182,22 +3214,26 @@ Units per 1000 em. Sidebearing error 62.6 · kerned-pair error 66.0 · kerning c
 
 Handwriting · `IngridDarling-Regular.ttf` · Version 1.010; ttfautohint (v1.8.3) · checked at weight 400 · baseline 2026-10-09-2340-1163
 
-- INFO `spacing/closest` — Spacing is closest to Kinetikern2's tight preset (best-fit Looseness -2.72; mean distance in units per 1000 em: tight 49.1, standard 54.0, loose 68.3).
-- INFO `spacing/italic` — Its stems lean 12.3° but the font declares no italic angle of 3° or more: it was measured upright, as drawn, the way the plugin measures it (along that slant the shape error would be 58.5 at Looseness -2.16, not clearly better than 53.2 upright).
-- **WARN** `spacing/tightness` — Overall tightness: Looseness -2.72 is at the 0th percentile of Handwriting fonts (median -0.32, robust z -4.2).
-- INFO `spacing/evenness` — Shape error 53.2 units per 1000 em (gaps that depart from even spacing of these shapes): 87th percentile of Handwriting fonts (median 34.9, robust z +1.7).
-- INFO `spacing/pairs` — 4 pairs are spaced far from how Handwriting fonts usually compare with the model (units per 1000 em, + looser): FH -322, Fr -354, F[ -323, F( -259.
+- INFO `spacing/closest` — Spacing is closest to Kinetikern2's standard preset (Looseness matched to its joined letters, as the plugin does with Keep joins, -0.09; mean distance in units per 1000 em: tight 44.4, standard 40.9, loose 41.0).
+- INFO `spacing/joins` — A connected script (it joins only in part, but where print faces never do: 28 of its 88 pairs of two stem letters (n n, m i, u n …) and 211 of 673 a–z pairs join above the baseline, as set inside words). Its joins are kept, the plugin's default: 97 glyph sides keep their sidebearings and every pair of two joining sides the font's kerning. The model spaces the rest, the scores leave the kept joins out, and the join checker judges the joins (264 of 264 a–z joins kept).
+- **WARN** `spacing/joins-broken` — 2 joins are broken in the font: two joining letters whose strokes do not meet, as a browser sets them inside words (units per 1000 em): dy 12 apart (kern -16 joins it), ay 7 apart (kern -12 joins it).
+- INFO `spacing/joins-fragile` — 51 joins have less than 5 units per 1000 em of room to open (ad 0.0, ak 0.0, ao 0.0, ap 0.0, ax 0.0, bc 0.0, fx 0.0, ln 0.0); 7 joins enclose white that neither letter has, or a changed counter (ee, fj, qf, qg, qp, qy, tb).
+- INFO `spacing/italic` — Its stems lean 12.3° but the font declares no italic angle of 3° or more: it was measured upright, as drawn, the way the plugin measures it (along that slant the shape error would be 50.2 at Looseness +0.21, not clearly better than 37.9 upright).
+- INFO `spacing/tightness` — Overall tightness, from its joined letters: Looseness -0.09 is at the 69th percentile of connected scripts (median -0.43, robust z +0.5).
+- INFO `spacing/evenness` — Shape error 37.9 units per 1000 em (gaps that depart from even spacing of these shapes): 25th percentile of connected scripts (median 49.5, robust z -0.5).
+- INFO `spacing/pairs` — 1 pair is spaced far from how connected scripts usually compare with the model (units per 1000 em, + looser): nv +89.
+- INFO `spacing/connected` — A connected script: its spacing is compared with the library's other connected scripts and reported, not judged — what the model compares there is mostly swash capitals and punctuation, where it disagrees with script designers by convention. Its joins are judged by the join checker.
 
 | Spacing | Looseness | Distance | Offset | Shape error | Bare model: distance | Shape error |
 |---|---:|---:|---:|---:|---:|---:|
-| tight (closest) | −0.50 | 49.1 | −9.3 | 49.5 | 47.1 | 47.1 |
-| standard | +0.00 | 54.0 | −29.8 | 50.3 | 50.6 | 48.5 |
-| loose | +0.50 | 68.3 | −54.9 | 53.8 | 64.1 | 51.3 |
-| best fit | −2.72 | | | 53.2 |  | 50.2 |
+| tight | −0.50 | 44.4 | +26.3 | 36.9 | 45.1 | 34.2 |
+| standard (closest) | +0.00 | 40.9 | +14.6 | 38.2 | 38.4 | 33.6 |
+| loose | +0.50 | 41.0 | +0.5 | 41.0 | 34.2 | 33.7 |
+| best fit (a connected script: matched to its joined letters) | −0.09 | | | 37.9 |  | 33.7 |
 
-With Kinetikern2's designer harness the model is further from this font's spacing: shape error 50.2 without it, 53.2 with it (+3.0).
+With Kinetikern2's designer harness the model is further from this font's spacing: shape error 33.7 without it, 37.9 with it (+4.2).
 
-Units per 1000 em. Sidebearing error 36.8 · kerned-pair error 72.3 · kerning correlation 0.28 · 7744 pairs measured.
+Units per 1000 em. Sidebearing error 30.3 · kerned-pair error 48.1 · kerning correlation 0.89 · 5404 pairs measured.
 
 [Full report](https://bghryct.github.io/KKQA/#/family/ingrid-darling) · [Specimen](https://fonts.google.com/specimen/Ingrid+Darling)
 
@@ -3603,6 +3639,34 @@ Units per 1000 em. Sidebearing error 12.7 · 7744 pairs measured.
 
 [Full report](https://bghryct.github.io/KKQA/#/family/kay-pho-du) · [Specimen](https://fonts.google.com/specimen/Kay+Pho+Du)
 
+<a id="kolker-brush"></a>
+
+## Kolker Brush Regular — WARN
+
+Handwriting · `KolkerBrush-Regular.ttf` · Version 1.010; ttfautohint (v1.8.3) · checked at weight 400 · baseline 2026-10-09-2340-1163
+
+- INFO `spacing/closest` — Spacing is closest to Kinetikern2's tight preset (Looseness matched to its joined letters, as the plugin does with Keep joins, -0.82; mean distance in units per 1000 em: tight 60.2, standard 61.4, loose 64.9).
+- INFO `spacing/joins` — A connected script (it joins only in part, but where print faces never do: 30 of its 88 pairs of two stem letters (n n, m i, u n …) and 255 of 673 a–z pairs join above the baseline, as set inside words). Its joins are kept, the plugin's default: 99 glyph sides keep their sidebearings and every pair of two joining sides the font's kerning. The model spaces the rest, the scores leave the kept joins out, and the join checker judges the joins (275 of 275 a–z joins kept).
+- **WARN** `spacing/joins-broken` — 1 join is broken in the font: two joining letters whose strokes do not meet, as a browser sets them inside words (units per 1000 em): kb 3 apart (kern -8 joins it).
+- INFO `spacing/joins-fragile` — 31 joins have less than 5 units per 1000 em of room to open (ex 0.0, ip 0.0, ll 0.0, mf 0.0, nj 0.0, ob 0.0, qi 0.0, qx 0.0); 18 joins enclose white that neither letter has, or a changed counter (cb, co, ct, ft, kt, lf, lt, qp).
+- INFO `spacing/tightness` — Overall tightness, from its joined letters: Looseness -0.82 is at the 30th percentile of connected scripts (median -0.43, robust z -0.5).
+- INFO `spacing/evenness` — Shape error 60.7 units per 1000 em (gaps that depart from even spacing of these shapes): 67th percentile of connected scripts (median 49.5, robust z +0.5).
+- INFO `spacing/pairs` — 1 pair is spaced far from how connected scripts usually compare with the model (units per 1000 em, + looser): V° -344.
+- INFO `spacing/connected` — A connected script: its spacing is compared with the library's other connected scripts and reported, not judged — what the model compares there is mostly swash capitals and punctuation, where it disagrees with script designers by convention. Its joins are judged by the join checker.
+
+| Spacing | Looseness | Distance | Offset | Shape error | Bare model: distance | Shape error |
+|---|---:|---:|---:|---:|---:|---:|
+| tight (closest) | −0.50 | 60.2 | −12.8 | 60.4 | 58.5 | 58.8 |
+| standard | +0.00 | 61.4 | −22.1 | 60.4 | 57.4 | 58.3 |
+| loose | +0.50 | 64.9 | −33.3 | 61.3 | 57.9 | 58.2 |
+| best fit (a connected script: matched to its joined letters) | −0.82 | | | 60.7 |  | 59.2 |
+
+With Kinetikern2's designer harness the model is further from this font's spacing: shape error 59.2 without it, 60.7 with it (+1.5).
+
+Units per 1000 em. Sidebearing error 56.8 · kerned-pair error 100.6 · kerning correlation 0.87 · 5300 pairs measured.
+
+[Full report](https://bghryct.github.io/KKQA/#/family/kolker-brush) · [Specimen](https://fonts.google.com/specimen/Kolker+Brush)
+
 <a id="kotta-one"></a>
 
 ## Kotta One Regular — WARN
@@ -3717,31 +3781,6 @@ With Kinetikern2's designer harness the model is closer to this font's spacing: 
 Units per 1000 em. Sidebearing error 21.3 · 7744 pairs measured.
 
 [Full report](https://bghryct.github.io/KKQA/#/family/krona-one) · [Specimen](https://fonts.google.com/specimen/Krona+One)
-
-<a id="la-belle-aurore"></a>
-
-## La Belle Aurore Regular — WARN
-
-Handwriting · `LaBelleAurore-Regular.ttf` · Version 1.001 2001 · checked at weight 400 · baseline 2026-10-09-2340-1163
-
-- INFO `spacing/closest` — Spacing is closest to Kinetikern2's standard preset (best-fit Looseness -1.72; mean distance in units per 1000 em: tight 65.1, standard 61.0, loose 62.1).
-- INFO `spacing/tightness` — Overall tightness: Looseness -1.72 is at the 2nd percentile of Handwriting fonts (median -0.32, robust z -2.4).
-- INFO `spacing/evenness` — Shape error 66.0 units per 1000 em (gaps that depart from even spacing of these shapes): 98th percentile of Handwriting fonts (median 34.9, robust z +2.9).
-- **WARN** `spacing/glyph-sides` — 5 glyph sides are spaced far from the norms of Handwriting fonts (units per 1000 em against their median): P right -213, … left +187, L right -173, S right -121, W right -226.
-- INFO `spacing/pairs` — 1 pair is spaced far from how Handwriting fonts usually compare with the model (units per 1000 em, + looser): jr -235; 1 more, with a glyph side flagged above, count under that side.
-
-| Spacing | Looseness | Distance | Offset | Shape error | Bare model: distance | Shape error |
-|---|---:|---:|---:|---:|---:|---:|
-| tight | −0.50 | 65.1 | +21.7 | 62.4 | 66.6 | 60.8 |
-| standard (closest) | +0.00 | 61.0 | +3.8 | 60.9 | 61.1 | 60.3 |
-| loose | +0.50 | 62.1 | −18.7 | 60.2 | 61.2 | 60.3 |
-| best fit | −1.72 | | | 66.0 |  | 64.1 |
-
-With Kinetikern2's designer harness the model is further from this font's spacing: shape error 64.1 without it, 66.0 with it (+1.9).
-
-Units per 1000 em. Sidebearing error 39.5 · 7744 pairs measured.
-
-[Full report](https://bghryct.github.io/KKQA/#/family/la-belle-aurore) · [Specimen](https://fonts.google.com/specimen/La+Belle+Aurore)
 
 <a id="lancelot"></a>
 
@@ -4620,6 +4659,32 @@ Units per 1000 em. Sidebearing error 40.5 · kerned-pair error 22.0 · kerning c
 
 [Full report](https://bghryct.github.io/KKQA/#/family/montenegrin-gothic-one) · [Specimen](https://fonts.google.com/specimen/Montenegrin+Gothic+One)
 
+<a id="mrs-sheppards"></a>
+
+## Mrs Sheppards Regular — WARN
+
+Handwriting · `MrsSheppards-Regular.ttf` · Version 1.000 · checked at weight 400 · baseline 2026-10-09-2340-1163
+
+- INFO `spacing/closest` — Spacing is closest to Kinetikern2's loose preset (Looseness matched to its joined letters, as the plugin does with Keep joins, -6.00; mean distance in units per 1000 em: tight 72.6, standard 70.4, loose 69.9).
+- INFO `spacing/joins` — A connected script (it joins only in part, but where print faces never do: 36 of its 88 pairs of two stem letters (n n, m i, u n …) and 253 of 676 a–z pairs join above the baseline, as set inside words). Its joins are kept, the plugin's default: 101 glyph sides keep their sidebearings and every pair of two joining sides the font's kerning. The model spaces the rest, the scores leave the kept joins out, and the join checker judges the joins (279 of 279 a–z joins kept).
+- **WARN** `spacing/joins-broken` — 1 join is broken in the font: two joining letters whose strokes do not meet, as a browser sets them inside words (units per 1000 em): fx 34 apart (kern -38 joins it).
+- INFO `spacing/joins-fragile` — 9 joins have less than 5 units per 1000 em of room to open (ad 0.0, bz 0.0, gy 0.2, pj 0.2, hz 0.3, as 1.7, gm 1.8, vw 3.0); 4 joins enclose white that neither letter has, or a changed counter (bt, ft, lt, lx).
+- INFO `spacing/italic` — Its stems lean 36.4° but the font declares no italic angle of 3° or more: it was measured upright, as drawn, the way the plugin measures it (along that slant the shape error would be 99.9 at Looseness +0.60, not clearly better than 76.4 upright).
+- INFO `spacing/out-of-range` — The font is set tighter than anything Kinetikern2 models (the best fit stops at Looseness -6.00), as in scripts and designs whose letters touch or overlap. Such spacing is a property of the design, so the comparison with the model is not judged against the norms, only shown for reference; joins broken in the font, and the locations of a variable font's designspace, are judged all the same.
+
+| Spacing | Looseness | Distance | Offset | Shape error | Bare model: distance | Shape error |
+|---|---:|---:|---:|---:|---:|---:|
+| tight | −0.50 | 72.6 | −0.9 | 72.8 | 74.0 | 72.3 |
+| standard | +0.00 | 70.4 | −10.4 | 71.3 | 71.3 | 71.0 |
+| loose (closest) | +0.50 | 69.9 | −21.8 | 70.3 | 69.1 | 69.8 |
+| best fit (a connected script: matched to its joined letters) | −6.00 | | | 76.4 |  | 76.1 |
+
+With Kinetikern2's designer harness the model is further from this font's spacing: shape error 76.1 without it, 76.4 with it (+0.3).
+
+Units per 1000 em. Sidebearing error 63.8 · kerned-pair error 69.6 · kerning correlation 0.79 · 5196 pairs measured.
+
+[Full report](https://bghryct.github.io/KKQA/#/family/mrs-sheppards) · [Specimen](https://fonts.google.com/specimen/Mrs+Sheppards)
+
 <a id="mystery-quest"></a>
 
 ## Mystery Quest Regular — WARN
@@ -5492,32 +5557,6 @@ The locations that raise the level: 3 of 14 checked (the family's report lists t
 - **WARN** ExtraBold — Shape error 37.2 units per 1000 em, 1.8× Regular's (the main report) 20.4: families usually lose far less evenness at their bold named instances (above wght 600) (median 0.93×, robust z +7.4).
 
 [Full report](https://bghryct.github.io/KKQA/#/family/plus-jakarta-sans) · [Specimen](https://fonts.google.com/specimen/Plus+Jakarta+Sans)
-
-<a id="puppies-play"></a>
-
-## Puppies Play Regular — WARN
-
-Handwriting · `PuppiesPlay-Regular.ttf` · Version 1.010; ttfautohint (v1.8.3) · checked at weight 400 · baseline 2026-10-09-2340-1163
-
-- INFO `spacing/closest` — Spacing is closest to Kinetikern2's tight preset (best-fit Looseness -2.29; mean distance in units per 1000 em: tight 47.0, standard 59.4, loose 81.9).
-- INFO `spacing/italic` — Its stems lean 8.0° but the font declares no italic angle of 3° or more: it was measured upright, as drawn, the way the plugin measures it (along that slant the shape error would be 53.1 at Looseness -3.17, not clearly better than 49.3 upright).
-- INFO `spacing/tightness` — Overall tightness: Looseness -2.29 is at the 0th percentile of Handwriting fonts (median -0.32, robust z -3.4).
-- INFO `spacing/evenness` — Shape error 49.3 units per 1000 em (gaps that depart from even spacing of these shapes): 85th percentile of Handwriting fonts (median 34.9, robust z +1.3).
-- **WARN** `spacing/glyph-sides` — 4 glyph sides are spaced far from the norms of Handwriting fonts (units per 1000 em against their median): m right -122, h right -120, R right -186, N right -193.
-- INFO `spacing/pairs` — 7 pairs are spaced far from how Handwriting fonts usually compare with the model (units per 1000 em, + looser): xg -224, dj -304, kg -220, Vh -269, Vk -281, dg -213; 7 more, with a glyph side flagged above, count under that side.
-
-| Spacing | Looseness | Distance | Offset | Shape error | Bare model: distance | Shape error |
-|---|---:|---:|---:|---:|---:|---:|
-| tight (closest) | −0.50 | 47.0 | −22.1 | 44.5 | 43.6 | 43.4 |
-| standard | +0.00 | 59.4 | −46.2 | 45.5 | 53.5 | 44.7 |
-| loose | +0.50 | 81.9 | −75.8 | 48.6 | 75.5 | 47.1 |
-| best fit | −2.29 | | | 49.3 |  | 47.7 |
-
-With Kinetikern2's designer harness the model is further from this font's spacing: shape error 47.7 without it, 49.3 with it (+1.6).
-
-Units per 1000 em. Sidebearing error 33.5 · 7744 pairs measured.
-
-[Full report](https://bghryct.github.io/KKQA/#/family/puppies-play) · [Specimen](https://fonts.google.com/specimen/Puppies+Play)
 
 <a id="qahiri"></a>
 
@@ -6745,6 +6784,31 @@ With Kinetikern2's designer harness the model is closer to this font's spacing: 
 Units per 1000 em. Sidebearing error 25.0 · 7744 pairs measured.
 
 [Full report](https://bghryct.github.io/KKQA/#/family/text-me-one) · [Specimen](https://fonts.google.com/specimen/Text+Me+One)
+
+<a id="the-nautigal"></a>
+
+## The Nautigal Regular — WARN
+
+Handwriting · `TheNautigal-Regular.ttf` · Version 1.100; ttfautohint (v1.8.3) · checked at weight 400 · baseline 2026-10-09-2340-1163
+
+- INFO `spacing/closest` — Spacing is closest to Kinetikern2's tight preset (Looseness matched to its joined letters, as the plugin does with Keep joins, -6.00; mean distance in units per 1000 em: tight 65.2, standard 66.3, loose 71.3).
+- INFO `spacing/joins` — A connected script (it joins only in part, but where print faces never do: 43 of its 88 pairs of two stem letters (n n, m i, u n …) and 234 of 673 a–z pairs join above the baseline, as set inside words). Its joins are kept, the plugin's default: 88 glyph sides keep their sidebearings and every pair of two joining sides the font's kerning. The model spaces the rest, the scores leave the kept joins out, and the join checker judges the joins (268 of 268 a–z joins kept).
+- **WARN** `spacing/joins-broken` — 3 joins are broken in the font: two joining letters whose strokes do not meet, as a browser sets them inside words (units per 1000 em): iz 76 apart (kern -80 joins it), ip 22 apart (kern -27 joins it), is 8 apart (kern -13 joins it).
+- INFO `spacing/joins-fragile` — 60 joins have less than 5 units per 1000 em of room to open (cc 0.0, cm 0.0, ey 0.0, ki 0.0, lt 0.0, nm 0.0, qe 0.0, rn 0.0); 23 joins enclose white that neither letter has, or a changed counter (dk, fj, gf, gj, hj, jj, mj, qf).
+- INFO `spacing/out-of-range` — The font is set tighter than anything Kinetikern2 models (the best fit stops at Looseness -6.00), as in scripts and designs whose letters touch or overlap. Such spacing is a property of the design, so the comparison with the model is not judged against the norms, only shown for reference; joins broken in the font, and the locations of a variable font's designspace, are judged all the same.
+
+| Spacing | Looseness | Distance | Offset | Shape error | Bare model: distance | Shape error |
+|---|---:|---:|---:|---:|---:|---:|
+| tight (closest) | −0.50 | 65.2 | −5.2 | 65.6 | 64.3 | 63.8 |
+| standard | +0.00 | 66.3 | −19.3 | 66.3 | 63.8 | 64.4 |
+| loose | +0.50 | 71.3 | −36.4 | 68.7 | 66.5 | 66.3 |
+| best fit (a connected script: matched to its joined letters) | −6.00 | | | 67.8 |  | 65.8 |
+
+With Kinetikern2's designer harness the model is further from this font's spacing: shape error 65.8 without it, 67.8 with it (+2.0).
+
+Units per 1000 em. Sidebearing error 64.7 · kerned-pair error 73.0 · kerning correlation 0.83 · 5872 pairs measured.
+
+[Full report](https://bghryct.github.io/KKQA/#/family/the-nautigal) · [Specimen](https://fonts.google.com/specimen/The+Nautigal)
 
 <a id="tiktok-sans"></a>
 

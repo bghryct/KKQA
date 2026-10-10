@@ -184,8 +184,11 @@
     const mode = st && st.joins;
     // found by the detector (outlines), else by the join checker on the
     // shaped pairs: through contextual forms only where shaping set them
+    const part = j.joins_in_part;
     const how = st && st.connected_by && st.connected_by.includes("outlines")
       ? "its letters overlap where they join, as spaced and kerned"
+      : st && st.connected_by && st.connected_by.includes("partly") && part
+      ? `it joins only in part, but where print faces never do: ${int(part[3])} of its ${int(part[2])} pairs of two stem letters (n n, m i, u n …) and ${int(part[1])} of ${int(part[0])} a–z pairs join above the baseline, as set inside words`
       : j.substituted ? "its letters join as set inside words, through contextual alternates and connectors"
       : "its letters touch as set inside words";
     const sec = section(root, "joins-h", "Joins",

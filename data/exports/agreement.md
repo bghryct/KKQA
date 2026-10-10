@@ -1,13 +1,13 @@
 # Spacing QA and the human `/Quality/Spacing` tags
 
-1151 families have both. Rank correlation (Spearman) of the measured evenness with the human weight: **+0.21**.
+1163 families have both. Rank correlation (Spearman) of the measured evenness with the human weight: **+0.22**.
 
 The human tag rates spacing as a whole, as people read it; the check measures one thing — how evenly the shapes are spaced by Kinetikern2's model. Read the suggestions as a second opinion, and the disagreements below as families worth a second look, not as corrections.
 
 | Category | Families | Spearman |
 |---|---:|---:|
 | Display | 335 | +0.24 |
-| Handwriting (no suggestions) | 229 | +0.04 |
+| Handwriting (no suggestions) | 241 | +0.06 |
 | Monospace | 1 | — |
 | Sans Serif | 375 | +0.28 |
 | Serif | 211 | +0.27 |

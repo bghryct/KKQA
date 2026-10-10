@@ -80,7 +80,7 @@ jobs:
           echo "SINCE=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_ENV"
 
       # The reports live in spacingqa-data/, apart from the site's own data/.
-      # The version in the key (v5) starts the cache again: change it to make
+      # The version in the key (v6) starts the cache again: change it to make
       # the next run start from the reports in this repository (data/reports)
       # after pushing a new copy of them, checked by the new version, instead
       # of checking every family again on the runner.
@@ -91,14 +91,16 @@ jobs:
       # pushed with reports checked that way.
       # v5: letters on two or three fixed widths skipped (Trispace, a barcode),
       # pushed with the reports checked again.
+      # v6: hands that join in part kept connected (Ephesis, Ruthie: the 27
+      # families the rule finds), pushed with the reports checked again.
       - name: Restore the reports of the last run
         uses: actions/cache/restore@v4
         with:
           path: |
             spacingqa-data
             !spacingqa-data/fonts
-          key: spacingqa-data-v5-${{ github.run_id }}
-          restore-keys: spacingqa-data-v5-
+          key: spacingqa-data-v6-${{ github.run_id }}
+          restore-keys: spacingqa-data-v6-
 
       - name: Without a cache, start from the reports of the published copy
         run: |
@@ -140,7 +142,7 @@ jobs:
           path: |
             spacingqa-data
             !spacingqa-data/fonts
-          key: spacingqa-data-v5-${{ github.run_id }}
+          key: spacingqa-data-v6-${{ github.run_id }}
 
       - id: pages
         uses: actions/configure-pages@v5
