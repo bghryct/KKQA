@@ -196,7 +196,7 @@
   const STATIC = CONFIG.mode === "static";
   const DATA = CONFIG.data || "data/";
   const BUILD = CONFIG.generated ? "?v=" + encodeURIComponent(CONFIG.generated) : "";
-  const STATIC_REFUSED = "This is the published copy of Spacing QA: a scheduled scan updates it (GitHub Actions), so scans and rebuilds do not run from this page.";
+  const STATIC_REFUSED = "This is the published copy of KKQA: a scheduled scan updates it (GitHub Actions), so scans and rebuilds do not run from this page.";
   /** How often the copy is rebuilt from fonts.google.com ("every day"), when its
    *  build says (`spacingqa site --refresh-hours 24`); "" when it does not. */
   const REBUILT = !STATIC || !(CONFIG.refresh_hours > 0) ? ""
@@ -360,7 +360,7 @@
   function describe(status, msg, path) {
     const m = msg ? String(msg) : "";
     switch (status) {
-      case 0: return "The Spacing QA server cannot be reached. Check the connection and try again.";
+      case 0: return "The KKQA server cannot be reached. Check the connection and try again.";
       case 400: return m ? cap(m) + "." : "The server did not accept the request.";
       case 401: return m ? cap(m) + "." : "This action needs the admin token.";
       case 403: return m ? cap(m) + "." : "This server does not allow that action.";
@@ -605,10 +605,23 @@
     if (!f || !info) return;
     clear(f);
     append(f, [
-      "Spacing QA for Google Fonts — spacing compared with the Kinetikern2 model and its designer harness, and with the library's own norms. Distances are in units per 1000 em. ",
+      "KKQA for Google Fonts — spacing compared with the Kinetikern2 model and its designer harness, and with the library's own norms. Distances are in units per 1000 em. ",
       h("span", { class: "muted" }, `${info.tool || "spacingqa"} · ${info.engine || "kinetikern2"}`),
       " · ", h("a", { href: "#/about" }, "How the check works"),
     ]);
+    renderSidewall(info);
+  }
+  /** The right sidewall: the run's data, set vertically (wide screens only). */
+  function renderSidewall(info) {
+    const el = document.getElementById("sidewall-run");
+    if (!el || !info) return;
+    const parts = [STATIC ? "Published copy" : "Live server", `built ${fmtDateTime(info.generated)}`, info.engine || "kinetikern2"];
+    if (info.baseline) parts.push(`baseline ${info.baseline.id}`);
+    if (typeof info.families === "number") parts.push(`${int(info.families)} families`);
+    const lv = info.levels || {};
+    const counts = ["FAIL", "WARN", "INFO", "SKIP"].filter((k) => lv[k]).map((k) => `${int(lv[k])} ${k}`);
+    if (counts.length) parts.push(counts.join(" · "));
+    el.textContent = "Run  /  " + parts.join("  /  ");
   }
 
   /** The library category key of a Google Fonts category ("Sans Serif" → "SANS_SERIF"). */

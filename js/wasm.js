@@ -135,7 +135,7 @@ self.onmessage = async (e) => {
     return { call, inPage: true };
   }
   function ensure() {
-    if (!cfg.wasm) return Promise.reject(new SQA.ApiError(501, "This copy of Spacing QA cannot check fonts in the browser (it was published without spacingqa-wasm.js)."));
+    if (!cfg.wasm) return Promise.reject(new SQA.ApiError(501, "This copy of KKQA cannot check fonts in the browser (it was published without spacingqa-wasm.js)."));
     if (typeof WebAssembly !== "object") return Promise.reject(new SQA.ApiError(501, "This browser cannot run the check (WebAssembly is needed)."));
     if (!ready) {
       const p = (async () => {

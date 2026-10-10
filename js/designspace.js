@@ -430,7 +430,7 @@
     const wrap = h("div", { class: "table-wrap medium" }, tbl);
     sec.append(h("h3", null, "Every location"), wrap,
       h("div", { class: "table-foot" }, h("span", null, `${SQA.plural(m.rows.length, "location")}. Numbers in units per 1000 em; Looseness bars: `,
-        h("span", { style: { color: "var(--div-neg)" } }, "◀"), " tighter · looser ", h("span", { style: { color: "var(--div-pos)" } }, "▶"), ".")));
+        h("span", { style: { color: "var(--div-neg-text)" } }, "◀"), " tighter · looser ", h("span", { style: { color: "var(--div-pos-text)" } }, "▶"), ".")));
     const tr = h("tr");
     COLS.forEach((c) => {
       const th = h("th", { scope: "col", class: c.num ? "num" : "", title: c.title });

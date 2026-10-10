@@ -45,9 +45,11 @@
     return `M${x},${y + hgt}V${y + rr}Q${x},${y} ${x + rr},${y}H${x + w - rr}Q${x + w},${y} ${x + w},${y + rr}V${y + hgt}Z`;
   }
   /** A horizontal bar from x (baseline) of width w (may be negative), rounded at the data end. */
+  /** Square bar ends: the site's design has no rounded corners. */
+  const BAR_RADIUS = 0;
   function barPath(x, y, w, hgt, r) {
     if (Math.abs(w) < 0.5) return `M${x - 0.5},${y}h1v${hgt}h-1Z`;
-    const rr = Math.min(r, Math.abs(w), hgt / 2);
+    const rr = Math.min(r, BAR_RADIUS, Math.abs(w), hgt / 2);
     if (w > 0) return `M${x},${y}H${x + w - rr}Q${x + w},${y} ${x + w},${y + rr}V${y + hgt - rr}Q${x + w},${y + hgt} ${x + w - rr},${y + hgt}H${x}Z`;
     const e = x + w;
     return `M${x},${y}H${e + rr}Q${e},${y} ${e},${y + rr}V${y + hgt - rr}Q${e},${y + hgt} ${e + rr},${y + hgt}H${x}Z`;

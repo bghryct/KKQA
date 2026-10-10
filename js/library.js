@@ -184,9 +184,11 @@
     // header
     const statusEl = h("div", { class: "status-strip", "aria-live": "off" }, h("span", { class: "muted" }, "Loading the catalog…"));
     const chipsEl = h("div", { class: "chips", role: "group", "aria-label": "Families by level (filters the table)" });
-    root.appendChild(h("header", { class: "view-head" },
+    root.appendChild(h("header", { class: "view-head masthead" },
       h("p", { class: "eyebrow" }, "Google Fonts · Kinetikern2 spacing model"),
-      h("h1", { tabindex: "-1" }, "Spacing QA"),
+      // the letters step down, a stair each (read as one word)
+      h("h1", { tabindex: "-1", class: "mast-title", "aria-label": "KKQA" }, [..."KKQA"].map((ch) => h("span", { class: "mt", "aria-hidden": "true" }, ch))),
+      h("p", { class: "mast-ribbon" }, "Spacing quality assurance"),
       h("p", { class: "lede" }, "Checks the spacing of every Google Fonts family against the Kinetikern2 spacing model and its designer harness — how tight or loose each family is set, and where its letter gaps depart from even spacing of its shapes — and flags what falls far outside the library's own norms, and joins broken in a connected script."),
       statusEl, chipsEl));
 
@@ -367,7 +369,7 @@
     const cfg = SQA.CONFIG;
     const more = h("p", { class: "small" });
     const el = h("div", { class: "panel scan static" },
-      h("div", null, h("p", { class: "scan-state" }, "This is the published copy of Spacing QA."), more));
+      h("div", null, h("p", { class: "scan-state" }, "This is the published copy of KKQA."), more));
     return {
       el, onData: null, onChange: null, lastRefresh: 0,
       setInfo(info) {
@@ -793,7 +795,7 @@
         h("label", null, "Fonts", selFont),
         reset),
       wrap, emptyEl,
-      h("div", { class: "table-foot" }, count, h("span", null, "Looseness bars: ", h("span", { style: { color: "var(--div-neg)" } }, "◀"), " tighter · looser ", h("span", { style: { color: "var(--div-pos)" } }, "▶"), " (bars to ±1) · ", h("span", { class: "vf" }, "VF · 12"), " a variable font checked at 12 locations of its designspace")));
+      h("div", { class: "table-foot" }, count, h("span", null, "Looseness bars: ", h("span", { style: { color: "var(--div-neg-text)" } }, "◀"), " tighter · looser ", h("span", { style: { color: "var(--div-pos-text)" } }, "▶"), " (bars to ±1) · ", h("span", { class: "vf" }, "VF · 12"), " a variable font checked at 12 locations of its designspace")));
 
     // header
     const tr = h("tr");

@@ -66,7 +66,7 @@
       h("p", { class: "section-intro" },
         "Kinetikern2 was set up for a font of this kind the way the plugin sets it up, so that what the check finds is about the font, not about a way of measuring that does not suit it: ",
         used.join("; "), ". ",
-        "The plugin's own defaults differ in two places: its designer harness is off until it is switched on, and it writes class kerning with a 5-unit threshold and at most 30,000 entries, where the check compares every glyph pair with no threshold and no budget. Two rules are Spacing QA's own: a design that leans without declaring an italic angle is measured along the slant its stems show where that fits clearly better, and a script whose letters join only as set inside words (strokes that meet flush, contextual alternates) is found by the join checker. ",
+        "The plugin's own defaults differ in two places: its designer harness is off until it is switched on, and it writes class kerning with a 5-unit threshold and at most 30,000 entries, where the check compares every glyph pair with no threshold and no budget. One rule is KKQA's own: a script whose letters join only as set inside words (strokes that meet flush, contextual alternates) is found by the join checker. A design that leans without declaring an italic angle is measured along the slant its stems show by the plugins' rule too. ",
         variants.length ? `Each setting was also tried the other way. Every row is compared on the same pairs, at its own ${st.fit === "joins" ? "Looseness (matched to the joined letters where the joins are kept, else fitted)" : "best-fit Looseness"}.` : ""));
     if (!variants.length) return;
     const tbl = h("table", { class: "both-ways settings-table" });

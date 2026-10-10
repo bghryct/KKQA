@@ -72,7 +72,7 @@
       signal: ac.signal,
       alive: () => alive,
       onCleanup: (fn) => cleanups.push(fn),
-      setTitle: (t) => { document.title = t ? `${t} — Spacing QA` : "Spacing QA"; },
+      setTitle: (t) => { document.title = t ? `${t} — KKQA` : "KKQA"; },
       focusHeading: () => {
         if (first) return;
         const hd = container.querySelector("h1");
@@ -110,12 +110,12 @@
    *  a web page cannot start one. Say what to open instead. */
   function noServer() {
     const local = "http://127.0.0.1:8787/";
-    const found = h("p", { class: "small" }, "Looking for a Spacing QA server on this computer…");
+    const found = h("p", { class: "small" }, "Looking for a KKQA server on this computer…");
     main.appendChild(h("div", { class: "view" },
       h("header", { class: "view-head" },
-        h("p", { class: "eyebrow" }, "Spacing QA"),
+        h("p", { class: "eyebrow" }, "KKQA"),
         h("h1", { tabindex: "-1" }, "This copy of the page runs with its server"),
-        h("p", { class: "lede" }, "You opened the live version of Spacing QA as a file. It gets everything from the Spacing QA server, and a web page cannot start a program on your computer — so here is what to open instead.")),
+        h("p", { class: "lede" }, "You opened the live version of KKQA as a file. It gets everything from its server (spacingqa serve), and a web page cannot start a program on your computer — so here is what to open instead.")),
       h("div", { class: "panel" },
         h("h2", { style: { marginTop: "0" } }, "No server needed"),
         h("p", null, "Open ", h("a", { href: "../dist/index.html" }, h("b", null, "the published copy")), " — in Finder, ", h("code", null, "SpacingQA/Spacing QA.html"),
@@ -127,8 +127,8 @@
         found)));
     // a server already running on this computer: offer it
     fetch(local + "healthz", { mode: "no-cors", cache: "no-store" })
-      .then(() => { clear(found); SQA.append(found, ["A Spacing QA server is running on this computer: ", h("a", { href: local }, h("b", null, "open it")), "."]); })
-      .catch(() => { found.textContent = "No Spacing QA server is running on this computer right now."; });
+      .then(() => { clear(found); SQA.append(found, ["A KKQA server is running on this computer: ", h("a", { href: local }, h("b", null, "open it")), "."]); })
+      .catch(() => { found.textContent = "No KKQA server is running on this computer right now."; });
   }
 
   function boot() {
