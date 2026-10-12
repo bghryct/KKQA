@@ -41,12 +41,12 @@
   /** A column with a rounded top (the data end) and a square base. */
   function colPath(x, y, w, hgt, r) {
     if (hgt <= 0) return "";
-    const rr = Math.min(r, w / 2, hgt);
+    const rr = Math.min(r, BAR_RADIUS, w / 2, hgt);
     return `M${x},${y + hgt}V${y + rr}Q${x},${y} ${x + rr},${y}H${x + w - rr}Q${x + w},${y} ${x + w},${y + rr}V${y + hgt}Z`;
   }
   /** A horizontal bar from x (baseline) of width w (may be negative), rounded at the data end. */
-  /** Square bar ends: the site's design has no rounded corners. */
-  const BAR_RADIUS = 0;
+  /** Data ends are softened a little (2 px), as the site's corners are. */
+  const BAR_RADIUS = 2;
   function barPath(x, y, w, hgt, r) {
     if (Math.abs(w) < 0.5) return `M${x - 0.5},${y}h1v${hgt}h-1Z`;
     const rr = Math.min(r, BAR_RADIUS, Math.abs(w), hgt / 2);

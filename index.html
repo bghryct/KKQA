@@ -6,11 +6,11 @@
 <title>KKQA</title>
 <meta name="description" content="KKQA checks the spacing of every Google Fonts family against the Kinetikern2 spacing model, with its designer harness, and the library's own norms.">
 <meta name="color-scheme" content="light dark">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0a0a'/%3E%3Cpath d='M5 27h7v-6h7v-6h7V5h1v22z' fill='%23f4f3ef'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='3' fill='%2326231f'/%3E%3Crect x='8' y='8' width='4' height='16' fill='%23f3efe8'/%3E%3Crect x='20' y='8' width='4' height='16' fill='%23f3efe8'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Spline+Sans+Mono:ital,wght@0,300..700;1,300..700&family=Spline+Sans:wght@300..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="app.css?v=11">
+<link rel="stylesheet" href="app.css?v=12">
 <script>
   // the saved theme before first paint (no flash)
   try { var t = localStorage.getItem("sqa-theme"); if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t); } catch (e) {}
@@ -21,16 +21,14 @@
 <nav class="nav" aria-label="Main"><div class="nav-inner">
   <a class="brand" href="#/"><b>KKQA</b><span class="brand-sub">Kinetikern<br>spacing QA</span></a>
   <div class="nav-links">
-    <a href="#/" data-nav="library"><span class="nav-n" aria-hidden="true">01</span>Library</a>
-    <a href="#/upload" data-nav="upload"><span class="nav-n" aria-hidden="true">02</span>Check<span class="long"> a font</span></a>
-    <a href="#/guide" data-nav="guide"><span class="nav-n" aria-hidden="true">03</span>Guide</a>
-    <a href="#/cli" data-nav="cli"><span class="nav-n" aria-hidden="true">04</span>CLI</a>
-    <a href="#/about" data-nav="about"><span class="nav-n" aria-hidden="true">05</span>About</a>
+    <a href="#/" data-nav="library">Library</a>
+    <a href="#/upload" data-nav="upload">Check<span class="long"> a font</span></a>
+    <a href="#/guide" data-nav="guide">Guide</a>
+    <a href="#/cli" data-nav="cli">CLI</a>
+    <a href="#/about" data-nav="about">About</a>
   </div>
   <button class="theme-toggle" type="button" id="theme-toggle"><span class="tt-icon" aria-hidden="true">◐</span><span class="tt-text">Dark</span></button>
 </div></nav>
-<div class="sidewall sidewall-l" aria-hidden="true"><span><b>&nbsp;KKQA&nbsp;</b>&nbsp; Kinetikern spacing quality assurance &nbsp;/&nbsp; Google Fonts library &nbsp;/&nbsp; tighter ↔ looser &nbsp;/&nbsp; units per 1000 em</span></div>
-<div class="sidewall sidewall-r" aria-hidden="true"><span id="sidewall-run">Run &nbsp;/&nbsp; loading</span></div>
 
 <main id="main" tabindex="-1">
   <noscript><p class="notice">KKQA needs JavaScript to show the library and the reports. The exports are plain files: in a published copy they are in <a href="data/exports/">data/exports/</a> (tags.csv, quant.csv, skip.csv, tags_metadata.csv, quality.csv, FAIL.md, WARN.md, INFO.md, SKIP.md, ERROR.md); on a server under /api/export/.</p></noscript>
@@ -42,21 +40,21 @@
 
 <div class="sr-only" aria-live="polite" id="announcer"></div>
 
-<script src="config.js?v=11"></script>
-<script src="js/core.js?v=11" defer></script>
-<script src="js/wasm.js?v=11" defer></script>
-<script src="js/charts.js?v=11" defer></script>
-<script src="js/glyphs.js?v=11" defer></script>
-<script src="js/designspace.js?v=11" defer></script>
-<script src="js/library.js?v=11" defer></script>
-<script src="js/report.js?v=11" defer></script>
-<script src="js/explain.js?v=11" defer></script>
-<script src="js/outliers.js?v=11" defer></script>
-<script src="js/settings.js?v=11" defer></script>
-<script src="js/upload.js?v=11" defer></script>
-<script src="js/about.js?v=11" defer></script>
-<script src="js/guide.js?v=11" defer></script>
-<script src="js/cli.js?v=11" defer></script>
-<script src="app.js?v=11" defer></script>
+<script src="config.js?v=12"></script>
+<script src="js/core.js?v=12" defer></script>
+<script src="js/wasm.js?v=12" defer></script>
+<script src="js/charts.js?v=12" defer></script>
+<script src="js/glyphs.js?v=12" defer></script>
+<script src="js/designspace.js?v=12" defer></script>
+<script src="js/library.js?v=12" defer></script>
+<script src="js/report.js?v=12" defer></script>
+<script src="js/explain.js?v=12" defer></script>
+<script src="js/outliers.js?v=12" defer></script>
+<script src="js/settings.js?v=12" defer></script>
+<script src="js/upload.js?v=12" defer></script>
+<script src="js/about.js?v=12" defer></script>
+<script src="js/guide.js?v=12" defer></script>
+<script src="js/cli.js?v=12" defer></script>
+<script src="app.js?v=12" defer></script>
 </body>
 </html>

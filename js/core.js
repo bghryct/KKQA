@@ -609,21 +609,7 @@
       h("span", { class: "muted" }, `${info.tool || "spacingqa"} · ${info.engine || "kinetikern2"}`),
       " · ", h("a", { href: "#/about" }, "How the check works"),
     ]);
-    renderSidewall(info);
   }
-  /** The right sidewall: the run's data, set vertically (wide screens only). */
-  function renderSidewall(info) {
-    const el = document.getElementById("sidewall-run");
-    if (!el || !info) return;
-    const parts = [STATIC ? "Published copy" : "Live server", `built ${fmtDateTime(info.generated)}`, info.engine || "kinetikern2"];
-    if (info.baseline) parts.push(`baseline ${info.baseline.id}`);
-    if (typeof info.families === "number") parts.push(`${int(info.families)} families`);
-    const lv = info.levels || {};
-    const counts = ["FAIL", "WARN", "INFO", "SKIP"].filter((k) => lv[k]).map((k) => `${int(lv[k])} ${k}`);
-    if (counts.length) parts.push(counts.join(" · "));
-    el.textContent = "Run  /  " + parts.join("  /  ");
-  }
-
   /** The library category key of a Google Fonts category ("Sans Serif" → "SANS_SERIF"). */
   const categoryKey = (c) => (c ? String(c).toUpperCase().replace(/ /g, "_") : "ALL");
   /** "SANS_SERIF" → "Sans Serif fonts", as the server's messages name them. */

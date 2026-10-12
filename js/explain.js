@@ -153,7 +153,7 @@
       const top = moves.slice().sort((x, y) => Math.abs(y.shift) - Math.abs(x.shift)).slice(0, 16);
       const stage = h("div", { class: "stage" });
       sec.appendChild(stage);
-      sec.appendChild(SQA.legend([{ label: "toward the designer", color: "var(--good)" }, { label: "away from the designer", color: "var(--critical)" }, { label: "bare model", color: "var(--ink)", ring: true }, { label: "with the harness", color: "var(--ink)" }]));
+      sec.appendChild(SQA.legend([{ label: "toward the designer", color: "var(--ink)", line: true }, { label: "away from the designer", color: "var(--critical)", line: true }, { label: "bare model", color: "var(--ink)", ring: true }, { label: "with the harness", color: "var(--ink)" }]));
       SQA.responsive(stage, (w) => dumbbell(stage, w, top, face), ctx);
       SQA.tableToggle(sec, [
         { label: "Side", get: (m) => `${m.g.char} ${m.side} (${m.g.name})` },

@@ -186,8 +186,7 @@
     const chipsEl = h("div", { class: "chips", role: "group", "aria-label": "Families by level (filters the table)" });
     root.appendChild(h("header", { class: "view-head masthead" },
       h("p", { class: "eyebrow" }, "Google Fonts · Kinetikern2 spacing model"),
-      // the letters step down, a stair each (read as one word)
-      h("h1", { tabindex: "-1", class: "mast-title", "aria-label": "KKQA" }, [..."KKQA"].map((ch) => h("span", { class: "mt", "aria-hidden": "true" }, ch))),
+      h("h1", { tabindex: "-1", class: "mast-title" }, "KKQA"),
       h("p", { class: "mast-ribbon" }, "Spacing quality assurance"),
       h("p", { class: "lede" }, "Checks the spacing of every Google Fonts family against the Kinetikern2 spacing model and its designer harness — how tight or loose each family is set, and where its letter gaps depart from even spacing of its shapes — and flags what falls far outside the library's own norms, and joins broken in a connected script."),
       statusEl, chipsEl));
