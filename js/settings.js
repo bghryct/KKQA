@@ -23,7 +23,7 @@
   }
   const num = (v) => typeof v === "number" && Number.isFinite(v);
   const JOIN_LABEL = { keep: "Keep joins", space: "Space joined letters", off: "No join mode" };
-  const SETTING_LABEL = { slant: "Italic angle", joins: "Connected script", harness: "Designer harness", categories: "Figures, punctuation, symbols" };
+  const SETTING_LABEL = { slant: "Italic angle", joins: "Connected script", harness: "Designer harness", punctuation: "Punctuation and figures by convention", categories: "Figures, punctuation, symbols" };
   const CAT_LABEL = { figures: "figures", punctuation: "punctuation", symbols: "symbols" };
 
   /** What the check used, in words. */
@@ -31,6 +31,7 @@
     if (setting === "slant") return st.slant ? `along ${fmt(Math.abs(st.slant), 1)}°${st.slant_from === "declared" ? " (declared)" : st.slant_from === "measured" ? " (measured)" : ""}` : "upright";
     if (setting === "joins") return JOIN_LABEL[st.joins] || st.joins;
     if (setting === "harness") return st.harness ? "on" : "off";
+    if (setting === "punctuation") return st.punctuation ? "on" : "off";
     if (setting === "categories") return "the letters' Looseness";
     return "";
   }
@@ -38,6 +39,7 @@
     if (v.setting === "slant") return v.value === "upright" ? "upright" : `along the ${v.value.replace("measured ", "")} slant its stems show`;
     if (v.setting === "joins") return JOIN_LABEL[v.value] || v.value;
     if (v.setting === "harness") return v.value;
+    if (v.setting === "punctuation") return v.value === "off" ? "off: punctuation spaced and kerned from its shapes alone" : v.value;
     if (v.setting === "categories") {
       const parts = Object.entries(v.offsets || {}).map(([k, x]) => `${CAT_LABEL[k] || k} ${signed(x, 2)}`);
       return `each at its own Looseness${parts.length ? ` (${parts.join(", ")})` : ""}`;
@@ -55,13 +57,18 @@
     // measured upright, the model could not follow it (its fit stops at the limit) and along the slant it can
     const upright = variants.find((v) => v.setting === "slant" && v.value === "upright");
     const onlyLean = !!upright && SQA.outOfRange(upright.best_looseness) && !SQA.outOfRange(sm.best_looseness);
+    // or upright it fits only far outside what fonts use (beyond ±2.5, kinetikern2::slant::FIT_FAR) and along it in range
+    const far = (t) => typeof t === "number" && Math.abs(t) >= 2.5;
+    const clearly = !!upright && typeof upright.shape_error === "number" && sm.shape_error <= 0.8 * upright.shape_error;
+    const farLean = !!upright && !onlyLean && !clearly && far(upright.best_looseness) && !far(sm.best_looseness);
     if (st.slant) used.push(st.slant_from === "measured"
-      ? `measured along the ${fmt(Math.abs(st.slant), 1)}° slant its stems show (it declares no italic angle, and ${onlyLean ? `measured upright the model cannot follow it — its fit stops at the limit of the Looseness range (${signed(upright.best_looseness, 2)}) — where along its slant it can` : "fits clearly better that way"}: the rule the Kinetikern2 plugins follow too). Like an italic, it is compared with its category and reported, not judged: the library's norms come from fonts measured upright`
+      ? `measured along the ${fmt(Math.abs(st.slant), 1)}° slant its stems show (it declares no italic angle, and ${onlyLean ? `measured upright the model cannot follow it — its fit stops at the limit of the Looseness range (${signed(upright.best_looseness, 2)}) — where along its slant it can` : farLean ? `measured upright the model follows it only at a Looseness far outside what fonts use (${signed(upright.best_looseness, 2)}), where along its slant it fits at ${signed(sm.best_looseness, 2)}` : "fits clearly better that way"}: the rule the Kinetikern2 plugins follow too). Like an italic, it is compared with its category and reported, not judged: the library's norms come from fonts measured upright`
       : `measured along its ${fmt(Math.abs(st.slant), 1)}° italic angle (sheared upright about half the x-height, as the plugin does)`);
     if (st.joins) used.push(`${st.joins === "keep" ? "its joins kept as drawn (Keep joins, the plugin's default for a connected script)" : `connected-script mode “${JOIN_LABEL[st.joins] || st.joins}”`}`);
     if (st.fit === "joins") used.push(`the Looseness matched to its joined letters (${signed(sm.best_looseness, 2)}), as the plugin does with Keep joins, so the rest of the font is measured at the script's own rhythm rather than pulled by its swash capitals and punctuation`);
     if (st.tabular) used.push("its tabular figures kept at their width");
     used.push(st.harness ? "the designer harness on" : "the bare model, without the designer harness");
+    if (st.punctuation) used.push(`punctuation by convention (${r.punctuation_table && /\+display$/.test(r.punctuation_table) ? "display" : r.punctuation_table && /\+handwriting$/.test(r.punctuation_table) ? "handwriting" : "text"} faces' conventions): each mark spaced as the designers of well-spaced fonts space it, and kerned with its own share of what its shape suggests — a period tucked well under T, V or Y, a hyphen or a quote hardly kerned — and the figures and the symbols that sit with them spaced as designers space them, as the plugins do by default`);
     const sec = section(root, "settings-h", "Settings",
       h("p", { class: "section-intro" },
         "Kinetikern2 was set up for a font of this kind the way the plugin sets it up, so that what the check finds is about the font, not about a way of measuring that does not suit it: ",
@@ -115,6 +122,7 @@
       else if (v.setting === "slant") lines.push(`Its stems lean but it declares no italic angle of 3° or more; measured along that slant it would look ${how}, not clearly better, so it was measured upright, as drawn — as the Kinetikern2 plugins measure it too.`);
       else if (v.setting === "joins" && v.joins) lines.push(`${JOIN_LABEL[v.value] || v.value}: ${v.joins.broken ? `${int(v.joins.broken)} of its ${int(v.joins.joins)} a–z joins would break` : "every join would hold"}${v.joins.crossings ? `, ${int(v.joins.crossings)} pairs would cross or collide` : ""}; the other pairs would look ${how}.`);
       else if (v.setting === "harness") lines.push(`Without the designer harness the model is ${how} to this font's spacing (the harness's own section has the detail).`);
+      else if (v.setting === "punctuation") lines.push(`Without punctuation and figures by convention — punctuation, symbols and figures spaced and kerned from their shapes alone, like letters — the pairs would look ${how}.`);
       else if (v.setting === "categories") {
         const off = Object.entries(v.offsets || {}).filter(([, x]) => Math.abs(x) >= 0.1).map(([k, x]) => `its ${CAT_LABEL[k] || k} ${x > 0 ? "looser" : "tighter"} (${signed(x, 2)})`);
         lines.push(off.length ? `By category the font sets ${off.join(", ")} than its letters, by the model; spaced that way the pairs would look ${how}.` : `Its figures, punctuation and symbols sit at about the letters' own tightness.`);
