@@ -1,1 +1,1 @@
-window.SQA_CONFIG = {"data":"data/","generated":"2026-10-12T14:53:35Z","mode":"static","public_url":"https://bghryct.github.io/KKQA/","refresh_hours":24.0,"repo_url":"https://github.com/bghryct/KKQA","requests":true,"wasm":"spacingqa-wasm.js"};
+window.SQA_CONFIG = {"data":"data/","generated":"2026-10-13T18:34:48Z","mode":"static","public_url":"https://bghryct.github.io/KKQA/","refresh_hours":24.0,"repo_url":"https://github.com/bghryct/KKQA","requests":true,"wasm":"spacingqa-wasm.js"};

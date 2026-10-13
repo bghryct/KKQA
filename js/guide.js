@@ -8,7 +8,7 @@
   const SQA = window.SQA;
   const { h } = SQA;
 
-  function view(ctx) {
+  function view(ctx, params) {
     ctx.setTitle("Guide");
     const root = ctx.root;
     const cfg = SQA.CONFIG || {};
@@ -41,27 +41,77 @@
     root.appendChild(prose);
     SQA.append(prose, [h("p", { class: "small" }, "On this page:"), toc]);
 
-    // ------------------------------------------------------------ the site
+    // ------------------------------------------------------------ the site: how to read a report
+    // (the explanations the report sections link to: #/guide?read=<topic>)
+    const read = (id, title) => h("h3", { id: "read-" + id, tabindex: "-1" }, title);
     SQA.append(prose, [
       s1,
-      h("p", null, "The ", h("a", { href: "#/" }, "Library"), " lists every Google Fonts family, checked live from fonts.google.com",
-        SQA.STATIC && SQA.REBUILT ? ` and rebuilt ${SQA.REBUILT}` : "",
-        ". Each row shows the family's level, the preset it is closest to and its numbers; “What each column and badge means”, above the table, explains them. The chips above the table filter it by level; the search box finds a family. Choose a family for its report."),
-      h("p", null, "A report has these sections:"),
+      h("p", null, "The ", h("a", { href: "#/" }, "Library"), " lists every Google Fonts family",
+        SQA.STATIC && SQA.REBUILT ? `, rebuilt ${SQA.REBUILT}` : "",
+        ". Each row shows the level, the nearest preset and the numbers. Choose a family to see its report."),
+      read("summary", "The summary"),
+      h("p", null, "A report opens with its level, four key numbers and the issues behind the level. Each issue shows one sentence; More shows its numbers. The notes, folded, tell how the check treated the font. Then two lists show what is furthest from the expected spacing: the 10 sidebearings and the 10 pairs with the largest Model Gap. Every other section is folded under Details. A font that the check compares but does not judge has no such lists."),
+      h("p", null, h("strong", null, "Model Gap"), " = actual − expected, in units per 1000 em. Plus is looser than expected; minus is tighter."),
+      h("ul", null,
+        h("li", null, "For a sidebearing, the expected value is the model's sidebearing plus what fonts of the same kind usually do for that side."),
+        h("li", null, "For a pair, the expected gap is the model's gap plus the usual for that pair, plus what the pair's two sidebearings do to all their pairs. So a bad sidebearing shows once, in the sidebearing list, and not again in every pair it faces.")),
+      h("p", null, "The pair list leaves out two kinds of pairs. Pairs with a glyph that the font classes as a mark: browsers put such a glyph on the previous letter, so its pairs do not show spacing. Pairs that the font kerns on purpose, in the direction of their gap, with the glyphs apart: these are in the folded list “Kerned on purpose”. In the sidebearing list, ! and ✕ mark sides beyond the WARN and FAIL limits. For a connected script, the summary also shows the joins that do not connect, as a browser sets them."),
+      read("levels", "The levels"),
+      h("p", null, "The levels follow fontspector. The check compares the font with the norm for its group: its Google Fonts category, or the connected scripts."),
       h("dl", { class: "defs" },
-        h("dt", null, "Verdict"), h("dd", null, "The level and every reason for it, with the glyph sides and pairs that stand out."),
-        h("dt", null, "Where it differs"), h("dd", null, "Whether the font is off everywhere or mostly consistent with a few groups of glyphs that are not. Every scored side and pair is compared with what the fonts of its category usually do there (or with the model alone), so the model's own habits drop out. The sides that stand out are grouped by kind and direction (brackets looser on their inner sides, quotes tighter, a glyph that sits off-centre), each group drawn among other letters as designed and as the model sets it; every glyph is drawn between two bands coloured by how far its sides depart; and the pairs whose kerning departs from what the two glyphs' other pairs predict are grouped by glyph, drawn, and listed pair by pair. A font that kerns nothing is said so."),
-        h("dt", null, "Closest to"), h("dd", null, "The designer's spacing against Kinetikern2's tight, standard and loose presets, with its designer harness and without it, and where the font sits on the Looseness scale among its category (a connected script: among the library's connected scripts). Which preset is closest is a matter of taste, so it is reported, never judged."),
-        h("dt", null, "Settings"), h("dd", null, "The settings the check used for this font — along the italic angle for an italic (or along the slant its stems show, for a design that leans without declaring it), Keep joins for a connected script, tabular figures at their width, punctuation by convention, the designer harness — and the check with each setting the other way, on the same pairs: what measuring an italic upright, spacing a script's joined letters, punctuation from its shapes alone, the bare model or each category at its own Looseness would give, and how many joins each would keep."),
-        h("dt", null, "Joins"), h("dd", null, "For a connected script: every a–z pair set inside a word as a browser sets it, and where the strokes meet — joins broken in the font (with the kerning that would join each, where kerning can), the pairs a partly connected hand leaves apart (listed as style), nearly touching, fragile and crossing joins, each drawn in the font — what the other join settings would break, drawn as designed and as they would set it, and drawing advice for each kept side."),
-        h("dt", null, "Designer harness"), h("dd", null, "The same comparison with the bare model, from the same solves: whether the harness brings the model closer to this font's spacing or further from it, the glyph sides and pairs it moves (drawn), and whether each move is toward the designer."),
-        h("dt", null, "Shape error, explained"), h("dd", null, "What the font's shape error is made of: one pair measured (the designer's gap, the model's gap, the overall offset and the residual they leave), how the residuals of all pairs spread, the glyphs that make most of it — drawn among other letters, as designed and as the model sets them — and whether it lies in the sidebearings or in the kerning."),
-        h("dt", null, "Specimen"), h("dd", null, "The same text as designed and as each preset spaces it — and the best fit with the harness and without it — as lines or overlaid. The samples use the kernel's punctuation and symbols too."),
-        h("dt", null, "Glyph sides"), h("dd", null, "Every sidebearing against the model and against the library's usual for that side, as a chart and a table."),
-        h("dt", null, "Pairs"), h("dd", null, "Every pair of the GF Latin Kernel from the loosest to the tightest, or the reverse, each drawn: all pairs, or capitals, lowercase, mixed case or punctuation and symbols; against the model or the library's usual. Pairs with a glyph that is not scored (figures, the symbols fonts often draw at the figure width, the underscore) can be included. Choose how many rows to see (and show more at the end), or type a glyph or its name to see every pair it is in. A heat map shows every pair at once, the unscored glyphs last and veiled."),
-        h("dt", null, "Kerning agreement"), h("dd", null, "The designer's kerning against the model's on the pairs the designer kerned."),
-        h("dt", null, "Designspace"), h("dd", null, "For a variable family: every named instance, edge and corner, checked and judged, its italic's too (each italic location against its upright), with charts along each axis.")),
-      h("p", null, "Levels follow fontspector. A family is ", h("strong", null, "INFO"), " unless it falls far outside the library's norms — those of its group (its Google Fonts category, or for a connected script whose joins are kept the library's connected scripts) at its main location, or how much evenness the library's families lose at a location of its designspace: then it is ", h("strong", null, "WARN"), " or, very far out, ", h("strong", null, "FAIL"), ". Joins broken in the font are ", h("strong", null, "WARN"), " on their own, and so is a location whose spacing jumps against its neighbours. About lists the thresholds.")]);
+        h("dt", null, "INFO"), h("dd", null, "Nothing is far from the norm. The nearest preset is the designer's choice: the check reports it but does not judge it."),
+        h("dt", null, "WARN"), h("dd", null, "Something is far from the norm: the overall tightness or the evenness (3.5 robust σ), 4 or more sidebearings (6 σ and 60 units each), 27 or more pairs (8 σ and 80 units), a designspace location, or a join that does not connect. Spacing is the designer's choice: a WARN points to what stands out."),
+        h("dt", null, "FAIL"), h("dd", null, "Something is very far from the norm: the evenness (6 σ), the tightness (7 σ), or 3 or more sidebearings (12 σ and 150 units each)."),
+        h("dt", null, "SKIP"), h("dd", null, "The check does not apply to the font."),
+        h("dt", null, "ERROR"), h("dd", null, "The check could not read the font.")),
+      h("p", null, "Some fonts have limits. A family whose primary script is not Latin cannot be FAIL. A connected script or a font measured along its slant is compared but not judged, except for its joins. A font whose best fit stops at the end of the Looseness range is out of range: the check shows the comparison but does not judge it."),
+      read("numbers", "Numbers"),
+      h("dl", { class: "defs" },
+        h("dt", null, "Best-fit Looseness"), h("dd", null, "The overall tightness at which the model comes nearest to the font: −0.5 is the tight preset, 0 standard, +0.5 loose. For a connected script, the Looseness matches its joined letters."),
+        h("dt", null, "Shape error"), h("dd", null, "How uneven the gaps are: the mean size of the residuals (see Shape error)."),
+        h("dt", null, "Sidebearing error"), h("dd", null, "The mean difference between the font's sidebearings and the model's, after the overall offset."),
+        h("dt", null, "Kerning match"), h("dd", null, "The correlation r between the designer's kerning and the model's, on the pairs the designer kerns, and how often the two kern in the same direction.")),
+      read("differs", "Where it differs"),
+      h("p", null, "This section asks one question: is the font off everywhere, or consistent except for a few glyphs? It compares each sidebearing with the font's typical side, after the norm for that side. A side stands out at 25 units and 3 times the font's usual spread; it stands far out at 50 units and 5 times. A font whose sides spread more than 9 in 10 fonts of its kind, or whose sides stand out by more than 1 in 5, is uneven throughout."),
+      h("p", null, "For kerning, it compares each pair with the usual pair of its two glyphs, so the sidebearings cancel out. A pair stands out at 30 units and 4 times the usual spread. A glyph with 3 or more such pairs in one direction makes a group."),
+      read("designspace", "Designspace"),
+      h("p", null, "The check measures a variable font at Regular (the main report): weight 400, width 100, upright, every other axis at its default. It also measures every named instance, every edge (one axis at its minimum or maximum) and every corner (all axes at their extremes). A font with more than six axes gets the corners of weight, width and optical size only."),
+      h("p", null, "Each location is compared with how much evenness fonts usually lose there, and with its neighbours along each axis. A named instance that differs from Regular in weight only can be WARN or FAIL. Other locations can be WARN at most. An italic location is judged against its upright."),
+      read("presets", "Presets"),
+      h("p", null, "Kinetikern2 has three presets: tight (Looseness −0.5), standard (0) and loose (+0.5). The distance to a preset is the mean difference of the pair gaps, the overall offset included. The nearest preset is a matter of overall tightness: the designer's choice."),
+      read("settings", "Settings"),
+      h("p", null, "The check sets up Kinetikern2 for each font as the plugin does. It measures an italic along its italic angle. It measures a design that leans without an italic angle along the slant of its stems, when that fits clearly better. It keeps the joins of a connected script as drawn. It keeps tabular figures at their width. It uses the designer harness and the punctuation conventions."),
+      h("p", null, "The plugin differs in two places. Its designer harness is off until you switch it on. It writes class kerning with a 5-unit threshold and at most 30,000 entries; the check compares every pair with no threshold. Each row of the Settings table changes one setting and shows the result."),
+      read("joins", "Joins"),
+      h("p", null, "For a connected script, the join checker sets every a–z pair between two n's, as a browser does: contextual alternates and connectors included. It then finds where the strokes meet."),
+      h("ul", null,
+        h("li", null, "A join does not connect when two joining letters stay 3 units or more apart, along the shortest line. A letter side joins when it meets at least half the letters set next to it."),
+        h("li", null, "Two strokes closer than 3 units nearly touch. A join that breaks if the spacing opens by less than 5 units is fragile."),
+        h("li", null, "A hand where 1 in 20 such pairs or more do not meet joins in part, by design. There, only pairs whose sides both join 3 in 4 of their partners count. The other non-joins are style."),
+        h("li", null, "The drawings show each word as a browser sets it. Kerning closes a gap only when the strokes do not cross and the kern is under 100 units; else a longer stroke or an alternate is needed.")),
+      read("harness", "Designer harness"),
+      h("p", null, "Kinetikern2 spaces from the outlines alone. Its designer harness adds what the designers of well-spaced fonts do differently from the model: more room inside parentheses and brackets and around / ? ! &, less around quotes, period, comma and hyphen. It learned this from the Google Fonts families that reviewers rate well spaced. The report compares the font with the model and its harness; this section shows the same comparison without the harness."),
+      read("shape", "Shape error"),
+      h("p", null, "Even spacing means that the white between letters looks the same from pair to pair. For every pair, the check measures the white as designed and as the model sets it at the font's own tightness. Their difference, after the overall offset, is the pair's residual. The shape error is the mean size of the residuals. A high value can be a style (scripts, lively display faces), a convention the model does not know, or pairs that are really uneven. It is not a grade."),
+      read("specimen", "Specimen"),
+      h("p", null, "The same text as designed and at each spacing, at one scale. Only the checked glyphs show, and the word space is 250 units."),
+      read("sides", "Glyph sides"),
+      h("p", null, "Every sidebearing against the model and against the norm for that side, as a chart and a table. The table puts the largest Model Gap first."),
+      read("pairs", "Pairs"),
+      h("p", null, "Every pair, drawn as designed and as the model sets it, largest Model Gap first. Choose the expected gap: the model and the norm, or the model alone. “far” marks a pair 8 σ and 80 units from the norm. The folded matrix shows every pair at once: a whole row or column in one colour is one sidebearing."),
+      read("kerning", "Kerning"),
+      h("p", null, "The designer's kerning against the model's: one point per kerned pair. Points near the diagonal agree."),
+      read("skipped", "When a font is not checked"),
+      h("p", null, "The check does not apply to monospaced fonts, to fonts whose letters use two or three widths (a multi-pitch design or a barcode), to designs whose glyphs touch by construction, to fonts without the basic Latin alphabet or without outlines, and to files that are not fonts."),
+    ]);
+    // a report's “How to read this” link: scroll to its part once the router has
+    // scrolled to the top and the fonts have set the text (else it moves)
+    const topic = params && params.get ? params.get("read") : null;
+    const t = topic ? document.getElementById("read-" + topic) : null;
+    if (t) {
+      const go = () => { if (t.isConnected) { t.scrollIntoView({ block: "start" }); t.focus({ preventScroll: true }); } };
+      setTimeout(() => (document.fonts && document.fonts.ready ? document.fonts.ready.then(go) : go()), 0);
+    }
 
     // ------------------------------------------------------------ testing
     SQA.append(prose, [

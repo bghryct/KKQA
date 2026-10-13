@@ -227,7 +227,7 @@
         exportLink("tags_metadata.csv", "The rows google/fonts' ", h("code", null, "tags/tags_metadata.csv"), " needs to register the new ", h("code", null, "/quant/spacing_*"), " and ", h("code", null, "/Skip/Spacing"), " tags, in its format (", h("code", null, "/Group/Tag,min,max,description"), ").")),
       h("h3", null, "Reports"),
       h("div", { class: "exports" },
-        mdLink("FAIL", "Every FAIL family as Markdown: a table, then each family's reasons, its distance to the presets and its loosest and tightest pairs."),
+        mdLink("FAIL", "Every FAIL family as Markdown: a table, then each family's reasons, its key numbers and its top 10 sidebearings and pairs."),
         mdLink("WARN", "Every WARN family as Markdown, the same way: for issues and pull requests."),
         mdLink("INFO", "Every INFO family as a Markdown table: closest preset, Looseness, shape error and notes."),
         mdLink("SKIP", "The families the check does not apply to, with the reason."),

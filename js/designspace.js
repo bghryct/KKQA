@@ -231,9 +231,10 @@
     m.rows.forEach((r) => { if (r.kind in counts && !r.italic) counts[r.kind]++; });
     const n = m.rows.filter((r) => r.kind !== "default" && !r.italic).length;
     sec.appendChild(h("p", { class: "section-intro" },
-      "A variable font is checked at Regular, the way Google Fonts serves it — weight 400, width 100 and upright where the axes reach them, every other axis at its default: the main report — and across its designspace: at every named instance, at every axis's minimum and maximum (its edges, the other axes where the main report has them) and at every corner of its designspace (all axes at their extremes together; a font with more than six axes: the corners of weight, width and optical size, and each other axis's extremes at the lightest and the boldest weight). ",
-      m.italic ? "A family's italic variable font is checked across its own designspace too: each location measured along its italic angle is judged against its upright counterpart (at most WARN), and one measured upright is reported only. " : "",
-      o.pick ? "Pick any location to see its full report, checked live." : ""));
+      "The check measures a variable font at Regular (the main report) and at every named instance, edge and corner of its designspace. ",
+      m.italic ? "Italic locations are judged against their upright (at most WARN). " : "",
+      o.pick ? "Pick a location to see its full report. " : "",
+      SQA.readLink("designspace")));
     if (m.summary) sec.appendChild(h("p", { class: "ds-summary" }, m.summary.message));
     else if (!m.checked && n) {
       sec.appendChild(h("p", { class: "ds-summary" }, `This font has ${SQA.plural(n, "location")} to check: ${[
@@ -250,7 +251,7 @@
     }
     if (m.from) {
       sec.appendChild(h("p", { class: "note", style: { marginTop: "12px" } },
-        `The locations are those of the published scan (${SQA.fmtDateTime(m.from.generated)}): the re-check in your browser covers the main report (Regular) only, because each location takes a few seconds here. Pick a location to check it now.`));
+        `The locations come from the published scan (${SQA.fmtDateTime(m.from.generated)}). A re-check in your browser covers Regular only. Pick a location to check it now.`));
     }
     sec.appendChild(axesList(m));
     if (o.pick) sec.appendChild(picker(m, o, cur));
@@ -290,7 +291,7 @@
     const id = "ds-pick-" + ++uid;
     const wrap = h("div", { class: "panel ds-pick" });
     const help = h("p", { class: "small", id: id + "-help" },
-      `Each location is checked live${o.where ? " " + o.where : ""} — ${o.seconds ? "about " + (o.seconds < 10 ? fmt(o.seconds, 1) + " s" : SQA.duration(o.seconds)) : "a few seconds"} — with its full report, and is not stored.`);
+      `The check runs${o.where ? " " + o.where : ""} in ${o.seconds ? "about " + (o.seconds < 10 ? fmt(o.seconds, 1) + " s" : SQA.duration(o.seconds)) : "a few seconds"}. It shows the full report and stores nothing.`);
     if (m.rows.length > 1) {
       const sel = h("select", { id, "aria-describedby": id + "-help" });
       const group = (label, list) => {
@@ -383,13 +384,13 @@
   // ---------------------------------------------------------------- the table
   const COLS = [
     { key: "k", label: "Location", title: "In the designspace's order: named instances as the font lists them, then edges, then corners; then the italic font's" },
-    { key: "kind", label: "Kind", title: "Named instance; edge (one axis at its minimum or maximum, the others where the main report has them: Regular — weight 400, width 100, upright — and the rest at their defaults); corner (all axes at their extremes together — with more than six axes, wght, wdth and opsz, or another axis's extreme at the lightest or the boldest weight)" },
+    { key: "kind", label: "Kind", title: "Named instance; edge: one axis at its minimum or maximum; corner: all axes at their extremes" },
     { key: "desc", label: "Axes", title: "The axes whose value differs from Regular, the main report's location (in the italic font: from the italic's own center, at the main report's weight)" },
-    { key: "level", label: "Level", title: "Evenness lost against Regular, the main report (an italic or slanted location: against its upright), compared with what the library's families usually lose there, and jumps against neighbouring locations (WARN). A named instance that differs from the main report in weight alone can be WARN or FAIL; edges, corners, named instances at one of them, locations at another width, optical size or custom-axis value than the main report, and italic and slanted locations at most WARN. Italic and slanted locations measured upright, and fits at the limit of the Looseness range, are reported only" },
+    { key: "level", label: "Level", title: "Evenness lost against Regular (italic: against its upright), compared with what fonts usually lose there, and jumps against neighbours" },
     { key: "closest", label: "Closest", title: "The Kinetikern2 preset nearest to the spacing at this location" },
-    { key: "best_looseness", label: "Looseness", num: true, title: "Best-fit Looseness (a connected script: matched to its joined letters): −0.5 is the tight preset, 0 standard, +0.5 loose. Reported, not judged: weights, widths and optical sizes are meant to differ" },
-    { key: "shape_error", label: "Shape error", num: true, title: "How far the gaps depart from even spacing of these shapes, overall tightness taken out (units per 1000 em)" },
-    { key: "sidebearing_error", label: "Sidebearing error", num: true, title: "Mean absolute sidebearing difference from the best-fit model, offset removed (units per 1000 em)" },
+    { key: "best_looseness", label: "Looseness", num: true, title: "Best-fit Looseness: −0.5 tight, 0 standard, +0.5 loose. Not judged: weights and widths differ by design" },
+    { key: "shape_error", label: "Shape error", num: true, title: "How uneven the gaps are, units per 1000 em" },
+    { key: "sidebearing_error", label: "Sidebearing error", num: true, title: "Mean sidebearing difference from the model, units per 1000 em" },
     { key: "kern_r", label: "Kerning r", num: true, title: "Correlation of the designer's kerning with the model's" },
     { key: "notes", label: "Notes", title: "Why a location is raised, skipped or not judged" },
   ];
@@ -577,7 +578,7 @@
     const st = { measure: "best_looseness" };
     const isCur = (r) => !SQA.sameLocation(cur, m.main) && SQA.sameLocation(r.location, cur);
     sec.append(head, h("p", { class: "section-intro" },
-      "Each line joins locations that differ on one axis only: the line through Regular (the main report) in ink, the others in grey; every dot is a location, coloured by its level. Hover or focus a dot for its numbers; click it, or press Enter, to check that location."));
+      "Each line joins locations that differ on one axis. Ink: the line through Regular. Each dot is a location, coloured by its level."));
     const controls = h("div", { class: "controls" }, h("span", { class: "control-label" }, "Measure"),
       SQA.segmented("Measure drawn", Object.keys(MEASURES).map((k) => ({ label: MEASURES[k].label, value: k })), st.measure, (v) => { st.measure = v; redraw(); }));
     // the legend: line keys for lines, the marks as drawn (level colours always with their names)

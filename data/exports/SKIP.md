@@ -1,6 +1,6 @@
 # Spacing QA — SKIP: 183 families
 
-Families the check does not apply to: monospaced or every letter on two or three fixed widths (spacing set by the widths: a multi-pitch design or a barcode), glyphs that touch by construction (a line, a grid, a background or an effect through every glyph), without the basic Latin alphabet, without outlines, or a file that is not a font.
+The check does not apply to these families: all letters on one, two or three widths, glyphs that touch by design, no basic Latin alphabet, no outlines, or a file that is not a font.
 
 1950 families in the library · baseline 2026-10-12-0107-1132 (1132 fonts in the norms) · spacingqa 0.1.0 kinetikern2 2.0.0
 

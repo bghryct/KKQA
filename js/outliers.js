@@ -324,10 +324,9 @@
     const sec = h("section", { "aria-labelledby": "differs-h" });
     sec.appendChild(h("h2", { id: "differs-h", tabindex: "-1" }, "Where it differs"));
     sec.appendChild(h("p", { class: "section-intro" },
-      "Is the font off everywhere, or mostly fine with a few glyphs that are not? This section looks at every scored glyph side and every scored pair and finds what stands out from the rest of the font. ",
-      N ? `It compares each side and each pair with what ${catName} usually do there — their median departure from the model — so the model's own habits (quotes and parentheses it sets tighter than designers do, the open sides of f, r and T) are taken out, and what remains is particular to this font. ` : "No library baseline is loaded, so it compares with the model alone. ",
-      N && slanted ? `This font is measured along its slant, so the comparison starts with the model alone: the norms of ${catName} come from fonts measured upright, and the shear moves the sides of what sits far from half the x-height (quotes, capitals, descenders), so what they usually do is only a rough guide here. ` : "",
-      "A side stands out when it is at least 25 units per 1000 em from this font's typical side and three times as far as the font's sides usually are, and stands far out at 50 units and five times; a pair stands out when its own kerning departs by at least 30 units and four times the usual. A font whose sides spread more widely than 9 in 10 fonts of its kind is uneven throughout."));
+      "The sides and pairs that stand out from the rest of this font. ",
+      N && slanted ? "The check measures this font along its slant, so it compares with the model alone first. " : "",
+      SQA.readLink("differs")));
     root.appendChild(sec);
     const st = { against: N && !slanted ? "library" : "model" };
     if (N) {
@@ -372,34 +371,34 @@
     // the spread of this font's group, for scale
     const group = A.spread.pooled ? "fonts" : catName;
     const [q10, , q90] = A.spread.q;
-    const scale = `a typical side is ${fmt(A.sigma, 0)} units per 1000 em from it, where 8 in 10 ${group} are at ${fmt(q10, 0)} to ${fmt(q90, 0)}`;
+    const scale = `typical spread ${fmt(A.sigma, 0)} units; 8 in 10 ${group}: ${fmt(q10, 0)} to ${fmt(q90, 0)}`;
     const box = h("div", { class: "panel diagnosis" });
-    const head = A.pattern === "even" ? "No glyph side stands out from the rest of the font"
-      : A.pattern === "outliers" ? `Mostly consistent, with ${groups.length === 1 ? "one group" : `${groups.length} groups`} of glyphs that stand out`
-        : "Uneven throughout: the differences are spread over the whole font";
+    const head = A.pattern === "even" ? "No sidebearing stands out from the rest of the font"
+      : A.pattern === "outliers" ? `Mostly consistent: ${groups.length === 1 ? "one group" : `${groups.length} groups`} of glyphs stand out`
+        : "Uneven: the differences spread over the whole font";
     box.appendChild(h("p", { class: "diagnosis-head" }, head));
     const p1 = A.pattern === "uneven"
       ? (A.wide
-        ? `${vs}, this font's glyph sides spread more widely around its typical side than 9 in 10 ${group}: ${scale}. So the spacing departs in many places rather than in a few glyphs — often a deliberate, lively rhythm (display and handwriting faces), sometimes sidebearings that were never made consistent.`
-        : `${vs}, ${int(k)} of the ${int(n)} scored glyph sides (${fmt((100 * k) / n, 0)} %) stand out from this font's typical side — too many to be a few glyphs that differ.`) +
-        (k ? (k === 1 ? " The side furthest out is grouped below." : ` The ${int(k)} sides furthest out are grouped below.`) : "")
-      : `${vs}, ${int(within)} of the ${int(n)} scored glyph sides (${fmt((100 * within) / n, 0)} %) are within ${fmt(A.tau, 0)} units per 1000 em of this font's typical side — the rest of the font is consistent with itself (${scale}). ` +
+        ? `${vs}, the sidebearings spread more than in 9 of 10 ${group} (${scale}). This can be a lively style, or sidebearings that do not agree.`
+        : `${vs}, ${int(k)} of ${int(n)} sidebearings (${fmt((100 * k) / n, 0)} %) stand out: too many for a few glyphs.`) +
+        (k ? (k === 1 ? " The list below shows the side furthest out." : ` The list below groups the ${int(k)} sides furthest out.`) : "")
+      : `${vs}, ${int(within)} of ${int(n)} sidebearings (${fmt((100 * within) / n, 0)} %) are within ${fmt(A.tau, 0)} units of the font's typical side (${scale}). ` +
         (k ? `${int(k)} ${k === 1 ? "side stands" : "sides stand"} out:` : "None stands out.");
     box.appendChild(h("p", null, p1));
     if (groups.length) {
       box.appendChild(h("ul", { class: "diagnosis-list" }, groups.slice(0, 8).map((gr) => h("li", null,
         h("b", null, `${gr.kind.label}: ${charList(face, gr.glyphs)}`),
-        gr.shift ? ` — sits off-centre: ${gr.dir.replace("shifted ", "")} by ${range(gr.offsets)} (one side tighter, the other looser)`
+        gr.shift ? ` — off-centre: ${gr.dir.replace("shifted ", "")} by ${range(gr.offsets)} (one side tighter, one looser)`
           : ` — ${gr.where} ${gr.dir} by ${range(gr.items.map((e) => e.d))}${gr.detail ? ` (${gr.detail})` : ""}`,
         gr.strong ? h("span", { class: "z-mark" }, "far out") : null))));
-      if (groups.length > 8) box.appendChild(h("p", { class: "small" }, `…and ${groups.length - 8} more groups below.`));
+      if (groups.length > 8) box.appendChild(h("p", { class: "small" }, `${groups.length - 8} more groups follow below.`));
     }
     if (K) {
       const kk = K.outs.length;
       box.appendChild(h("p", null,
-        `Kerning: of the ${int(K.n)} scored pairs, ${int(kk)} (${fmt((100 * kk) / K.n, 1)} %) depart by ${fmt(K.tau, 0)} units or more from the typical pair of their two glyphs — ${kerned === 0 ? "differences only kerning can change" : "differences in how those particular pairs are kerned"}. `,
-        kerned === 0 ? `This font kerns none of its scored pairs, so each of these gaps is the two glyphs' sidebearings alone: these are the pairs that would need kerning to match ${against === "library" ? `what ${catName} usually do` : "the model"}. ` : "",
-        K.groups.length ? `${K.groups.length === 1 ? "They fall in one group" : `Most of them fall in ${K.groups.length} groups; the largest`}:` : "They are scattered rather than grouped."));
+        `Kerning: ${int(kk)} of ${int(K.n)} pairs (${fmt((100 * kk) / K.n, 1)} %) differ by ${fmt(K.tau, 0)} units or more from the usual pair of their two glyphs. `,
+        kerned === 0 ? "The font has no kerning, so these pairs need it. " : "",
+        K.groups.length ? (K.groups.length === 1 ? "They form one group:" : `The largest of ${K.groups.length} groups:`) : "They do not form groups."));
       if (K.groups.length) {
         box.appendChild(h("ul", { class: "diagnosis-list kern" }, K.groups.slice(0, 5).map((gr) => {
           const g = face.glyphs[gr.glyph];
@@ -418,7 +417,7 @@
   function glyphMap(face, A, bySide, catName, body) {
     body.appendChild(h("h3", { id: "differs-map-h", tabindex: "-1" }, "Every glyph, side by side"));
     body.appendChild(h("p", { class: "section-intro" },
-      "Each glyph is drawn between two bands, its left and its right side. A band's colour says how far that side departs from this font's typical side: grey is as usual, red is looser, blue is tighter, the deeper the further. A ring marks a side that stands out; a red ring, one that stands far out. Hover or focus a glyph for its numbers."));
+      "Each glyph between two bands, its left and right side. Red is looser than the font's typical side, blue tighter. A ring marks a side that stands out."));
     body.appendChild(ramp(A.R, A.against, catName));
     const map = h("div", { class: "glyph-map" });
     const groupsOrder = [["upper", "Capitals"], ["lower", "Lowercase"], ["punct", "Punctuation and symbols"]];
@@ -431,14 +430,13 @@
       map.appendChild(h("div", { class: "gm-group" }, h("h4", null, label), tiles));
     });
     body.appendChild(map);
-    body.appendChild(h("p", { class: "caption" }, "Figures, the symbols fonts often draw at the figure width and the underscore are not scored (see Glyph sides further down)."));
+    body.appendChild(h("p", { class: "caption" }, "Figures, symbols at figure width and the underscore are not scored."));
   }
 
   function sideCards(face, A, groups, bySide, resOf, catName, body) {
     if (!groups.length) return;
     body.appendChild(h("h3", { id: "differs-sides-h", tabindex: "-1" }, "Sides that stand out"));
-    body.appendChild(h("p", { class: "section-intro" },
-      `Grouped by kind of glyph and direction. The numbers are units per 1000 em beyond this font's typical side${A.against === "library" ? `, after what ${catName} usually do for that side` : ""}. Under each group, its glyph set among others as designed and as the model sets it, with the white shaded red where the font is looser than the model, blue where tighter.`));
+    body.appendChild(h("p", { class: "section-intro" }, "Grouped by kind of glyph and direction. Units per 1000 em beyond the font's typical side."));
     const cards = h("div", { class: "out-cards" });
     groups.forEach((gr, gi) => {
       const card = h("article", { class: "panel out-card" + (gr.strong ? " far" : "") });
@@ -446,9 +444,8 @@
       card.appendChild(h("h4", null, gr.shift ? `${gr.kind.label}: off-centre, ${gr.dir}` : `${gr.kind.label}: ${gr.where} ${gr.dir}`, gr.strong ? h("span", { class: "z-mark" }, "far out") : null));
       const all = n === gr.total && n > 1 ? `All ${n} ${gr.kind.label.toLowerCase()}, ${charList(face, gr.glyphs)},` : n === 1 ? `${face.glyphs[gr.glyphs[0]].char} (${face.glyphs[gr.glyphs[0]].name})` : `${n} of the ${gr.total} ${gr.kind.label.toLowerCase()}, ${charList(face, gr.glyphs)},`;
       const words = h("p", { class: "card-text" }, gr.shift
-        ? `${all} ${n === 1 ? "sits" : "sit"} ${range(gr.offsets)} units per 1000 em further ${gr.dir.replace("shifted ", "")} in ${n === 1 ? "its" : "their"} advance than ${A.against === "library" ? `${catName} usually place ${n === 1 ? "it" : "them"}` : `the model places ${n === 1 ? "it" : "them"}`}: one side is tighter and the other looser by about as much, so the room is right but the ink is off-centre.`
-        : [`${all} ${n === 1 ? "is" : "are"} set ${gr.dir} ${onWhere(gr, n)} than ${A.against === "library" ? `${catName} usually set ${n === 1 ? "it" : "them"}` : `the model sets ${n === 1 ? "it" : "them"}`}: ${range(gr.items.map((e) => e.d))} units per 1000 em beyond the font's typical side. `,
-          `${n === 1 ? "It gets" : "They get"} ${gr.dir === "looser" ? "more" : "less"} room than the rest of the font gives its glyphs.`]);
+        ? `${all} ${n === 1 ? "sits" : "sit"} ${range(gr.offsets)} units ${gr.dir.replace("shifted ", "")} in ${n === 1 ? "its" : "their"} advance. One side is tighter and one looser: the ink is off-centre.`
+        : `${all} ${n === 1 ? "has" : "have"} ${gr.dir === "looser" ? "more" : "less"} room ${onWhere(gr, n)}: ${range(gr.items.map((e) => e.d))} units beyond the font's typical side.`);
       const tiles = h("div", { class: "gm-tiles big" });
       gr.glyphs.forEach((i) => {
         const l = bySide.get(i + ":left") || null, rr = bySide.get(i + ":right") || null;
@@ -476,9 +473,8 @@
 
   function kerningCards(face, K, catName, against, body) {
     body.appendChild(h("h3", { id: "differs-kern-h", tabindex: "-1" }, "Kerning that stands out"));
-    body.appendChild(h("p", { class: "section-intro" },
-      `A pair's gap depends on the two sidebearings and on its kerning. To see the kerning on its own, each pair is measured against the typical pair of its left glyph and of its right glyph${against === "library" ? `, after what ${catName} usually do for that pair` : ""}: whatever a glyph's sidebearing does to all its pairs cancels out, and what is left is how this particular pair is kerned. A pair stands out at ${fmt(K.tau, 0)} units per 1000 em or more. Groups: a glyph with three or more such pairs in one direction.`));
-    if (!K.outs.length) { body.appendChild(h("p", { class: "note" }, "No pair stands out: the kerning follows the sidebearings consistently.")); return; }
+    body.appendChild(h("p", { class: "section-intro" }, `Each pair against the usual pair of its two glyphs, so the sidebearings cancel out and the kerning shows. A pair stands out at ${fmt(K.tau, 0)} units or more.`));
+    if (!K.outs.length) { body.appendChild(h("p", { class: "note" }, "No pair stands out. The kerning follows the sidebearings.")); return; }
     const cards = h("div", { class: "out-cards kern-cards" });
     const k = 132 / (face.top - face.bottom);
     K.groups.slice(0, 12).forEach((gr) => {
@@ -488,9 +484,7 @@
       card.appendChild(h("h4", null, gr.role === "left" ? `${named(g)} followed by ${gr.pairs.length} glyphs: ${gr.dir}` : `${gr.pairs.length} glyphs followed by ${named(g)}: ${gr.dir}`));
       const kd = medianOf(gr.pairs.map((e) => e.kd)), km = medianOf(gr.pairs.map((e) => e.km));
       const words = h("p", { class: "card-text" },
-        `${gr.role === "left" ? `${named(g)} before ${describeGlyphs(face, partnerIdx)}` : `${describeGlyphs(face, partnerIdx)} before ${named(g)}`}: these pairs are set ${fmt(Math.abs(gr.median), 0)} units ${gr.dir} (median) than ${/^[A-Za-z0-9]$/.test(g.char) ? `${g.char}'s other pairs` : `the other pairs of ${named(g)}`} and their partners' other pairs would make them. `,
-        `The font kerns them ${signed(kd, 0)} (median) where the model kerns ${signed(km, 0)}. `,
-        gr.dir === "looser" ? "Compared with how the rest of the font is spaced, these pairs are kerned less, or opened more, than expected." : "Compared with how the rest of the font is spaced, these pairs are kerned more than expected.");
+        `These pairs are ${fmt(Math.abs(gr.median), 0)} units ${gr.dir} (median) than their glyphs' other pairs. The font kerns them ${signed(kd, 0)}; the model kerns ${signed(km, 0)}.`);
       // the pairs furthest out, drawn as designed and as the model sets them
       const ex = gr.pairs.slice(0, 4);
       const widthU = Math.max(...ex.map((e) => Math.max(face.pairPlace(e.a, e.b, "designer").right, face.pairPlace(e.a, e.b, "best").right)));
@@ -512,10 +506,10 @@
     if (K.groups.length > 12) body.appendChild(h("p", { class: "small" }, `${K.groups.length - 12} smaller groups are in the table below.`));
     if (K.singles.length) {
       body.appendChild(h("h4", { class: "sub-h" }, `Single pairs that stand out (${int(K.singles.length)})`));
-      body.appendChild(h("p", { class: "small" }, "Pairs that stand out but share no group with two others, furthest first."));
+      body.appendChild(h("p", { class: "small" }, "Pairs that stand out alone, largest gap first."));
       const box = h("div", { class: "table-wrap medium" }, pairTable(face, K.singles.slice(0, 40)));
       body.appendChild(box);
-      if (K.singles.length > 40) body.appendChild(h("p", { class: "small" }, `The first 40 of ${int(K.singles.length)}; the table below has every pair that stands out.`));
+      if (K.singles.length > 40) body.appendChild(h("p", { class: "small" }, `The first 40 of ${int(K.singles.length)}. The table below has all of them.`));
     }
   }
 

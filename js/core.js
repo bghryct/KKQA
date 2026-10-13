@@ -156,11 +156,11 @@
   const LEVEL_RANK = { SKIP: 0, PASS: 1, INFO: 2, WARN: 3, FAIL: 4, ERROR: 5 };
   const LEVEL_ICON = { SKIP: "–", PASS: "✓", INFO: "i", WARN: "!", FAIL: "✕", ERROR: "!!" };
   const LEVEL_TEXT = {
-    SKIP: "Not checked: the font is outside what the check covers.",
-    PASS: "Passes.",
-    INFO: "For information: the spacing is the designer's choice, and nothing the check judges is far outside the library's norms or broken.",
-    WARN: "Worth a look: something falls far outside the library's norms, a location of the designspace jumps against its neighbours, or joins are broken in the font.",
-    FAIL: "Fails: the spacing falls very far outside the library's norms.",
+    SKIP: "Not checked. The check does not apply to this font.",
+    PASS: "No problem found.",
+    INFO: "The check found no problem. Spacing is the designer's choice.",
+    WARN: "Examine the items below. Something is far from the norm, a designspace location stands out, or joins do not connect.",
+    FAIL: "The spacing is very far from the norm.",
     ERROR: "The check could not run on this font.",
   };
   function badge(level, opts) {
@@ -671,6 +671,19 @@
     el.textContent = text || "";
     if (text) el.setAttribute("role", kind === "error" ? "alert" : "status");
   }
+  /** A link to the part of the Guide that explains a report section. */
+  function readLink(topic, text) {
+    return h("a", { href: `#/guide?read=${encodeURIComponent(topic)}`, class: "read-link" }, text || "How to read this");
+  }
+  /** Opens the folded section that holds element `id`, then scrolls to it. */
+  function reveal(id) {
+    const t = document.getElementById(id);
+    if (!t) return;
+    for (let d = t.closest("details"); d; d = d.parentElement && d.parentElement.closest("details")) d.open = true;
+    t.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    t.focus({ preventScroll: true });
+  }
+
   function loading(text, sub) {
     return h("div", { class: "loading", role: "status" },
       h("p", { class: "lede", style: { margin: 0 } }, text),
@@ -693,6 +706,6 @@
     CONFIG, STATIC, REBUILT, requestUrl, WHERE, exportUrl, staticData,
     tip, initTheme, currentTheme, cssVar, announce,
     store, getInfo, getFamilies, getLibrary, categoryKey, categoryName, judgedCategory, SIGMA, FIT_LIMIT, outOfRange, withHarness, scriptName,
-    download, segmented, message, loading, errorBox, MINUS,
+    download, segmented, message, loading, errorBox, MINUS, readLink, reveal,
   });
 })();

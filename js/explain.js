@@ -100,8 +100,9 @@
     if (!b || !face || !face.spacings.includes("bare")) return;
     const d = sm.shape_error - b.shape_error;
     const rel = b.shape_error > 0 ? Math.abs(d) / b.shape_error : 0;
-    const sec = section(root, "harness-h", "Designer harness: with it and without it",
-      "Kinetikern2 spaces from the outlines alone. Its designer harness adds what the designers of well-spaced fonts consistently do differently from the model — more room inside parentheses and brackets and around / ? ! &, less around quotes, period, comma and hyphen, more on the open sides of E, F, L and T at light weights — learned from the fonts on Google Fonts that its reviewers rate well spaced (see About). Every other section of this page compares the font with the model and its harness. Here is the same comparison with the bare model, from the same solves: the difference is the harness alone.");
+    const sec = section(root, "harness-h", "Designer harness", h("p", { class: "section-intro" },
+      "The same comparison with the bare model, without the harness. The difference is the harness alone. ",
+      SQA.readLink("harness")));
     const verb = d < -0.05 ? "closer to" : d > 0.05 ? "further from" : "as close to";
     sec.appendChild(h("p", { class: "lead-line" },
       h("b", null, `With the harness the model is ${verb} this font's spacing`),
@@ -148,8 +149,8 @@
       const toward = moves.filter((m) => m.toward).length, away = moves.filter((m) => m.away).length;
       sec.appendChild(h("h3", null, "The sides it moves"));
       sec.appendChild(h("p", { class: "section-intro" },
-        `The harness moves ${int(moves.length)} glyph ${moves.length === 1 ? "side" : "sides"} of this font by a unit per 1000 em or more: ${int(toward)} toward where the designer put ${toward === 1 ? "it" : "them"}, ${int(away)} away${moves.length - toward - away ? `, ${int(moves.length - toward - away)} about as far` : ""}. ` +
-        "Each row is one side: the hollow dot is how far the designer's side is from the bare model, the filled dot how far it is from the model with the harness (0: where the model puts it, offset removed). An arrow toward 0 means the harness moved the model toward this font."));
+        `The harness moves ${int(moves.length)} ${moves.length === 1 ? "side" : "sides"} by a unit or more: ${int(toward)} toward the designer, ${int(away)} away${moves.length - toward - away ? `, ${int(moves.length - toward - away)} about the same` : ""}. ` +
+        "Hollow dot: the bare model. Filled dot: the model with the harness. 0 is the model's position."));
       const top = moves.slice().sort((x, y) => Math.abs(y.shift) - Math.abs(x.shift)).slice(0, 16);
       const stage = h("div", { class: "stage" });
       sec.appendChild(stage);
@@ -179,7 +180,7 @@
       const toward = fixes.filter((f) => f.toward).length;
       sec.appendChild(h("h3", null, "The pairs it corrects"));
       sec.appendChild(h("p", { class: "section-intro" },
-        `Beyond the sides, the harness corrects the kerning of ${int(fixes.length)} ${fixes.length === 1 ? "pair" : "pairs"} of this font (mostly with punctuation); ${int(toward)} of them end up closer to the designer's gap. The largest, as designed, as the bare model sets them and with the harness:`));
+        `The harness also corrects the kerning of ${int(fixes.length)} ${fixes.length === 1 ? "pair" : "pairs"}, mostly with punctuation. ${int(toward)} come closer to the designer. The largest:`));
       const top = fixes.slice().sort((x, y) => Math.abs(y.corr) - Math.abs(x.corr)).slice(0, 8);
       const k = 64 / (face.top - face.bottom);
       const widthU = Math.max(...top.map((e) => Math.max(face.pairPlace(e.a, e.b, "designer").right, face.pairPlace(e.a, e.b, "bare").right, face.pairPlace(e.a, e.b, "best").right)));
@@ -199,7 +200,7 @@
       });
       t2.appendChild(body);
       sec.appendChild(h("div", { class: "table-wrap" }, t2));
-      sec.appendChild(h("p", { class: "caption" }, "Drawings at one scale; the white between the glyphs is shaded and measured, the designed position of the second glyph in grey. “vs bare” and “vs with it”: the pair's residual (designer's gap − model's gap − overall offset) against each model."));
+      sec.appendChild(h("p", { class: "caption" }, "The white between the glyphs is shaded and measured. Grey: the designer's position of the second glyph. “vs bare” and “vs with it”: the residual against each model."));
     }
   }
 
@@ -256,11 +257,9 @@
     const SE = sm.shape_error;
     const N = SQA.reportParts && SQA.reportParts.normsFor ? SQA.reportParts.normsFor(r, o.library) : null;
     const med = N && N.stats && N.stats.shape_error && N.stats.shape_error.n ? N.stats.shape_error : null;
-    const sec = section(root, "shape-h", "Shape error, explained", h("div", { class: "section-intro" },
-      h("p", null, "Even spacing means the white between letters feels the same from pair to pair, whatever their shapes. Kinetikern2 spaces each pair of this font's glyphs that way from the outlines alone. For every pair, the check measures the white between the two glyphs as designed and as the model sets them at the font's own overall tightness (the best fit), and takes their difference — after the font's overall offset is taken out, so being set tight or loose overall costs nothing. That difference is the pair's ", h("b", null, "residual"), ": positive when the font gives the pair more room than the model would, negative when less."),
-      h("p", null, h("b", null, `The shape error is the average size of the residuals: ${fmt(SE, 1)} units per 1000 em for this font`),
-        med ? ` (the median of ${N.name} is ${fmt(med.median, 1)}).` : ".",
-        " 0 would mean every pair as even as the model spaces these shapes. A high value can be a deliberate style (scripts, display faces with a lively rhythm), a convention the model does not know, or pairs that really are uneven. It is not a grade: a shape error raises WARN or FAIL only when it is far outside the library's norms.")));
+    const sec = section(root, "shape-h", "Shape error", h("p", { class: "section-intro" },
+      `Shape error: ${fmt(SE, 1)}${med ? ` (median for ${N.name}: ${fmt(med.median, 1)})` : ""}. It is the mean size of the residuals: how far each pair's gap is from the model's, after the overall offset. `,
+      SQA.readLink("shape")));
 
     // a pair, measured
     const letterPairs = P.filter((e) => isLetter(face.glyphs[e.a]) && isLetter(face.glyphs[e.b]));
@@ -283,9 +282,9 @@
         h("p", { class: "equation" },
           h("span", null, `designer's gap ${fmt(e.dg, 0)}`), " − ", h("span", null, `model's gap ${fmt(e.mg, 0)}`), " − ", h("span", null, `overall offset ${fmt(offset, 0)}`), " = ",
           h("b", { class: e.res > 0 ? "pos-text" : e.res < 0 ? "neg-text" : "" }, `residual ${signed(e.res, 0)}`)),
-        h("p", { class: "small", style: { margin: 0 } }, e.res > 0 ? "The font gives this pair more room than the model would at its own tightness." : e.res < 0 ? "The font sets this pair tighter than the model would at its own tightness." : "Exactly as the model would.")));
+        h("p", { class: "small", style: { margin: 0 } }, e.res > 0 ? "The font gives this pair more room than the model." : e.res < 0 ? "The font sets this pair tighter than the model." : "Exactly as the model.")));
     });
-    sec.appendChild(h("p", { class: "caption" }, "The white between the two glyphs is shaded and measured (units per 1000 em); in the model's drawing the designed position of the second glyph is in grey. The overall offset is the font's average difference from the model over all pairs: how much looser or tighter it is set overall."));
+    sec.appendChild(h("p", { class: "caption" }, "Units per 1000 em. The overall offset is the font's mean difference from the model."));
 
     // how the residuals spread
     const res = P.map((e) => e.res);
@@ -297,7 +296,7 @@
     const within = (lim) => absSorted.filter((v) => v <= lim).length / absSorted.length;
     sec.appendChild(h("h3", null, `Every pair: ${int(P.length)} residuals`));
     sec.appendChild(h("p", { class: "section-intro" },
-      `${fmt(100 * within(10), 0)} % of this font's pairs are within 10 units of the model, ${fmt(100 * (1 - within(40)), 0)} % are 40 or more away. The shape error, ${fmt(SE, 1)}, is their average distance from 0: a few pairs far out weigh as much as many a little off.`));
+      `${fmt(100 * within(10), 0)} % of the pairs are within 10 units of the model. ${fmt(100 * (1 - within(40)), 0)} % are 40 or more away.`));
     const hst = h("div", { class: "stage" });
     sec.appendChild(hst);
     SQA.responsive(hst, (w) => SQA.histogram(hst, {
@@ -332,8 +331,8 @@
     const even = 1 / glyphs.length;
     sec.appendChild(h("h3", null, "The glyphs that make it"));
     sec.appendChild(h("p", { class: "section-intro" },
-      `Each pair's residual belongs to two glyph sides: the right side of its first glyph and the left side of its second. Added up per glyph, ${topN.length} glyphs make ${fmt(100 * topN.reduce((t, c) => t + c.share, 0), 0)} % of this font's shape error (with every glyph equal, ${topN.length} would make ${fmt(100 * topN.length * even, 0)} %).` +
-      (Number.isFinite(restSE) ? ` Without their pairs the shape error would be ${fmt(restSE, 1)}.` : "")));
+      `${topN.length} glyphs make ${fmt(100 * topN.reduce((t, c) => t + c.share, 0), 0)} % of the shape error (with every glyph equal: ${fmt(100 * topN.length * even, 0)} %).` +
+      (Number.isFinite(restSE) ? ` Without their pairs, the shape error would be ${fmt(restSE, 1)}.` : "")));
     const cst = h("div", { class: "stage" });
     sec.appendChild(cst);
     sec.appendChild(SQA.legend([{ label: "pairs where it is the left glyph (its right side)", color: "var(--s-kk)" }, { label: "pairs where it is the right glyph (its left side)", color: "color-mix(in srgb, var(--s-kk) 30%, transparent)" }]));
@@ -350,7 +349,7 @@
     // the same glyphs, drawn in context
     const resOf = new Map(P.map((e) => [e.a * face.n + e.b, e.res]));
     sec.appendChild(h("h4", { class: "sub-h" }, "Drawn among other letters"));
-    sec.appendChild(h("p", { class: "small" }, "The first six, set between n and o (lowercase), H and O (capitals) or n and H (punctuation and symbols), as designed and as the model sets them; the white on each side of the glyph is shaded red where the font is looser than the model, blue where tighter, with the residual. Draw more glyphs, in order of their share, with the button below."));
+    sec.appendChild(h("p", { class: "small" }, "The first six, among other letters, as designed and as the model sets them. Red: looser than the model. Blue: tighter."));
     const strips = h("div", { class: "context-strips" });
     const moreStrips = h("div", { class: "more-rows" });
     sec.append(strips, moreStrips);
@@ -381,10 +380,10 @@
       const A = meanAbsCentred(sidesOnly), B = meanAbsCentred(kernOnly);
       sec.appendChild(h("h3", null, "Sidebearings or kerning?"));
       const lead = A < B
-        ? "Most of it lies in the sidebearings: fix the sides above and the pairs follow."
-        : "Most of it lies in the kerning: the sides are close to the model's, the pairs differ.";
+        ? "Most of it is in the sidebearings: fix the sides and the pairs follow."
+        : "Most of it is in the kerning: the sides are near the model, the pairs differ.";
       sec.appendChild(h("p", { class: "section-intro" },
-        `A residual is the two sides' differences plus the kerning difference. If every glyph side were where the model puts it (the font's kerning as it is), the shape error would be ${fmt(A, 1)}; if the font kerned as the model does (its sidebearings as they are), ${fmt(B, 1)}. Now: ${fmt(SE, 1)}. ${lead}`));
+        `With every side where the model puts it: ${fmt(A, 1)}. With the model's kerning: ${fmt(B, 1)}. Now: ${fmt(SE, 1)}. ${lead}`));
       const bst = h("div", { class: "stage", style: { maxWidth: "620px" } });
       sec.appendChild(bst);
       const rows = [

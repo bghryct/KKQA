@@ -11,7 +11,7 @@ google/fonts `tags/all/`: four columns, no header —
 | `skip.csv` | Suggested `/Skip/Spacing` signals in the format of `skip.csv`, for families the check cannot judge: monospaced or on two or three fixed widths, glyphs that touch by construction (a line, a grid, a background or an effect through every glyph), without the basic Latin alphabet, without outlines, or spaced beyond the model's range (scripts and designs whose letters touch or overlap). |
 | `tags_metadata.csv` | The rows google/fonts' `tags/tags_metadata.csv` needs for the tags of `quant.csv` and `skip.csv`, in its format (`/Group/Tag,min,max,description`). `/Quality/Spacing` is listed there already. |
 | `quality.csv` | This tool's review table (with a header): level, closest preset, the numbers and the WARN/FAIL reasons of every family. |
-| `FAIL.md`, `WARN.md`, `INFO.md`, `SKIP.md`, `ERROR.md` | Every family of one level: a table, then (FAIL and WARN) each family's reasons, its distance to the three presets and its loosest and tightest pairs. |
+| `FAIL.md`, `WARN.md`, `INFO.md`, `SKIP.md`, `ERROR.md` | Every family of one level: a table, then (FAIL and WARN) each family's reasons, its key numbers and its top 10 sidebearings and pairs. |
 | `agreement.md` | (when made with google/fonts' families.csv) how the measured evenness compares with the human `/Quality/Spacing` tags, and the families where they disagree most. |
 
 The suggestion maps a family's evenness rank in its category onto the

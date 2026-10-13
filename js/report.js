@@ -31,21 +31,21 @@
     return {
       kernel, glyphs: g.length, scored,
       what: kernel
-        ? "the glyphs of Google Fonts’ GF Latin Kernel — A–Z, a–z, 0–9, punctuation and symbols, 114 in all"
-        : "the font's 76 core glyphs — A–Z, a–z, 0–9 and 14 punctuation marks",
+        ? "the 114 glyphs of the GF Latin Kernel (A–Z, a–z, 0–9, punctuation and symbols)"
+        : "the 76 core glyphs (A–Z, a–z, 0–9 and 14 punctuation marks)",
       unscored: kernel
-        ? "figures, the symbols fonts often draw at the figure width ($ ¢ £ ¥ € + − × ÷ = < > # ^ ~) and the underscore, which joins its neighbours, are spaced and drawn but not scored"
-        : "figures are spaced but not scored, because many fonts make them tabular",
+        ? "figures, symbols at figure width ($ ¢ £ ¥ € + − × ÷ = < > # ^ ~) and the underscore are drawn but not scored"
+        : "figures are drawn but not scored: many fonts make them tabular",
     };
   }
   // what to do about a skip or an error (the reason itself says what happened)
   const CODE_HELP = {
-    "spacing/no-outlines": "The font has no outlines the check can read (for example a bitmap or colour-only font).",
-    "spacing/unreadable": "The file could not be read as a TrueType or OpenType font.",
-    "spacing/unavailable": "The font could not be downloaded from Google Fonts. This is usually temporary: re-check later.",
+    "spacing/no-outlines": "The font has no outlines that the check can read, for example a bitmap or colour font.",
+    "spacing/unreadable": "The file is not a TrueType or OpenType font that the check can read.",
+    "spacing/unavailable": "Google Fonts did not send the font. This is usually temporary: re-check later.",
     "spacing/error": "The spacing engine could not measure this font.",
-    "spacing/fixed-widths": "Every letter has one of two or three advance widths — a multi-pitch design such as Trispace (500, 650 and 850 units per 1000 em) or a barcode — so, as in a monospaced font, the spacing is set by the widths and there are no sidebearings or kerning of a proportional font to compare with the model.",
-    "spacing/decorated": "Its figures touch the letters as set, as an underline, a chart, guide lines or an effect make every glyph touch its neighbours (a script's figures stand apart). Spacing such a font would break the line or grid, so there is nothing to compare: the plugin's Keep joins keeps every side that touches.",
+    "spacing/fixed-widths": "All letters use two or three widths, as in a multi-pitch design (Trispace) or a barcode. The widths set the spacing.",
+    "spacing/decorated": "A line, grid or effect makes every glyph touch its neighbours. Spacing would break that design, so there is nothing to compare.",
   };
 
   // ---------------------------------------------------------------- helpers
@@ -114,9 +114,12 @@
     if (face) root.appendChild(face.defs());
     const ds = SQA.designspace ? SQA.designspace.model(o.designspace || ownDesignspace(report)) : null;
     header(root, report, o, !!ds);
-    const vsec = verdict(root, report, o);
-    if (!sum || !face) { notChecked(root, report, o); if (ds) designspace(ctx, root, ds, o); technical(root, report); return; }
-    keyNumbers(vsec, report, o);
+    // what the report opens with: the level, the issues, the Top 10 lists;
+    // every section after it is folded under Details (summary.js)
+    const sumSec = SQA.summary ? SQA.summary.render(ctx, root, report, face, o) : null;
+    const done = () => { if (sumSec) SQA.summary.fold(root, sumSec); };
+    if (!sum || !face) { notChecked(root, report, o); if (ds) designspace(ctx, root, ds, o); technical(root, report); done(); return; }
+    numbers(root, report, o);
     if (SQA.outliers) SQA.outliers.render(ctx, root, report, face, o);
     if (ds) designspace(ctx, root, ds, o);
     closest(ctx, root, report, o);
@@ -133,6 +136,7 @@
     pairs(ctx, root, report, face, o);
     kerning(ctx, root, report, face);
     technical(root, report);
+    done();
   }
 
   /** A variable font's own designspace: the locations its report was checked
@@ -232,7 +236,7 @@
     if (request) {
       actions.appendChild(h("a", {
         class: "btn", href: request, target: "_blank", rel: "noopener",
-        title: "Opens a GitHub issue (a GitHub account is needed). The site's workflow checks the family again from fonts.google.com, publishes the new report for everyone, answers on the issue and closes it, usually within 15 minutes.",
+        title: "Opens a GitHub issue (you need a GitHub account). The site checks the family again, publishes the new report and closes the issue.",
       }, "Request a new check"));
     }
     // a picked location's file names say where it was checked
@@ -269,55 +273,22 @@
     if (o.mode === "upload") head.appendChild(h("p", { class: "note", style: { marginTop: "14px" } }, SQA.STATIC
       ? "This font was checked in your browser and was not uploaded anywhere: the report exists only in this page. Download it to keep it."
       : "This font was checked in memory and is not stored on the server: the report exists only in this page. Download it to keep it."));
-    if (r.summary) {
-      const nav = h("nav", { class: "onpage", "aria-label": "On this page" });
-      [["verdict-h", "Verdict"], ["differs-h", "Where it differs"], hasDs ? ["designspace-h", "Designspace"] : null, ["closest-h", "Closest preset"], r.settings && r.settings.variants && r.settings.variants.length ? ["settings-h", "Settings"] : null, r.joins ? ["joins-h", "Joins"] : null, r.summary.bare ? ["harness-h", "Designer harness"] : null, ["shape-h", "Shape error"], ["specimen-h", "Specimen"], ["sides-h", "Glyph sides"], ["pairs-h", "Pairs"], ["heat-h", "Heat map"], ["kern-h", "Kerning"]].filter(Boolean).forEach(([id, label]) => {
-        const a = h("a", { href: "#" + id }, label);
-        a.addEventListener("click", (e) => {
-          e.preventDefault();
-          const t = document.getElementById(id);
-          if (t) { t.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }); t.focus({ preventScroll: true }); }
-        });
-        nav.appendChild(a);
-      });
-      head.appendChild(nav);
-    }
     root.appendChild(head);
   }
 
-  function verdict(root, r, o) {
-    const st = r.status || { level: "ERROR", reasons: [] };
-    const sec = section(root, "verdict-h", "Verdict");
-    const reasons = (st.reasons || []).slice().sort((a, b) => SQA.LEVEL_RANK[b.level] - SQA.LEVEL_RANK[a.level]);
-    // what raised the level: the library's norms, a location of the
-    // designspace, broken joins — one or more of them
-    const raised = reasons.filter((x) => x.level === st.level).map((x) => x.code);
-    const joins = reasons.some((x) => x.code === "spacing/joins-broken" && SQA.LEVEL_RANK[x.level] >= SQA.LEVEL_RANK.WARN);
-    const located = raised.includes("spacing/instances");
-    const norms = raised.some((x) => x !== "spacing/joins-broken" && x !== "spacing/instances");
-    const fail = st.level === "FAIL";
-    const parts = [
-      norms ? `the spacing falls ${fail ? "very " : ""}far outside the library's norms` : null,
-      located ? (fail ? "a named instance of its designspace falls very far outside the library's norms" : "a location of its designspace stands far from the norms or from its neighbours") : null,
-      joins ? "joins are broken in the font" : null,
-    ].filter(Boolean);
-    const text = (st.level === "WARN" || fail) && parts.length ? `${fail ? "Fails" : "Worth a look"}: ${parts.join(", and ")}.`
-      : SQA.LEVEL_TEXT[st.level] || "";
-    const box = h("div", { class: "panel verdict" },
-      badge(st.level, { big: true }),
-      h("div", null,
-        h("p", { class: "verdict-text" }, text),
-        h("ul", { class: "reasons" }, reasons.map((x) => h("li", null,
-          h("span", null, badge(x.level)),
-          h("span", null, h("span", { class: "code" }, x.code), x.message))))));
-    sec.appendChild(box);
+  /** Every number of the report and what it was judged against (the
+   *  issues themselves are in the summary). */
+  function numbers(root, r, o) {
+    const st = r.status || {};
+    const sec = section(root, "numbers-h", "Numbers", h("p", { class: "section-intro" }, "Every number of this report, in units per 1000 em. ", SQA.readLink("numbers")));
+    keyNumbers(sec, r, o);
     const lib = o.library;
     if (r.summary && !st.baseline && !r.font.italic) {
       sec.appendChild(h("p", { class: "small" }, lib
-        ? `This report was made without a library baseline, so nothing in it was judged against the library's norms (only broken joins raise a level without one); the comparisons below use the current baseline ${lib.id}. Re-check to judge it.`
-        : "No library baseline was used: nothing is judged against the library's norms until one is built from the library's reports (joins broken in the font are WARN regardless). The comparisons below use the families checked so far."));
+        ? `This report has no baseline, so the norms judged nothing. Only broken joins can raise its level. Re-check to judge it against baseline ${lib.id}.`
+        : "No baseline exists yet, so the norms judge nothing. Broken joins are WARN all the same."));
     } else if (r.summary && st.baseline && lib && lib.id && st.baseline !== lib.id) {
-      sec.appendChild(h("p", { class: "note", style: { marginTop: "10px" } }, `The level and reasons above were judged against baseline ${st.baseline}; the library comparisons below use the server's current baseline ${lib.id}, so their numbers can differ slightly until the report is judged again.`));
+      sec.appendChild(h("p", { class: "note" }, `The level uses baseline ${st.baseline}. The comparisons use baseline ${lib.id}, so some numbers can differ a little.`));
     }
     return sec;
   }
@@ -331,7 +302,7 @@
       CODE_HELP[first.code] ? h("p", null, CODE_HELP[first.code]) : null,
       st.level === "ERROR" && o.onRecheck ? h("p", null, h("button", { type: "button", class: "btn", onclick: (e) => o.onRecheck(e.currentTarget) }, "Re-check now")) : null));
     sec.appendChild(h("h3", null, "What the check covers"));
-    sec.appendChild(h("p", { class: "section-intro" }, "Kinetikern2 spaces and kerns the glyphs of Google Fonts’ GF Latin Kernel — A–Z, a–z, 0–9, punctuation and symbols, 114 in all, each against every other — from their outlines, at a tight, a standard and a loose preset and at the Looseness that fits the font best, with its designer harness and without it, and compares the designer's spacing with each. Letters, punctuation and most symbols are scored; figures, the symbols fonts often draw at the figure width and the underscore are spaced and drawn but not scored. Skipped: monospaced fonts and fonts whose every letter has one of two or three widths (a multi-pitch design or a barcode), designs whose glyphs touch by construction (a line, a grid, a background or an effect through every glyph), fonts without the basic Latin alphabet, fonts without outlines, and files that are not fonts."));
+    sec.appendChild(h("p", { class: "section-intro" }, "The check spaces the 114 glyphs of the GF Latin Kernel from their outlines and compares the result with the font. It does not apply to these fonts: monospaced; letters on two or three widths; glyphs that touch by design; no basic Latin; no outlines; not a font. ", SQA.readLink("skipped")));
   }
 
   function keyNumbers(sec, r, o) {
@@ -341,38 +312,30 @@
     const ctxLine = (k, d) => { const m = med(k); return m && m.n ? `library median ${fmt(m.median, d)}${percentileOf(m, sm[k]) !== null ? ` · ${ordinal(percentileOf(m, sm[k]))} percentile` : ""}` : ""; };
     const stats = h("div", { class: "stats" });
     const tile = (value, label, delta) => stats.appendChild(h("div", { class: "stat" }, h("div", { class: "stat-value" }, value), h("div", { class: "stat-label" }, label), delta ? h("div", { class: "stat-delta" }, delta) : null));
-    tile(signed(sm.best_looseness, 2), r.settings && r.settings.fit === "joins" ? "Looseness (a connected script: matched to its joined letters; −0.5 tight · 0 standard · +0.5 loose)" : "best-fit Looseness (−0.5 tight · 0 standard · +0.5 loose)", ctxLine("best_looseness", 2));
-    tile(fmt(sm.shape_error, 1), "shape error: gaps that depart from even spacing of these shapes", ctxLine("shape_error", 1));
-    tile(fmt(sm.sidebearing_error, 1), "sidebearing error per side, offset removed", ctxLine("sidebearing_error", 1));
-    tile(sm.kerned_error !== null && sm.kerned_error !== undefined ? fmt(sm.kerned_error, 1) : "–", `shape error on the ${int(sm.kerned_pairs)} pairs the designer kerned`, ctxLine("kerned_error", 1));
-    tile(sm.kern_r !== null && sm.kern_r !== undefined ? fmt(sm.kern_r, 2) : "–", "kerning correlation r with the model", sm.kern_sign !== null && sm.kern_sign !== undefined ? `same direction on ${pct(sm.kern_sign)} of kerned pairs` : "the designer kerned none of the scored pairs");
+    tile(signed(sm.best_looseness, 2), r.settings && r.settings.fit === "joins" ? "Looseness, from the joined letters" : "Best-fit Looseness", ctxLine("best_looseness", 2));
+    tile(fmt(sm.shape_error, 1), "Shape error", ctxLine("shape_error", 1));
+    tile(fmt(sm.sidebearing_error, 1), "Sidebearing error", ctxLine("sidebearing_error", 1));
+    tile(sm.kerned_error !== null && sm.kerned_error !== undefined ? fmt(sm.kerned_error, 1) : "–", `Shape error, ${int(sm.kerned_pairs)} kerned pairs`, ctxLine("kerned_error", 1));
+    tile(sm.kern_r !== null && sm.kern_r !== undefined ? fmt(sm.kern_r, 2) : "–", "Kerning match (r)", sm.kern_sign !== null && sm.kern_sign !== undefined ? `same direction: ${pct(sm.kern_sign)}` : "no kerned pairs");
     const cov = coverage(r);
-    const cjk = r.font && r.font.cjk ? " · a CJK font: its punctuation of ambiguous width is not scored" : "";
-    tile(int(sm.pairs), "scored pairs measured", (sm.missing && sm.missing.length ? `missing from the font: ${sm.missing.join(" ")}` : `all ${cov.scored} scored glyphs present${cov.kernel ? ` · ${int(cov.glyphs * cov.glyphs)} pairs drawn in all` : ""}`) + cjk);
+    const cjk = r.font && r.font.cjk ? " · CJK punctuation not scored" : "";
+    tile(int(sm.pairs), "Scored pairs", (sm.missing && sm.missing.length ? `missing: ${sm.missing.join(" ")}` : `all ${cov.scored} scored glyphs present`) + cjk);
     if (sm.bare) {
       const d = sm.shape_error - sm.bare.shape_error;
-      tile(signed(d, 1), "shape error from the designer harness", `${fmt(sm.bare.shape_error, 1)} without it, ${fmt(sm.shape_error, 1)} with it: ${d < -0.05 ? "closer to this font" : d > 0.05 ? "further from this font" : "no change"}`);
+      tile(signed(d, 1), "Effect of the harness", `${fmt(sm.bare.shape_error, 1)} without, ${fmt(sm.shape_error, 1)} with`);
     }
-    sec.appendChild(h("p", { class: "small", style: { marginBottom: 0 } }, "All numbers in units per 1000 em."));
     sec.appendChild(stats);
-    // the shape error, explained further down
-    const go = (id) => () => {
-      const t = document.getElementById(id);
-      if (t) { t.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }); t.focus({ preventScroll: true }); }
-    };
     sec.appendChild(h("p", { class: "small" },
-      h("button", { type: "button", class: "linklike", onclick: go("shape-h") }, "What the shape error is made of"), " — the pairs and glyphs behind it, drawn",
-      sm.bare ? [" · ", h("button", { type: "button", class: "linklike", onclick: go("harness-h") }, "The designer harness, with it and without it")] : null));
+      h("button", { type: "button", class: "linklike", onclick: () => SQA.reveal("shape-h") }, "What makes the shape error"),
+      sm.bare ? [" · ", h("button", { type: "button", class: "linklike", onclick: () => SQA.reveal("harness-h") }, "The designer harness")] : null));
   }
 
   // ---------------------------------------------------------------- closest
   function closest(ctx, root, r, o) {
     const sm = r.summary;
-    const sec = section(root, "closest-h", "Closest to",
-      (SQA.withHarness(r)
-        ? "The designer's gaps compared with Kinetikern2's three presets, with its designer harness (see About)."
-        : "The designer's gaps compared with Kinetikern2's three presets — the bare model: this report was checked before the designer harness.") +
-      " Distance is the mean absolute difference of the scored pairs' gaps, overall offset included; which preset is nearest is a matter of overall tightness — a designer's choice.");
+    const sec = section(root, "closest-h", "Presets", h("p", { class: "section-intro" },
+      "How far the font is from each of the three presets. The nearest preset is the designer's choice of overall tightness. ",
+      SQA.readLink("presets")));
     const cards = h("div", { class: "preset-cards" });
     const bare = sm.bare || null;
     (sm.presets || []).forEach((p, k) => {
@@ -380,19 +343,19 @@
       const loose = p.offset > 0;
       const bp = bare && bare.presets ? bare.presets[k] : null;
       cards.appendChild(h("div", { class: "preset-card" + (isClosest ? " closest" : "") },
-        isClosest ? h("span", { class: "closest-flag" }, "Closest") : null,
+        isClosest ? h("span", { class: "closest-flag" }, "Nearest") : null,
         h("h3", null, SQA.PRESET_LABEL[p.name] || p.name, h("small", null, `Looseness ${signed(p.looseness, 1)}`)),
         h("div", { class: "big" }, fmt(p.distance, 1)),
-        h("div", { class: "lab" }, "mean gap distance (units per 1000 em)"),
+        h("div", { class: "lab" }, "distance (units per 1000 em)"),
         h("dl", null,
           h("dt", null, "Overall offset"), h("dd", null, signed(p.offset, 1)),
-          h("dt", null, "Shape error at this preset"), h("dd", null, fmt(p.shape_error, 1)),
+          h("dt", null, "Shape error"), h("dd", null, fmt(p.shape_error, 1)),
           bp ? h("dt", null, "Without the harness") : null,
-          bp ? h("dd", null, `${fmt(bp.distance, 1)} distance · ${fmt(bp.shape_error, 1)} shape error${bare.closest === p.name && !isClosest ? " · closest without it" : ""}`) : null),
-        h("p", { class: "small", style: { margin: "8px 0 0" } }, Math.abs(p.offset) < 0.5 ? "On average the font sets its gaps as this preset does." : `On average the font sets its gaps ${fmt(Math.abs(p.offset), 1)} units ${loose ? "looser" : "tighter"} than this preset.`)));
+          bp ? h("dd", null, `${fmt(bp.distance, 1)} distance · ${fmt(bp.shape_error, 1)} shape error${bare.closest === p.name && !isClosest ? " · nearest without it" : ""}`) : null),
+        h("p", { class: "small", style: { margin: "8px 0 0" } }, Math.abs(p.offset) < 0.5 ? "The font sets its gaps as this preset does." : `The font sets its gaps ${fmt(Math.abs(p.offset), 1)} units ${loose ? "looser" : "tighter"} than this preset.`)));
     });
     sec.appendChild(cards);
-    if (bare && bare.closest !== sm.closest) sec.appendChild(h("p", { class: "small" }, `Without the designer harness the font would be closest to the ${SQA.PRESET_LABEL[bare.closest] || bare.closest} preset: the harness moves the model's overall tightness a little (most of all around punctuation), and the font sits between two presets.`));
+    if (bare && bare.closest !== sm.closest) sec.appendChild(h("p", { class: "small" }, `Without the designer harness, the nearest preset is ${SQA.PRESET_LABEL[bare.closest] || bare.closest}. The harness changes the overall tightness a little.`));
 
     // the Looseness scale with the category behind it
     const lib = o.library;
@@ -419,7 +382,7 @@
     fig.appendChild(stage);
     const v = sm.best_looseness;
     fig.appendChild(h("p", { class: "caption" }, `Best fit ${signed(v, 2)}` + (dist && dist.pctl !== null && dist.pctl !== undefined ? ` — the ${ordinal(dist.pctl)} percentile; median ${signed(dist.median, 2)}.` : ".") +
-      (SQA.outOfRange(v) ? (v < 0 ? " The fit stopped at its limit (−6): the font is set tighter than anything the model makes, as scripts and designs whose letters touch or overlap can be. Its comparison with the model is reported, not judged; broken joins and the designspace's locations still are." : " The fit stopped at its limit (+6): the font is set looser than anything the model makes. Its comparison with the model is reported, not judged; broken joins and the designspace's locations still are.") : "")));
+      (SQA.outOfRange(v) ? (v < 0 ? " The fit stops at its limit (−6): the font is tighter than the model can set. The check does not judge the comparison." : " The fit stops at its limit (+6): the font is looser than the model can set. The check does not judge the comparison.") : "")));
     sec.appendChild(fig);
     SQA.responsive(stage, (w) => looseScale(stage, w, v, dist, sm.presets), ctx);
     SQA.tableToggle(fig, [{ label: "Marker", get: (x) => x[0] }, { label: "Looseness", num: true, get: (x) => x[1] }],
@@ -484,8 +447,9 @@
   // ---------------------------------------------------------------- specimen
   function specimen(ctx, root, r, face) {
     const sm = r.summary;
-    const sec = section(root, "specimen-h", "Specimen",
-      `The same outlines under each spacing, all at one scale, so widths and rhythm compare directly${face.spacings.includes("bare") ? " — the best fit with the designer harness, and without it (the bare model)" : ""}. Only the ${face.n} checked glyphs exist here (${face.n > 76 ? "A–Z, a–z, 0–9 and the punctuation and symbols of the GF Latin Kernel" : "A–Z, a–z, 0–9 and . , : ; ! ? - ' \" ( ) / & ’"}); other characters are left out and the word space is fixed at 250 units per 1000 em.`);
+    const sec = section(root, "specimen-h", "Specimen", h("p", { class: "section-intro" },
+      `The same outlines under each spacing, at one scale. Only the ${face.n} checked glyphs show; the word space is 250 units. `,
+      SQA.readLink("specimen")));
     const st = { text: SAMPLES[0], mode: "lines", over: "best", shifts: true };
     const controls = h("div", { class: "controls" });
     const input = h("input", { type: "text", value: st.text, maxlength: "64", "aria-label": "Specimen text", spellcheck: "false", autocomplete: "off" });
@@ -606,12 +570,9 @@
     const N = normsFor(r, lib);
     const t = (N && N.t) || (o.info && o.info.thresholds) || {};
     const wide = fullWidth(face, t);
-    const sec = section(root, "sides-h", "Glyph sides",
-      "Each side's sidebearing against the best-fit model, after the font's overall offset: positive means the designer gives that side more room than the model, negative less. A bar to the right is a side set looser than the model would set it, to the left tighter; the longer, the further. The thin line on a bar is where the fonts of the same kind usually are for that side, so a bar that ends near its line is a common habit, and a bar far from its line is particular to this font. " +
-      (SQA.withHarness(r)
-        ? "The designer harness already takes out what the designers of well-spaced text fonts consistently do differently from the model alone (quotes, parentheses, the open sides of E, F, L and T…); "
-        : "The bare model disagrees with designers in the same places in many fonts (around f, r, quotes and the like), so ") +
-      "with a baseline each side is also compared with the library's median for that side — only what is far from the library is flagged.");
+    const sec = section(root, "sides-h", "Glyph sides", h("p", { class: "section-intro" },
+      "Each sidebearing against the expected value: the model, plus what fonts of this kind usually do. A bar to the right is looser, to the left tighter. ",
+      SQA.readLink("sides")));
     const entries = [];
     face.glyphs.forEach((g, i) => {
       if (!Array.isArray(g.dev)) return;
@@ -638,17 +599,15 @@
       if (flagged.length) {
         const far = flagged.length - ext;
         const lead = ext
-          ? `${ext} extreme ${ext === 1 ? "side" : "sides"}${far ? ` and ${far} more far` : ""} from the norms of ${N.name}`
-          : `${far} ${far === 1 ? "side is" : "sides are"} far from the norms of ${N.name}`;
-        sec.appendChild(h("p", { style: { margin: "0 0 4px" } }, h("b", null, lead),
-          ` — far: at least ${fmt(t.side_warn_z, 0)} robust σ and ${fmt(t.side_warn_units, 0)} units per 1000 em from the median for that side` +
-          (ext ? `; extreme (✕): ${fmt(t.side_fail_z, 0)} σ and ${fmt(t.side_fail_units, 0)} units` : "") + ":"));
+          ? `${ext} ${ext === 1 ? "side is" : "sides are"} very far${far ? `, and ${far} more far,` : ""} from the norm for ${N.name}:`
+          : `${far} ${far === 1 ? "side is" : "sides are"} far from the norm for ${N.name}:`;
+        sec.appendChild(h("p", { style: { margin: "0 0 4px" } }, h("b", null, lead)));
         sec.appendChild(h("div", { class: "flag-list" }, flagged.map((e) => h("span", { class: "flag-item" + (e.flag === "fail" ? " fail" : "") },
           h("b", { "aria-hidden": "true" }, e.flag === "fail" ? "✕" : "!"), `${e.g.char} ${e.side} ${signed(e.diff, 0)}`, h("span", { class: "small" }, `${e.flag === "fail" ? "extreme · " : ""}z ${signed(e.z, 1)}`)))));
-      } else sec.appendChild(h("p", { class: "small" }, `No side is far from the norms of ${N.name} (${fmt(t.side_warn_z, 0)} robust σ and ${fmt(t.side_warn_units, 0)} units per 1000 em from the median for that side).`));
-      if (slanted(r)) sec.appendChild(h("p", { class: "small" }, `Measured along its slant: the norms of ${N.name} come from fonts measured upright, and the shear moves the sides of what sits far from half the x-height (quotes, capitals, descenders), so these comparisons are reported, not judged.`));
-      if (wide.some(Boolean)) sec.appendChild(h("p", { class: "small" }, `Full-width quotes (${face.glyphs.filter((g, i) => wide[i] && g.scored).map((g) => g.char).join(" ")}), a CJK convention, are not compared with the norms of proportional fonts.`));
-    } else sec.appendChild(h("p", { class: "small" }, "No baseline yet: the library's medians are not shown, so sides where the model usually disagrees with designers are not told apart."));
+      } else sec.appendChild(h("p", { class: "small" }, `No side is far from the norm for ${N.name}.`));
+      if (slanted(r)) sec.appendChild(h("p", { class: "small" }, `The check measures this font along its slant. The norms for ${N.name} come from upright fonts, so use them as a rough guide.`));
+      if (wide.some(Boolean)) sec.appendChild(h("p", { class: "small" }, `Full-width quotes (${face.glyphs.filter((g, i) => wide[i] && g.scored).map((g) => g.char).join(" ")}) follow a CJK convention. The check does not compare them with Latin norms.`));
+    } else sec.appendChild(h("p", { class: "small" }, "No baseline yet: the check compares the sides with the model only."));
     const abs = entries.filter((e) => e.group !== "unscored").map((e) => Math.abs(e.v)).concat(entries.filter((e) => e.lib).map((e) => Math.abs(e.lib.median))).sort((a, b) => a - b);
     let R = Math.max(20, SQA.quantile(abs, 0.96) * 1.2);
     R = Math.ceil(R / 10) * 10;
@@ -668,15 +627,17 @@
       grid.appendChild(panel);
       SQA.responsive(stage, (w) => sideChart(stage, w, list, entries, R, face, !!N), ctx);
     });
-    sec.appendChild(h("p", { class: "caption" }, `Bars run from 0 to the side's deviation (units per 1000 em, scale ±${fmt(R, 0)}; longer values stop at the edge with ›).`));
+    sec.appendChild(h("p", { class: "caption" }, `Units per 1000 em, scale ±${fmt(R, 0)}. Longer values stop at the edge (›).`));
     SQA.tableToggle(sec, [
       { label: "Glyph", get: (e) => `${e.g.char} (${e.g.name})` }, { label: "Side", get: (e) => e.side },
       { label: "Deviation", num: true, get: (e) => signed(e.v, 1) },
       { label: "Library median", num: true, get: (e) => (e.lib ? signed(e.lib.median, 1) : "–") },
-      { label: "Difference", num: true, get: (e) => (e.diff !== null ? signed(e.diff, 1) : "–") },
+      { label: "Model Gap", num: true, get: (e) => (e.diff !== null ? signed(e.diff, 1) : "–") },
       { label: "Robust z", num: true, get: (e) => (e.z !== null ? signed(e.z, 1) : "–") },
       { label: "Flag", get: (e) => (e.flag === "fail" ? "extreme" : e.flag === "warn" ? "far" : e.wide ? "full-width, not compared" : e.group === "unscored" ? "not scored" : "") }],
-      () => entries, { caption: "Glyph side deviations from the best-fit model", size: "medium" });
+      // largest Model Gap first (the difference from the norm for that side; without norms, from the model)
+      () => entries.slice().sort((a, b) => Math.abs(b.diff !== null ? b.diff : b.v) - Math.abs(a.diff !== null ? a.diff : a.v)),
+      { caption: "Sidebearings, largest Model Gap first", size: "medium" });
   }
 
   function sideChart(container, W, list, entries, R, face, hasLib) {
@@ -781,22 +742,53 @@
     return { list: out, m, pg, hasLib: out.some((e) => e.libMed !== undefined), offset: offs.length ? SQA.median(offs) : 0 };
   }
 
+  /**
+   * Each pair's Model Gap, as `top.rs` computes it for the report's Top 10:
+   * its departure (`valueOf`: from the model, or from the category's usual)
+   * less what its two glyphs' sidebearings do to all their pairs — the
+   * medians of its row and its column — so a sidebearing that is off counts
+   * once, among the sidebearings. Measured on the scored pairs without a mark
+   * glyph (`marks`); stored as e[key].
+   */
+  function ownGaps(list, valueOf, key, marks, face) {
+    const isMark = (e) => marks.has(face.glyphs[e.a].char) || marks.has(face.glyphs[e.b].char);
+    const P = list.filter((e) => e.scored && !isMark(e) && Number.isFinite(valueOf(e)));
+    if (P.length < 100) { list.forEach((e) => { e[key] = valueOf(e); }); return; }
+    const all = SQA.median(P.map(valueOf));
+    const rows = new Map(), cols = new Map();
+    P.forEach((e) => {
+      const v = valueOf(e);
+      if (!rows.has(e.a)) rows.set(e.a, []);
+      if (!cols.has(e.b)) cols.set(e.b, []);
+      rows.get(e.a).push(v);
+      cols.get(e.b).push(v);
+    });
+    const rf = new Map([...rows].map(([g, v]) => [g, SQA.median(v) - all]));
+    const cf = new Map([...cols].map(([g, v]) => [g, SQA.median(v) - all]));
+    const own = (e) => valueOf(e) - all - (rf.get(e.a) || 0) - (cf.get(e.b) || 0);
+    const c = SQA.median(P.map(own));
+    list.forEach((e) => { e[key] = Number.isFinite(valueOf(e)) ? own(e) - c : undefined; });
+  }
+
   function pairs(ctx, root, r, face, o) {
     const lib = o.library;
     const N = normsFor(r, lib);
     const t = (N && N.t) || (o.info && o.info.thresholds) || {};
     const P = pairData(r, face, lib, N);
     const unscoredPairs = P.list.some((e) => !e.scored);
-    const sec = section(root, "pairs-h", "Pairs, loosest to tightest", h("div", { class: "section-intro" },
-      h("p", null, `Every ordered pair of the scored glyphs, ranked by how its gap departs from the best-fit model: the designer's gap − the model's gap − the font's overall offset (${signed(P.offset, 1)}). Positive: the font sets the pair looser than the model would at the font's own tightness; negative: tighter. Relative to the library, the value is compared with how ${N ? N.name.replace(/^the whole library$/, "the library's fonts") : "the library's fonts"} usually differ from the model on that pair, so pairs every font sets differently from the model drop away and what is left is particular to this font.${unscoredPairs ? ` Pairs with a glyph that is not scored (figures, symbols often drawn at the figure width, the underscore${face.cjk ? "; in this CJK font, the punctuation of ambiguous width" : ""}) are measured too: include them below.` : ""}`),
-      h("p", null, "How to read a row: the first drawing is the pair as designed, the second as the model sets it, with the designer's position of the second glyph in grey — where grey shows to the right, the model would close the pair up; to the left, open it. The gaps are the white between the two inks; the kerning columns say how much of each gap is kerning. Choose how many rows to see, or type a glyph to see every pair it is in.")));
-    if (!P.list.length) { sec.appendChild(h("p", { class: "note" }, "This report has no pair residuals.")); return; }
-    const st = { rel: "model", order: "loose", filter: "all", unscored: false, limit: 40, glyph: "" };
+    const sec = section(root, "pairs-h", "Pairs", h("p", { class: "section-intro" },
+      "Every pair, largest Model Gap first: how far its gap is from the expected gap, after what its two sidebearings do to every pair. ",
+      SQA.readLink("pairs")));
+    if (!P.list.length) { sec.appendChild(h("p", { class: "note" }, "This report has no pair values.")); return; }
+    // each pair's Model Gap, against the model alone and (with a baseline) the model plus the norm
+    const marks = new Set((r.font && r.font.marks_as_spacing) || []);
+    ownGaps(P.list, (e) => e.res, "gapModel", marks, face);
+    if (P.hasLib) ownGaps(P.list, (e) => e.diff, "gapLib", marks, face);
+    const st = { rel: P.hasLib ? "library" : "model", filter: "all", unscored: false, limit: 40, glyph: "" };
     const rowsSeg = SQA.segmented("Rows", [40, 100, 250, 500].map((n) => ({ label: `${n} rows`, value: n })), st.limit, (v) => { st.limit = v; drawList(); });
     const controls = h("div", { class: "controls" });
-    const relSeg = SQA.segmented("Relative to", [{ label: "Relative to the model", value: "model" }, { label: "Relative to the library", value: "library", disabled: !P.hasLib, title: P.hasLib ? "" : "Needs a library baseline" }], st.rel, (v) => { st.rel = v; drawList(); heat.draw(); });
+    const relSeg = SQA.segmented("Expected gap", [{ label: "The model and the norm", value: "library", disabled: !P.hasLib, title: P.hasLib ? "" : "Needs a library baseline" }, { label: "The model alone", value: "model" }], st.rel, (v) => { st.rel = v; drawList(); heat.draw(); });
     controls.append(relSeg,
-      SQA.segmented("Order", [{ label: "Loosest first", value: "loose" }, { label: "Tightest first", value: "tight" }], st.order, (v) => { st.order = v; drawList(); }),
       SQA.segmented("Pairs shown", [{ label: "All", value: "all" }, { label: "Capitals", value: "upper" }, { label: "Lowercase", value: "lower" }, { label: "Mixed case", value: "mixed" }, { label: "Punctuation and symbols", value: "punct" }], st.filter, (v) => { st.filter = v; drawList(); }),
       rowsSeg);
     const find = h("input", { type: "search", placeholder: "T, or a name: bar", maxlength: 40, size: 14, "aria-label": "Show only the pairs with this glyph: type the glyph, or its name" });
@@ -808,7 +800,7 @@
       controls.appendChild(h("label", { class: "check" }, box, "Include glyphs that are not scored"));
     }
     sec.appendChild(controls);
-    if (!P.hasLib) sec.appendChild(h("p", { class: "small", style: { marginTop: "-4px" } }, lib ? "The library's pair norms do not cover this font's glyph set." : "“Relative to the library” needs a library baseline; none exists yet."));
+    if (!P.hasLib) sec.appendChild(h("p", { class: "small" }, lib ? "The library's norms do not cover this font's glyph set." : "No baseline exists yet: the expected gap is the model alone."));
     const listInfo = h("p", { class: "small", "aria-live": "polite" });
     sec.appendChild(listInfo);
     const tableBox = h("div", { class: "table-wrap" });
@@ -816,7 +808,7 @@
     sec.append(tableBox, moreBox);
     // one character: that glyph; longer: a glyph name
     const hasGlyph = (g) => ([...st.glyph].length === 1 ? g.char === st.glyph : g.name === st.glyph);
-    const valueOf = (e) => (st.rel === "library" ? e.diff : e.res);
+    const valueOf = (e) => (st.rel === "library" ? e.gapLib : e.gapModel);
 
     // pair drawings share one scale
     const k = 84 / (face.top - face.bottom);
@@ -837,21 +829,22 @@
     }
     function drawList() {
       const useLib = st.rel === "library" && P.hasLib;
-      let list = P.list.filter((e) => (st.unscored || e.scored) && (st.filter === "all" || e.cat === st.filter) && valueOf(e) !== undefined && valueOf(e) !== null &&
+      let list = P.list.filter((e) => (st.unscored || e.scored) && (st.filter === "all" || e.cat === st.filter) && Number.isFinite(valueOf(e)) &&
         (!st.glyph || hasGlyph(face.glyphs[e.a]) || hasGlyph(face.glyphs[e.b])));
       const max = Math.max(1, ...list.map((e) => Math.abs(valueOf(e))));
-      list.sort((a, b) => (st.order === "loose" ? valueOf(b) - valueOf(a) : valueOf(a) - valueOf(b)));
+      // largest Model Gap first, either direction
+      list.sort((a, b) => Math.abs(valueOf(b)) - Math.abs(valueOf(a)));
       const shown = list.slice(0, st.limit);
       const unusual = useLib ? P.list.filter((e) => e.z !== undefined && Math.abs(e.z) >= (t.pair_z || 5) && Math.abs(e.diff) >= (t.pair_units || 50)).length : null;
-      listInfo.textContent = `The ${st.order === "loose" ? "loosest" : "tightest"} ${int(shown.length)} of ${int(list.length)} pairs${st.glyph ? ` with ${st.glyph}` : ""}` +
-        (useLib ? ` relative to ${N.name}. ${int(unusual)} ${unusual === 1 ? "pair is" : "pairs are"} far from their usual (at least ${fmt(t.pair_z, 0)} robust σ and ${fmt(t.pair_units, 0)} units) and marked “far”.` : " relative to the model.");
+      listInfo.textContent = `The ${int(shown.length)} pairs with the largest Model Gap, of ${int(list.length)}${st.glyph ? ` with ${st.glyph}` : ""}.` +
+        (useLib ? ` ${int(unusual)} ${unusual === 1 ? "pair is" : "pairs are"} far from the norm (marked “far”).` : "");
       clear(tableBox);
       clear(moreBox);
-      if (!shown.length) { tableBox.appendChild(h("p", { class: "empty" }, st.glyph ? `No pairs with ${st.glyph} in this group: the glyph${[...st.glyph].length > 1 ? " name" : ""} may not be in the report's set, or not scored${st.unscored || !unscoredPairs ? "" : " (include the glyphs that are not scored above)"}.` : "No pairs in this group.")); return; }
+      if (!shown.length) { tableBox.appendChild(h("p", { class: "empty" }, st.glyph ? `No pairs with ${st.glyph} in this group.${st.unscored || !unscoredPairs ? "" : " Include the glyphs that are not scored above."}` : "No pairs in this group.")); return; }
       const widthU = Math.max(...shown.map((e) => Math.max(face.pairPlace(e.a, e.b, "designer").right, face.pairPlace(e.a, e.b, "best").right)));
       const tbl = h("table", { class: "pairs" });
       tbl.appendChild(h("caption", { class: "sr-only" }, listInfo.textContent));
-      const cols = ["#", "Pair", "As designed", "Model (best fit)", useLib ? "vs library" : "vs model", "Designer gap", "Model gap", "Designer kern", "Model kern"].concat(useLib ? ["Library median", "z"] : []);
+      const cols = ["#", "Pair", "As designed", "Model", "Model Gap", "Designer white", "Model white", "Designer kern", "Model kern"].concat(useLib ? ["Norm", "z"] : []);
       tbl.appendChild(h("thead", null, h("tr", null, cols.map((c, i) => h("th", { scope: "col", class: i >= 4 ? "num" : "" }, c)))));
       const tb = h("tbody");
       shown.forEach((e, i) => {
@@ -863,7 +856,7 @@
           h("td", { class: "pair-name" }, ga.char + gb.char, h("small", null, `${ga.name} ${gb.name}`)),
           h("td", { class: "draw" }, pairSvg(e, "designer", widthU)),
           h("td", { class: "draw" }, pairSvg(e, "best", widthU, "designer")),
-          h("td", { class: "num" }, SQA.miniDiverging(v, max, 96), " ", h("b", null, signed(v, 1)), far ? h("span", { class: "z-mark", title: "Far from the library's usual for this pair" }, "far") : null, e.kd ? h("span", { class: "kd-mark", title: "The designer kerned this pair" }, "kerned") : null, e.scored ? null : h("span", { class: "kd-mark", title: `A glyph of this pair is not scored: ${unscoredWhy(ga.scored ? gb : ga, face)}` }, "not scored")),
+          h("td", { class: "num" }, SQA.miniDiverging(v, max, 96), " ", h("b", null, signed(v, 1)), far ? h("span", { class: "z-mark", title: "Far from the norm for this pair" }, "far") : null, e.kd ? h("span", { class: "kd-mark", title: "The designer kerns this pair" }, "kerned") : null, e.scored ? null : h("span", { class: "kd-mark", title: `Not scored: ${unscoredWhy(ga.scored ? gb : ga, face)}` }, "not scored")),
           h("td", { class: "num" }, fmt(e.dg, 0)),
           h("td", { class: "num" }, fmt(e.mg, 0)),
           h("td", { class: "num" }, e.kd ? signed(e.kd, 0) : "0"),
@@ -878,16 +871,16 @@
         const step = Math.min(rest, 250);
         const more = h("button", { type: "button", class: "btn" }, `Show ${int(step)} more`);
         more.addEventListener("click", () => { st.limit = shown.length + step; rowsSeg.setValue(st.limit); drawList(); });
-        moreBox.append(more, h("span", { class: "small" }, ` ${int(rest)} more ${rest === 1 ? "pair" : "pairs"} in this order, down to the ${st.order === "loose" ? "tightest" : "loosest"}.`));
+        moreBox.append(more, h("span", { class: "small" }, ` ${int(rest)} more ${rest === 1 ? "pair" : "pairs"}, with smaller gaps.`));
       }
     }
     drawList();
-    sec.appendChild(h("p", { class: "caption" }, "Drawings: the pair as designed, and as the best-fit model sets it with the designed position of the second glyph in grey. Gaps and kerning in units per 1000 em."));
+    sec.appendChild(h("p", { class: "caption" }, "Units per 1000 em. In the model drawing, grey is the designer's position of the second glyph."));
 
-    // the heat map
-    const hsec = h("div", null);
-    hsec.appendChild(h("h3", { id: "heat-h", tabindex: "-1" }, "Heat map of every pair"));
-    hsec.appendChild(h("p", { class: "section-intro" }, "Rows: the left glyph; columns: the right glyph. Uses the “relative to” setting above. How to read it: a whole row in one colour is the left glyph's right side (every pair after it is looser or tighter), a whole column the right glyph's left side — a sidebearing; single cells or short runs that differ from their row and column are kerning. Hover a cell, or focus the map and use the arrow keys."));
+    // the matrix of every pair, folded: a whole row or column in one colour is one sidebearing
+    const hsec = h("details", { class: "fold small-fold" }, h("summary", null, "Matrix of every pair"));
+    hsec.appendChild(h("h3", { id: "heat-h", tabindex: "-1", class: "sr-only" }, "Matrix of every pair"));
+    hsec.appendChild(h("p", { class: "section-intro" }, "Rows: the left glyph. Columns: the right glyph. Blue is tighter than expected, red looser. A whole row or column in one colour is one sidebearing."));
     sec.appendChild(hsec);
     const heat = heatMap(ctx, hsec, P, face, () => (st.rel === "library" && P.hasLib ? "library" : "model"));
   }
@@ -1023,22 +1016,7 @@
       root.addEventListener("focus", () => { const [a, b] = at || [0, 0]; move(a, b, true); });
       root.addEventListener("blur", () => { tip.hide(); sel.setAttribute("x", -20); });
       wrap.appendChild(root);
-      tableTog.refresh();
     }
-    // the matrix (up to 114 × 114 cells) is built as one string
-    const tableTog = SQA.tableToggle(sec, [], () => [], {
-      label: "Show as table (every pair)", size: "medium",
-      render(twrap) {
-        const head = "<thead><tr><th scope=\"col\">L \\ R</th>" + chars.map((ch) => `<th scope="col">${SQA.esc(ch)}</th>`).join("") + "</tr></thead>";
-        let body = "<tbody>";
-        for (let a = 0; a < m; a++) {
-          body += `<tr><th scope="row">${SQA.esc(chars[a])}</th>`;
-          for (let b = 0; b < m; b++) { const v = val(byK[a * m + b]); body += `<td>${v === null || v === undefined ? "" : SQA.esc(fmt(v, 0))}</td>`; }
-          body += "</tr>";
-        }
-        twrap.innerHTML = `<table class="matrix"><caption class="sr-only">Pair values ${rel === "library" ? "relative to the library" : "relative to the model"}, units per 1000 em; rows are the left glyph</caption>${head}${body}</tbody></table>`;
-      },
-    });
     SQA.responsive(wrap, (w) => { width = w; draw(); }, ctx);
     return { draw };
   }
@@ -1047,8 +1025,9 @@
   function kerning(ctx, root, r, face) {
     const sm = r.summary;
     const d = r.detail;
-    const sec = section(root, "kern-h", "Kerning agreement",
-      "The designer's kerning against the best-fit model's on the scored pairs the designer kerned (units per 1000 em). Each point is one pair: across, how much the designer kerns it; up, how much the model would. Points near the diagonal agree; points above it are pairs the model would kern less (or open), below it more; points in the top-left or bottom-right quarters kern the other way. Hover a point for its pair.");
+    const sec = section(root, "kern-h", "Kerning", h("p", { class: "section-intro" },
+      "The designer's kerning against the model's, one point per kerned pair. Points near the diagonal agree. ",
+      SQA.readLink("kerning")));
     const scored = new Set((d.pair_glyphs || []).filter((i) => face.glyphs[i] && face.glyphs[i].scored));
     const pts = [];
     (d.kerning.designer || []).forEach(([a, b, v]) => {
@@ -1058,16 +1037,14 @@
       pts.push({ a, b, kd, km, agree, label: face.glyphs[a].char + face.glyphs[b].char });
     });
     const stats = h("p", { style: { margin: "0 0 10px" } });
-    if (sm.kern_r !== null && sm.kern_r !== undefined) stats.append(h("b", null, `r = ${fmt(sm.kern_r, 2)}`), ` · the same direction on ${pct(sm.kern_sign)} of the ${int(sm.kerned_pairs)} pairs the designer kerned · shape error on those pairs ${fmt(sm.kerned_error, 1)}`);
-    else stats.append(pts.length ? `${int(pts.length)} kerned pairs; too few for a correlation.` : "The designer kerned none of the scored pairs, so there is nothing to compare.");
+    if (sm.kern_r !== null && sm.kern_r !== undefined) stats.append(h("b", null, `r = ${fmt(sm.kern_r, 2)}`), ` · same direction on ${pct(sm.kern_sign)} of ${int(sm.kerned_pairs)} kerned pairs · their shape error ${fmt(sm.kerned_error, 1)}`);
+    else stats.append(pts.length ? `${int(pts.length)} kerned pairs: too few for a correlation.` : "The font kerns none of the scored pairs.");
     sec.appendChild(stats);
     if (!pts.length) return;
-    sec.appendChild(SQA.legend([{ label: "same direction", color: "var(--s-kk)" }, { label: "opposite direction, or not kerned by the model", color: "var(--s-human)", ring: true }]));
+    sec.appendChild(SQA.legend([{ label: "same direction", color: "var(--s-kk)" }, { label: "other direction, or the model does not kern it", color: "var(--s-human)", ring: true }]));
     const stage = h("div", { class: "stage", style: { maxWidth: "640px", marginTop: "8px" } });
     sec.appendChild(stage);
     SQA.responsive(stage, (w) => scatter(stage, Math.min(w, 640), pts), ctx);
-    SQA.tableToggle(sec, [{ label: "Pair", get: (p) => `${p.label} (${face.glyphs[p.a].name} ${face.glyphs[p.b].name})` }, { label: "Designer kerning", num: true, get: (p) => signed(p.kd, 1) }, { label: "Model kerning", num: true, get: (p) => signed(p.km, 1) }, { label: "Same direction", get: (p) => (p.agree ? "yes" : "no") }],
-      () => pts.slice().sort((x, y) => x.kd - y.kd), { caption: "Designer and model kerning on the pairs the designer kerned", size: "medium" });
   }
 
   function scatter(container, W, pts) {
@@ -1182,11 +1159,11 @@
     const cached = mainCache && mainCache.slug === slug && (at || mainCache.picking) && Date.now() - mainCache.t < CACHE_MS ? mainCache : null;
     const willCheck = !cached && row && (!row.level || row.stale);
     const crumbs = h("p", { class: "crumbs", style: { marginTop: "28px" } }, h("a", { href: libraryHref() }, "← Library"));
-    let waitEl = SQA.loading(willCheck ? `Checking ${name} now…` : `Loading the report of ${name}…`, willCheck ? "The font is downloaded from Google Fonts and spaced by Kinetikern2 at its three presets and its best fit, and with each other setting; this takes a few seconds." : null);
+    let waitEl = SQA.loading(willCheck ? `Checking ${name} now…` : `Loading the report of ${name}…`, willCheck ? "The check downloads the font from Google Fonts and spaces it. This takes a few seconds." : null);
     if (!cached) root.append(crumbs, waitEl);
     const slow = cached ? null : setTimeout(() => {
       if (!ctx.alive() || !waitEl.isConnected || willCheck) return;
-      const nw = SQA.loading(`Checking ${name} now…`, "No current report was stored, so the font is being downloaded and checked; this takes a few seconds.");
+      const nw = SQA.loading(`Checking ${name} now…`, "No current report exists, so the check downloads and checks the font now. This takes a few seconds.");
       waitEl.replaceWith(nw); waitEl = nw;
     }, 900);
     ctx.onCleanup(() => clearTimeout(slow));
@@ -1306,8 +1283,8 @@
         eyebrow: [f.category || "Category unknown", target.italic ? "Italic variable font" : "Variable font"].join(" · "),
         title: family, picked,
         sub: SQA.STATIC
-          ? "Checked in your browser: the font is downloaded from Google Fonts and spaced by Kinetikern2 at this location, at its three presets and its best fit, and with each other setting — a few seconds. Nothing is stored."
-          : "Checked live on the server: the font is spaced by Kinetikern2 at this location, at its three presets and its best fit, and with each other setting — a few seconds. Nothing is stored.",
+          ? "The check runs in your browser at this location. It takes a few seconds and stores nothing."
+          : "The check runs on the server at this location. It takes a few seconds and stores nothing.",
         model: own ? SQA.designspace.model(own) : null,
         dsOpts: { current: target.location, href: lk.dsHref, pick: lk.dsPick, where: SQA.STATIC ? "in your browser" : "on the server", seconds: pickSeconds() },
       });

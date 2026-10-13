@@ -1,6 +1,6 @@
-# Spacing QA — INFO: 1523 families
+# Spacing QA — INFO: 1530 families
 
-Spacing within the norms of the family's group. The closest preset (tight, standard or loose) is a designer's choice and is reported, never judged. Families the norms do not judge are here too, unless broken joins or a location of their designspace raise them: those spaced beyond the model's range (scripts and designs whose letters touch or overlap), marked *out of range*, and those checked on an italic alone.
+These families are within the norm for their group. The nearest preset is the designer's choice: the check reports it but does not judge it. The list also holds the families that the norms do not judge, marked *out of range*.
 
 1950 families in the library · baseline 2026-10-12-0107-1132 (1132 fonts in the norms) · spacingqa 0.1.0 kinetikern2 2.0.0
 
@@ -32,7 +32,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Alata](https://bghryct.github.io/KKQA/#/family/alata) | Sans Serif | standard | +0.31 | 31.0 |  |  |
 | [Alatsi](https://bghryct.github.io/KKQA/#/family/alatsi) | Sans Serif | loose | +0.64 | 19.9 |  |  |
 | [Albert Sans](https://bghryct.github.io/KKQA/#/family/albert-sans) | Sans Serif | standard | +0.00 | 17.5 |  |  |
-| [Aldrich](https://bghryct.github.io/KKQA/#/family/aldrich) | Sans Serif | loose | +0.43 | 16.7 |  |  |
+| [Aldrich](https://bghryct.github.io/KKQA/#/family/aldrich) | Sans Serif | loose | +0.44 | 16.7 |  |  |
 | [Alef](https://bghryct.github.io/KKQA/#/family/alef) | Sans Serif | loose | +0.41 | 25.2 |  | secondary Latin |
 | [Alegreya](https://bghryct.github.io/KKQA/#/family/alegreya) | Serif | loose | +0.40 | 22.2 |  |  |
 | [Alegreya Sans](https://bghryct.github.io/KKQA/#/family/alegreya-sans) | Sans Serif | standard | +0.16 | 19.8 |  |  |
@@ -69,7 +69,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Andika](https://bghryct.github.io/KKQA/#/family/andika) | Sans Serif | loose | +0.50 | 25.2 |  |  |
 | [Angkor](https://bghryct.github.io/KKQA/#/family/angkor) | Display | loose | +0.90 | 23.2 |  | secondary Latin |
 | [Annapurna SIL](https://bghryct.github.io/KKQA/#/family/annapurna-sil) | Serif | loose | +0.28 | 27.4 |  | secondary Latin |
-| [Annie Use Your Telescope](https://bghryct.github.io/KKQA/#/family/annie-use-your-telescope) | Handwriting | tight | −0.47 | 23.3 |  |  |
+| [Annie Use Your Telescope](https://bghryct.github.io/KKQA/#/family/annie-use-your-telescope) | Handwriting | tight | −0.48 | 23.3 |  |  |
 | [Anta](https://bghryct.github.io/KKQA/#/family/anta) | Sans Serif | standard | −0.03 | 16.6 |  |  |
 | [Anton](https://bghryct.github.io/KKQA/#/family/anton) | Sans Serif | loose | +0.55 | 10.7 |  |  |
 | [Anton SC](https://bghryct.github.io/KKQA/#/family/anton-sc) | Sans Serif | loose | +0.55 | 12.5 |  |  |
@@ -156,7 +156,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Be Vietnam Pro](https://bghryct.github.io/KKQA/#/family/be-vietnam-pro) | Sans Serif | standard | +0.20 | 27.0 |  |  |
 | [Beau Rivage](https://bghryct.github.io/KKQA/#/family/beau-rivage) | Handwriting | loose | −2.05 | 53.2 |  |  |
 | [Bebas Neue](https://bghryct.github.io/KKQA/#/family/bebas-neue) | Sans Serif | standard | +0.26 | 16.3 |  |  |
-| [Beiruti](https://bghryct.github.io/KKQA/#/family/beiruti) | Sans Serif | loose | +0.30 | 18.9 |  | secondary Latin |
+| [Beiruti](https://bghryct.github.io/KKQA/#/family/beiruti) | Sans Serif | loose | +0.31 | 18.9 |  | secondary Latin |
 | [Belanosima](https://bghryct.github.io/KKQA/#/family/belanosima) | Sans Serif | standard | +0.05 | 18.7 |  |  |
 | [Belgrano](https://bghryct.github.io/KKQA/#/family/belgrano) | Serif | loose | +0.47 | 14.8 |  |  |
 | [Bellefair](https://bghryct.github.io/KKQA/#/family/bellefair) | Serif | loose | +0.73 | 20.7 |  |  |
@@ -199,7 +199,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Bonheur Royale](https://bghryct.github.io/KKQA/#/family/bonheur-royale) | Handwriting | tight | −1.32 | 60.3 |  |  |
 | [Boogaloo](https://bghryct.github.io/KKQA/#/family/boogaloo) | Display | loose | +0.60 | 28.7 |  |  |
 | [Borel](https://bghryct.github.io/KKQA/#/family/borel) | Handwriting | loose | +1.44 | 37.9 |  |  |
-| [Bowlby One](https://bghryct.github.io/KKQA/#/family/bowlby-one) | Display | standard | +0.20 | 25.9 |  |  |
+| [Bowlby One](https://bghryct.github.io/KKQA/#/family/bowlby-one) | Display | standard | +0.21 | 25.9 |  |  |
 | [Bowlby One SC](https://bghryct.github.io/KKQA/#/family/bowlby-one-sc) | Display | loose | +0.14 | 23.5 |  |  |
 | [Bpmf Huninn](https://bghryct.github.io/KKQA/#/family/bpmf-huninn) | Sans Serif | standard | −0.08 | 13.3 |  | secondary Latin |
 | [Bpmf Iansui](https://bghryct.github.io/KKQA/#/family/bpmf-iansui) | Handwriting | loose | +0.26 | 25.5 |  | secondary Latin |
@@ -278,7 +278,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Coda](https://bghryct.github.io/KKQA/#/family/coda) | Display | standard | −0.08 | 12.8 |  |  |
 | [Codystar](https://bghryct.github.io/KKQA/#/family/codystar) | Display | loose | +1.14 | 29.4 |  |  |
 | [Coiny](https://bghryct.github.io/KKQA/#/family/coiny) | Display | loose | +1.22 | 19.2 |  |  |
-| [Combo](https://bghryct.github.io/KKQA/#/family/combo) | Display | loose | +0.60 | 21.7 |  |  |
+| [Combo](https://bghryct.github.io/KKQA/#/family/combo) | Display | loose | +0.61 | 21.7 |  |  |
 | [Comfortaa](https://bghryct.github.io/KKQA/#/family/comfortaa) | Display | tight | −0.21 | 29.8 |  |  |
 | [Comic Neue](https://bghryct.github.io/KKQA/#/family/comic-neue) | Handwriting | standard | −0.13 | 26.9 |  |  |
 | [Comic Relief](https://bghryct.github.io/KKQA/#/family/comic-relief) | Display | loose | +0.37 | 32.7 |  |  |
@@ -300,18 +300,18 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Cormorant Unicase](https://bghryct.github.io/KKQA/#/family/cormorant-unicase) | Serif | standard | +0.07 | 13.6 |  |  |
 | [Cormorant Upright](https://bghryct.github.io/KKQA/#/family/cormorant-upright) | Serif | standard | +0.03 | 17.4 |  |  |
 | [Cossette Texte](https://bghryct.github.io/KKQA/#/family/cossette-texte) | Sans Serif | standard | −0.06 | 14.7 |  |  |
-| [Cossette Titre](https://bghryct.github.io/KKQA/#/family/cossette-titre) | Sans Serif | standard | −0.23 | 10.2 |  |  |
+| [Cossette Titre](https://bghryct.github.io/KKQA/#/family/cossette-titre) | Sans Serif | standard | −0.24 | 10.2 |  |  |
 | [Courgette](https://bghryct.github.io/KKQA/#/family/courgette) | Handwriting | standard | −0.81 | 44.0 |  |  |
 | [Coustard](https://bghryct.github.io/KKQA/#/family/coustard) | Serif | tight | −0.28 | 22.8 |  |  |
 | [Covered By Your Grace](https://bghryct.github.io/KKQA/#/family/covered-by-your-grace) | Handwriting | standard | +0.13 | 23.1 |  |  |
 | [Crafty Girls](https://bghryct.github.io/KKQA/#/family/crafty-girls) | Handwriting | tight | −0.68 | 37.2 |  |  |
 | [Creepster](https://bghryct.github.io/KKQA/#/family/creepster) | Display | tight | −0.28 | 15.6 |  |  |
 | [Crete Round](https://bghryct.github.io/KKQA/#/family/crete-round) | Serif | loose | +0.36 | 19.4 |  |  |
-| [Crimson Pro](https://bghryct.github.io/KKQA/#/family/crimson-pro) | Serif | loose | +0.43 | 18.8 |  |  |
+| [Crimson Pro](https://bghryct.github.io/KKQA/#/family/crimson-pro) | Serif | loose | +0.44 | 18.8 |  |  |
 | [Crimson Text](https://bghryct.github.io/KKQA/#/family/crimson-text) | Serif | loose | +0.31 | 18.0 |  |  |
 | [Croissant One](https://bghryct.github.io/KKQA/#/family/croissant-one) | Display | loose | +0.56 | 22.9 |  |  |
 | [Crushed](https://bghryct.github.io/KKQA/#/family/crushed) | Display | tight | −0.28 | 12.6 |  |  |
-| [Cuprum](https://bghryct.github.io/KKQA/#/family/cuprum) | Sans Serif | standard | +0.20 | 13.8 |  |  |
+| [Cuprum](https://bghryct.github.io/KKQA/#/family/cuprum) | Sans Serif | standard | +0.21 | 13.8 |  |  |
 | [Cute Font](https://bghryct.github.io/KKQA/#/family/cute-font) | Display | loose | +0.65 | 18.7 |  | secondary Latin |
 | [Cutive](https://bghryct.github.io/KKQA/#/family/cutive) | Serif | standard | +0.08 | 29.9 |  |  |
 | [Dai Banna SIL](https://bghryct.github.io/KKQA/#/family/dai-banna-sil) | Serif | loose | +0.33 | 17.3 |  | secondary Latin |
@@ -336,7 +336,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Diphylleia](https://bghryct.github.io/KKQA/#/family/diphylleia) | Serif | standard | +0.00 | 25.7 |  | secondary Latin |
 | [Diplomata](https://bghryct.github.io/KKQA/#/family/diplomata) | Display | standard | +0.03 | 38.3 |  | full-width quotes |
 | [Diplomata SC](https://bghryct.github.io/KKQA/#/family/diplomata-sc) | Display | standard | −0.06 | 42.2 |  | full-width quotes |
-| [DM Sans](https://bghryct.github.io/KKQA/#/family/dm-sans) | Sans Serif | standard | −0.07 | 17.9 |  |  |
+| [DM Sans](https://bghryct.github.io/KKQA/#/family/dm-sans) | Sans Serif | standard | −0.08 | 17.9 |  |  |
 | [DM Serif Display](https://bghryct.github.io/KKQA/#/family/dm-serif-display) | Serif | standard | −0.02 | 19.8 |  |  |
 | [DM Serif Text](https://bghryct.github.io/KKQA/#/family/dm-serif-text) | Serif | standard | −0.00 | 19.0 |  |  |
 | [Do Hyeon](https://bghryct.github.io/KKQA/#/family/do-hyeon) | Sans Serif | standard | +0.29 | 16.1 |  | secondary Latin |
@@ -356,8 +356,9 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Economica](https://bghryct.github.io/KKQA/#/family/economica) | Sans Serif | loose | +0.43 | 15.4 |  |  |
 | [Eczar](https://bghryct.github.io/KKQA/#/family/eczar) | Serif | standard | +0.07 | 24.5 |  | secondary Latin |
 | [Edu AU VIC WA NT Arrows](https://bghryct.github.io/KKQA/#/family/edu-au-vic-wa-nt-arrows) | Handwriting | tight | −0.54 | 22.2 |  |  |
-| [Edu AU VIC WA NT Dots](https://bghryct.github.io/KKQA/#/family/edu-au-vic-wa-nt-dots) | Handwriting | standard | −0.30 | 32.1 |  |  |
+| [Edu AU VIC WA NT Dots](https://bghryct.github.io/KKQA/#/family/edu-au-vic-wa-nt-dots) | Handwriting | standard | −0.31 | 32.1 |  |  |
 | [Edu AU VIC WA NT Hand](https://bghryct.github.io/KKQA/#/family/edu-au-vic-wa-nt-hand) | Handwriting | tight | −0.46 | 51.6 |  |  |
+| [Edu AU VIC WA NT Pre](https://bghryct.github.io/KKQA/#/family/edu-au-vic-wa-nt-pre) | Handwriting | standard | −0.42 | 60.6 |  |  |
 | [Edu NSW ACT Foundation](https://bghryct.github.io/KKQA/#/family/edu-nsw-act-foundation) | Handwriting | standard | +0.10 | 29.5 |  |  |
 | [Edu NSW ACT Hand Pre](https://bghryct.github.io/KKQA/#/family/edu-nsw-act-hand-pre) | Handwriting | standard | −0.04 | 44.4 |  |  |
 | [Edu QLD Beginner](https://bghryct.github.io/KKQA/#/family/edu-qld-beginner) | Handwriting | standard | −0.12 | 42.3 |  |  |
@@ -374,7 +375,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Elsie Swash Caps](https://bghryct.github.io/KKQA/#/family/elsie-swash-caps) | Display | standard | +0.15 | 29.3 |  |  |
 | [Emblema One](https://bghryct.github.io/KKQA/#/family/emblema-one) | Display | loose | +0.82 | 33.3 |  |  |
 | [Encode Sans](https://bghryct.github.io/KKQA/#/family/encode-sans) | Sans Serif | standard | −0.20 | 17.2 |  |  |
-| [Encode Sans Condensed](https://bghryct.github.io/KKQA/#/family/encode-sans-condensed) | Sans Serif | tight | −0.23 | 15.1 |  |  |
+| [Encode Sans Condensed](https://bghryct.github.io/KKQA/#/family/encode-sans-condensed) | Sans Serif | tight | −0.24 | 15.1 |  |  |
 | [Encode Sans Expanded](https://bghryct.github.io/KKQA/#/family/encode-sans-expanded) | Sans Serif | standard | −0.18 | 20.3 |  |  |
 | [Encode Sans Semi Condensed](https://bghryct.github.io/KKQA/#/family/encode-sans-semi-condensed) | Sans Serif | standard | −0.22 | 15.9 |  |  |
 | [Encode Sans Semi Expanded](https://bghryct.github.io/KKQA/#/family/encode-sans-semi-expanded) | Sans Serif | standard | −0.19 | 18.8 |  |  |
@@ -392,7 +393,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Euphoria Script](https://bghryct.github.io/KKQA/#/family/euphoria-script) | Handwriting | standard | −0.59 | 33.4 |  |  |
 | [Ewert](https://bghryct.github.io/KKQA/#/family/ewert) | Display | tight | −1.12 | 20.5 |  |  |
 | [Exile](https://bghryct.github.io/KKQA/#/family/exile) | Display | standard | +0.25 | 13.2 |  |  |
-| [Exo](https://bghryct.github.io/KKQA/#/family/exo) | Sans Serif | standard | −0.15 | 17.9 |  |  |
+| [Exo](https://bghryct.github.io/KKQA/#/family/exo) | Sans Serif | standard | −0.16 | 17.9 |  |  |
 | [Exo 2](https://bghryct.github.io/KKQA/#/family/exo-2) | Sans Serif | standard | +0.02 | 10.7 |  |  |
 | [Expletus Sans](https://bghryct.github.io/KKQA/#/family/expletus-sans) | Display | standard | +0.23 | 30.4 |  |  |
 | [Explora](https://bghryct.github.io/KKQA/#/family/explora) | Handwriting | tight | −0.93 | 55.6 |  |  |
@@ -430,7 +431,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Freckle Face](https://bghryct.github.io/KKQA/#/family/freckle-face) | Display | tight | −0.40 | 11.9 |  |  |
 | [Freeman](https://bghryct.github.io/KKQA/#/family/freeman) | Display | loose | +0.80 | 12.3 |  |  |
 | [Fresca](https://bghryct.github.io/KKQA/#/family/fresca) | Sans Serif | standard | −0.05 | 21.0 |  |  |
-| [Frijole](https://bghryct.github.io/KKQA/#/family/frijole) | Display | standard | −0.29 | 32.5 |  |  |
+| [Frijole](https://bghryct.github.io/KKQA/#/family/frijole) | Display | standard | −0.30 | 32.5 |  |  |
 | [Fruktur](https://bghryct.github.io/KKQA/#/family/fruktur) | Display | standard | +0.37 | 23.0 |  |  |
 | [Fugaz One](https://bghryct.github.io/KKQA/#/family/fugaz-one) | Display | loose | +0.04 | 32.9 |  |  |
 | [Fuggles](https://bghryct.github.io/KKQA/#/family/fuggles) | Handwriting | tight | −1.72 | 39.0 |  |  |
@@ -443,6 +444,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Gabriela](https://bghryct.github.io/KKQA/#/family/gabriela) | Serif | standard | +0.14 | 21.3 |  |  |
 | [Gaegu](https://bghryct.github.io/KKQA/#/family/gaegu) | Handwriting | loose | +1.39 | 34.4 |  | secondary Latin |
 | [Gafata](https://bghryct.github.io/KKQA/#/family/gafata) | Sans Serif | standard | +0.09 | 9.4 |  |  |
+| [Gajraj One](https://bghryct.github.io/KKQA/#/family/gajraj-one) | Display | standard | +0.05 | 17.2 |  | secondary Latin |
 | [Galada](https://bghryct.github.io/KKQA/#/family/galada) | Display | loose | −0.53 | 39.3 |  | secondary Latin |
 | [Galdeano](https://bghryct.github.io/KKQA/#/family/galdeano) | Sans Serif | loose | +0.49 | 15.8 |  |  |
 | [Galindo](https://bghryct.github.io/KKQA/#/family/galindo) | Display | standard | −0.07 | 11.0 |  |  |
@@ -456,10 +458,11 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Gemunu Libre](https://bghryct.github.io/KKQA/#/family/gemunu-libre) | Sans Serif | tight | −0.27 | 11.3 |  | secondary Latin |
 | [Gentium Book Plus](https://bghryct.github.io/KKQA/#/family/gentium-book-plus) | Serif | loose | +0.31 | 16.2 |  |  |
 | [Gentium Plus](https://bghryct.github.io/KKQA/#/family/gentium-plus) | Serif | standard | +0.25 | 16.4 |  |  |
-| [Geom](https://bghryct.github.io/KKQA/#/family/geom) | Sans Serif | standard | −0.12 | 23.4 |  |  |
+| [Geom](https://bghryct.github.io/KKQA/#/family/geom) | Sans Serif | standard | −0.13 | 23.4 |  |  |
+| [Geomini](https://bghryct.github.io/KKQA/#/family/geomini) | Sans Serif | tight | −0.46 | 19.5 |  |  |
 | [Geostar](https://bghryct.github.io/KKQA/#/family/geostar) | Display | tight | −0.79 | 16.8 |  |  |
 | [Geostar Fill](https://bghryct.github.io/KKQA/#/family/geostar-fill) | Display | tight | −0.81 | 20.3 |  |  |
-| [Germania One](https://bghryct.github.io/KKQA/#/family/germania-one) | Display | loose | +0.81 | 20.4 |  |  |
+| [Germania One](https://bghryct.github.io/KKQA/#/family/germania-one) | Display | loose | +0.82 | 20.4 |  |  |
 | [GFS Didot](https://bghryct.github.io/KKQA/#/family/gfs-didot) | Serif | standard | +0.13 | 27.0 |  |  |
 | [Gideon Roman](https://bghryct.github.io/KKQA/#/family/gideon-roman) | Display | standard | −0.26 | 21.0 |  |  |
 | [Gidole](https://bghryct.github.io/KKQA/#/family/gidole) | Sans Serif | loose | +0.26 | 13.4 |  |  |
@@ -487,7 +490,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Grandiflora One](https://bghryct.github.io/KKQA/#/family/grandiflora-one) | Serif | tight | −0.17 | 26.5 |  | secondary Latin |
 | [Grandstander](https://bghryct.github.io/KKQA/#/family/grandstander) | Display | loose | +0.36 | 19.3 |  |  |
 | [Grape Nuts](https://bghryct.github.io/KKQA/#/family/grape-nuts) | Handwriting | standard | −1.17 | 45.6 |  |  |
-| [Gravitas One](https://bghryct.github.io/KKQA/#/family/gravitas-one) | Display | loose | +0.60 | 20.0 |  |  |
+| [Gravitas One](https://bghryct.github.io/KKQA/#/family/gravitas-one) | Display | loose | +0.61 | 20.0 |  |  |
 | [Great Vibes](https://bghryct.github.io/KKQA/#/family/great-vibes) | Handwriting | standard | −0.46 | 62.6 |  |  |
 | [Grenze Gotisch](https://bghryct.github.io/KKQA/#/family/grenze-gotisch) | Display | loose | +0.37 | 17.5 |  |  |
 | [Griffy](https://bghryct.github.io/KKQA/#/family/griffy) | Display | tight | −6.00 | 44.5 |  | out of range |
@@ -497,7 +500,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Gulzar](https://bghryct.github.io/KKQA/#/family/gulzar) | Serif | standard | +0.18 | 13.0 |  | secondary Latin |
 | [Gupter](https://bghryct.github.io/KKQA/#/family/gupter) | Serif | loose | +0.51 | 17.6 |  |  |
 | [Gurajada](https://bghryct.github.io/KKQA/#/family/gurajada) | Sans Serif | standard | +0.13 | 11.5 |  | secondary Latin |
-| [Gveret Levin](https://bghryct.github.io/KKQA/#/family/gveret-levin) | Handwriting | standard | −0.12 | 30.2 |  | secondary Latin |
+| [Gveret Levin](https://bghryct.github.io/KKQA/#/family/gveret-levin) | Handwriting | standard | −0.13 | 30.2 |  | secondary Latin |
 | [Gwendolyn](https://bghryct.github.io/KKQA/#/family/gwendolyn) | Handwriting | tight | −0.80 | 64.8 |  |  |
 | [Habibi](https://bghryct.github.io/KKQA/#/family/habibi) | Serif | loose | +0.14 | 26.5 |  |  |
 | [Hachi Maru Pop](https://bghryct.github.io/KKQA/#/family/hachi-maru-pop) | Handwriting | tight | −0.36 | 53.6 |  | secondary Latin |
@@ -508,7 +511,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Hanalei Fill](https://bghryct.github.io/KKQA/#/family/hanalei-fill) | Display | tight | −0.62 | 14.2 |  |  |
 | [Handjet](https://bghryct.github.io/KKQA/#/family/handjet) | Display | standard | +0.19 | 19.8 |  |  |
 | [Handlee](https://bghryct.github.io/KKQA/#/family/handlee) | Handwriting | standard | −0.10 | 18.0 |  |  |
-| [Hanken Grotesk](https://bghryct.github.io/KKQA/#/family/hanken-grotesk) | Sans Serif | standard | +0.01 | 16.3 |  |  |
+| [Hanken Grotesk](https://bghryct.github.io/KKQA/#/family/hanken-grotesk) | Sans Serif | standard | +0.02 | 16.3 |  |  |
 | [Hanuman](https://bghryct.github.io/KKQA/#/family/hanuman) | Serif | loose | +0.29 | 17.1 |  | secondary Latin |
 | [Happy Monkey](https://bghryct.github.io/KKQA/#/family/happy-monkey) | Display | tight | −0.48 | 11.6 |  |  |
 | [Harmattan](https://bghryct.github.io/KKQA/#/family/harmattan) | Sans Serif | loose | +0.41 | 19.1 |  | secondary Latin |
@@ -517,7 +520,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Heebo](https://bghryct.github.io/KKQA/#/family/heebo) | Sans Serif | standard | +0.09 | 13.6 |  | secondary Latin |
 | [Herr Von Muellerhoff](https://bghryct.github.io/KKQA/#/family/herr-von-muellerhoff) | Handwriting | tight | +0.64 | 90.7 |  |  |
 | [Hi Melody](https://bghryct.github.io/KKQA/#/family/hi-melody) | Handwriting | loose | +0.43 | 25.4 |  | secondary Latin |
-| [Hina Mincho](https://bghryct.github.io/KKQA/#/family/hina-mincho) | Serif | standard | −0.12 | 26.8 |  | secondary Latin |
+| [Hina Mincho](https://bghryct.github.io/KKQA/#/family/hina-mincho) | Serif | standard | −0.13 | 26.8 |  | secondary Latin |
 | [Hind](https://bghryct.github.io/KKQA/#/family/hind) | Sans Serif | standard | −0.03 | 19.7 |  | secondary Latin |
 | [Hind Guntur](https://bghryct.github.io/KKQA/#/family/hind-guntur) | Sans Serif | standard | −0.03 | 19.7 |  | secondary Latin |
 | [Hind Madurai](https://bghryct.github.io/KKQA/#/family/hind-madurai) | Sans Serif | standard | −0.03 | 19.7 |  | secondary Latin |
@@ -530,7 +533,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Hubballi](https://bghryct.github.io/KKQA/#/family/hubballi) | Sans Serif | loose | +0.41 | 21.4 |  | secondary Latin |
 | [Hubot Sans](https://bghryct.github.io/KKQA/#/family/hubot-sans) | Sans Serif | tight | −0.47 | 19.8 |  |  |
 | [Huninn](https://bghryct.github.io/KKQA/#/family/huninn) | Sans Serif | standard | −0.08 | 12.8 |  | secondary Latin |
-| [Iansui](https://bghryct.github.io/KKQA/#/family/iansui) | Handwriting | standard | +0.21 | 24.5 |  | secondary Latin |
+| [Iansui](https://bghryct.github.io/KKQA/#/family/iansui) | Handwriting | standard | +0.22 | 24.5 |  | secondary Latin |
 | [Ibarra Real Nova](https://bghryct.github.io/KKQA/#/family/ibarra-real-nova) | Serif | standard | +0.26 | 19.9 |  |  |
 | [IBM Plex Sans](https://bghryct.github.io/KKQA/#/family/ibm-plex-sans) | Sans Serif | standard | +0.17 | 16.5 |  |  |
 | [IBM Plex Sans Arabic](https://bghryct.github.io/KKQA/#/family/ibm-plex-sans-arabic) | Sans Serif | standard | +0.17 | 16.4 |  | secondary Latin |
@@ -562,7 +565,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Indie Flower](https://bghryct.github.io/KKQA/#/family/indie-flower) | Handwriting | tight | −0.52 | 26.2 |  |  |
 | [Inika](https://bghryct.github.io/KKQA/#/family/inika) | Serif | standard | +0.10 | 24.9 |  |  |
 | [Inknut Antiqua](https://bghryct.github.io/KKQA/#/family/inknut-antiqua) | Serif | loose | +0.69 | 22.4 |  | secondary Latin |
-| [Inria Sans](https://bghryct.github.io/KKQA/#/family/inria-sans) | Sans Serif | loose | +0.41 | 22.4 |  |  |
+| [Inria Sans](https://bghryct.github.io/KKQA/#/family/inria-sans) | Sans Serif | loose | +0.42 | 22.4 |  |  |
 | [Inria Serif](https://bghryct.github.io/KKQA/#/family/inria-serif) | Serif | loose | +0.27 | 18.9 |  |  |
 | [Inspiration](https://bghryct.github.io/KKQA/#/family/inspiration) | Handwriting | standard | +0.05 | 54.8 |  |  |
 | [Instrument Sans](https://bghryct.github.io/KKQA/#/family/instrument-sans) | Sans Serif | standard | −0.02 | 19.4 |  |  |
@@ -574,13 +577,13 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Italianno](https://bghryct.github.io/KKQA/#/family/italianno) | Handwriting | tight | −0.42 | 62.2 |  |  |
 | [Itim](https://bghryct.github.io/KKQA/#/family/itim) | Handwriting | loose | +0.52 | 16.1 |  | secondary Latin |
 | [Jacquard 12](https://bghryct.github.io/KKQA/#/family/jacquard-12) | Display | loose | +0.34 | 17.3 |  |  |
-| [Jacquard 24](https://bghryct.github.io/KKQA/#/family/jacquard-24) | Display | standard | +0.29 | 15.5 |  |  |
+| [Jacquard 24](https://bghryct.github.io/KKQA/#/family/jacquard-24) | Display | standard | +0.30 | 15.5 |  |  |
 | [Jacques Francois](https://bghryct.github.io/KKQA/#/family/jacques-francois) | Serif | loose | +0.57 | 24.8 |  |  |
 | [Jacques Francois Shadow](https://bghryct.github.io/KKQA/#/family/jacques-francois-shadow) | Display | standard | −0.28 | 23.4 |  |  |
 | [Jaini](https://bghryct.github.io/KKQA/#/family/jaini) | Display | standard | +0.06 | 20.0 |  | secondary Latin |
 | [Jaini Purva](https://bghryct.github.io/KKQA/#/family/jaini-purva) | Display | standard | +0.06 | 20.0 |  | secondary Latin |
 | [Jaldi](https://bghryct.github.io/KKQA/#/family/jaldi) | Sans Serif | standard | +0.10 | 14.9 |  | secondary Latin |
-| [Jersey 10](https://bghryct.github.io/KKQA/#/family/jersey-10) | Display | tight | −0.17 | 11.7 |  |  |
+| [Jersey 10](https://bghryct.github.io/KKQA/#/family/jersey-10) | Display | tight | −0.18 | 11.7 |  |  |
 | [Jersey 15](https://bghryct.github.io/KKQA/#/family/jersey-15) | Display | loose | +0.41 | 14.9 |  |  |
 | [Jersey 20](https://bghryct.github.io/KKQA/#/family/jersey-20) | Display | loose | +0.65 | 15.4 |  |  |
 | [Jersey 25](https://bghryct.github.io/KKQA/#/family/jersey-25) | Display | loose | +0.68 | 16.3 |  |  |
@@ -594,7 +597,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Jost](https://bghryct.github.io/KKQA/#/family/jost) | Sans Serif | standard | +0.21 | 22.7 |  |  |
 | [Joti One](https://bghryct.github.io/KKQA/#/family/joti-one) | Display | loose | +1.07 | 25.2 |  |  |
 | [Jua](https://bghryct.github.io/KKQA/#/family/jua) | Sans Serif | loose | +0.61 | 27.7 |  | secondary Latin |
-| [Judson](https://bghryct.github.io/KKQA/#/family/judson) | Serif | standard | +0.07 | 11.7 |  |  |
+| [Judson](https://bghryct.github.io/KKQA/#/family/judson) | Serif | standard | +0.08 | 11.7 |  |  |
 | [Julee](https://bghryct.github.io/KKQA/#/family/julee) | Handwriting | standard | +0.23 | 23.1 |  |  |
 | [Julius Sans One](https://bghryct.github.io/KKQA/#/family/julius-sans-one) | Sans Serif | standard | −0.09 | 31.4 |  |  |
 | [Junge](https://bghryct.github.io/KKQA/#/family/junge) | Serif | loose | +0.23 | 24.5 |  |  |
@@ -618,7 +621,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Karma](https://bghryct.github.io/KKQA/#/family/karma) | Serif | standard | −0.02 | 19.9 |  | secondary Latin |
 | [Katibeh](https://bghryct.github.io/KKQA/#/family/katibeh) | Display | standard | −0.03 | 12.7 |  | secondary Latin |
 | [Kaushan Script](https://bghryct.github.io/KKQA/#/family/kaushan-script) | Handwriting | standard | +0.22 | 29.7 |  |  |
-| [Kavivanar](https://bghryct.github.io/KKQA/#/family/kavivanar) | Handwriting | tight | −0.36 | 34.8 |  | secondary Latin |
+| [Kavivanar](https://bghryct.github.io/KKQA/#/family/kavivanar) | Handwriting | tight | −0.37 | 34.8 |  | secondary Latin |
 | [Kavoon](https://bghryct.github.io/KKQA/#/family/kavoon) | Display | loose | +0.29 | 22.4 |  |  |
 | [Kay Pho Du](https://bghryct.github.io/KKQA/#/family/kay-pho-du) | Serif | loose | +0.36 | 20.1 |  | secondary Latin |
 | [Kdam Thmor Pro](https://bghryct.github.io/KKQA/#/family/kdam-thmor-pro) | Sans Serif | standard | −0.15 | 13.4 |  | secondary Latin |
@@ -634,9 +637,10 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Kiwi Maru](https://bghryct.github.io/KKQA/#/family/kiwi-maru) | Serif | loose | +0.33 | 20.6 |  | secondary Latin |
 | [Klee One](https://bghryct.github.io/KKQA/#/family/klee-one) | Handwriting | standard | +0.11 | 25.6 |  | secondary Latin |
 | [Knewave](https://bghryct.github.io/KKQA/#/family/knewave) | Display | tight | −6.00 | 38.9 |  | out of range |
-| [Kodchasan](https://bghryct.github.io/KKQA/#/family/kodchasan) | Sans Serif | tight | −0.36 | 19.6 |  | secondary Latin |
+| [Kodchasan](https://bghryct.github.io/KKQA/#/family/kodchasan) | Sans Serif | tight | −0.37 | 19.6 |  | secondary Latin |
 | [Koh Santepheap](https://bghryct.github.io/KKQA/#/family/koh-santepheap) | Serif | loose | +0.22 | 19.9 |  | secondary Latin |
 | [KoHo](https://bghryct.github.io/KKQA/#/family/koho) | Sans Serif | standard | −0.12 | 17.3 |  | secondary Latin |
+| [Kolker Brush](https://bghryct.github.io/KKQA/#/family/kolker-brush) | Handwriting | tight | −0.82 | 54.1 |  |  |
 | [Konkhmer Sleokchher](https://bghryct.github.io/KKQA/#/family/konkhmer-sleokchher) | Display | loose | +0.62 | 25.5 |  | secondary Latin |
 | [Koulen](https://bghryct.github.io/KKQA/#/family/koulen) | Display | loose | +0.29 | 10.7 |  | secondary Latin |
 | [Kreon](https://bghryct.github.io/KKQA/#/family/kreon) | Serif | loose | +0.42 | 12.2 |  |  |
@@ -653,7 +657,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Lacquer](https://bghryct.github.io/KKQA/#/family/lacquer) | Display | loose | +0.76 | 17.6 |  |  |
 | [Laila](https://bghryct.github.io/KKQA/#/family/laila) | Serif | loose | +0.31 | 24.6 |  | secondary Latin |
 | [Lakki Reddy](https://bghryct.github.io/KKQA/#/family/lakki-reddy) | Handwriting | tight | −2.15 | 45.6 |  | secondary Latin |
-| [Lalezar](https://bghryct.github.io/KKQA/#/family/lalezar) | Sans Serif | loose | +0.30 | 14.3 |  | secondary Latin |
+| [Lalezar](https://bghryct.github.io/KKQA/#/family/lalezar) | Sans Serif | loose | +0.31 | 14.3 |  | secondary Latin |
 | [Langar](https://bghryct.github.io/KKQA/#/family/langar) | Display | standard | +0.03 | 26.7 |  | secondary Latin |
 | [Lateef](https://bghryct.github.io/KKQA/#/family/lateef) | Serif | loose | +0.42 | 14.1 |  | secondary Latin |
 | [Lato](https://bghryct.github.io/KKQA/#/family/lato) | Sans Serif | standard | +0.01 | 16.9 |  |  |
@@ -684,7 +688,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Literata](https://bghryct.github.io/KKQA/#/family/literata) | Serif | loose | +0.56 | 21.2 |  |  |
 | [Liu Jian Mao Cao](https://bghryct.github.io/KKQA/#/family/liu-jian-mao-cao) | Handwriting | standard | −0.25 | 34.4 |  | secondary Latin |
 | [Livvic](https://bghryct.github.io/KKQA/#/family/livvic) | Sans Serif | standard | −0.25 | 21.4 |  |  |
-| [Lobster](https://bghryct.github.io/KKQA/#/family/lobster) | Display | loose | −0.61 | 42.1 |  |  |
+| [Lobster](https://bghryct.github.io/KKQA/#/family/lobster) | Display | loose | −0.62 | 42.1 |  |  |
 | [Lobster Two](https://bghryct.github.io/KKQA/#/family/lobster-two) | Display | tight | −0.56 | 16.9 |  |  |
 | [Londrina Sketch](https://bghryct.github.io/KKQA/#/family/londrina-sketch) | Display | tight | −1.70 | 14.5 |  |  |
 | [Londrina Solid](https://bghryct.github.io/KKQA/#/family/londrina-solid) | Display | standard | +0.16 | 7.2 |  |  |
@@ -709,7 +713,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Ma Shan Zheng](https://bghryct.github.io/KKQA/#/family/ma-shan-zheng) | Handwriting | tight | −0.99 | 25.7 |  | secondary Latin |
 | [Macondo](https://bghryct.github.io/KKQA/#/family/macondo) | Display | standard | −0.09 | 16.9 |  |  |
 | [Mada](https://bghryct.github.io/KKQA/#/family/mada) | Sans Serif | standard | +0.22 | 14.8 |  | secondary Latin |
-| [Magra](https://bghryct.github.io/KKQA/#/family/magra) | Sans Serif | loose | +0.21 | 13.5 |  |  |
+| [Magra](https://bghryct.github.io/KKQA/#/family/magra) | Sans Serif | loose | +0.22 | 13.5 |  |  |
 | [Maiden Orange](https://bghryct.github.io/KKQA/#/family/maiden-orange) | Serif | standard | +0.07 | 12.8 |  |  |
 | [Maitree](https://bghryct.github.io/KKQA/#/family/maitree) | Serif | standard | +0.12 | 20.1 |  |  |
 | [Mako](https://bghryct.github.io/KKQA/#/family/mako) | Sans Serif | standard | +0.19 | 9.5 |  |  |
@@ -724,7 +728,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Marcellus](https://bghryct.github.io/KKQA/#/family/marcellus) | Serif | tight | −0.36 | 20.0 |  |  |
 | [Marcellus SC](https://bghryct.github.io/KKQA/#/family/marcellus-sc) | Serif | standard | −0.24 | 20.8 |  |  |
 | [Marck Script](https://bghryct.github.io/KKQA/#/family/marck-script) | Handwriting | tight | −0.79 | 43.1 |  |  |
-| [Margarine](https://bghryct.github.io/KKQA/#/family/margarine) | Display | standard | +0.10 | 12.1 |  |  |
+| [Margarine](https://bghryct.github.io/KKQA/#/family/margarine) | Display | standard | +0.11 | 12.1 |  |  |
 | [Marhey](https://bghryct.github.io/KKQA/#/family/marhey) | Display | loose | +0.40 | 17.2 |  | secondary Latin |
 | [Markazi Text](https://bghryct.github.io/KKQA/#/family/markazi-text) | Serif | loose | +0.37 | 10.9 |  | secondary Latin |
 | [Marko One](https://bghryct.github.io/KKQA/#/family/marko-one) | Serif | loose | +0.51 | 20.0 |  |  |
@@ -783,7 +787,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Montserrat Alternates](https://bghryct.github.io/KKQA/#/family/montserrat-alternates) | Sans Serif | tight | −0.32 | 21.9 |  |  |
 | [Moo Lah Lah](https://bghryct.github.io/KKQA/#/family/moo-lah-lah) | Display | tight | −0.72 | 27.1 |  |  |
 | [Mooli](https://bghryct.github.io/KKQA/#/family/mooli) | Sans Serif | standard | −0.08 | 21.3 |  |  |
-| [Moon Dance](https://bghryct.github.io/KKQA/#/family/moon-dance) | Handwriting | tight | −0.47 | 42.4 |  |  |
+| [Moon Dance](https://bghryct.github.io/KKQA/#/family/moon-dance) | Handwriting | tight | −0.48 | 42.4 |  |  |
 | [Moul](https://bghryct.github.io/KKQA/#/family/moul) | Display | loose | +0.90 | 23.2 |  | secondary Latin |
 | [Moulpali](https://bghryct.github.io/KKQA/#/family/moulpali) | Sans Serif | loose | +0.88 | 12.7 |  | secondary Latin |
 | [Mountains of Christmas](https://bghryct.github.io/KKQA/#/family/mountains-of-christmas) | Display | standard | −0.09 | 23.5 |  |  |
@@ -809,7 +813,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Nanum Gothic](https://bghryct.github.io/KKQA/#/family/nanum-gothic) | Sans Serif | standard | −0.01 | 25.4 |  | secondary Latin |
 | [Nanum Myeongjo](https://bghryct.github.io/KKQA/#/family/nanum-myeongjo) | Serif | loose | +0.27 | 28.5 |  | secondary Latin |
 | [Nanum Pen Script](https://bghryct.github.io/KKQA/#/family/nanum-pen-script) | Handwriting | loose | +0.71 | 24.0 |  | secondary Latin |
-| [Narnoor](https://bghryct.github.io/KKQA/#/family/narnoor) | Sans Serif | loose | +0.41 | 26.7 |  | secondary Latin |
+| [Narnoor](https://bghryct.github.io/KKQA/#/family/narnoor) | Sans Serif | loose | +0.42 | 26.7 |  | secondary Latin |
 | [Nata Sans](https://bghryct.github.io/KKQA/#/family/nata-sans) | Sans Serif | tight | −0.24 | 20.9 |  |  |
 | [National Park](https://bghryct.github.io/KKQA/#/family/national-park) | Sans Serif | standard | −0.06 | 16.5 |  |  |
 | [Neonderthaw](https://bghryct.github.io/KKQA/#/family/neonderthaw) | Handwriting | tight | −1.09 | 46.8 |  |  |
@@ -818,13 +822,13 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Neuton](https://bghryct.github.io/KKQA/#/family/neuton) | Serif | standard | −0.20 | 17.5 |  |  |
 | [New Amsterdam](https://bghryct.github.io/KKQA/#/family/new-amsterdam) | Sans Serif | tight | −0.40 | 16.7 |  |  |
 | [New Rocker](https://bghryct.github.io/KKQA/#/family/new-rocker) | Display | loose | +0.26 | 17.8 |  |  |
-| [News Cycle](https://bghryct.github.io/KKQA/#/family/news-cycle) | Sans Serif | tight | −0.34 | 16.1 |  |  |
+| [News Cycle](https://bghryct.github.io/KKQA/#/family/news-cycle) | Sans Serif | tight | −0.35 | 16.1 |  |  |
 | [Niconne](https://bghryct.github.io/KKQA/#/family/niconne) | Handwriting | tight | −1.45 | 37.8 |  |  |
 | [Nixie One](https://bghryct.github.io/KKQA/#/family/nixie-one) | Display | tight | −0.38 | 14.4 |  |  |
 | [Nobile](https://bghryct.github.io/KKQA/#/family/nobile) | Sans Serif | standard | −0.17 | 31.5 |  |  |
 | [Norican](https://bghryct.github.io/KKQA/#/family/norican) | Handwriting | standard | −0.69 | 44.8 |  |  |
 | [Nosifer](https://bghryct.github.io/KKQA/#/family/nosifer) | Display | loose | +0.55 | 14.5 |  |  |
-| [Notable](https://bghryct.github.io/KKQA/#/family/notable) | Sans Serif | tight | −0.43 | 27.1 |  |  |
+| [Notable](https://bghryct.github.io/KKQA/#/family/notable) | Sans Serif | tight | −0.44 | 27.1 |  |  |
 | [Noticia Text](https://bghryct.github.io/KKQA/#/family/noticia-text) | Serif | loose | +0.19 | 18.1 |  |  |
 | [Noto Kufi Arabic](https://bghryct.github.io/KKQA/#/family/noto-kufi-arabic) | Sans Serif | standard | −0.03 | 15.6 |  | secondary Latin |
 | [Noto Music](https://bghryct.github.io/KKQA/#/family/noto-music) | Sans Serif | standard | −0.03 | 15.6 |  |  |
@@ -1001,7 +1005,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Noto Serif Hentaigana](https://bghryct.github.io/KKQA/#/family/noto-serif-hentaigana) | Serif | loose | +0.17 | 16.6 |  |  |
 | [Noto Serif HK](https://bghryct.github.io/KKQA/#/family/noto-serif-hk) | Serif | standard | +0.23 | 17.3 |  | secondary Latin |
 | [Noto Serif JP](https://bghryct.github.io/KKQA/#/family/noto-serif-jp) | Serif | standard | +0.23 | 17.3 |  | secondary Latin |
-| [Noto Serif Kannada](https://bghryct.github.io/KKQA/#/family/noto-serif-kannada) | Serif | loose | +0.23 | 18.3 |  | secondary Latin |
+| [Noto Serif Kannada](https://bghryct.github.io/KKQA/#/family/noto-serif-kannada) | Serif | loose | +0.24 | 18.3 |  | secondary Latin |
 | [Noto Serif Khitan Small Script](https://bghryct.github.io/KKQA/#/family/noto-serif-khitan-small-script) | Serif | loose | +0.25 | 17.4 |  |  |
 | [Noto Serif Khmer](https://bghryct.github.io/KKQA/#/family/noto-serif-khmer) | Serif | loose | +0.26 | 16.9 |  | secondary Latin |
 | [Noto Serif Khojki](https://bghryct.github.io/KKQA/#/family/noto-serif-khojki) | Serif | loose | +0.32 | 23.7 |  | secondary Latin |
@@ -1036,12 +1040,12 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Numans](https://bghryct.github.io/KKQA/#/family/numans) | Sans Serif | standard | −0.05 | 18.6 |  |  |
 | [Nunito](https://bghryct.github.io/KKQA/#/family/nunito) | Sans Serif | standard | −0.15 | 18.3 |  |  |
 | [Nunito Sans](https://bghryct.github.io/KKQA/#/family/nunito-sans) | Sans Serif | standard | −0.18 | 18.4 |  |  |
-| [Odibee Sans](https://bghryct.github.io/KKQA/#/family/odibee-sans) | Display | loose | +0.85 | 25.0 |  |  |
+| [Odibee Sans](https://bghryct.github.io/KKQA/#/family/odibee-sans) | Display | loose | +0.86 | 25.0 |  |  |
 | [Odor Mean Chey](https://bghryct.github.io/KKQA/#/family/odor-mean-chey) | Serif | standard | +0.17 | 19.5 |  | secondary Latin |
 | [Offside](https://bghryct.github.io/KKQA/#/family/offside) | Display | loose | +0.32 | 21.1 |  |  |
-| [Oi](https://bghryct.github.io/KKQA/#/family/oi) | Display | tight | −0.60 | 16.7 |  |  |
+| [Oi](https://bghryct.github.io/KKQA/#/family/oi) | Display | tight | −0.61 | 16.7 |  |  |
 | [Ojuju](https://bghryct.github.io/KKQA/#/family/ojuju) | Sans Serif | tight | −0.44 | 23.2 |  |  |
-| [Old Standard TT](https://bghryct.github.io/KKQA/#/family/old-standard-tt) | Serif | loose | +0.42 | 24.9 |  |  |
+| [Old Standard TT](https://bghryct.github.io/KKQA/#/family/old-standard-tt) | Serif | loose | +0.43 | 24.9 |  |  |
 | [Oldenburg](https://bghryct.github.io/KKQA/#/family/oldenburg) | Display | loose | +0.10 | 29.4 |  |  |
 | [Ole](https://bghryct.github.io/KKQA/#/family/ole) | Handwriting | tight | −0.98 | 34.5 |  |  |
 | [Oleo Script](https://bghryct.github.io/KKQA/#/family/oleo-script) | Display | standard | −0.03 | 26.2 |  |  |
@@ -1058,6 +1062,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Over the Rainbow](https://bghryct.github.io/KKQA/#/family/over-the-rainbow) | Handwriting | standard | −0.22 | 39.3 |  |  |
 | [Overlock](https://bghryct.github.io/KKQA/#/family/overlock) | Display | standard | +0.04 | 24.3 |  |  |
 | [Overlock SC](https://bghryct.github.io/KKQA/#/family/overlock-sc) | Display | standard | +0.08 | 26.8 |  |  |
+| [Overpass](https://bghryct.github.io/KKQA/#/family/overpass) | Sans Serif | loose | +0.56 | 21.3 |  |  |
 | [Ovo](https://bghryct.github.io/KKQA/#/family/ovo) | Serif | loose | +0.16 | 18.0 |  |  |
 | [Oxanium](https://bghryct.github.io/KKQA/#/family/oxanium) | Display | standard | +0.05 | 15.6 |  |  |
 | [Oxygen](https://bghryct.github.io/KKQA/#/family/oxygen) | Sans Serif | standard | −0.26 | 15.0 |  |  |
@@ -1089,11 +1094,11 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Petrona](https://bghryct.github.io/KKQA/#/family/petrona) | Serif | loose | +0.32 | 18.9 |  |  |
 | [Philosopher](https://bghryct.github.io/KKQA/#/family/philosopher) | Sans Serif | standard | +0.01 | 13.5 |  |  |
 | [Piazzolla](https://bghryct.github.io/KKQA/#/family/piazzolla) | Serif | loose | +0.26 | 20.0 |  |  |
-| [Piedra](https://bghryct.github.io/KKQA/#/family/piedra) | Display | tight | −0.29 | 13.2 |  |  |
+| [Piedra](https://bghryct.github.io/KKQA/#/family/piedra) | Display | tight | −0.30 | 13.2 |  |  |
 | [Pinyon Script](https://bghryct.github.io/KKQA/#/family/pinyon-script) | Handwriting | tight | −0.64 | 87.1 |  |  |
 | [Pirata One](https://bghryct.github.io/KKQA/#/family/pirata-one) | Display | loose | +0.17 | 25.6 |  |  |
 | [Pixelify Sans](https://bghryct.github.io/KKQA/#/family/pixelify-sans) | Display | loose | +0.62 | 21.6 |  |  |
-| [Platypi](https://bghryct.github.io/KKQA/#/family/platypi) | Serif | standard | +0.12 | 19.7 |  |  |
+| [Platypi](https://bghryct.github.io/KKQA/#/family/platypi) | Serif | standard | +0.13 | 19.7 |  |  |
 | [Play](https://bghryct.github.io/KKQA/#/family/play) | Sans Serif | standard | +0.02 | 15.1 |  |  |
 | [Playball](https://bghryct.github.io/KKQA/#/family/playball) | Display | loose | −0.43 | 66.7 |  |  |
 | [Playfair Display SC](https://bghryct.github.io/KKQA/#/family/playfair-display-sc) | Serif | standard | −0.14 | 11.2 |  |  |
@@ -1105,7 +1110,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Playwrite AR](https://bghryct.github.io/KKQA/#/family/playwrite-ar) | Handwriting | loose | −1.54 | 38.0 |  |  |
 | [Playwrite AT](https://bghryct.github.io/KKQA/#/family/playwrite-at) | Handwriting | loose | −0.99 | 30.6 |  |  |
 | [Playwrite AU NSW](https://bghryct.github.io/KKQA/#/family/playwrite-au-nsw) | Handwriting | loose | −0.09 | 26.6 |  |  |
-| [Playwrite AU QLD](https://bghryct.github.io/KKQA/#/family/playwrite-au-qld) | Handwriting | loose | −0.23 | 28.7 |  |  |
+| [Playwrite AU QLD](https://bghryct.github.io/KKQA/#/family/playwrite-au-qld) | Handwriting | loose | −0.24 | 28.7 |  |  |
 | [Playwrite AU SA](https://bghryct.github.io/KKQA/#/family/playwrite-au-sa) | Handwriting | loose | +0.03 | 25.9 |  |  |
 | [Playwrite AU TAS](https://bghryct.github.io/KKQA/#/family/playwrite-au-tas) | Handwriting | standard | −0.03 | 30.4 |  |  |
 | [Playwrite AU VIC](https://bghryct.github.io/KKQA/#/family/playwrite-au-vic) | Handwriting | loose | −0.24 | 29.3 |  |  |
@@ -1127,7 +1132,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Playwrite FR Moderne](https://bghryct.github.io/KKQA/#/family/playwrite-fr-moderne) | Handwriting | loose | +0.20 | 25.5 |  |  |
 | [Playwrite FR Trad](https://bghryct.github.io/KKQA/#/family/playwrite-fr-trad) | Handwriting | loose | −1.41 | 56.2 |  |  |
 | [Playwrite GB J](https://bghryct.github.io/KKQA/#/family/playwrite-gb-j) | Handwriting | standard | +0.08 | 20.7 |  |  |
-| [Playwrite GB S](https://bghryct.github.io/KKQA/#/family/playwrite-gb-s) | Handwriting | loose | +0.07 | 20.4 |  |  |
+| [Playwrite GB S](https://bghryct.github.io/KKQA/#/family/playwrite-gb-s) | Handwriting | loose | +0.08 | 20.4 |  |  |
 | [Playwrite HR](https://bghryct.github.io/KKQA/#/family/playwrite-hr) | Handwriting | standard | −1.03 | 49.8 |  |  |
 | [Playwrite HR Lijeva](https://bghryct.github.io/KKQA/#/family/playwrite-hr-lijeva) | Handwriting | standard | −0.72 | 27.0 |  |  |
 | [Playwrite HU](https://bghryct.github.io/KKQA/#/family/playwrite-hu) | Handwriting | standard | −0.53 | 26.1 |  |  |
@@ -1167,7 +1172,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Potta One](https://bghryct.github.io/KKQA/#/family/potta-one) | Display | loose | +1.53 | 31.6 |  | secondary Latin |
 | [Pragati Narrow](https://bghryct.github.io/KKQA/#/family/pragati-narrow) | Sans Serif | standard | +0.05 | 14.3 |  | secondary Latin |
 | [Praise](https://bghryct.github.io/KKQA/#/family/praise) | Handwriting | loose | +0.47 | 55.8 |  |  |
-| [Prata](https://bghryct.github.io/KKQA/#/family/prata) | Serif | standard | −0.29 | 17.1 |  |  |
+| [Prata](https://bghryct.github.io/KKQA/#/family/prata) | Serif | standard | −0.30 | 17.1 |  |  |
 | [Preahvihear](https://bghryct.github.io/KKQA/#/family/preahvihear) | Sans Serif | standard | −0.11 | 12.6 |  | secondary Latin |
 | [Pridi](https://bghryct.github.io/KKQA/#/family/pridi) | Serif | standard | −0.01 | 20.0 |  | secondary Latin |
 | [Princess Sofia](https://bghryct.github.io/KKQA/#/family/princess-sofia) | Handwriting | tight | −6.00 | 71.7 |  | out of range |
@@ -1192,7 +1197,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Quando](https://bghryct.github.io/KKQA/#/family/quando) | Serif | loose | +0.33 | 22.6 |  |  |
 | [Quantico](https://bghryct.github.io/KKQA/#/family/quantico) | Sans Serif | loose | +0.47 | 20.0 |  |  |
 | [Quattrocento](https://bghryct.github.io/KKQA/#/family/quattrocento) | Serif | standard | +0.13 | 16.1 |  |  |
-| [Quattrocento Sans](https://bghryct.github.io/KKQA/#/family/quattrocento-sans) | Sans Serif | standard | +0.10 | 12.4 |  |  |
+| [Quattrocento Sans](https://bghryct.github.io/KKQA/#/family/quattrocento-sans) | Sans Serif | standard | +0.11 | 12.4 |  |  |
 | [Questrial](https://bghryct.github.io/KKQA/#/family/questrial) | Sans Serif | tight | −0.50 | 10.1 |  |  |
 | [Quicksand](https://bghryct.github.io/KKQA/#/family/quicksand) | Sans Serif | tight | −0.32 | 17.4 |  |  |
 | [Quintessential](https://bghryct.github.io/KKQA/#/family/quintessential) | Handwriting | tight | −0.29 | 24.3 |  |  |
@@ -1210,7 +1215,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Rambla](https://bghryct.github.io/KKQA/#/family/rambla) | Sans Serif | standard | +0.20 | 9.2 |  |  |
 | [Rammetto One](https://bghryct.github.io/KKQA/#/family/rammetto-one) | Display | loose | +1.38 | 18.3 |  |  |
 | [Rampart One](https://bghryct.github.io/KKQA/#/family/rampart-one) | Display | tight | −1.36 | 22.8 |  | secondary Latin |
-| [Ramsina](https://bghryct.github.io/KKQA/#/family/ramsina) | Serif | loose | +0.59 | 17.4 |  | secondary Latin |
+| [Ramsina](https://bghryct.github.io/KKQA/#/family/ramsina) | Serif | loose | +0.60 | 17.4 |  | secondary Latin |
 | [Ranchers](https://bghryct.github.io/KKQA/#/family/ranchers) | Display | tight | −0.61 | 8.4 |  |  |
 | [Rancho](https://bghryct.github.io/KKQA/#/family/rancho) | Handwriting | tight | −0.54 | 24.4 |  |  |
 | [Rationale](https://bghryct.github.io/KKQA/#/family/rationale) | Sans Serif | loose | +0.56 | 10.8 |  |  |
@@ -1225,7 +1230,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Reem Kufi Fun](https://bghryct.github.io/KKQA/#/family/reem-kufi-fun) | Sans Serif | loose | +0.54 | 22.1 |  | secondary Latin |
 | [Reem Kufi Ink](https://bghryct.github.io/KKQA/#/family/reem-kufi-ink) | Sans Serif | loose | +0.54 | 22.1 |  | secondary Latin |
 | [Reenie Beanie](https://bghryct.github.io/KKQA/#/family/reenie-beanie) | Handwriting | loose | +0.41 | 35.0 |  |  |
-| [Reggae One](https://bghryct.github.io/KKQA/#/family/reggae-one) | Display | loose | +0.30 | 17.3 |  | secondary Latin |
+| [Reggae One](https://bghryct.github.io/KKQA/#/family/reggae-one) | Display | loose | +0.31 | 17.3 |  | secondary Latin |
 | [REM](https://bghryct.github.io/KKQA/#/family/rem) | Sans Serif | standard | +0.11 | 19.8 |  |  |
 | [Rethink Sans](https://bghryct.github.io/KKQA/#/family/rethink-sans) | Sans Serif | standard | −0.13 | 19.6 |  |  |
 | [Rhodium Libre](https://bghryct.github.io/KKQA/#/family/rhodium-libre) | Serif | standard | −0.01 | 18.9 |  |  |
@@ -1305,13 +1310,14 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Sedan](https://bghryct.github.io/KKQA/#/family/sedan) | Serif | loose | +0.42 | 21.3 |  |  |
 | [Sedan SC](https://bghryct.github.io/KKQA/#/family/sedan-sc) | Serif | loose | +0.42 | 24.8 |  |  |
 | [Sedgwick Ave Display](https://bghryct.github.io/KKQA/#/family/sedgwick-ave-display) | Handwriting | tight | −0.45 | 40.3 |  |  |
+| [Sekuya](https://bghryct.github.io/KKQA/#/family/sekuya) | Display | tight | +0.03 | 41.0 |  |  |
 | [Sen](https://bghryct.github.io/KKQA/#/family/sen) | Sans Serif | loose | +0.30 | 16.9 |  |  |
 | [Send Flowers](https://bghryct.github.io/KKQA/#/family/send-flowers) | Handwriting | standard | −1.07 | 36.3 |  |  |
 | [Shadows Into Light](https://bghryct.github.io/KKQA/#/family/shadows-into-light) | Handwriting | tight | −0.15 | 28.2 |  |  |
 | [Shadows Into Light Two](https://bghryct.github.io/KKQA/#/family/shadows-into-light-two) | Handwriting | tight | −0.69 | 25.8 |  |  |
 | [Shafarik](https://bghryct.github.io/KKQA/#/family/shafarik) | Display | loose | +0.23 | 19.2 |  | secondary Latin |
 | [Shalimar](https://bghryct.github.io/KKQA/#/family/shalimar) | Handwriting | tight | −0.76 | 32.7 |  |  |
-| [Shantell Sans](https://bghryct.github.io/KKQA/#/family/shantell-sans) | Display | standard | +0.30 | 22.4 |  |  |
+| [Shantell Sans](https://bghryct.github.io/KKQA/#/family/shantell-sans) | Display | standard | +0.31 | 22.4 |  |  |
 | [Shanti](https://bghryct.github.io/KKQA/#/family/shanti) | Sans Serif | standard | +0.15 | 11.9 |  |  |
 | [Share](https://bghryct.github.io/KKQA/#/family/share) | Sans Serif | loose | +0.90 | 13.4 |  |  |
 | [Share Tech](https://bghryct.github.io/KKQA/#/family/share-tech) | Sans Serif | loose | +0.91 | 14.3 |  |  |
@@ -1320,7 +1326,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Shippori Mincho](https://bghryct.github.io/KKQA/#/family/shippori-mincho) | Serif | loose | +0.29 | 23.7 |  | secondary Latin |
 | [Shippori Mincho B1](https://bghryct.github.io/KKQA/#/family/shippori-mincho-b1) | Serif | loose | +0.30 | 23.6 |  | secondary Latin |
 | [Shizuru](https://bghryct.github.io/KKQA/#/family/shizuru) | Display | tight | −0.50 | 21.8 |  | secondary Latin |
-| [Shojumaru](https://bghryct.github.io/KKQA/#/family/shojumaru) | Display | standard | −0.24 | 18.7 |  |  |
+| [Shojumaru](https://bghryct.github.io/KKQA/#/family/shojumaru) | Display | standard | −0.25 | 18.7 |  |  |
 | [Short Stack](https://bghryct.github.io/KKQA/#/family/short-stack) | Handwriting | loose | +0.39 | 24.0 |  |  |
 | [Shrikhand](https://bghryct.github.io/KKQA/#/family/shrikhand) | Display | loose | +0.52 | 25.5 |  | secondary Latin |
 | [Sigmar](https://bghryct.github.io/KKQA/#/family/sigmar) | Display | standard | +0.10 | 17.7 |  |  |
@@ -1353,7 +1359,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Solitreo](https://bghryct.github.io/KKQA/#/family/solitreo) | Handwriting | standard | +0.02 | 33.4 |  | secondary Latin |
 | [Solway](https://bghryct.github.io/KKQA/#/family/solway) | Serif | loose | +0.65 | 18.6 |  |  |
 | [Song Myung](https://bghryct.github.io/KKQA/#/family/song-myung) | Serif | loose | +0.42 | 12.9 |  | secondary Latin |
-| [Sora](https://bghryct.github.io/KKQA/#/family/sora) | Sans Serif | standard | +0.04 | 13.9 |  |  |
+| [Sora](https://bghryct.github.io/KKQA/#/family/sora) | Sans Serif | standard | +0.05 | 13.9 |  |  |
 | [Sorts Mill Goudy](https://bghryct.github.io/KKQA/#/family/sorts-mill-goudy) | Serif | standard | +0.22 | 19.2 |  |  |
 | [Source Sans 3](https://bghryct.github.io/KKQA/#/family/source-sans-3) | Sans Serif | standard | +0.22 | 14.9 |  |  |
 | [Source Serif 4](https://bghryct.github.io/KKQA/#/family/source-serif-4) | Serif | standard | +0.33 | 17.0 |  |  |
@@ -1380,13 +1386,13 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Stalemate](https://bghryct.github.io/KKQA/#/family/stalemate) | Handwriting | standard | −0.81 | 38.9 |  |  |
 | [Stalinist One](https://bghryct.github.io/KKQA/#/family/stalinist-one) | Display | standard | −0.09 | 25.1 |  |  |
 | [Stick](https://bghryct.github.io/KKQA/#/family/stick) | Sans Serif | loose | +0.27 | 22.5 |  | secondary Latin |
-| [Stick No Bills](https://bghryct.github.io/KKQA/#/family/stick-no-bills) | Sans Serif | tight | −0.42 | 15.1 |  |  |
+| [Stick No Bills](https://bghryct.github.io/KKQA/#/family/stick-no-bills) | Sans Serif | tight | −0.43 | 15.1 |  |  |
 | [Stint Ultra Condensed](https://bghryct.github.io/KKQA/#/family/stint-ultra-condensed) | Serif | standard | +0.09 | 10.7 |  |  |
 | [Stint Ultra Expanded](https://bghryct.github.io/KKQA/#/family/stint-ultra-expanded) | Serif | tight | −0.39 | 25.6 |  |  |
 | [STIX Two Math](https://bghryct.github.io/KKQA/#/family/stix-two-math) | Serif | standard | +0.11 | 16.6 |  |  |
 | [STIX Two Text](https://bghryct.github.io/KKQA/#/family/stix-two-text) | Serif | standard | +0.10 | 16.9 |  |  |
 | [Stoke](https://bghryct.github.io/KKQA/#/family/stoke) | Serif | loose | +0.37 | 25.6 |  |  |
-| [Story Script](https://bghryct.github.io/KKQA/#/family/story-script) | Sans Serif | tight | −0.07 | 24.8 |  |  |
+| [Story Script](https://bghryct.github.io/KKQA/#/family/story-script) | Sans Serif | tight | −0.08 | 24.8 |  |  |
 | [Strait](https://bghryct.github.io/KKQA/#/family/strait) | Sans Serif | loose | +0.62 | 18.8 |  |  |
 | [Strichpunkt Sans](https://bghryct.github.io/KKQA/#/family/strichpunkt-sans) | Sans Serif | standard | −0.06 | 14.4 |  |  |
 | [Stylish](https://bghryct.github.io/KKQA/#/family/stylish) | Sans Serif | loose | +0.78 | 13.7 |  | secondary Latin |
@@ -1448,15 +1454,15 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Tulpen One](https://bghryct.github.io/KKQA/#/family/tulpen-one) | Display | tight | −0.31 | 15.0 |  |  |
 | [Turret Road](https://bghryct.github.io/KKQA/#/family/turret-road) | Display | tight | −0.85 | 27.6 |  |  |
 | [Twinkle Star](https://bghryct.github.io/KKQA/#/family/twinkle-star) | Handwriting | tight | −0.82 | 35.8 |  |  |
-| [Ubuntu](https://bghryct.github.io/KKQA/#/family/ubuntu) | Sans Serif | standard | +0.12 | 16.1 |  |  |
+| [Ubuntu](https://bghryct.github.io/KKQA/#/family/ubuntu) | Sans Serif | standard | +0.13 | 16.1 |  |  |
 | [Ubuntu Condensed](https://bghryct.github.io/KKQA/#/family/ubuntu-condensed) | Sans Serif | loose | +0.67 | 17.4 |  |  |
 | [Ubuntu Sans](https://bghryct.github.io/KKQA/#/family/ubuntu-sans) | Sans Serif | standard | −0.01 | 16.5 |  |  |
 | [Uchen](https://bghryct.github.io/KKQA/#/family/uchen) | Serif | standard | +0.01 | 24.4 |  | secondary Latin |
 | [Ultra](https://bghryct.github.io/KKQA/#/family/ultra) | Serif | loose | +0.49 | 17.4 |  |  |
 | [Unbounded](https://bghryct.github.io/KKQA/#/family/unbounded) | Sans Serif | tight | −0.53 | 12.6 |  |  |
-| [Uncial Antiqua](https://bghryct.github.io/KKQA/#/family/uncial-antiqua) | Display | standard | −0.15 | 12.1 |  |  |
+| [Uncial Antiqua](https://bghryct.github.io/KKQA/#/family/uncial-antiqua) | Display | standard | −0.16 | 12.1 |  |  |
 | [Underdog](https://bghryct.github.io/KKQA/#/family/underdog) | Display | standard | +0.09 | 17.9 |  |  |
-| [Unica One](https://bghryct.github.io/KKQA/#/family/unica-one) | Display | loose | +0.95 | 16.9 |  |  |
+| [Unica One](https://bghryct.github.io/KKQA/#/family/unica-one) | Display | loose | +0.96 | 16.9 |  |  |
 | [Unlock](https://bghryct.github.io/KKQA/#/family/unlock) | Display | loose | +0.25 | 19.2 |  |  |
 | [Unna](https://bghryct.github.io/KKQA/#/family/unna) | Serif | standard | +0.03 | 17.9 |  |  |
 | [UoqMunThenKhung](https://bghryct.github.io/KKQA/#/family/uoqmunthenkhung) | Serif | loose | +0.33 | 29.8 |  | secondary Latin |
@@ -1484,6 +1490,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Waiting for the Sunrise](https://bghryct.github.io/KKQA/#/family/waiting-for-the-sunrise) | Handwriting | tight | −0.50 | 29.1 |  |  |
 | [Wallpoet](https://bghryct.github.io/KKQA/#/family/wallpoet) | Display | standard | +0.03 | 27.4 |  |  |
 | [Walter Turncoat](https://bghryct.github.io/KKQA/#/family/walter-turncoat) | Handwriting | tight | −0.60 | 24.8 |  |  |
+| [Warnes](https://bghryct.github.io/KKQA/#/family/warnes) | Display | loose | +1.52 | 86.1 |  |  |
 | [Water Brush](https://bghryct.github.io/KKQA/#/family/water-brush) | Handwriting | loose | +1.11 | 56.8 |  |  |
 | [Waterfall](https://bghryct.github.io/KKQA/#/family/waterfall) | Handwriting | tight | −0.85 | 41.1 |  |  |
 | [WDXL Lubrifont JP N](https://bghryct.github.io/KKQA/#/family/wdxl-lubrifont-jp-n) | Sans Serif | loose | +0.42 | 18.8 |  | secondary Latin |
@@ -1499,7 +1506,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Wix Madefor Text](https://bghryct.github.io/KKQA/#/family/wix-madefor-text) | Sans Serif | standard | +0.12 | 20.5 |  |  |
 | [Work Sans](https://bghryct.github.io/KKQA/#/family/work-sans) | Sans Serif | loose | +0.32 | 15.3 |  |  |
 | [Yaldevi](https://bghryct.github.io/KKQA/#/family/yaldevi) | Sans Serif | standard | −0.08 | 15.8 |  | secondary Latin |
-| [Yanone Kaffeesatz](https://bghryct.github.io/KKQA/#/family/yanone-kaffeesatz) | Sans Serif | standard | +0.17 | 14.7 |  |  |
+| [Yanone Kaffeesatz](https://bghryct.github.io/KKQA/#/family/yanone-kaffeesatz) | Sans Serif | standard | +0.18 | 14.7 |  |  |
 | [Yantramanav](https://bghryct.github.io/KKQA/#/family/yantramanav) | Sans Serif | loose | +0.34 | 24.4 |  | secondary Latin |
 | [Yarndings 12](https://bghryct.github.io/KKQA/#/family/yarndings-12) | Display | loose | +1.34 | 25.1 |  |  |
 | [Yarndings 20](https://bghryct.github.io/KKQA/#/family/yarndings-20) | Display | loose | +0.75 | 15.9 |  |  |
@@ -1512,7 +1519,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Yuyu Short](https://bghryct.github.io/KKQA/#/family/yuyu-short) | Handwriting | loose | +0.83 | 29.3 |  |  |
 | [Zain](https://bghryct.github.io/KKQA/#/family/zain) | Sans Serif | standard | +0.08 | 19.3 |  | secondary Latin |
 | [Zalando Sans Expanded](https://bghryct.github.io/KKQA/#/family/zalando-sans-expanded) | Sans Serif | tight | −0.65 | 23.7 |  |  |
-| [Zalando Sans SemiExpanded](https://bghryct.github.io/KKQA/#/family/zalando-sans-semiexpanded) | Sans Serif | standard | −0.30 | 18.8 |  |  |
+| [Zalando Sans SemiExpanded](https://bghryct.github.io/KKQA/#/family/zalando-sans-semiexpanded) | Sans Serif | standard | −0.31 | 18.8 |  |  |
 | [ZCOOL KuaiLe](https://bghryct.github.io/KKQA/#/family/zcool-kuaile) | Sans Serif | tight | −0.31 | 25.3 |  | secondary Latin |
 | [ZCOOL QingKe HuangYou](https://bghryct.github.io/KKQA/#/family/zcool-qingke-huangyou) | Sans Serif | loose | +0.40 | 19.8 |  | secondary Latin |
 | [ZCOOL XiaoWei](https://bghryct.github.io/KKQA/#/family/zcool-xiaowei) | Sans Serif | standard | +0.00 | 12.4 |  | secondary Latin |
@@ -1524,7 +1531,7 @@ Spacing within the norms of the family's group. The closest preset (tight, stand
 | [Zen Kurenaido](https://bghryct.github.io/KKQA/#/family/zen-kurenaido) | Sans Serif | loose | +0.26 | 24.5 |  | secondary Latin |
 | [Zen Loop](https://bghryct.github.io/KKQA/#/family/zen-loop) | Display | standard | −0.14 | 15.1 |  |  |
 | [Zen Maru Gothic](https://bghryct.github.io/KKQA/#/family/zen-maru-gothic) | Sans Serif | standard | +0.02 | 19.5 |  | secondary Latin |
-| [Zen Old Mincho](https://bghryct.github.io/KKQA/#/family/zen-old-mincho) | Serif | standard | +0.18 | 22.4 |  | secondary Latin |
+| [Zen Old Mincho](https://bghryct.github.io/KKQA/#/family/zen-old-mincho) | Serif | standard | +0.19 | 22.4 |  | secondary Latin |
 | [Zen Tokyo Zoo](https://bghryct.github.io/KKQA/#/family/zen-tokyo-zoo) | Display | tight | −0.40 | 16.3 |  |  |
 | [Zeyada](https://bghryct.github.io/KKQA/#/family/zeyada) | Handwriting | tight | +0.68 | 35.5 |  |  |
 | [Zhi Mang Xing](https://bghryct.github.io/KKQA/#/family/zhi-mang-xing) | Handwriting | tight | −0.99 | 25.7 |  | secondary Latin |
